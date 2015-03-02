@@ -14,3 +14,14 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "altislife");
 define("DB_USER", "root");
 define("DB_PASS", "133788hjk");
+define("results_per_page", 10 );
+
+
+/**
+	Change These To Reflect The Connection Info Of Your Game Server.
+	This Allows the current players function to work.
+	!! Make sure to add +1 to the server port, ARMA 3 implementation violates Source query protocol spec. !!
+
+**/
+define( 'SQ_SERVER_ADDR', '127.0.0.1' );
+define( 'SQ_SERVER_PORT', 3103 );

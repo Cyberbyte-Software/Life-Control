@@ -5,7 +5,40 @@
 	// change character set to utf8 and check it
 	if (!$db_connection->set_charset("utf8")) {
 		$db_connection->errors[] = $db_connection->error;
-	}	
+	}
+
+	require __DIR__ . '/SourceQuery/SourceQuery.class.php';
+	
+	// Edit this ->
+	define( 'SQ_TIMEOUT',     1 );
+	define( 'SQ_ENGINE',      SourceQuery :: SOURCE );
+	// Edit this <-
+	
+	$Timer = MicroTime( true );
+	
+	$Query = new SourceQuery( );
+	
+	$Info    = Array( );
+	$Rules   = Array( );
+	$Players = Array( );
+	
+	try
+	{
+		$Query->Connect( SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE );
+		
+		$Info    = $Query->GetInfo( );
+		$Players = $Query->GetPlayers( );
+		$Rules   = $Query->GetRules( );
+	}
+	catch( Exception $e )
+	{
+		$Exception = $e;
+	}
+	
+	$Query->Disconnect( );
+	
+	$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +62,21 @@
     <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
 
+	<script src="js/raphael.2.1.0.min.js"></script>
+	<script src="js/justgage.1.0.1.min.js"></script>
+	<script>
+		var g;
+	
+		window.onload = function(){
+			  var g = new JustGage({
+				id: "bigfella",
+				value:<?php echo htmlspecialchars( $Info[ 'Players' ] ); ?>,
+				min: 0,
+				max: <?php echo htmlspecialchars( $Info[ 'MaxPlayers' ] ); ?>,
+				title: 'Current Players'
+			  });
+		};
+	</script>
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -128,29 +176,48 @@
                         </ol>
                     </div>
                 </div>
+				
 				<div class="alert alert-info alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <i class="fa fa-info-circle"></i> <strong>Welcome</strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
-                </div>
-
-                <!-- /.row -->
-
-					<div class="col-lg-4">
-                        <div class="panel panel-default">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<i class="fa fa-info-circle"></i> <strong>Welcome</strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
+				</div>
+				
+				<div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i>Police Overview</h3>
+                                <div class="row">
+									<center><div id="bigfella" style="width:200px; height:120px"></div></center>
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Player Name</th>
-                                                <th>Player ID</th>
-                                                <th>Rank</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                            <a href="curPlayers.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View All Players</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+				</div>	
+				
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i>Police Overview</h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover table-striped">
+										<thead>
+											<tr>
+												<th>Player Name</th>
+												<th>Player ID</th>
+												<th>Rank</th>
+											</tr>
+										</thead>
+										<tbody>
 											<?php
 												if (!$db_connection->connect_errno) 
 												{
@@ -171,33 +238,33 @@
 													$this->errors[] = "Database connection problem.";
 												}
 											?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="text-right">
-                                    <a href="police.php">View All Police <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Top Ten Richest Players</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Player Name</th>
-                                                <th>Player ID</th>
-                                                <th>Cash</th>
-                                                <th>Bank</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
+										</tbody>
+									</table>
+								</div>
+								<div class="text-right">
+									<a href="police.php">View All Police <i class="fa fa-arrow-circle-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Top Ten Richest Players</h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover table-striped">
+										<thead>
+											<tr>
+												<th>Player Name</th>
+												<th>Player ID</th>
+												<th>Cash</th>
+												<th>Bank</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
 												if (!$db_connection->connect_errno) 
 												{
 													$sql = "SELECT `name`, `cash`, `bankacc`, `playerid` FROM `players` ORDER BY `bankacc` DESC LIMIT 10";
@@ -218,31 +285,31 @@
 													$this->errors[] = "Database connection problem.";
 												}
 											?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="text-right">
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+										</tbody>
+									</table>
+								</div>
+								<div class="text-right">
+									<br/>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i>Medic Overview</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Player Name</th>
-                                                <th>Player ID</th>
-                                                <th>Rank</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i>Medic Overview</h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover table-striped">
+										<thead>
+											<tr>
+												<th>Player Name</th>
+												<th>Player ID</th>
+												<th>Rank</th>
+											</tr>
+										</thead>
+										<tbody>
 											<?php
 												if (!$db_connection->connect_errno) 
 												{
@@ -263,18 +330,17 @@
 													$this->errors[] = "Database connection problem.";
 												}
 											?> 
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="text-right">
-                                    <a href="medic.php">View All Medics <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
+										</tbody>
+									</table>
+								</div>
+								<div class="text-right">
+									<a href="medic.php">View All Medics <i class="fa fa-arrow-circle-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!-- /.row -->			
             </div>
             <!-- /.container-fluid -->
 
