@@ -1,7 +1,7 @@
 <?php
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
+	$page_rows = results_per_page;
 	// change character set to utf8 and check it
 	if (!$db_connection->set_charset("utf8")) {
 		$db_connection->errors[] = $db_connection->error;
@@ -150,7 +150,33 @@
 										<?php
 											if (!$db_connection->connect_errno) 
 											{
-												$sql = "SELECT `name`,`mediclevel`,`playerid` FROM `players` WHERE `mediclevel` >= '1' ORDER BY `mediclevel` ";
+												if (!(isset($_POST['pagenum']))) 
+												{ 
+													$pagenum = 1; 
+												}
+												else
+												{
+													$pagenum = $_POST['pagenum'];
+												}
+
+												$sql = "SELECT * FROM `players`;";
+
+												$result_of_query = $db_connection->query($sql);
+												$rows = mysqli_num_rows($result_of_query); 
+												$last = ceil($rows/$page_rows); 
+												
+												if ($pagenum < 1) 
+												{ 
+													$pagenum = 1; 
+												} 
+												elseif ($pagenum > $last) 
+												{ 
+													$pagenum = $last; 
+												} 
+												
+												$max = 'limit ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+
+												$sql = "SELECT `name`,`mediclevel`,`playerid` FROM `players` WHERE `mediclevel` >= '1' ORDER BY `mediclevel` ".$max." ;";
 												$result_of_query = $db_connection->query($sql);
 												while($row = mysqli_fetch_assoc($result_of_query)) 
 												{
@@ -165,7 +191,39 @@
 														echo "</form></td>";
 													echo "</tr>";
 												};
-											} 
+												echo "</tbody></table>";
+												echo "<table><thead>";
+												echo "<br>";
+												if ($pagenum == 1){} 
+												else 
+												{
+													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+													echo "<input id='pagenum' type='hidden' name='pagenum' value='1'>";
+													echo "<input type='submit' value=' <<-First  '>";
+													echo "</form></th>";
+													$previous = $pagenum-1;
+													echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$previous."'>";
+													echo "<input type='submit' value=' <-Previous  '>";
+													echo "</form></th>";
+												} 
+												//This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
+												if ($pagenum == $last) {} 
+												else 
+												{
+													$next = $pagenum+1;
+													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$next."'>";
+													echo "<input type='submit' value=' Next ->  '>";
+													echo "</form></th>";
+													echo " ";
+													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$last."'>";
+													echo "<input type='submit' value=' Last ->>  '>";
+													echo "</form></th>";
+												} 
+												echo "</thead></table>";
+											}
 											else 
 											{
 												$this->errors[] = "Database connection problem.";
