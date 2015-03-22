@@ -184,9 +184,13 @@
 					<div class="col-md-4">
 								<center>
 									<?php
+                                        if($_SESSION['user_level'] >= '2') {
 										echo "<input id='gID' type='hidden' name='gID' value='".$gID."'>";
 										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='Submit Changes'>  ";
 										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='DELETE'>";
+                                        } else {
+                                               echo "Your permission level is insufficient to submit these changes";
+                                        };
 									?>
 									<br/>
 								</center>

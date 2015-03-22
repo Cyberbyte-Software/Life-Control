@@ -142,119 +142,121 @@
                                 <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> Players
                             </div>
                             <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Player Name</th>
-                                                <th>Player ID</th>
-                                                <th>Cash</th>
-												<th>Bank</th>
-                                                <th>Cop</th>
-                                                <th>THW</th>
-												<th>Admin</th>
-												<th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-										<?php
-											if (!$db_connection->connect_errno) 
-											{
 
-												if (!(isset($_POST['pagenum']))) 
-												{ 
-													$pagenum = 1; 
-												}
-												else
-												{
-													$pagenum = $_POST['pagenum'];
-												}
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Player Name</th>
+                                                        <th>Player ID</th>
+                                                        <th>Cash</th>
+                                                        <th>Bank</th>
+                                                        <th>Cop</th>
+                                                        <th>THW</th>
+                                                        <th>Admin</th>
+                                                        <th>Edit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php
+                                                    if (!$db_connection->connect_errno) 
+                                                    {
 
-												$sql = "SELECT * FROM `players`;";
+                                                        if (!(isset($_POST['pagenum']))) 
+                                                        { 
+                                                            $pagenum = 1; 
+                                                        }
+                                                        else
+                                                        {
+                                                            $pagenum = $_POST['pagenum'];
+                                                        }
 
-												$result_of_query = $db_connection->query($sql);
-												$rows = mysqli_num_rows($result_of_query); 
-												
-												$last = ceil($rows/$page_rows); 
-												
-												if ($pagenum < 1) 
-												{ 
-													$pagenum = 1; 
-												} 
-												elseif ($pagenum > $last) 
-												{ 
-													$pagenum = $last; 
-												} 
-												
-												$max = 'limit ' .($pagenum - 1) * $page_rows .',' .$page_rows;
-																					
-												if (isset($_POST['searchText']))
-												{
-													$searchText = $_POST['searchText'];
-													$sql = "SELECT * FROM `players` WHERE `name` LIKE '%".$searchText."%' ".$max." ;";												
-												}
-												else
-												{
-													$sql = "SELECT * FROM `players` ".$max." ;";
-												}
-												$result_of_query = $db_connection->query($sql);
-												while($row = mysqli_fetch_assoc($result_of_query)) 
-												{
-													$playersID = $row["playerid"];
-													echo "<tr>";
-														echo "<td>".$row["name"]."</td>";
-														echo "<td>".$playersID."</td>";
-														echo "<td>".$row["cash"]."</td>";
-														echo "<td>".$row["bankacc"]."</td>";
-														echo "<td>".$row["coplevel"]."</td>";
-														echo "<td>".$row["mediclevel"]."</td>";
-														echo "<td>".$row["adminlevel"]."</td>";
-														echo "<td><form method='post' action='editPlayer.php' name='PlayerEdit'>";
-														echo "<input id='playerId' type='hidden' name='playerId' value='".$playersID."'>";
-														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='Edit Player'>";
-														echo "</form></td>";
-													echo "</tr>";
-													
-												};
-												echo "</tbody></table>";
-												echo "<table><thead>";
-												echo "<br>";
-												if ($pagenum == 1){} 
-												else 
-												{
-													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='1'>";
-													echo "<input type='submit' value=' <<-First  '>";
-													echo "</form></th>";
-													$previous = $pagenum-1;
-													echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$previous."'>";
-													echo "<input type='submit' value=' <-Previous  '>";
-													echo "</form></th>";
-												} 
-												//This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
-												if ($pagenum == $last) {} 
-												else 
-												{
-													$next = $pagenum+1;
-													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$next."'>";
-													echo "<input type='submit' value=' Next ->  '>";
-													echo "</form></th>";
-													echo " ";
-													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$last."'>";
-													echo "<input type='submit' value=' Last ->>  '>";
-													echo "</form></th>";
-												} 
-												echo "</thead></table>";
-											} 
-											else 
-											{
-												$this->errors[] = "Database connection problem.";
-											}
-										?>  
-                                </div>
+                                                        $sql = "SELECT * FROM `players`;";
+
+                                                        $result_of_query = $db_connection->query($sql);
+                                                        $rows = mysqli_num_rows($result_of_query); 
+
+                                                        $last = ceil($rows/$page_rows); 
+
+                                                        if ($pagenum < 1) 
+                                                        { 
+                                                            $pagenum = 1; 
+                                                        } 
+                                                        elseif ($pagenum > $last) 
+                                                        { 
+                                                            $pagenum = $last; 
+                                                        } 
+
+                                                        $max = 'limit ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+
+                                                        if (isset($_POST['searchText']))
+                                                        {
+                                                            $searchText = $_POST['searchText'];
+                                                            $sql = "SELECT * FROM `players` WHERE `name` LIKE '%".$searchText."%' ".$max." ;";												
+                                                        }
+                                                        else
+                                                        {
+                                                            $sql = "SELECT * FROM `players` ".$max." ;";
+                                                        }
+                                                        $result_of_query = $db_connection->query($sql);
+                                                        while($row = mysqli_fetch_assoc($result_of_query)) 
+                                                        {
+                                                            $playersID = $row["playerid"];
+                                                            echo "<tr>";
+                                                                echo "<td>".$row["name"]."</td>";
+                                                                echo "<td>".$playersID."</td>";
+                                                                echo "<td>".$row["cash"]."</td>";
+                                                                echo "<td>".$row["bankacc"]."</td>";
+                                                                echo "<td>".$row["coplevel"]."</td>";
+                                                                echo "<td>".$row["mediclevel"]."</td>";
+                                                                echo "<td>".$row["adminlevel"]."</td>";
+                                                                echo "<td><form method='post' action='editPlayer.php' name='PlayerEdit'>";
+                                                                echo "<input id='playerId' type='hidden' name='playerId' value='".$playersID."'>";
+                                                                echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='Edit Player'>";
+                                                                echo "</form></td>";
+                                                            echo "</tr>";
+
+                                                        };
+                                                        echo "</tbody></table>";
+                                                        echo "<table><thead>";
+                                                        echo "<br>";
+                                                        if ($pagenum == 1){} 
+                                                        else 
+                                                        {
+                                                            echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+                                                            echo "<input id='pagenum' type='hidden' name='pagenum' value='1'>";
+                                                            echo "<input type='submit' value=' <<-First  '>";
+                                                            echo "</form></th>";
+                                                            $previous = $pagenum-1;
+                                                            echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+                                                            echo "<input id='pagenum' type='hidden' name='pagenum' value='".$previous."'>";
+                                                            echo "<input type='submit' value=' <-Previous  '>";
+                                                            echo "</form></th>";
+                                                        } 
+                                                        //This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
+                                                        if ($pagenum == $last) {} 
+                                                        else 
+                                                        {
+                                                            $next = $pagenum+1;
+                                                            echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+                                                            echo "<input id='pagenum' type='hidden' name='pagenum' value='".$next."'>";
+                                                            echo "<input type='submit' value=' Next ->  '>";
+                                                            echo "</form></th>";
+                                                            echo " ";
+                                                            echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
+                                                            echo "<input id='pagenum' type='hidden' name='pagenum' value='".$last."'>";
+                                                            echo "<input type='submit' value=' Last ->>  '>";
+                                                            echo "</form></th>";
+                                                        } 
+                                                        echo "</thead></table>";
+                                                    } 
+                                                    else 
+                                                    {
+                                                        $this->errors[] = "Database connection problem.";
+                                                    }
+                                                ?>  
+                                        </div>
+                                    
                             </div>
                         </div>
                     </div>
