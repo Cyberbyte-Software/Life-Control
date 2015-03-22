@@ -262,6 +262,12 @@
 															echo '<option value="7"';
 																if($row['coplevel']==7){echo ' selected';}
 															echo '>7</option></h4>';
+                                                            echo '<option value="8"';
+																if($row['coplevel']==8){echo ' selected';}
+															echo '>8</option></h4>';
+                                                            echo '<option value="9"';
+																if($row['coplevel']==9){echo ' selected';}
+															echo '>9</option></h4>';
 														echo "</select>";
 														echo "<h4>THW: ";
 														echo "<select id='player_medlvl' name='player_medlvl'>";
