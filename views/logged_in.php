@@ -181,6 +181,8 @@
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					<i class="fa fa-info-circle"></i> <strong>Welcome</strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
 				</div>
+                
+                Dein Benutzerrang ist <?php echo $_SESSION['user_level']; ?>.
 				
 				<div class="row">
                     <div class="col-lg-3 col-md-6">
