@@ -66,7 +66,7 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
 						<?php
-								if ($_SESSION['user_level'] >= 2)
+								if ($_SESSION['user_level'] >= 3)
 								{
 
 									echo"<li class='divider'></li>";
@@ -151,7 +151,7 @@
                                                 <th>Cash</th>
 												<th>Bank</th>
                                                 <th>Cop</th>
-                                                <th>Medic</th>
+                                                <th>THW</th>
 												<th>Admin</th>
 												<th>Edit</th>
                                             </tr>

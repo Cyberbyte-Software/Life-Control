@@ -114,7 +114,7 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
 						<?php
-								if ($_SESSION['user_level'] >= 2)
+								if ($_SESSION['user_level'] >= 3)
 								{
 
 									echo"<li class='divider'></li>";
@@ -183,6 +183,9 @@
 				</div>
                 
                 Dein Benutzerrang ist <?php echo $_SESSION['user_level']; ?>.
+                <?php if($_SESSION['user_level'] >= '3') {
+                            ?>Userlevel 3<?php
+                        }; ?>
 				
 				<div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -299,7 +302,7 @@
 					<div class="col-lg-4">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i>Medic Overview</h3>
+								<h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i>THW Overview</h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
@@ -336,7 +339,7 @@
 									</table>
 								</div>
 								<div class="text-right">
-									<a href="medic.php">View All Medics <i class="fa fa-arrow-circle-right"></i></a>
+									<a href="medic.php">View All THWs <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 						</div>

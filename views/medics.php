@@ -66,7 +66,7 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
 						<?php
-								if ($_SESSION['user_level'] >= 2)
+								if ($_SESSION['user_level'] >= 3)
 								{
 
 									echo"<li class='divider'></li>";
@@ -119,11 +119,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Medics <small>Overview</small>
+                            THWs <small>Overview</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-ambulance"></i> Medics
+                                <i class="fa fa-ambulance"></i> THWs
                             </li>
                         </ol>
                     </div>
@@ -133,7 +133,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i> Medics</h3>
+                                <h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i> THWs</h3>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
