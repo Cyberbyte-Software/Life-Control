@@ -90,7 +90,7 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
 						<?php
-								if ($_SESSION['user_level'] >= 2)
+								if ($_SESSION['user_level'] >= 3)
 								{
 
 									echo"<li class='divider'></li>";
@@ -175,7 +175,7 @@
 													$result_of_query = $db_connection->query($sql);
 													while($row = mysqli_fetch_assoc($result_of_query)) 
 													{
-														$playersID = $row["pid"];
+														
 														$temp = '';
 
 														for ($i = 0; $i < 8; $i++) {
