@@ -101,13 +101,13 @@
 														echo "<select id='staffRank' name='staffRank'>";
 															echo '<option value="1"';
 																if($row['user_level']==1){echo ' selected';}
-															echo '>1</option>';	
+															echo '>Support</option>';	
 															echo '<option value="2"';
 																if($row['user_level']==2){echo ' selected';}
-															echo '>2</option>';
+															echo '>Moderator</option>';
 															echo '<option value="3"';
 																if($row['user_level']==3){echo ' selected';}
-															echo '>3</option>';
+															echo '>Administrator</option>';
 														echo "</select></h4>";
 														echo "<h4>Player ID:  <input id='staffPID' name='staffPID' type='text' value='".$row["playerid"]."'></h4>";
 													echo "</center>";

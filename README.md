@@ -37,7 +37,7 @@ The System Now Uses A User Level System Based Of The Modifications erdknuffel Ma
 2. Can't add new users
 3. Can see current players in server
 
-### White Lister
+### Support
 
 1. Can Only Set Cop/Medic Rank
 2. Can't see richest players in Dashboard
