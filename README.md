@@ -13,6 +13,29 @@ Life-Control is developed by Cammygames. This contains primarily the release and
 7. Go into the users table and change your username and password for your first account
 8. Gently congratulate yourself with a hot beverage of your choice and log in
 
+## Rank system
+
+This version uses a modified rank system that includes 3 permission tiers. The following description starts with the highest permission level and outlines what is restricted compared to the superior level.
+
+### Administrator
+
+1. Can edit **everything**
+2. Can add new users and admins
+ 
+### Super-User
+
+1. Can edit **everything**
+2. Can't add new users
+3. Can't see house locations
+
+### User
+
+1. Can't see richest players in Dashboard
+2. Can see Players *- with the exception of house information -* but not edit them *- with the exception of some vehicles*
+3. Can't see vehicle list, but access vehicles that got destroyed or aren't in the garage anymore
+4. Can't see houses
+5. Can access gangs but can't edit them
+
 ## Issues / Questions
 
 This plugin is mostly developed to accompany the needs of our server. If you have any questions or issues, feel free to head over to the [issues section](https://github.com/jastend/Life-Control/issues) or contact us (in German) via http://life.kbs-altis.de/index.php/Contact/
