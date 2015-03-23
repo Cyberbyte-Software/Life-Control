@@ -50,6 +50,7 @@
                     <li>
                         <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
                     </li>
+<<<<<<< HEAD
                     <?php
                         if ($_SESSION['user_level'] >= 2) { ?>
                             <li>
@@ -60,6 +61,14 @@
                             </li>
                         <?php };
                     ?>
+=======
+                    <li>
+                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
+                    </li>
+                    <li>
+                        <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
+                    </li>
+>>>>>>> 75a0ee5881fd440898f01723bcc4e037df51903e
                    <li>
                         <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
                     </li>

@@ -1,43 +1,48 @@
 <?php
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
+	
+	$enale = enable_game_query;
+	
 	// change character set to utf8 and check it
 	if (!$db_connection->set_charset("utf8")) {
 		$db_connection->errors[] = $db_connection->error;
 	}
-
-	require __DIR__ . '/SourceQuery/SourceQuery.class.php';
 	
-	// Edit this ->
-	define( 'SQ_TIMEOUT',     1 );
-	define( 'SQ_ENGINE',      SourceQuery :: SOURCE );
-	// Edit this <-
-	
-	$Timer = MicroTime( true );
-	
-	$Query = new SourceQuery( );
-	
-	$Info    = Array( );
-	$Rules   = Array( );
-	$Players = Array( );
-	
-	try
+	if (enable_game_query == TRUE) 
 	{
-		$Query->Connect( SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE );
+		require __DIR__ . '/SourceQuery/SourceQuery.class.php';
 		
-		$Info    = $Query->GetInfo( );
-		$Players = $Query->GetPlayers( );
-		$Rules   = $Query->GetRules( );
+		// Edit this ->
+		define( 'SQ_TIMEOUT',     1 );
+		define( 'SQ_ENGINE',      SourceQuery :: SOURCE );
+		// Edit this <-
+		
+		$Timer = MicroTime( true );
+		
+		$Query = new SourceQuery( );
+		
+		$Info    = Array( );
+		$Rules   = Array( );
+		$Players = Array( );
+		
+		try
+		{
+			$Query->Connect( SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE );
+			
+			$Info    = $Query->GetInfo( );
+			$Players = $Query->GetPlayers( );
+			$Rules   = $Query->GetRules( );
+		}
+		catch( Exception $e )
+		{
+			$Exception = $e;
+		}
+		
+		$Query->Disconnect( );
+		
+		$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
 	}
-	catch( Exception $e )
-	{
-		$Exception = $e;
-	}
-	
-	$Query->Disconnect( );
-	
-	$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
 	
 ?>
 <!DOCTYPE html>
@@ -117,7 +122,7 @@
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					<i class="fa fa-info-circle"></i> <strong>Welcome</strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
 				</div>
-				
+			<?php if (enable_game_query == TRUE) { ?>
 				<div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
@@ -136,7 +141,7 @@
                         </div>
                     </div>
 				</div>	
-				
+			<?php }?>
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="panel panel-default">
