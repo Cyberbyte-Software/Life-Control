@@ -63,6 +63,16 @@
 						   <li>
 								<a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
 							</li>
+						<?php
+							if (alits_life_4 == TRUE)
+							{
+						?>
+							   <li>
+									<a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i> Wanted</a>
+								</li>
+						<?php								
+							}
+						?>
 					<?php								
 						}
 					?>

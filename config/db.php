@@ -11,11 +11,15 @@
  * DB_PASS: the password of the above user
  */
 define("DB_HOST", "localhost");
-define("DB_NAME", "altislife");
-define("DB_USER", "root");
-define("DB_PASS", "133788hjk");
+define("DB_NAME", "arma3life");
+define("DB_USER", "arma3life");
+define("DB_PASS", "1237");
 define("results_per_page", 10 );
 
+/**
+	Make altis_life_4 True to be able to access the wanted section
+*/
+define("alits_life_4", true);
 
 /**
 	Change These To Reflect The Connection Info Of Your Game Server.
@@ -24,5 +28,5 @@ define("results_per_page", 10 );
 
 **/
 define( 'enable_game_query', false);
-define( 'SQ_SERVER_ADDR', '127.0.0.1' );
-define( 'SQ_SERVER_PORT', 3103 );
+define( 'SQ_SERVER_ADDR'   , '127.0.0.1' );
+define( 'SQ_SERVER_PORT'   , 3103 );
