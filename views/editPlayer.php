@@ -111,7 +111,7 @@
 													$result_of_query = $db_connection->query($sql);
 													while($row = mysqli_fetch_assoc($result_of_query)) 
 													{
-														$playersID = $row["pid"];
+
 														$temp = '';
 
 														for ($i = 0; $i < 8; $i++) {
