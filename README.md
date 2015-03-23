@@ -5,7 +5,8 @@ Life-Control by Cammygames is licensed under a Creative Commons Attribution-NonC
 http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US
 
 ## Credits
-	erdknuffel aka jastend for giving me some ideas and fixes for Life-Control and letting me merge some of them in to the base file from his custom one
+	
+erdknuffel aka jastend for giving me some ideas and fixes for Life-Control and letting me merge some of them in to the base file from his custom one
 
 ## Installation
 
