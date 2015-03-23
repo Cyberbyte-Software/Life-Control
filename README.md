@@ -22,7 +22,7 @@ The System Now Uses A User Level System Based Of The Modifications erdknuffel Ma
 
 ### White Lister
 
-1. Can Only Set Cop/Medic Rank And Licenses 
+1. Can Only Set Cop/Medic Rank
 2. Can't see richest players in Dashboard
 3. Can't see vehicles,houses,gangs
 4. Can't see current players in server
