@@ -19,20 +19,20 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
 						<?php
-								if ($_SESSION['user_level'] >= 2)
+								if ($_SESSION['user_level'] >= 3)
 								{
+						?>
+									<li class='divider'></li>
+									<li>
+										<a href='admin.php'><i class='fa fa-fw fa-cog'></i> Admin</a>
+									</li>
 
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='admin.php'><i class='fa fa-fw fa-cog'></i> Admin</a>";
-									echo"</li>";
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='register.php'><i class='fa fa-fw fa-cog'></i> Add New User</a>";
-									echo"</li>";
+									<li class='divider'></li>
+									<li>
+										<a href='register.php'><i class='fa fa-fw fa-cog'></i> Add New User</a>
+									</li>
+						<?php								
 								}
-						
 						?>
                         <li class="divider"></li>
                         <li>
@@ -50,15 +50,22 @@
                     <li>
                         <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
                     </li>
-                    <li>
-                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
-                    </li>
-                    <li>
-                        <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
-                    </li>
-                   <li>
-                        <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
-                    </li>
+					<?php
+						if ($_SESSION['user_level'] >= 2)
+						{
+					?>
+							<li>
+								<a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
+							</li>
+							<li>
+								<a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
+							</li>
+						   <li>
+								<a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
+							</li>
+					<?php								
+						}
+					?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

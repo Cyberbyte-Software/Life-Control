@@ -97,7 +97,18 @@
 													echo "<center>";
 														echo "<h4>Name:  <input id='staffName' name='staffName' type='text' value='".$row["user_name"]."'></h4>";
 														echo "<h4>Email: <input id='staffEmail' style='min-width:300px;'name='staffEmail' type='text' value='".$row["user_email"]."'></h4>";
-														echo "<h4>Rank:  <input id='staffRank' name='staffRank' type='text' value='".$row["user_level"]."'></h4>";
+														echo "<h4>Rank: ";
+														echo "<select id='staffRank' name='staffRank'>";
+															echo '<option value="1"';
+																if($row['user_level']==1){echo ' selected';}
+															echo '>1</option>';	
+															echo '<option value="2"';
+																if($row['user_level']==2){echo ' selected';}
+															echo '>2</option>';
+															echo '<option value="3"';
+																if($row['user_level']==3){echo ' selected';}
+															echo '>3</option>';
+														echo "</select></h4>";
 														echo "<h4>Player ID:  <input id='staffPID' name='staffPID' type='text' value='".$row["playerid"]."'></h4>";
 													echo "</center>";
 										

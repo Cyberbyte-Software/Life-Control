@@ -90,105 +90,122 @@
                 </div>
                 <!-- /.row -->
 					<div class="col-lg-4">
-                       <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-home fa-fw"></i>Houses Quick Look</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Position</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-											<?php
-												if (!$db_connection->connect_errno) 
-												{
-													$sql = "SELECT `pos`,`id` FROM `houses` WHERE `pid` = '".$pId."' ORDER BY `id` DESC LIMIT 10";
-													$result_of_query = $db_connection->query($sql);
-													while($row = mysqli_fetch_assoc($result_of_query)) 
+						<?php 
+							if ($_SESSION['user_level'] >= 2)
+							{
+						?>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title"><i class="fa fa-home fa-fw"></i>Houses Quick Look</h3>
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Position</th>
+													<th>Edit</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+													if (!$db_connection->connect_errno) 
 													{
+														$sql = "SELECT `pos`,`id` FROM `houses` WHERE `pid` = '".$pId."' ORDER BY `id` DESC LIMIT 10";
+														$result_of_query = $db_connection->query($sql);
+														while($row = mysqli_fetch_assoc($result_of_query)) 
+														{
 
-														$temp = '';
+															$temp = '';
 
-														for ($i = 0; $i < 8; $i++) {
-															$temp .= chr($playersID & 0xFF);
-															$playersID >>= 8;
-														}
+															for ($i = 0; $i < 8; $i++) {
+																$temp .= chr($playersID & 0xFF);
+																$playersID >>= 8;
+															}
 
-														$return = md5('BE' . $temp);
-														$pGID = $return;
-														
-														$hID = $row["id"];
-														echo "<tr>";
-															echo "<td>".$row["pos"]."</td>";
-															echo "<td><form method='post' action='editHouse.php' name='PlayerEdit'>";
-															echo "<input id='hID' type='hidden' name='hID' value='".$hID."'>";
-															echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editH' value='Edit House'>";
-															echo "</form></td>";
-														echo "</tr>";
-													};
-												} 
-												else 
-												{
-													$this->errors[] = "Database connection problem.";
-												}
-											?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+															$return = md5('BE' . $temp);
+															$pGID = $return;
+															
+															$hID = $row["id"];
+															echo "<tr>";
+																echo "<td>".$row["pos"]."</td>";
+																echo "<td><form method='post' action='editHouse.php' name='PlayerEdit'>";
+																echo "<input id='hID' type='hidden' name='hID' value='".$hID."'>";
+																echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editH' value='Edit House'>";
+																echo "</form></td>";
+															echo "</tr>";
+														};
+													} 
+													else 
+													{
+														$this->errors[] = "Database connection problem.";
+													}
+												?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						<?php
+							}
+						?>
                     </div>
 					<div class="col-lg-4" style="float:right;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-car fa-fw"></i> Vehicles Quick Look</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Class</th>
-												<th>Type</th>
-												<th>Plate</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-											<?php
-												if (!$db_connection->connect_errno) 
-												{
-													$sql = "SELECT * FROM `vehicles` WHERE `pid` = '".$pId."' ORDER BY `id` DESC LIMIT 10";
-													$result_of_query = $db_connection->query($sql);
-													while($row = mysqli_fetch_assoc($result_of_query)) 
-													{
-														$vehID = $row["id"];
-														echo "<tr>";
-															echo "<td>".$row["classname"]."</td>";
-															echo "<td>".$row["type"]."</td>";
-															echo "<td>".$row["plate"]."</td>";
-															echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
-															echo "<input id='vehID' type='hidden' name='vehID' value='".$vehID."'>";
-															echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editVeh' value='Edit Vehicle'>";
-															echo "</form></td>";
-														echo "</tr>";
-													};
-												} 
-												else 
-												{
-													$this->errors[] = "Database connection problem.";
-												}
-											?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+						<?php 
+							if ($_SESSION['user_level'] >= 2)
+							{
+						?>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title"><i class="fa fa-car fa-fw"></i> Vehicles Quick Look</h3>
+									</div>
+									<div class="panel-body">
+										<div class="table-responsive">
+											<table class="table table-bordered table-hover table-striped">
+												<thead>
+													<tr>
+														<th>Class</th>
+														<th>Type</th>
+														<th>Plate</th>
+														<th>Edit</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+														if ($_SESSION['user_level'] >= 2)
+														{
+															if (!$db_connection->connect_errno) 
+															{
+																$sql = "SELECT * FROM `vehicles` WHERE `pid` = '".$pId."' ORDER BY `id` DESC LIMIT 10";
+																$result_of_query = $db_connection->query($sql);
+																while($row = mysqli_fetch_assoc($result_of_query)) 
+																{
+																	$vehID = $row["id"];
+																	echo "<tr>";
+																		echo "<td>".$row["classname"]."</td>";
+																		echo "<td>".$row["type"]."</td>";
+																		echo "<td>".$row["plate"]."</td>";
+																		echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
+																		echo "<input id='vehID' type='hidden' name='vehID' value='".$vehID."'>";
+																		echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editVeh' value='Edit Vehicle'>";
+																		echo "</form></td>";
+																	echo "</tr>";
+																};
+															} 
+															else 
+															{
+																$this->errors[] = "Database connection problem.";
+															}
+														}
+													?>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+						<?php
+							}
+						?>
                     </div>
                     <div class="col-md-4"style="float:left;">
                         <div class="panel panel-default">
@@ -212,8 +229,18 @@
 														echo "<h4>Aliases: ".$row["aliases"]."</h4>";
 														echo "<h4>Player ID: ".$playersID."</h4>";
 														echo "<h4>GUID: ".$pGID."</h4>";
-														echo "<h4>Cash:    <input id='player_cash' name='player_cash' type='text' value='".$row["cash"]."'></td><br/>";
-														echo "<h4>Bank:    <input id='player_bank' name='player_bank' type='text' value='".$row["bankacc"]."'></td><br/>";
+														if ($_SESSION['user_level'] >= 2)
+														{
+															echo "<h4>Cash:    <input id='player_cash' name='player_cash' type='text' value='".$row["cash"]."'></td><br/>";
+															echo "<h4>Bank:    <input id='player_bank' name='player_bank' type='text' value='".$row["bankacc"]."'></td><br/>";
+														}
+														else 
+														{
+															echo "<input id='player_cash' type='hidden' name='player_cash' value='".$row["cash"]."'>";
+															echo "<input id='player_bank' type='hidden' name='player_bank' value='".$row["bankacc"]."'>";
+															echo "<h4>Cash: ".$row["cash"]."</h4>";
+															echo "<h4>Cash: ".$row["bankacc"]."</h4>";														
+														}
 														echo "<h4>Cop: ";
 														echo "<select id='player_coplvl' name='player_coplvl'>";
 															echo '<option value="0"';
@@ -262,42 +289,58 @@
 																if($row['mediclevel']==5){echo ' selected';}
 															echo '>5</option>';
 														echo "</select>";
-														echo "<h4>Admin: ";
-														echo "<select id='player_adminlvl' name='player_adminlvl'>";
-															echo '<option value="0"';
-																if($row['adminlevel']==0){echo ' selected';}
-															echo '>0</option>';	
-															echo '<option value="1"';
-																if($row['adminlevel']==1){echo ' selected';}
-															echo '>1</option>';	
-															echo '<option value="2"';
-																if($row['adminlevel']==2){echo ' selected';}
-															echo '>2</option>';
-															echo '<option value="3"';
-																if($row['adminlevel']==3){echo ' selected';}
-															echo '>3</option>';
-														echo "</select>";
-														echo "<h4>Donator: ";
-														echo "<select id='player_donlvl' name='player_donlvl'>";
-															echo '<option value="0"';
-																if($row['donatorlvl']==0){echo ' selected';}
-															echo '>0</option>';	
-															echo '<option value="1"';
-																if($row['donatorlvl']==1){echo ' selected';}
-															echo '>1</option>';	
-															echo '<option value="2"';
-																if($row['donatorlvl']==2){echo ' selected';}
-															echo '>2</option>';
-															echo '<option value="3"';
-																if($row['donatorlvl']==3){echo ' selected';}
-															echo '>3</option>';
-															echo '<option value="4"';
-																if($row['donatorlvl']==4){echo ' selected';}
-															echo '>4</option>';
-															echo '<option value="5"';
-																if($row['donatorlvl']==5){echo ' selected';}
-															echo '>5</option>';
-														echo "</select>";
+														if ($_SESSION['user_level'] >= 3)
+														{
+															echo "<h4>Admin: ";
+															echo "<select id='player_adminlvl' name='player_adminlvl'>";
+																echo '<option value="0"';
+																	if($row['adminlevel']==0){echo ' selected';}
+																echo '>0</option>';	
+																echo '<option value="1"';
+																	if($row['adminlevel']==1){echo ' selected';}
+																echo '>1</option>';	
+																echo '<option value="2"';
+																	if($row['adminlevel']==2){echo ' selected';}
+																echo '>2</option>';
+																echo '<option value="3"';
+																	if($row['adminlevel']==3){echo ' selected';}
+																echo '>3</option>';
+															echo "</select>";
+														}
+														else 
+														{
+															echo "<input id='player_adminlvl' type='hidden' name='player_adminlvl' value='".$row["adminlevel"]."'>";
+															echo "<h4>Admin: ".$row["adminlevel"]."</h4>";
+														}
+														if ($_SESSION['user_level'] >= 2)
+														{
+															echo "<h4>Donator: ";
+															echo "<select id='player_donlvl' name='player_donlvl'>";
+																echo '<option value="0"';
+																	if($row['donatorlvl']==0){echo ' selected';}
+																echo '>0</option>';	
+																echo '<option value="1"';
+																	if($row['donatorlvl']==1){echo ' selected';}
+																echo '>1</option>';	
+																echo '<option value="2"';
+																	if($row['donatorlvl']==2){echo ' selected';}
+																echo '>2</option>';
+																echo '<option value="3"';
+																	if($row['donatorlvl']==3){echo ' selected';}
+																echo '>3</option>';
+																echo '<option value="4"';
+																	if($row['donatorlvl']==4){echo ' selected';}
+																echo '>4</option>';
+																echo '<option value="5"';
+																	if($row['donatorlvl']==5){echo ' selected';}
+																echo '>5</option>';
+															echo "</select>";
+														}
+														else 
+														{
+															echo "<input id='player_donlvl' type='hidden' name='player_donlvl' value='".$row["donatorlvl"]."'>";
+															echo "<h4>Donator: ".$row['donatorlvl']."</h4>";														
+														}
 													echo "</center>";
 									?>
 							</div>		
@@ -311,12 +354,26 @@
 							<div class="panel-body">
 								<div class="col-md-4" style="padding-left:250px;">
 									<?php
-										echo "<h4>Cop Licenses:</h4> <textarea id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";
+										if ($_SESSION['user_level'] >= 2)
+										{
+											echo "<h4>Cop Licenses:</h4> <textarea id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";
+										}
+										else 
+										{
+											echo "<h4>Cop Licenses:</h4> <textarea readonly id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";												
+										}									
 									?>
 								</div>
 								<div class="col-md-4" style="padding-left:300px;">
 									<?php
-										echo "<h4>Cop Gear:</h4> <textarea id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
+										if ($_SESSION['user_level'] >= 2)
+										{
+											echo "<h4>Cop Gear:</h4> <textarea id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
+										}
+										else 
+										{
+											echo "<h4>Cop Gear:</h4> <textarea readonly id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
+										}									
 									?>
 								</div>
 							</div>
@@ -328,12 +385,26 @@
 							<div class="panel-body">
 								<div class="col-md-4" style="padding-left:250px;">
 									<?php
-										echo "<h4>Civ Licenses:</h4> <textarea id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
+										if ($_SESSION['user_level'] >= 2)
+										{
+											echo "<h4>Civ Licenses:</h4> <textarea id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
+										}
+										else 
+										{
+											echo "<h4>Civ Licenses:</h4> <textarea readonly id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
+										}									
 									?>
 								</div>
 								<div class="col-md-4" style="padding-left:300px;">
 									<?php
-										echo "<h4>Civ Gear:</h4> <textarea id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
+										if ($_SESSION['user_level'] >= 2)
+										{
+											echo "<h4>Civ Gear:</h4> <textarea id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
+										}
+										else 
+										{
+											echo "<h4>Civ Gear:</h4> <textarea readonly id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
+										}									
 									?>
 								</div>
 							</div>
@@ -346,12 +417,26 @@
 							<div class="panel-body">
 								<div class="col-md-4" style="padding-left:250px;">
 									<?php
-										echo "<h4>Medic Licenses:</h4> <textarea id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
+										if ($_SESSION['user_level'] >= 2)
+										{
+											echo "<h4>Medic Licenses:</h4> <textarea id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
+										}
+										else 
+										{
+											echo "<h4>Medic Licenses:</h4> <textarea readonly id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
+										}									
 									?>
 								</div>
 								<div class="col-md-4" style="padding-left:300px;">
 									<?php
-										echo "<h4>Medic Gear:</h4> <textarea id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
+										if ($_SESSION['user_level'] >= 2)
+										{
+											echo "<h4>Medic Gear:</h4> <textarea id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
+										}
+										else 
+										{
+											echo "<h4>Medic Gear:</h4> <textarea readonly id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
+										}									
 									?>
 								</div>
 							</div>
