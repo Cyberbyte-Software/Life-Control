@@ -134,7 +134,7 @@
 											<th>Cash</th>
 											<th>Bank</th>
 											<th>Cop</th>
-											<th>THW</th>
+											<th>Medic</th>
 											<th>Admin</th>
 											<th>Edit</th>
 										</tr>

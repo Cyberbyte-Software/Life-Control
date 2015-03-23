@@ -19,7 +19,7 @@
                             <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
 						<?php
-								if ($_SESSION['user_level'] >= 3)
+								if ($_SESSION['user_level'] >= 2)
 								{
 
 									echo"<li class='divider'></li>";
@@ -50,16 +50,12 @@
                     <li>
                         <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
                     </li>
-                    <?php
-                        if ($_SESSION['user_level'] >= 2) { ?>
-                            <li>
-                                <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
-                            </li>
-                            <li>
-                                <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
-                            </li>
-                        <?php };
-                    ?>
+                    <li>
+                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
+                    </li>
+                    <li>
+                        <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
+                    </li>
                    <li>
                         <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
                     </li>

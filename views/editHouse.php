@@ -55,114 +55,105 @@
     <div id="wrapper">
 
         <?php include("views/sidebar.php"); ?>
-
+		
         <div id="page-wrapper">
-            
-            <?php
-                if($_SESSION['user_level'] >= '2') { ?>
 
-                    <div class="container-fluid">
+            <div class="container-fluid">
 
-                        <!-- Page Heading -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h1 class="page-header">
-                                    House <small>Editing</small>
-                                </h1>
-                                <ol class="breadcrumb">
-                                    <li class="active">
-                                        <i class="fa fa-wrench"></i> Houses
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title"><i class="fa fa-home fa-fw"></i> House</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <form method="post" action="edit-actionH.php" name="editform">
-                                            <?php
-                                                if (!$db_connection->connect_errno) 
-                                                {
-                                                    $sql = 'SELECT * FROM `houses` WHERE `id` ="'.$hID.'";';
-                                                    $result_of_query = $db_connection->query($sql);
-                                                    if ($result_of_query->num_rows > 0)
-                                                    {
-                                                        while($row = mysqli_fetch_assoc($result_of_query)) 
-                                                        {
-                                                            echo "<center>";
-                                                                echo "<h4>Owners Player ID: <input id='hOwn' name='hOwn' type='text' value='".$row["pid"]."'></td><br/>";
-                                                                if($_SESSION['user_level'] >= '3') {
-                                                                    echo "<h4>Position:<input id='hPos' name='hPos' type='text' value='".$row["pos"]."'></td><br/>";
-                                                                };
-                                                                echo "<h4>Owned:   <input id='hOwned' name='hOwned' type='text' value='".$row["owned"]."'></td><br/>";
-                                                            echo "</center>";
-                                            ?>
-                                    </div>		
-                                </div>
-                            </div>
-                                <div class='col-lg-12'>
-                                    <div class='panel panel-default'>
-                                        <div class='panel-heading'>
-                                            <h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Inventory</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="col-md-4" style="padding-left:425px;">
-                                                <?php
-                                                    echo "<textarea id='hInv' name='hInv' cols='100' rows='5'>".$row["inventory"]."</textarea>";
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='panel panel-default'>
-                                        <div class='panel-heading'>
-                                            <h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Containers</h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="col-md-4" style="padding-left:425px;">
-                                                <?php
-                                                    echo "<textarea id='hCont' name='hCont' cols='100' rows='5'>".$row["containers"]."</textarea>";
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="col-md-4"></div>					
-                            <div class="col-md-4">
-                                        <center>
-                                            <?php
-                                                echo "<input id='hID' type='hidden' name='hID' value='".$row["id"]."'>";
-                                                echo "<input class='btn btn-lg btn-primary'  type='submit'  name='update' value='Submit Changes'>  ";
-                                                echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='DELETE'>";
-                                            ?>
-                                            <br/>
-                                        </center>
-                            </div>
-                                            <?php
-                                                        };
-                                                    }
-                                                    else 
-                                                    {
-                                                        echo "<center><h1 style='color:red'>ERROR NO RESULTS</h1></center>";
-                                                    }
-
-                                                } 
-                                                else 
-                                                {
-                                                    $this->errors[] = "Database connection problem.";
-                                                }
-                                            ?>  
-                                        </form>
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            House <small>Editing</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-wrench"></i> Houses
+                            </li>
+                        </ol>
                     </div>
-                    <!-- /.container-fluid -->
-                <?php } else {
-                    echo "Your permission level is insufficient to see this.";
-                };
-            ?>
+                </div>
+                <!-- /.row -->
+					<div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-home fa-fw"></i> House</h3>
+                            </div>
+                            <div class="panel-body">
+								<form method="post" action="edit-actionH.php" name="editform">
+									<?php
+										if (!$db_connection->connect_errno) 
+										{
+											$sql = 'SELECT * FROM `houses` WHERE `id` ="'.$hID.'";';
+											$result_of_query = $db_connection->query($sql);
+											if ($result_of_query->num_rows > 0)
+											{
+												while($row = mysqli_fetch_assoc($result_of_query)) 
+												{
+													echo "<center>";
+														echo "<h4>Owners Player ID: <input id='hOwn' name='hOwn' type='text' value='".$row["pid"]."'></td><br/>";
+														echo "<h4>Position:<input id='hPos' name='hPos' type='text' value='".$row["pos"]."'></td><br/>";
+														echo "<h4>Owned:   <input id='hOwned' name='hOwned' type='text' value='".$row["owned"]."'></td><br/>";
+													echo "</center>";
+									?>
+							</div>		
+						</div>
+					</div>
+						<div class='col-lg-12'>
+							<div class='panel panel-default'>
+								<div class='panel-heading'>
+									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Inventory</h3>
+								</div>
+								<div class="panel-body">
+									<div class="col-md-4" style="padding-left:425px;">
+										<?php
+											echo "<textarea id='hInv' name='hInv' cols='100' rows='5'>".$row["inventory"]."</textarea>";
+										?>
+									</div>
+								</div>
+							</div>
+							<div class='panel panel-default'>
+								<div class='panel-heading'>
+									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Containers</h3>
+								</div>
+								<div class="panel-body">
+									<div class="col-md-4" style="padding-left:425px;">
+										<?php
+											echo "<textarea id='hCont' name='hCont' cols='100' rows='5'>".$row["containers"]."</textarea>";
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					<div class="col-md-4"></div>					
+					<div class="col-md-4">
+								<center>
+									<?php
+										echo "<input id='hID' type='hidden' name='hID' value='".$row["id"]."'>";
+										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='update' value='Submit Changes'>  ";
+										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='DELETE'>";
+									?>
+									<br/>
+								</center>
+					</div>
+									<?php
+												};
+											}
+											else 
+											{
+												echo "<center><h1 style='color:red'>ERROR NO RESULTS</h1></center>";
+											}
+										
+										} 
+										else 
+										{
+											$this->errors[] = "Database connection problem.";
+										}
+									?>  
+								</form>
+            </div>
+            <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
 

@@ -45,7 +45,7 @@
 
     <div id="wrapper">
 
-        <?php include("views/sidebar.php"); ?>
+       <?php include("views/sidebar.php"); ?>
 
         <div id="page-wrapper">
 

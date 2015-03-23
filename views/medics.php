@@ -55,11 +55,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            THWs <small>Overview</small>
+                            Medics <small>Overview</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-ambulance"></i> THWs
+                                <i class="fa fa-ambulance"></i> Medics
                             </li>
                         </ol>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i> THWs</h3>
+                                <h3 class="panel-title"><i class="fa fa-ambulance fa-fw"></i> Medics</h3>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
