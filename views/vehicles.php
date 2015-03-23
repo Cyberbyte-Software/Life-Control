@@ -129,11 +129,11 @@
 																								
 													if (isset($_POST['pid'])) 
 													{
-														$sql = "SELECT * FROM `vehicles` WHERE `classname` LIKE '%".$searchText."%' ".$max." ;";
+														$sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%".$searchText."%' ".$max." ;";
 													} 
 													else 
 													{
-														$sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%".$searchText."%' ".$max." ;";
+														$sql = "SELECT * FROM `vehicles` WHERE `classname` LIKE '%".$searchText."%' ".$max." ;";
 													}												
 												}
 												else
