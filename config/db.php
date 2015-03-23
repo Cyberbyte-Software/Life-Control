@@ -23,5 +23,6 @@ define("results_per_page", 10 );
 	!! Make sure to add +1 to the server port, ARMA 3 implementation violates Source query protocol spec. !!
 
 **/
+define( 'enable_game_query', false);
 define( 'SQ_SERVER_ADDR', '127.0.0.1' );
 define( 'SQ_SERVER_PORT', 3103 );
