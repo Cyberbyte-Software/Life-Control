@@ -441,6 +441,14 @@
 								</div>
 							</div>
 						</div>
+						<?php
+							if (sql_smartPhone == TRUE && $_SESSION['user_level'] >= 2)
+							{
+								include("views/modules/sqlSmartPhone/module.php");
+							}
+						?>
+						
+						
 					</div>
 					<div class="col-md-4"></div>					
 					<div class="col-md-4">

@@ -22,6 +22,13 @@ define("results_per_page", 10 );
 define("alits_life_4", true);
 
 /**
+	Modules: Here you can enable any modules for the system that have been made to
+			 support people who use things like SQL Smart Phone
+*/
+define("sql_smartPhone",true);
+
+
+/**
 	Change These To Reflect The Connection Info Of Your Game Server.
 	This Allows the current players function to work.
 	!! Make sure to add +1 to the server port, ARMA 3 implementation violates Source query protocol spec. !!
