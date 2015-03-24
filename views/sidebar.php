@@ -16,7 +16,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION['user_name']; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="profile.php"><i class="fa fa-fw fa-user"></i><?php echo " ". $lang['navProfile'];?></a>
                         </li>
 						<?php
 								if ($_SESSION['user_level'] >= 3)
@@ -24,19 +24,19 @@
 						?>
 									<li class='divider'></li>
 									<li>
-										<a href='admin.php'><i class='fa fa-fw fa-cog'></i> Admin</a>
+										<a href='admin.php'><i class='fa fa-fw fa-cog'></i><?php echo " ". $lang['navAdmin'];?></a>
 									</li>
 
 									<li class='divider'></li>
 									<li>
-										<a href='register.php'><i class='fa fa-fw fa-cog'></i> Add New User</a>
+										<a href='register.php'><i class='fa fa-fw fa-cog'></i><?php echo " ". $lang['navNewUser'];?></a>
 									</li>
 						<?php								
 								}
 						?>
                         <li class="divider"></li>
                         <li>
-                            <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i><?php echo " ". $lang['navLogOut'];?></a>
                         </li>
                     </ul>
                 </li>
@@ -45,30 +45,30 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i><?php echo " ". $lang['navDashboard'];?></a>
                     </li>
                     <li>
-                        <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
+                        <a href="players.php"><i class="fa fa-fw fa-child "></i><?php echo " ". $lang['players'];?></a>
                     </li>
 					<?php
 						if ($_SESSION['user_level'] >= 2)
 						{
 					?>
 							<li>
-								<a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
+								<a href="vehicles.php"><i class="fa fa-fw fa-car"></i><?php echo " ". $lang['vehicles'];?></a>
 							</li>
 							<li>
-								<a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
+								<a href="houses.php"><i class="fa fa-fw fa-home"></i><?php echo " ". $lang['houses'];?></a>
 							</li>
 						   <li>
-								<a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
+								<a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i><?php echo " ". $lang['gangs'];?></a>
 							</li>
 						<?php
 							if (alits_life_4 == TRUE)
 							{
 						?>
 							   <li>
-									<a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i> Wanted</a>
+									<a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i><?php echo " ". $lang['wanted'];?></a>
 								</li>
 						<?php								
 							}

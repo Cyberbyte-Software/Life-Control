@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -90,11 +92,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Players <small>Overview</small>
+                            <?php echo $lang['players'];?> <small><?php echo " ". $lang['overview'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-child"></i> Players
+                                <i class="fa fa-child"></i><?php echo " ". $lang['players'];?>
                             </li>
                         </ol>
                     </div>
@@ -104,15 +106,15 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> Players
+                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " ". $lang['players'];?>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
 										<thead>
 											<tr>
-												<th>Player Name</th>
-												<th>Time Played</th>
+												<th><?php echo $lang['name'];?></th>
+												<th><?php echo $lang['time'];?></th>
 												<!-- <th>Kick</th>
 												<th>Ban</th> -->
 											</tr>

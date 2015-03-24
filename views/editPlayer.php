@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -8,7 +10,7 @@
 	}
 	else
 	{
-		echo "<center><h1 style='color:red'>PLAYERID NOT SET</h1></center>";
+		echo "<center><h1 style='color:red'>".$lang['idNotSet']."</h1></center>";
 	}
 
 	// change character set to utf8 and check it
@@ -79,11 +81,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Player <small>Editing</small>
+                           <?php echo $lang['player'];?><small><?php echo " ". $lang['editing'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-wrench"></i> Player Editor
+                                <i class="fa fa-wrench"></i><?php echo $lang['player']." ".$lang['editor'];?>
                             </li>
                         </ol>
                     </div>
@@ -96,15 +98,15 @@
 						?>
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h3 class="panel-title"><i class="fa fa-home fa-fw"></i>Houses Quick Look</h3>
+									<h3 class="panel-title"><i class="fa fa-home fa-fw"></i><?php echo " ". $lang['houses']." ".$lang['quickLook'];?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="table-responsive">
 										<table class="table table-bordered table-hover table-striped">
 											<thead>
 												<tr>
-													<th>Position</th>
-													<th>Edit</th>
+													<th><?php echo $lang['position'];?></th>
+													<th><?php echo $lang['edit'];?></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -131,7 +133,7 @@
 																echo "<td>".$row["pos"]."</td>";
 																echo "<td><form method='post' action='editHouse.php' name='PlayerEdit'>";
 																echo "<input id='hID' type='hidden' name='hID' value='".$hID."'>";
-																echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editH' value='Edit House'>";
+																echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editH' value='".$lang['edit']."'>";
 																echo "</form></td>";
 															echo "</tr>";
 														};
@@ -157,17 +159,17 @@
 						?>
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h3 class="panel-title"><i class="fa fa-car fa-fw"></i> Vehicles Quick Look</h3>
+										<h3 class="panel-title"><i class="fa fa-car fa-fw"></i><?php echo " ". $lang['vehicles']." ".$lang['quickLook'];?></h3>
 									</div>
 									<div class="panel-body">
 										<div class="table-responsive">
 											<table class="table table-bordered table-hover table-striped">
 												<thead>
 													<tr>
-														<th>Class</th>
-														<th>Type</th>
-														<th>Plate</th>
-														<th>Edit</th>
+														<th><?php echo $lang['class'];?></th>
+														<th><?php echo $lang['type'];?></th>
+														<th><?php echo $lang['plate'];?></th>
+														<th><?php echo $lang['edit'];?></th>
 													</tr>
 												</thead>
 												<tbody>
@@ -187,7 +189,7 @@
 																		echo "<td>".$row["plate"]."</td>";
 																		echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
 																		echo "<input id='vehID' type='hidden' name='vehID' value='".$vehID."'>";
-																		echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editVeh' value='Edit Vehicle'>";
+																		echo "<input class='btn btn-sm btn-primary'  type='submit'  name='editVeh' value='".$lang['edit']."'>";
 																		echo "</form></td>";
 																	echo "</tr>";
 																};
@@ -210,7 +212,7 @@
                     <div class="col-md-4"style="float:left;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> Player</h3>
+                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " ". $lang['player'];?></h3>
                             </div>
                             <div class="panel-body">
 								<form method="post" action="edit-action.php" name="editform">
@@ -225,23 +227,23 @@
 												{
 													$playersID = $row["playerid"];
 													echo "<center>";
-														echo "<h3>Name: ".$row["name"]."</h3>";
-														echo "<h4>Aliases: ".$row["aliases"]."</h4>";
-														echo "<h4>Player ID: ".$playersID."</h4>";
-														echo "<h4>GUID: ".$pGID."</h4>";
+														echo "<h3>".$lang['name'].": ".$row["name"]."</h3>";
+														echo "<h4>".$lang['aliases'].": ".$row["aliases"]."</h4>";
+														echo "<h4>".$lang['playerID'].": ".$playersID."</h4>";
+														echo "<h4>".$lang['GUID'].": ".$pGID."</h4>";
 														if ($_SESSION['user_level'] >= 2)
 														{
-															echo "<h4>Cash:    <input id='player_cash' name='player_cash' type='text' value='".$row["cash"]."'></td><br/>";
-															echo "<h4>Bank:    <input id='player_bank' name='player_bank' type='text' value='".$row["bankacc"]."'></td><br/>";
+															echo "<h4>".$lang['cash'].":    <input id='player_cash' name='player_cash' type='text' value='".$row["cash"]."'></td><br/>";
+															echo "<h4>".$lang['bank'].":    <input id='player_bank' name='player_bank' type='text' value='".$row["bankacc"]."'></td><br/>";
 														}
 														else 
 														{
 															echo "<input id='player_cash' type='hidden' name='player_cash' value='".$row["cash"]."'>";
 															echo "<input id='player_bank' type='hidden' name='player_bank' value='".$row["bankacc"]."'>";
-															echo "<h4>Cash: ".$row["cash"]."</h4>";
-															echo "<h4>Cash: ".$row["bankacc"]."</h4>";														
+															echo "<h4>".$lang['cash'].": ".$row["cash"]."</h4>";
+															echo "<h4>".$lang['bank'].": ".$row["bankacc"]."</h4>";														
 														}
-														echo "<h4>Cop: ";
+														echo "<h4>".$lang['cop'].": ";
 														echo "<select id='player_coplvl' name='player_coplvl'>";
 															echo '<option value="0"';
 																if($row['coplevel']==0){echo ' selected';}
@@ -268,7 +270,7 @@
 																if($row['coplevel']==7){echo ' selected';}
 															echo '>7</option></h4>';
 														echo "</select>";
-														echo "<h4>Medic: ";
+														echo "<h4>".$lang['medic'].": ";
 														echo "<select id='player_medlvl' name='player_medlvl'>";
 															echo '<option value="0"';
 																if($row['mediclevel']==0){echo ' selected';}
@@ -291,7 +293,7 @@
 														echo "</select>";
 														if ($_SESSION['user_level'] >= 3)
 														{
-															echo "<h4>Admin: ";
+															echo "<h4>".$lang['admin'].": ";
 															echo "<select id='player_adminlvl' name='player_adminlvl'>";
 																echo '<option value="0"';
 																	if($row['adminlevel']==0){echo ' selected';}
@@ -310,11 +312,11 @@
 														else 
 														{
 															echo "<input id='player_adminlvl' type='hidden' name='player_adminlvl' value='".$row["adminlevel"]."'>";
-															echo "<h4>Admin: ".$row["adminlevel"]."</h4>";
+															echo "<h4>".$lang['admin'].": ".$row["adminlevel"]."</h4>";
 														}
 														if ($_SESSION['user_level'] >= 2)
 														{
-															echo "<h4>Donator: ";
+															echo "<h4>".$lang['donator'].": ";
 															echo "<select id='player_donlvl' name='player_donlvl'>";
 																echo '<option value="0"';
 																	if($row['donatorlvl']==0){echo ' selected';}
@@ -339,7 +341,7 @@
 														else 
 														{
 															echo "<input id='player_donlvl' type='hidden' name='player_donlvl' value='".$row["donatorlvl"]."'>";
-															echo "<h4>Donator: ".$row['donatorlvl']."</h4>";														
+															echo "<h4>".$lang['donator'].": ".$row['donatorlvl']."</h4>";														
 														}
 													echo "</center>";
 									?>
@@ -349,18 +351,18 @@
 					<div class='col-lg-12'>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
-								<h3 class='panel-title'><i class='fa fa-taxi fa-fw'></i> Police</h3>
+								<h3 class='panel-title'><i class='fa fa-taxi fa-fw'></i><?php echo " ". $lang['police'];?></h3>
 							</div>
 							<div class="panel-body">
 								<div class="col-md-4" style="padding-left:250px;">
 									<?php
 										if ($_SESSION['user_level'] >= 2)
 										{
-											echo "<h4>Cop Licenses:</h4> <textarea id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";
+											echo "<h4>".$lang['cop']." ".$lang['licenses']."</h4> <textarea id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";
 										}
 										else 
 										{
-											echo "<h4>Cop Licenses:</h4> <textarea readonly id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";												
+											echo "<h4>".$lang['cop']." ".$lang['licenses'].":</h4> <textarea readonly id='cop_lic' name='cop_lic' cols='70' rows='5'>".$row["cop_licenses"]."</textarea>";												
 										}									
 									?>
 								</div>
@@ -368,11 +370,11 @@
 									<?php
 										if ($_SESSION['user_level'] >= 2)
 										{
-											echo "<h4>Cop Gear:</h4> <textarea id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
+											echo "<h4>".$lang['cop']." ".$lang['gear'].":</h4> <textarea id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
 										}
 										else 
 										{
-											echo "<h4>Cop Gear:</h4> <textarea readonly id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
+											echo "<h4>".$lang['cop']." ".$lang['gear'].":</h4> <textarea readonly id='cop_gear' name='cop_gear' cols='70' rows='5'>".$row["cop_gear"]."</textarea>";
 										}									
 									?>
 								</div>
@@ -380,18 +382,18 @@
 						</div>
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
-								<h3 class='panel-title'><i class='fa fa-child fa-fw'></i> Civilian</h3>
+								<h3 class='panel-title'><i class='fa fa-child fa-fw'></i><?php echo " ". $lang['civil'];?></h3>
 							</div>
 							<div class="panel-body">
 								<div class="col-md-4" style="padding-left:250px;">
 									<?php
 										if ($_SESSION['user_level'] >= 2)
 										{
-											echo "<h4>Civ Licenses:</h4> <textarea id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
+											echo "<h4>".$lang['civ']." ".$lang['licenses'].":</h4> <textarea id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
 										}
 										else 
 										{
-											echo "<h4>Civ Licenses:</h4> <textarea readonly id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
+											echo "<h4>".$lang['civ']." ".$lang['licenses'].":</h4> <textarea readonly id='civ_lic' name='civ_lic' cols='70' rows='5'>".$row["civ_licenses"]."</textarea>";
 										}									
 									?>
 								</div>
@@ -399,11 +401,11 @@
 									<?php
 										if ($_SESSION['user_level'] >= 2)
 										{
-											echo "<h4>Civ Gear:</h4> <textarea id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
+											echo "<h4>".$lang['civ']." ".$lang['gear'].":</h4> <textarea id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
 										}
 										else 
 										{
-											echo "<h4>Civ Gear:</h4> <textarea readonly id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
+											echo "<h4>".$lang['civ']." ".$lang['gear'].":</h4> <textarea readonly id='civ_gear' name='civ_gear' cols='70' rows='5'>".$row["civ_gear"]."</textarea>";
 										}									
 									?>
 								</div>
@@ -412,18 +414,18 @@
 
 						<div class='panel panel-default'>
 							<div class='panel-heading'>
-								<h3 class='panel-title'><i class='fa fa-ambulance fa-fw'></i> Medic</h3>
+								<h3 class='panel-title'><i class='fa fa-ambulance fa-fw'></i><?php echo " ". $lang['medic'];?></h3>
 							</div>
 							<div class="panel-body">
 								<div class="col-md-4" style="padding-left:250px;">
 									<?php
 										if ($_SESSION['user_level'] >= 2)
 										{
-											echo "<h4>Medic Licenses:</h4> <textarea id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
+											echo "<h4>".$lang['medic']." ".$lang['licenses'].":</h4> <textarea id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
 										}
 										else 
 										{
-											echo "<h4>Medic Licenses:</h4> <textarea readonly id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
+											echo "<h4>".$lang['medic']." ".$lang['licenses'].":</h4> <textarea readonly id='med_lic' name='med_lic' cols='70' rows='5'>".$row["med_licenses"]."</textarea>";
 										}									
 									?>
 								</div>
@@ -431,11 +433,11 @@
 									<?php
 										if ($_SESSION['user_level'] >= 2)
 										{
-											echo "<h4>Medic Gear:</h4> <textarea id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
+											echo "<h4>".$lang['medic']." ".$lang['gear'].":</h4> <textarea id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
 										}
 										else 
 										{
-											echo "<h4>Medic Gear:</h4> <textarea readonly id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
+											echo "<h4>".$lang['medic']." ".$lang['gear'].":</h4> <textarea readonly id='med_gear' name='med_gear' cols='70' rows='5'>".$row["med_gear"]."</textarea>";
 										}									
 									?>
 								</div>

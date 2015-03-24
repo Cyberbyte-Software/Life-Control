@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -8,7 +10,7 @@
 	}
 	else
 	{
-		echo "<center><h1 style='color:red'>wantedID NOT SET</h1></center>";
+		echo "<center><h1 style='color:red'>".$lang['idNotSet']."</h1></center>";
 	}
 
 	// change character set to utf8 and check it
@@ -64,11 +66,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Wanted <small>Editing</small>
+                            <?php echo $lang['wanted'];?><small><?php echo " ". $lang['editing'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-wrench"></i> Wanted
+                                <i class="fa fa-wrench"></i><?php echo " ". $lang['wanted'];?>
                             </li>
                         </ol>
                     </div>
@@ -78,7 +80,7 @@
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> Vehicle</h3>
+                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> <?php echo " ". $lang['wanted'];?></h3>
                             </div>
                             <div class="panel-body">
 								<form method="post" action="edit-actionW.php" name="editform">
@@ -92,10 +94,10 @@
 												while($row = mysqli_fetch_assoc($result_of_query)) 
 												{
 													echo "<center>";
-														echo "<h4>Wanted ID: <input id='wantedID' name='wantedID' type='text' value='".$row["wantedID"]."'></td><br/>";
-														echo "<h4>Name:   <input id='wantedName' name='wantedName' type='text' value='".$row["wantedName"]."'></td><br/>";
-														echo "<h4>Bounty:    <input id='wantedBounty' name='wantedBounty' type='text' value='".$row["wantedBounty"]."'></td><br/>";
-														echo "<h4>Active:";
+														echo "<h4>".$lang['wID'].": <input id='wantedID' name='wantedID' type='text' value='".$row["wantedID"]."'></td><br/>";
+														echo "<h4>".$lang['name'].":   <input id='wantedName' name='wantedName' type='text' value='".$row["wantedName"]."'></td><br/>";
+														echo "<h4>".$lang['bounty'].":    <input id='wantedBounty' name='wantedBounty' type='text' value='".$row["wantedBounty"]."'></td><br/>";
+														echo "<h4>".$lang['active'].":";
 														echo "<select id='active' name='active'>";
 															echo '<option value="0"';
 																if($row['active']==0){echo ' selected';}
@@ -112,7 +114,7 @@
 						<div class='col-lg-12'>
 							<div class='panel panel-default'>
 								<div class='panel-heading'>
-									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Crimes</h3>
+									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i><?php echo " ". $lang['crimes'];?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="col-md-4" style="padding-left:425px;">
@@ -127,8 +129,8 @@
 					<div class="col-md-4">
 								<center>
 									<?php
-										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='update' value='Submit Changes'>  ";
-										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='DELETE'>";
+										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='update' value='".$lang['subChanges']."'>  ";
+										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='".$lang['DELETE']."'>";
 									?>
 									<br/>
 								</center>

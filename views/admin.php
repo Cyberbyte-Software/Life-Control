@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -57,17 +59,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Staff <small>Overview</small>
+                            <?php echo $lang['staff'];?> <small><?php echo " ". $lang['overview'];?></small>
                         </h1>
 						<div class="col-lg-4" style="top:3px;float:right;">
 							<form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" name='searchPlayer'>
 								<input id='searchText' type='text' name='searchText'>
-								<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='Search'>
+								<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='<?php echo " ". $lang['search'];?>'>
 							</form>
 						</div>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-users"></i> Staff
+                                <i class="fa fa-users"></i><?php echo " ". $lang['staff'];?>
                             </li>
                         </ol>
                     </div>
@@ -77,18 +79,18 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-users fa-fw"></i> Staff
+                                <h3 class="panel-title"><i class="fa fa-users fa-fw"></i><?php echo " ". $lang['staff'];?>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Staff Name</th>
-                                                <th>Email Address</th>
-                                                <th>Rank</th>
-												<th>Player ID</th>
-												<th>Edit</th>
+                                                <th><?php echo $lang['staffName'];?></th>
+                                                <th><?php echo $lang['emailAdd'];?></th>
+                                                <th><?php echo $lang['rank'];?></th>
+												<th><?php echo $lang['playerID'];?></th>
+												<th><?php echo $lang['edit'];?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -143,7 +145,7 @@
 														echo "<td>".$row["playerid"]."</td>";
 														echo "<td><form method='post' action='editStaff.php' name='PlayerEdit'>";
 														echo "<input id='userId' type='hidden' name='userId' value='".$userID."'>";
-														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='Edit Staff Member'>";
+														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='".$lang['edit']."'>";
 														echo "</form></td>";
 													echo "</tr>";
 												};
@@ -155,12 +157,12 @@
 												{
 													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
 													echo "<input id='pagenum' type='hidden' name='pagenum' value='1'>";
-													echo "<input type='submit' value=' <<-First  '>";
+													echo "<input type='submit' value=' <<-".$lang['first']."  '>";
 													echo "</form></th>";
 													$previous = $pagenum-1;
 													echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
 													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$previous."'>";
-													echo "<input type='submit' value=' <-Previous  '>";
+													echo "<input type='submit' value=' <-".$lang['previous']."  '>";
 													echo "</form></th>";
 												} 
 												//This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
@@ -170,12 +172,12 @@
 													$next = $pagenum+1;
 													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
 													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$next."'>";
-													echo "<input type='submit' value=' Next ->  '>";
+													echo "<input type='submit' value=' ".$lang['next']." ->  '>";
 													echo "</form></th>";
 													echo " ";
 													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
 													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$last."'>";
-													echo "<input type='submit' value=' Last ->>  '>";
+													echo "<input type='submit' value=' ".$lang['last']." ->>  '>";
 													echo "</form></th>";
 												} 
 												echo "</thead></table>";

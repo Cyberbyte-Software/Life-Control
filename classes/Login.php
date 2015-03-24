@@ -86,6 +86,7 @@ class Login
                         $_SESSION['user_name'] = $result_row->user_name;
 						$_SESSION['user_level'] = $result_row->user_level;
                         $_SESSION['user_email'] = $result_row->user_email;
+						$_SESSION['lang'] = $_POST['lang'];
                         $_SESSION['user_login_status'] = 1;
 
                     } else {

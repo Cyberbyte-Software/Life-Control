@@ -4,17 +4,17 @@
 ?>
 	<div class='panel panel-default'>
 		<div class='panel-heading'>
-			<h3 class='panel-title'><i class='fa fa-envelope-o fa-fw'></i> Messages</h3>
+			<h3 class='panel-title'><i class='fa fa-envelope-o fa-fw'></i><?php echo " ".$lang['message'];?></h3>
 		</div>
 		<div class="panel-body">
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>
-							<th>From</th>
-							<th>To</th>
-							<th>Message</th>
-							<th>Time</th>
+							<th><?php echo $lang['from'];?></th>
+							<th><?php echo $lang['to'];?></th>
+							<th><?php echo $lang['message'];?></th>
+							<th><?php echo $lang['time'];?></th>
 						</tr>
 					</thead>
 					<tbody>

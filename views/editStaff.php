@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+	
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -10,7 +12,7 @@
 	}
 	else
 	{
-		echo "<center><h1 style='color:red'>USERID NOT SET</h1></center>";
+		echo "<center><h1 style='color:red'>".$lang['idNotSet']."</h1></center>";
 	}
 
 	// change character set to utf8 and check it
@@ -66,11 +68,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Staff <small>Editor
+                            <?php echo $lang['staff'];?> <small><?php echo " ". $lang['editor'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-wrench"></i> Staff Editor
+                                <i class="fa fa-wrench"></i><?php echo $lang['staff'] ." ". $lang['editor'];?>
                             </li>
                         </ol>
                     </div>
@@ -80,7 +82,7 @@
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-users fa-fw"></i> Staff Member</h3>
+                                <h3 class="panel-title"><i class="fa fa-users fa-fw"></i><?php echo " ". $lang['staff'];?></h3>
                             </div>
                             <div class="panel-body">
 								<form method="post" action="editStaffAction.php" name="editform">
@@ -95,21 +97,21 @@
 												{
 													$playersID = $row["playerid"];
 													echo "<center>";
-														echo "<h4>Name:  <input id='staffName' name='staffName' type='text' value='".$row["user_name"]."'></h4>";
-														echo "<h4>Email: <input id='staffEmail' style='min-width:300px;'name='staffEmail' type='text' value='".$row["user_email"]."'></h4>";
-														echo "<h4>Rank: ";
+														echo "<h4>".$lang['name'].":  <input id='staffName' name='staffName' type='text' value='".$row["user_name"]."'></h4>";
+														echo "<h4>".$lang['emailAdd'].": <input id='staffEmail' style='min-width:300px;'name='staffEmail' type='text' value='".$row["user_email"]."'></h4>";
+														echo "<h4>".$lang['rank'].": ";
 														echo "<select id='staffRank' name='staffRank'>";
 															echo '<option value="1"';
 																if($row['user_level']==1){echo ' selected';}
-															echo '>Support</option>';	
+															echo '>'.$lang['support'].'</option>';	
 															echo '<option value="2"';
 																if($row['user_level']==2){echo ' selected';}
-															echo '>Moderator</option>';
+															echo '>'.$lang['mod'].'</option>';
 															echo '<option value="3"';
 																if($row['user_level']==3){echo ' selected';}
-															echo '>Administrator</option>';
+															echo '>'.$lang['administrator'].'</option>';
 														echo "</select></h4>";
-														echo "<h4>Player ID:  <input id='staffPID' name='staffPID' type='text' value='".$row["playerid"]."'></h4>";
+														echo "<h4>".$lang['playerID'].":  <input id='staffPID' name='staffPID' type='text' value='".$row["playerid"]."'></h4>";
 													echo "</center>";
 										
 												};
@@ -125,7 +127,7 @@
 											$this->errors[] = "Database connection problem.";
 										}
 											echo "<input id='user_id' type='hidden' name='user_id' value='".$uId."'>";
-											echo "<center><input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='Submit Changes'></center>";
+											echo "<center><input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='".$lang['subChange']."'></center>";
 								
 									?>
 								</form>

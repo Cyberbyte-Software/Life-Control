@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -57,11 +59,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Police <small>Overview</small>
+                            <?php echo $lang['police'];?><small><?php echo " ". $lang['overview'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-taxi"></i> Police
+                                <i class="fa fa-taxi"></i><?php echo " ". $lang['police'];?>
                             </li>
                         </ol>
                     </div>
@@ -71,17 +73,17 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i> Police</h3>
+                                <h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i><?php echo " ". $lang['police'];?></h3>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Player Name</th>
-                                                <th>Player ID</th>
-                                                <th>Rank</th>
-												<th>Edit</th>
+                                                <th><?php echo $lang['name'];?></th>
+                                                <th><?php echo $lang['playerID'];?></th>
+                                                <th><?php echo $lang['rank'];?></th>
+												<th><?php echo $lang['edit'];?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -125,7 +127,7 @@
 														echo "<td>".$row["coplevel"]."</td>";
 														echo "<td><form method='post' action='editPlayer.php' name='PlayerEdit'>";
 														echo "<input id='playerId' type='hidden' name='playerId' value='".$playersID."'>";
-														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='Edit Player'>";
+														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='".$lang['edit']."'>";
 														echo "</form></td>";
 													echo "</tr>";
 												};
@@ -135,14 +137,14 @@
 												if ($pagenum == 1){} 
 												else 
 												{
-													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='1'>";
-													echo "<input type='submit' value=' <<-First  '>";
+													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
+													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='1'>";
+													echo "<input type='submit' value=' <<-".$lang['first']."  '>";
 													echo "</form></th>";
 													$previous = $pagenum-1;
-													echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$previous."'>";
-													echo "<input type='submit' value=' <-Previous  '>";
+													echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
+													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='".$previous."'>";
+													echo "<input type='submit' value=' <-".$lang['previous']."  '>";
 													echo "</form></th>";
 												} 
 												//This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
@@ -150,14 +152,14 @@
 												else 
 												{
 													$next = $pagenum+1;
-													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$next."'>";
-													echo "<input type='submit' value=' Next ->  '>";
+													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
+													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='".$next."'>";
+													echo "<input type='submit' value=' ".$lang['next']." ->  '>";
 													echo "</form></th>";
 													echo " ";
-													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='pagenum'>";
-													echo "<input id='pagenum' type='hidden' name='pagenum' value='".$last."'>";
-													echo "<input type='submit' value=' Last ->>  '>";
+													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
+													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='".$last."'>";
+													echo "<input type='submit' value=' ".$lang['last']." ->>  '>";
 													echo "</form></th>";
 												} 
 												echo "</thead></table>";

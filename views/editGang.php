@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -8,7 +10,7 @@
 	}
 	else
 	{
-		echo "<center><h1 style='color:red'>PLAYERID NOT SET</h1></center>";
+		echo "<center><h1 style='color:red'>".$lang['idNotSet']."</h1></center>";
 	}
 
 	// change character set to utf8 and check it
@@ -64,11 +66,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Gang <small>Editing</small>
+                            <?php echo $lang['gang'];?> <small><?php echo " ". $lang['editing'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-wrench"></i> Gangs Editor
+                                <i class="fa fa-wrench"></i> <?php echo  $lang['gangs']." ".$lang['editor'];?>
                             </li>
                         </ol>
                     </div>
@@ -78,7 +80,7 @@
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> Player</h3>
+                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " ". $lang['player'];?></h3>
                             </div>
                             <div class="panel-body">
 								<form method="post" action="edit-actionG.php" name="editform">
@@ -93,11 +95,11 @@
 												{
 													$gID = $row["id"];
 													echo "<center>";
-														echo "<h3>Name:    <input id='gname' name='gname' type='text' value='".$row["name"]."'></td><br/>";
-														echo "<h4>Owner:    <input id='gowner' name='gowner' type='text' value='".$row["owner"]."'></td><br/>";
-														echo "<h4>Max Members:    <input id='gMM' name='gMM' type='text' value='".$row["maxmembers"]."'></td><br/>";
-														echo "<h4>Bank:     <input id='gbank' name='gbank' type='text' value='".$row["bank"]."'></td><br/>";
-														echo "<h4>Active:   <input id='gAct' name='gAct' type='text' value='".$row["active"]."'></td><br/>";
+														echo "<h3>".$lang['name'].":    <input id='gname' name='gname' type='text' value='".$row["name"]."'></td><br/>";
+														echo "<h4>".$lang['owner'].":    <input id='gowner' name='gowner' type='text' value='".$row["owner"]."'></td><br/>";
+														echo "<h4>".$lang['maxMembers'].":    <input id='gMM' name='gMM' type='text' value='".$row["maxmembers"]."'></td><br/>";
+														echo "<h4>".$lang['bank'].":     <input id='gbank' name='gbank' type='text' value='".$row["bank"]."'></td><br/>";
+														echo "<h4>".$lang['active'].":   <input id='gAct' name='gAct' type='text' value='".$row["active"]."'></td><br/>";
 													echo "</center>";
 									?>
 							</div>		
@@ -106,7 +108,7 @@
 						<div class='col-lg-12'>
 							<div class='panel panel-default'>
 								<div class='panel-heading'>
-									<h3 class='panel-title'><i class='fa fa-users fa-fw'></i> Members</h3>
+									<h3 class='panel-title'><i class='fa fa-users fa-fw'></i><?php echo " ". $lang['members'];?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="col-md-4" style="padding-left:425px;">
@@ -121,8 +123,8 @@
 								<center>
 									<?php
 										echo "<input id='gID' type='hidden' name='gID' value='".$gID."'>";
-										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='Submit Changes'>  ";
-										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='DELETE'>";
+										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='".$lang['subChange']."'>  ";
+										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='".$lang['DELETE']."'>";
 									?>
 									<br/>
 								</center>
@@ -132,7 +134,7 @@
 											}
 											else 
 											{
-												echo "<center><h1 style='color:red'>ERROR NO RESULTS</h1></center>";
+												echo "<center><h1 style='color:red'>".$lang['noRes']."</h1></center>";
 											}
 										
 										} 

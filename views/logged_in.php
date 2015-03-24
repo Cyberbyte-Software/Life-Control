@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+	
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 	
@@ -78,7 +80,7 @@
 				value:<?php echo htmlspecialchars( $Info[ 'Players' ] ); ?>,
 				min: 0,
 				max: <?php echo htmlspecialchars( $Info[ 'MaxPlayers' ] ); ?>,
-				title: 'Current Players'
+				title: <?php echo $lang['curPlayers'];?>
 			  });
 		};
 	</script>
@@ -108,11 +110,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Dashboard <small>Statistics Overview</small>
+                            <?php echo $lang['navDashboard'];?> <small><?php echo " ".$lang['statOver'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-dashboard"></i><?php echo " ". $lang['navDashboard'];?>
                             </li>
                         </ol>
                     </div>
@@ -120,7 +122,7 @@
 				
 				<div class="alert alert-info alert-dismissable">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<i class="fa fa-info-circle"></i> <strong>Welcome</strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
+					<i class="fa fa-info-circle"></i> <strong><?php echo " ". $lang['welcome'];?></strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
 				</div>
 			<?php 
 				if ($_SESSION['user_level'] >= 2)
@@ -138,7 +140,7 @@
 									</div>
 									<a href="curPlayers.php">
 										<div class="panel-footer">
-											<span class="pull-left">View All Players</span>
+											<span class="pull-left"><?php echo $lang['viewAll'];?></span>
 											<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 											<div class="clearfix"></div>
 										</div>
@@ -154,16 +156,16 @@
 					<div class="col-lg-4">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i>Police Overview</h3>
+								<h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i><?php echo $lang['police'] ." ". $lang['overview']  ;?></h3>
 							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-bordered table-hover table-striped">
 										<thead>
 											<tr>
-												<th>Player Name</th>
-												<th>Player ID</th>
-												<th>Rank</th>
+												<th><?php echo $lang['name'];?></th>
+												<th><?php echo $lang['playerID'];?></th>
+												<th><?php echo $lang['rank'];?></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -191,7 +193,7 @@
 									</table>
 								</div>
 								<div class="text-right">
-									<a href="police.php">View All Police <i class="fa fa-arrow-circle-right"></i></a>
+									<a href="police.php"><?php echo $lang['viewAll']." ";?> <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 						</div>
@@ -207,10 +209,10 @@
 										<table class="table table-bordered table-hover table-striped">
 											<thead>
 												<tr>
-													<th>Player Name</th>
-													<th>Player ID</th>
-													<th>Cash</th>
-													<th>Bank</th>
+													<th><?php echo $lang['name'];?></th>
+													<th><?php echo $lang['playerID'];?></th>
+													<th><?php echo $lang['cash'];?></th>
+													<th><?php echo $lang['bank'];?></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -255,9 +257,9 @@
 									<table class="table table-bordered table-hover table-striped">
 										<thead>
 											<tr>
-												<th>Player Name</th>
-												<th>Player ID</th>
-												<th>Rank</th>
+												<th><?php echo $lang['name'];?></th>
+												<th><?php echo $lang['playerID'];?></th>
+												<th><?php echo $lang['rank'];?></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -285,7 +287,7 @@
 									</table>
 								</div>
 								<div class="text-right">
-									<a href="medic.php">View All Medics <i class="fa fa-arrow-circle-right"></i></a>
+									<a href="medic.php"><?php echo $lang['viewAll']." ";?><i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
 						</div>
