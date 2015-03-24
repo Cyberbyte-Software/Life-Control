@@ -63,10 +63,10 @@ $lang['navAdmin'] = 'Admin';
 $lang['navNewUser'] = 'Add New User'; 
 $lang['navDashboard'] = 'Dashboard'; 
 $lang['navLogOut'] = 'Log Out'; 
-$lang['navFirst'] = 'First'; 
-$lang['navPrevious'] = 'Previous'; 
-$lang['navNext'] = 'Next'; 
-$lang['navLast'] = 'Last'; 
+$lang['first'] = 'First'; 
+$lang['previous'] = 'Previous'; 
+$lang['next'] = 'Next'; 
+$lang['last'] = 'Last'; 
 
 /*
 ------------------
