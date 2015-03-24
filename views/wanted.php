@@ -84,7 +84,7 @@
                                         <thead>
                                             <tr>
                                                 <th><?php echo $lang['id'];?></th>
-                                                <th><?php echo $lang['names'];?></th>
+                                                <th><?php echo $lang['name'];?></th>
                                                 <th><?php echo $lang['crimes'];?></th>
 												<th><?php echo $lang['bounty'];?></th>
                                                 <th><?php echo $lang['active'];?></th>
