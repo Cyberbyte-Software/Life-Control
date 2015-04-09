@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -80,71 +82,7 @@
 
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Life Control</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION['user_name']; ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-						<?php
-								if ($_SESSION['user_level'] >= 2)
-								{
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='admin.php'><i class='fa fa-fw fa-cog'></i> Admin</a>";
-									echo"</li>";
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='register.php'><i class='fa fa-fw fa-cog'></i> Add New User</a>";
-									echo"</li>";
-								}
-						
-						?>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
-                    </li>
-                    <li>
-                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
-                    </li>
-                    <li>
-                        <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
-                    </li>
-                   <li>
-                        <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+        <?php include("views/sidebar.php"); ?>
 
         <div id="page-wrapper">
 
@@ -154,11 +92,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Players <small>Overview</small>
+                            <?php echo $lang['players'];?> <small><?php echo " ". $lang['overview'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-child"></i> Players
+                                <i class="fa fa-child"></i><?php echo " ". $lang['players'];?>
                             </li>
                         </ol>
                     </div>
@@ -168,15 +106,15 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> Players
+                                <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " ". $lang['players'];?>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
 										<thead>
 											<tr>
-												<th>Player Name</th>
-												<th>Time Played</th>
+												<th><?php echo $lang['name'];?></th>
+												<th><?php echo $lang['time'];?></th>
 												<!-- <th>Kick</th>
 												<th>Ban</th> -->
 											</tr>

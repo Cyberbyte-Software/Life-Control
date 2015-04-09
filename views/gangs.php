@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -47,71 +49,7 @@
 
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Life Control</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION['user_name']; ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-						<?php
-								if ($_SESSION['user_level'] >= 2)
-								{
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='admin.php'><i class='fa fa-fw fa-cog'></i> Admin</a>";
-									echo"</li>";
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='register.php'><i class='fa fa-fw fa-cog'></i> Add New User</a>";
-									echo"</li>";
-								}
-						
-						?>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
-                    </li>
-                    <li>
-                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
-                    </li>
-                    <li>
-                        <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
-                    </li>
-                    <li class="active">
-                        <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+        <?php include("views/sidebar.php"); ?>
 
         <div id="page-wrapper">
 
@@ -121,18 +59,18 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Gangs <small>Overview</small>
+                            <?php echo $lang['gangs'];?><small><?php echo " ". $lang['overview'];?></small>
                         </h1>
 						<div class="col-lg-4" style="top:3px;float:right;">
 							<form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" name='searchPlayer'>
 								<input id='searchText' type='text' name='searchText'>
-								<input class='btn btn-sm btn-primary'  type='submit'  name='pid' value='Search PID'>
-								<input class='btn btn-sm btn-primary'  type='submit'  name='name' value='Search Name'>
+								<input class='btn btn-sm btn-primary'  type='submit'  name='pid' value='<?php echo $lang['search']." ".$lang['PID'];?>'>
+								<input class='btn btn-sm btn-primary'  type='submit'  name='name' value='<?php echo $lang['search']." ".$lang['name'];?>'>
 							</form>
 						</div>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-child"></i> Gangs
+                                <i class="fa fa-child"></i><?php echo " ". $lang['gangs'];?>
                             </li>
                         </ol>
                     </div>
@@ -142,20 +80,20 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-sitemap fa-fw"></i> Players
+                                <h3 class="panel-title"><i class="fa fa-sitemap fa-fw"></i><?php echo " ". $lang['gangs'];?>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
-												<th>ID</th>
-                                                <th>Gang Name</th>
-                                                <th>Owners Player ID</th>
-                                                <th>Bank</th>
-												<th>Max Members</th>
-                                                <th>Active</th>
-												<th>Edit</th>
+												<th><?php echo $lang['id'];?></th>
+                                                <th><?php echo $lang['gang']." ".$lang['name'];?></th>
+                                                <th><?php echo $lang['owner']." ".$lang['playerID'];?></th>
+                                                <th><?php echo $lang['bank'];?></th>
+												<th><?php echo $lang['maxMembers'];?></th>
+                                                <th><?php echo $lang['active'];?></th>
+												<th><?php echo $lang['edit'];?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -219,7 +157,7 @@
 														echo "<td>".$row["active"]."</td>";
 														echo "<td><form method='post' action='editGang.php' name='PlayerEdit'>";
 														echo "<input id='gID' type='hidden' name='gID' value='".$row["id"]."'>";
-														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='Edit Gang'>";
+														echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='".$lang['edit']."'>";
 														echo "</form></td>";
 													echo "</tr>";
 												};
@@ -231,12 +169,12 @@
 												{
 													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
 													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='1'>";
-													echo "<input type='submit' value=' <<-First  '>";
+													echo "<input type='submit' value=' <<-".$lang['first']."  '>";
 													echo "</form></th>";
 													$previous = $pagenum-1;
 													echo "<th><form style='float:right;' method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
 													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='".$previous."'>";
-													echo "<input type='submit' value=' <-Previous  '>";
+													echo "<input type='submit' value=' <-".$lang['previous']."  '>";
 													echo "</form></th>";
 												} 
 												//This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
@@ -246,12 +184,12 @@
 													$next = $pagenum+1;
 													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
 													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='".$next."'>";
-													echo "<input type='submit' value=' Next ->  '>";
+													echo "<input type='submit' value=' ".$lang['next']." ->  '>";
 													echo "</form></th>";
 													echo " ";
 													echo "<th><form method='post' action='".$_SERVER['PHP_SELF']."' name='Gpagenum'>";
 													echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='".$last."'>";
-													echo "<input type='submit' value=' Last ->>  '>";
+													echo "<input type='submit' value=' ".$lang['last']." ->>  '>";
 													echo "</form></th>";
 												} 
 												echo "</thead></table>";

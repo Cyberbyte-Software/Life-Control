@@ -1,4 +1,6 @@
 <?php
+	include("config/lang/module.php");
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -8,7 +10,7 @@
 	}
 	else
 	{
-		echo "<center><h1 style='color:red'>VEHID NOT SET</h1></center>";
+		echo "<center><h1 style='color:red'>".$lang['idNotSet']."</h1></center>";
 	}
 
 	// change character set to utf8 and check it
@@ -54,72 +56,8 @@
 
     <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Life Control</a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo $_SESSION['user_name']; ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-						<?php
-								if ($_SESSION['user_level'] >= 2)
-								{
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='admin.php'><i class='fa fa-fw fa-cog'></i> Admin</a>";
-									echo"</li>";
-
-									echo"<li class='divider'></li>";
-									echo"<li>";
-									echo"<a href='register.php'><i class='fa fa-fw fa-cog'></i> Add New User</a>";
-									echo"</li>";
-								}
-						
-						?>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="index.php?logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li>
-                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="players.php"><i class="fa fa-fw fa-child "></i> Players</a>
-                    </li>
-                    <li>
-                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i> Vehicles</a>
-                    </li>
-                    <li  class="active">
-                        <a href="houses.php"><i class="fa fa-fw fa-home"></i> Houses</a>
-                    </li>
-                   <li>
-                        <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i> Gangs</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-
+        <?php include("views/sidebar.php"); ?>
+		
         <div id="page-wrapper">
 
             <div class="container-fluid">
@@ -128,11 +66,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            House <small>Editing</small>
+                            <?php echo $lang['house'];?> <small><?php echo " ". $lang['editing'];?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-wrench"></i> Houses
+                                <i class="fa fa-wrench"></i><?php echo " ". $lang['houses'];?>
                             </li>
                         </ol>
                     </div>
@@ -142,7 +80,7 @@
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-home fa-fw"></i> House</h3>
+                                <h3 class="panel-title"><i class="fa fa-home fa-fw"></i><?php echo " ". $lang['house'];?></h3>
                             </div>
                             <div class="panel-body">
 								<form method="post" action="edit-actionH.php" name="editform">
@@ -156,9 +94,9 @@
 												while($row = mysqli_fetch_assoc($result_of_query)) 
 												{
 													echo "<center>";
-														echo "<h4>Owners Player ID: <input id='hOwn' name='hOwn' type='text' value='".$row["pid"]."'></td><br/>";
-														echo "<h4>Position:<input id='hPos' name='hPos' type='text' value='".$row["pos"]."'></td><br/>";
-														echo "<h4>Owned:   <input id='hOwned' name='hOwned' type='text' value='".$row["owned"]."'></td><br/>";
+														echo "<h4>".$lang['playerID'].": <input id='hOwn' name='hOwn' type='text' value='".$row["pid"]."'></td><br/>";
+														echo "<h4>".$lang['position'].":<input id='hPos' name='hPos' type='text' value='".$row["pos"]."'></td><br/>";
+														echo "<h4>".$lang['owned'].":   <input id='hOwned' name='hOwned' type='text' value='".$row["owned"]."'></td><br/>";
 													echo "</center>";
 									?>
 							</div>		
@@ -167,7 +105,7 @@
 						<div class='col-lg-12'>
 							<div class='panel panel-default'>
 								<div class='panel-heading'>
-									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Inventory</h3>
+									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i><?php echo " ". $lang['inventory'];?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="col-md-4" style="padding-left:425px;">
@@ -179,7 +117,7 @@
 							</div>
 							<div class='panel panel-default'>
 								<div class='panel-heading'>
-									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i> Containers</h3>
+									<h3 class='panel-title'><i class='fa fa-suitcase  fa-fw'></i><?php echo " ". $lang['containers'];?></h3>
 								</div>
 								<div class="panel-body">
 									<div class="col-md-4" style="padding-left:425px;">
@@ -195,8 +133,8 @@
 								<center>
 									<?php
 										echo "<input id='hID' type='hidden' name='hID' value='".$row["id"]."'>";
-										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='update' value='Submit Changes'>  ";
-										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='DELETE'>";
+										echo "<input class='btn btn-lg btn-primary'  type='submit'  name='update' value='".$lang['subChange']."'>  ";
+										echo "<input class='btn btn-lg btn-danger'  type='submit'  name='drop' value='".$lang['DELETE']."'>";
 									?>
 									<br/>
 								</center>

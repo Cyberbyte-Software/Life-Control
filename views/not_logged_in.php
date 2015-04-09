@@ -86,6 +86,10 @@ if (isset($login)) {
 					   <div class="form-group">
 							Username : <input placeholder="Username" id="login_input_username" class=" form-control login_input" type="text" name="user_name" required >
 							Password : <input pid="login_input_password" class="form-control login_input" type="password" name="user_password" autocomplete="off" required >
+							Language : <select id='lang' name='lang' class="form-control login_input">
+											<option value="en" selected>English</option>
+											<option value="de" selected>Deutsch</option>
+										</select>
 							<br>
 							<input class="btn btn-lg btn-primary" style="float:right;" type="submit"  name="login" value="Log in" >
 						</div>
