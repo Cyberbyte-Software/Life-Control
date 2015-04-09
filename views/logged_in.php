@@ -1,37 +1,36 @@
 <?php
-	include("config/lang/module.php");
-	
+
 	// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 	$db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-	
+
 	$enale = enable_game_query;
-	
+
 	// change character set to utf8 and check it
 	if (!$db_connection->set_charset("utf8")) {
 		$db_connection->errors[] = $db_connection->error;
 	}
-	
-	if (enable_game_query == TRUE) 
+
+	if (enable_game_query == TRUE)
 	{
 		require __DIR__ . '/SourceQuery/SourceQuery.class.php';
-		
+
 		// Edit this ->
 		define( 'SQ_TIMEOUT',     1 );
 		define( 'SQ_ENGINE',      SourceQuery :: SOURCE );
 		// Edit this <-
-		
+
 		$Timer = MicroTime( true );
-		
+
 		$Query = new SourceQuery( );
-		
+
 		$Info    = Array( );
 		$Rules   = Array( );
 		$Players = Array( );
-		
+
 		try
 		{
 			$Query->Connect( SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE );
-			
+
 			$Info    = $Query->GetInfo( );
 			$Players = $Query->GetPlayers( );
 			$Rules   = $Query->GetRules( );
@@ -40,12 +39,12 @@
 		{
 			$Exception = $e;
 		}
-		
+
 		$Query->Disconnect( );
-		
+
 		$Timer = Number_Format( MicroTime( true ) - $Timer, 4, '.', '' );
 	}
-	
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +72,7 @@
 	<script src="js/justgage.1.0.1.min.js"></script>
 	<script>
 		var g;
-	
+
 		window.onload = function(){
 			  var g = new JustGage({
 				id: "bigfella",
@@ -99,9 +98,9 @@
 <body>
 
     <div id="wrapper">
-	
+
         <?php include("views/sidebar.php"); ?>
-		
+
         <div id="page-wrapper">
 
             <div class="container-fluid">
@@ -119,16 +118,16 @@
                         </ol>
                     </div>
                 </div>
-				
+
 				<div class="alert alert-info alert-dismissable">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 					<i class="fa fa-info-circle"></i> <strong><?php echo " ". $lang['welcome'];?></strong> To Life Control <?php echo $_SESSION['user_name']; ?>.
 				</div>
-			<?php 
+			<?php
 				if ($_SESSION['user_level'] >= 2)
 				{
-					if (enable_game_query == TRUE) 
-					{ 
+					if (enable_game_query == TRUE)
+					{
 			?>
 						<div class="row">
 							<div class="col-lg-3 col-md-6">
@@ -147,8 +146,8 @@
 									</a>
 								</div>
 							</div>
-						</div>	
-			<?php 	
+						</div>
+			<?php
 					}
 				}
 			?>
@@ -170,11 +169,11 @@
 										</thead>
 										<tbody>
 											<?php
-												if (!$db_connection->connect_errno) 
+												if (!$db_connection->connect_errno)
 												{
 													$sql = "SELECT `name`,`coplevel`,`playerid` FROM `players` WHERE `coplevel` >= '1' ORDER BY `coplevel` DESC LIMIT 10";
 													$result_of_query = $db_connection->query($sql);
-													while($row = mysqli_fetch_assoc($result_of_query)) 
+													while($row = mysqli_fetch_assoc($result_of_query))
 													{
 														$playersID = $row["playerid"];
 														echo "<tr>";
@@ -183,8 +182,8 @@
 															echo "<td>".$row["coplevel"]."</td>";
 														echo "</tr>";
 													};
-												} 
-												else 
+												}
+												else
 												{
 													$this->errors[] = "Database connection problem.";
 												}
@@ -217,11 +216,11 @@
 											</thead>
 											<tbody>
 												<?php
-													if (!$db_connection->connect_errno) 
+													if (!$db_connection->connect_errno)
 													{
 														$sql = "SELECT `name`, `cash`, `bankacc`, `playerid` FROM `players` ORDER BY `bankacc` DESC LIMIT 10";
 														$result_of_query = $db_connection->query($sql);
-														while($row = mysqli_fetch_assoc($result_of_query)) 
+														while($row = mysqli_fetch_assoc($result_of_query))
 														{
 															$playersID = $row["playerid"];
 															echo "<tr>";
@@ -231,8 +230,8 @@
 																echo "<td>".$row["bankacc"]."</td>";
 															echo "</tr>";
 														};
-													} 
-													else 
+													}
+													else
 													{
 														$this->errors[] = "Database connection problem.";
 													}
@@ -264,11 +263,11 @@
 										</thead>
 										<tbody>
 											<?php
-												if (!$db_connection->connect_errno) 
+												if (!$db_connection->connect_errno)
 												{
 													$sql = "SELECT `name`,`mediclevel`,`playerid` FROM `players` WHERE `mediclevel` >= '1' ORDER BY `mediclevel` DESC LIMIT 10";
 													$result_of_query = $db_connection->query($sql);
-													while($row = mysqli_fetch_assoc($result_of_query)) 
+													while($row = mysqli_fetch_assoc($result_of_query))
 													{
 														$playersID = $row["playerid"];
 														echo "<tr>";
@@ -277,12 +276,12 @@
 															echo "<td>".$row["mediclevel"]."</td>";
 														echo "</tr>";
 													};
-												} 
-												else 
+												}
+												else
 												{
 													$this->errors[] = "Database connection problem.";
 												}
-											?> 
+											?>
 										</tbody>
 									</table>
 								</div>
@@ -293,7 +292,7 @@
 						</div>
 					</div>
 				</div>
-                <!-- /.row -->			
+                <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
 
