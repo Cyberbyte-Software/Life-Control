@@ -13,16 +13,16 @@
     <title>Life Control</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/sb-admin.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="../css/plugins/morris.css" rel="stylesheet">
+    <link href="css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,7 +47,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../index.php">Life Control</a>
+            <a class="navbar-brand" href="index.php">Life Control</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -56,7 +56,7 @@
                         class="fa fa-user"></i>  <?php echo $_SESSION['user_name']; ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="../profile.php"><i class="fa fa-fw fa-user"></i><?php echo " " . $lang['navProfile']; ?>
+                        <a href="profile.php"><i class="fa fa-fw fa-user"></i><?php echo " " . $lang['navProfile']; ?>
                         </a>
                     </li>
                     <?php
@@ -64,12 +64,12 @@
                         ?>
                         <li class='divider'></li>
                         <li>
-                            <a href='../admin.php'><i class='fa fa-fw fa-cog'></i><?php echo " " . $lang['navAdmin'];?></a>
+                            <a href='admin.php'><i class='fa fa-fw fa-cog'></i><?php echo " " . $lang['navAdmin'];?></a>
                         </li>
 
                         <li class='divider'></li>
                         <li>
-                            <a href='../register.php'><i
+                            <a href='register.php'><i
                                     class='fa fa-fw fa-cog'></i><?php echo " " . $lang['navNewUser'];?></a>
                         </li>
                     <?php
@@ -77,7 +77,7 @@
                     ?>
                     <li class="divider"></li>
                     <li>
-                        <a href="../index.php?logout"><i
+                        <a href="index.php?logout"><i
                                 class="fa fa-fw fa-power-off"></i><?php echo " " . $lang['navLogOut']; ?></a>
                     </li>
                 </ul>
@@ -87,29 +87,29 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="../index.php"><i class="fa fa-fw fa-dashboard"></i><?php echo " " . $lang['navDashboard']; ?>
+                    <a href="index.php"><i class="fa fa-fw fa-dashboard"></i><?php echo " " . $lang['navDashboard']; ?>
                     </a>
                 </li>
                 <li>
-                    <a href="../players.php"><i class="fa fa-fw fa-child "></i><?php echo " " . $lang['players']; ?></a>
+                    <a href="players.php"><i class="fa fa-fw fa-child "></i><?php echo " " . $lang['players']; ?></a>
                 </li>
                 <?php
                 if ($_SESSION['user_level'] >= 2) {
                     ?>
                     <li>
-                        <a href="../vehicles.php"><i class="fa fa-fw fa-car"></i><?php echo " " . $lang['vehicles'];?></a>
+                        <a href="vehicles.php"><i class="fa fa-fw fa-car"></i><?php echo " " . $lang['vehicles'];?></a>
                     </li>
                     <li>
-                        <a href="../houses.php"><i class="fa fa-fw fa-home"></i><?php echo " " . $lang['houses'];?></a>
+                        <a href="houses.php"><i class="fa fa-fw fa-home"></i><?php echo " " . $lang['houses'];?></a>
                     </li>
                     <li>
-                        <a href="../gangs.php"><i class="fa fa-fw fa-sitemap"></i><?php echo " " . $lang['gangs'];?></a>
+                        <a href="gangs.php"><i class="fa fa-fw fa-sitemap"></i><?php echo " " . $lang['gangs'];?></a>
                     </li>
                     <?php
                     if (alits_life_4 == TRUE) {
                         ?>
                         <li>
-                            <a href="../wanted.php"><i class="fa fa-fw fa-list-ul"></i><?php echo " " . $lang['wanted'];?>
+                            <a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i><?php echo " " . $lang['wanted'];?>
                             </a>
                         </li>
                     <?php
@@ -137,15 +137,15 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="../js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="../js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="../js/plugins/morris/raphael.min.js"></script>
-<script src="../js/plugins/morris/morris.min.js"></script>
-<script src="../js/plugins/morris/morris-data.js"></script>
+<script src="js/plugins/morris/raphael.min.js"></script>
+<script src="js/plugins/morris/morris.min.js"></script>
+<script src="js/plugins/morris/morris-data.js"></script>
 
 </body>
 
