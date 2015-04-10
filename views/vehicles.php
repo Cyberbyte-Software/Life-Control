@@ -55,84 +55,55 @@ if (!$db_connection->set_charset("utf8")) {
                     <tbody>
                     <?php
                     if (!$db_connection->connect_errno) {
+						if (isset($_GET["page"])) {
+							$page = $_GET["page"];
+						}else {
+							$page=1;
+						}
 
-                        if (!(isset($_POST['pagenum']))) {
-                            $pagenum = 1;
-                        } else {
-                            $pagenum = $_POST['pagenum'];
-                        }
+						$start_from = ($page-1) * $page_rows;
+						$max = 'LIMIT ' . $start_from . ',' . $page_rows;
+							
+						if (isset($_POST['searchText'])) {
+							$searchText = $_POST['searchText'];
 
-                        $sql = "SELECT * FROM `vehicles`;";
+							if (isset($_POST['pid'])) {
+								$sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
+							} else {
+								$sql = "SELECT * FROM `vehicles` WHERE `classname` LIKE '%" . $searchText . "%' " . $max . " ;";
+							}
+						} else {
+							$sql = "SELECT * FROM `vehicles` " . $max . " ;";
+						}
+						$result_of_query = $db_connection->query($sql);
+						while ($row = mysqli_fetch_assoc($result_of_query)) {
+							$vehID = $row["id"];
+							echo "<tr>";
+							echo "<td>" . $row["pid"] . "</td>";
+							echo "<td>" . $row["classname"] . "</td>";
+							echo "<td>" . $row["type"] . "</td>";
+							echo "<td>" . $row["plate"] . "</td>";
+							echo "<td>" . $row["alive"] . "</td>";
+							echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
+							echo "<input id='vehID' type='hidden' name='vehID' value='" . $vehID . "'>";
+							echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='" . $lang['edit'] . "'>";
+							echo "</form></td>";
+							echo "</tr>";
+						};
+						echo "</tbody></table>";
 
-                        $result_of_query = $db_connection->query($sql);
-                        $rows = mysqli_num_rows($result_of_query);
+						$sql = "SELECT * FROM `vehicles`;";
+						$result_of_query = $db_connection->query($sql);
+						$total_records  = mysqli_num_rows($result_of_query); 
+						$total_pages = ceil($total_records / $page_rows);
+						echo "<center><a href='vehicles.php?page=1'>".'First Page'."</a> ";
 
-                        $last = ceil($rows / $page_rows);
+						for ($i=1; $i<=$total_pages; $i++) {
+							echo "<a href='vehicles.php?page=".$i."'>|".$i."|</a> ";
+						};
 
-                        if ($pagenum < 1) {
-                            $pagenum = 1;
-                        } elseif ($pagenum > $last) {
-                            $pagenum = $last;
-                        }
-
-                        $max = 'limit ' . ($pagenum - 1) * $page_rows . ',' . $page_rows;
-
-                        if (isset($_POST['searchText'])) {
-                            $searchText = $_POST['searchText'];
-
-                            if (isset($_POST['pid'])) {
-                                $sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
-                            } else {
-                                $sql = "SELECT * FROM `vehicles` WHERE `classname` LIKE '%" . $searchText . "%' " . $max . " ;";
-                            }
-                        } else {
-                            $sql = "SELECT * FROM `vehicles` " . $max . " ;";
-                        }
-                        $result_of_query = $db_connection->query($sql);
-                        while ($row = mysqli_fetch_assoc($result_of_query)) {
-                            $vehID = $row["id"];
-                            echo "<tr>";
-                            echo "<td>" . $row["pid"] . "</td>";
-                            echo "<td>" . $row["classname"] . "</td>";
-                            echo "<td>" . $row["type"] . "</td>";
-                            echo "<td>" . $row["plate"] . "</td>";
-                            echo "<td>" . $row["alive"] . "</td>";
-                            echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
-                            echo "<input id='vehID' type='hidden' name='vehID' value='" . $vehID . "'>";
-                            echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='" . $lang['edit'] . "'>";
-                            echo "</form></td>";
-                            echo "</tr>";
-                        };
-                        echo "</tbody></table>";
-                        echo "<table><thead>";
-                        echo "<br>";
-                        if ($pagenum == 1) {
-                        } else {
-                            echo "<th><form method='post' action='" . $_SERVER['PHP_SELF'] . "' name='Gpagenum'>";
-                            echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='1'>";
-                            echo "<input type='submit' value=' <<-" . $lang['first'] . "  '>";
-                            echo "</form></th>";
-                            $previous = $pagenum - 1;
-                            echo "<th><form style='float:right;' method='post' action='" . $_SERVER['PHP_SELF'] . "' name='Gpagenum'>";
-                            echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='" . $previous . "'>";
-                            echo "<input type='submit' value=' <-" . $lang['previous'] . "  '>";
-                            echo "</form></th>";
-                        }
-                        //This does the same as above, only checking if we are on the last page, and then generating the Next and Last links
-                        if ($pagenum == $last) {
-                        } else {
-                            $next = $pagenum + 1;
-                            echo "<th><form method='post' action='" . $_SERVER['PHP_SELF'] . "' name='Gpagenum'>";
-                            echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='" . $next . "'>";
-                            echo "<input type='submit' value=' " . $lang['next'] . " ->  '>";
-                            echo "</form></th>";
-                            echo " ";
-                            echo "<th><form method='post' action='" . $_SERVER['PHP_SELF'] . "' name='Gpagenum'>";
-                            echo "<input id='Gpagenum' type='hidden' name='Gpagenum' value='" . $last . "'>";
-                            echo "<input type='submit' value=' " . $lang['last'] . " ->>  '>";
-                            echo "</form></th>";
-                        }
-                        echo "</thead></table>";
+						echo "<a href='vehicles.php?page=$total_pages'>".'Last Page'."</a></center>";
+												
                     } else {
                         $this->errors[] = "Database connection problem.";
                     }
