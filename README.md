@@ -8,6 +8,8 @@ http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US
 	
 erdknuffel aka jastend for giving me some ideas and fixes for Life-Control and letting me merge some of them in to the base file from his custom one
 
+MightySCollins for changes ot the code base to make things more effective!
+
 ## Installation
 
 1. Download the latest files (for mostly-stable versions, please visit our [releases section](https://github.com/cammygames/Life-Control/releases/tag/2.0))
