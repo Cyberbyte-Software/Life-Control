@@ -47,31 +47,23 @@ $Timer = Number_Format(MicroTime(true) - $Timer, 4, '.', '');
             <?php echo $lang['players']; ?>
             <small><?php echo " " . $lang['overview']; ?></small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-child"></i><?php echo " " . $lang['players']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->
 
-<div class="col-lg-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " " . $lang['players']; ?>
-        </div>
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th><?php echo $lang['name']; ?></th>
-                        <th><?php echo $lang['time']; ?></th>
-                        <!-- <th>Kick</th>
-                        <th>Ban</th> -->
-                    </tr>
-                    </thead>
+<div class="col-md-12">
+	<div class="content-panel">
+		<table class="table table-striped table-advance table-hover">
+			<h4>
+				<i class="fa fa-child fa-fw"></i><?php echo " " . $lang['players']; ?>
+			</h4>
+			<hr>
+			<thead>
+				<tr>
+					<th><i class="fa fa-user"></i><?php echo " ". $lang['name']; ?></th>
+					<th><i class="fa fa-clock-o"></i><?php echo " ". $lang['time']; ?></th>
+				</tr>
+			</thead>
                     <tbody>
                     <?php if (Is_Array($Players)): ?>
                         <?php foreach ($Players as $Player): ?>

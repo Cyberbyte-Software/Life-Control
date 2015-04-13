@@ -36,11 +36,6 @@ $pGID = $return;
             <?php echo $lang['player']; ?>
             <small><?php echo " " . $lang['editing']; ?></small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-wrench"></i><?php echo $lang['player'] . " " . $lang['editor']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->

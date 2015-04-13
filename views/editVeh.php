@@ -22,11 +22,6 @@ if (!$db_connection->set_charset("utf8")) {
             <?php echo $lang['vehicle']; ?>
             <small><?php echo " " . $lang['editing']; ?></small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-wrench"></i><?php echo " " . $lang['vehicles']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->
@@ -34,7 +29,7 @@ if (!$db_connection->set_charset("utf8")) {
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " " . $lang['vehicle']; ?></h3>
+            <h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i><?php echo " " . $lang['vehicle']; ?></h3>
         </div>
         <div class="panel-body">
             <form method="post" action="edit-actionV.php" name="editform">

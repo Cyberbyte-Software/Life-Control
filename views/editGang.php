@@ -21,11 +21,6 @@ if (!$db_connection->set_charset("utf8")) {
             <?php echo $lang['gang']; ?>
             <small><?php echo " " . $lang['editing']; ?></small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-wrench"></i> <?php echo $lang['gangs'] . " " . $lang['editor']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->

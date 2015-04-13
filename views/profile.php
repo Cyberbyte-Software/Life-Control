@@ -13,20 +13,18 @@ $curpassHash = "";
 
 <!-- Page Heading -->
 <div class="row">
-    <div class="col-lg-12">
+	<div class="col-lg-4">
+	</div>
+    <div class="col-lg-8">
         <h1 class="page-header">
             <?php echo $lang['navProfile']; ?>
             <small><?php echo " " . $lang['overview']; ?></small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-user"></i><?php echo " " . $lang['navProfile']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->
-
+<div class="col-lg-4">
+</div>
 <div class="col-lg-4">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -38,8 +36,9 @@ $curpassHash = "";
 
                 if (!empty($_POST)) {
                     $email = $_POST['email'];
-
-                    $update = "UPDATE `users` SET `user_email`= '" . $email . "' WHERE `user_name` = '" . $_SESSION['user_name'] . "' ";
+					$user_pic = $_POST['user_pic'];
+					
+                    $update = "UPDATE `users` SET `user_email`= '" . $email . "', `user_profile`= '" . $user_pic . "'WHERE `user_name` = '" . $_SESSION['user_name'] . "' ";
                     $result_of_query = $db_connection->query($update);
                     $sql = "SELECT * FROM `users` WHERE `user_name` ='" . $_SESSION['user_name'] . "' ;";
                 } else {
@@ -55,6 +54,40 @@ $curpassHash = "";
                     echo "<center>";
                     echo "<h4>" . $lang['emailAdd'] . ": <input style='min-width:300px;text-align:center;'id='email' type='text' name='email' value='" . $row["user_email"] . "'></h4>";
                     echo "<h4>" . $lang['rank'] . ": " . $row["user_level"] . "</h4>";
+					echo "<h4> Picture: ";
+					echo "<select id='user_pic' name='user_pic'>";
+					echo '<option value="assets/img/ui-dave.jpg"';
+					if ($row['user_profile'] == "assets/img/ui-dave.jpg") {
+						echo ' selected';
+					}
+					echo '>Dave</option>';
+					echo '<option value="assets/img/ui-sam.jpg"';
+					if ($row['user_profile'] == "assets/img/ui-sam.jpg") {
+						echo ' selected';
+					}
+					echo '>Sam</option>';
+					echo '<option value="assets/img/ui-joe.jpg"';
+					if ($row['user_profile'] == "assets/img/ui-joe.jpg") {
+						echo ' selected';
+					}
+					echo '>Joe</option>';
+					echo '<option value="assets/img/ui-kerry.jpg"';
+					if ($row['user_profile'] == "assets/img/ui-kerry.jpg") {
+						echo ' selected';
+					}
+					echo '>Kerry</option>';
+					echo '<option value="assets/img/ui-connie.jpg"';
+					if ($row['user_profile'] == "assets/img/ui-connie.jpg") {
+						echo ' selected';
+					}
+					echo '>Connie</option>';
+					echo '<option value="assets/img/ui-Jess.jpg"';
+					if ($row['user_profile'] == "assets/img/ui-Jess.jpg") {
+						echo ' selected';
+					}
+					echo '>Jess</option>';
+					echo '</h4>';
+					echo "</select>";
                     echo "<h4>" . $lang['playerID'] . ": " . $row["playerid"] . "</h4>";
                     echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='" . $lang['subChange'] . "'>";
                     echo "</center>";

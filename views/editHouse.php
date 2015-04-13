@@ -22,11 +22,6 @@ if (!$db_connection->set_charset("utf8")) {
             <?php echo $lang['house']; ?>
             <small><?php echo " " . $lang['editing']; ?></small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-wrench"></i><?php echo " " . $lang['houses']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->

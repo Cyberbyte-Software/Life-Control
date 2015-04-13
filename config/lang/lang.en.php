@@ -12,6 +12,7 @@ $lang['welcome'] = 'Welcome';
 $lang['players'] = 'Players';
 $lang['player'] = 'Player';  
 $lang['vehicles'] = 'Vehicles'; 
+$lang['vehicle'] = 'Vehicle'; 
 $lang['houses'] = 'Houses'; 
 $lang['house'] = 'House'; 
 $lang['gangs'] = 'Gangs'; 
@@ -33,7 +34,7 @@ $lang['curPlayers'] = 'Current Players';
 $lang['statOver'] = 'Statistics Overview'; 
 $lang['overview'] = 'Overview'; 
 $lang['viewAll'] = 'View All'; 
-
+$lang['subChanges'] = 'Update';
 /*
 ------------------
 	Errors

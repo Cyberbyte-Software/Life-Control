@@ -16,95 +16,85 @@ if (!$db_connection->set_charset("utf8")) {
             <?php echo $lang['staff']; ?>
             <small><?php echo " " . $lang['overview']; ?></small>
         </h1>
-        <div class="col-lg-4" style="top:3px;float:right;">
-            <form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
-                  name='searchPlayer'>
-                <input id='searchText' type='text' name='searchText'>
-                <input class='btn btn-sm btn-primary' type='submit' name='edit'
-                       value='<?php echo " " . $lang['search']; ?>'>
-            </form>
-        </div>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-users"></i><?php echo " " . $lang['staff']; ?>
-            </li>
-        </ol>
-    </div>
 </div>
 <!-- /.row -->
+<div class="col-md-12">
+	<div class="content-panel">
+		<table class="table table-striped table-advance table-hover">
+			<h4>
+				<i class="fa fa-cogs fa-fw"></i>
+				<?php echo " " . $lang['staff']; ?>
+				<div class="col-lg-4 pull-right">
+					<form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
+						  name='searchPlayer'>
+						<input id='searchText' type='text' name='searchText'>
+						<input class='btn btn-sm btn-primary' type='submit' name='edit'
+							   value='<?php echo " " . $lang['search']; ?>'>
+					</form>
+				</div>
+			</h4>
+			<hr>
+			<thead>
+				<tr>
+					<th><i class="fa fa-user"><?php echo  " " . $lang['staffName']; ?></th>
+					<th><i class="fa fa-user"><?php echo  " " . $lang['emailAdd']; ?></th>
+					<th><i class="fa fa-user"><?php echo  " " . $lang['rank']; ?></th>
+					<th><i class="fa fa-eye"><?php echo  " " . $lang['playerID']; ?></th>
+					<th><i class="fa fa-pencil"><?php echo " " .$lang['edit']; ?></th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+			if (!$db_connection->connect_errno) {
+				if (isset($_GET["page"])) {
+					$page = $_GET["page"];
+				}else {
+					$page=1;
+				}
 
-<div class="col-lg-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-users fa-fw"></i><?php echo " " . $lang['staff']; ?>
-        </div>
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th><?php echo $lang['staffName']; ?></th>
-                        <th><?php echo $lang['emailAdd']; ?></th>
-                        <th><?php echo $lang['rank']; ?></th>
-                        <th><?php echo $lang['playerID']; ?></th>
-                        <th><?php echo $lang['edit']; ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if (!$db_connection->connect_errno) {
-						if (isset($_GET["page"])) {
-							$page = $_GET["page"];
-						}else {
-							$page=1;
-						}
+				$start_from = ($page-1) * $page_rows;
+				$max = 'LIMIT ' . $start_from . ',' . $page_rows;
+					
+				if (isset($_POST['searchText'])) {
+					$searchText = $_POST['searchText'];
+					$sql = "SELECT * FROM `users` WHERE `user_name` LIKE '%" . $searchText . "%' " . $max . " ;";
+				} else {
+					$sql = "SELECT * FROM `users` " . $max . ";";
+				}
 
-						$start_from = ($page-1) * $page_rows;
-						$max = 'LIMIT ' . $start_from . ',' . $page_rows;
-							
-						if (isset($_POST['searchText'])) {
-							$searchText = $_POST['searchText'];
-							$sql = "SELECT * FROM `users` WHERE `user_name` LIKE '%" . $searchText . "%' " . $max . " ;";
-						} else {
-							$sql = "SELECT * FROM `users` " . $max . ";";
-						}
+				$result_of_query = $db_connection->query($sql);
+				while ($row = mysqli_fetch_assoc($result_of_query)) {
+					$userID = $row["user_id"];
+					echo "<tr>";
+					echo "<td>" . $row["user_name"] . "</td>";
+					echo "<td>" . $row["user_email"] . "</td>";
+					echo "<td>" . $row["user_level"] . "</td>";
+					echo "<td>" . $row["playerid"] . "</td>";
+					echo "<td><form method='post' action='editStaff.php' name='PlayerEdit'>";
+					echo "<input id='userId' type='hidden' name='userId' value='" . $userID . "'>";
+					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
+					echo "</form></td>";
+					echo "</tr>";
+				};
+				echo "</tbody></table>";
 
-						$result_of_query = $db_connection->query($sql);
-						while ($row = mysqli_fetch_assoc($result_of_query)) {
-							$userID = $row["user_id"];
-							echo "<tr>";
-							echo "<td>" . $row["user_name"] . "</td>";
-							echo "<td>" . $row["user_email"] . "</td>";
-							echo "<td>" . $row["user_level"] . "</td>";
-							echo "<td>" . $row["playerid"] . "</td>";
-							echo "<td><form method='post' action='editStaff.php' name='PlayerEdit'>";
-							echo "<input id='userId' type='hidden' name='userId' value='" . $userID . "'>";
-							echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='" . $lang['edit'] . "'>";
-							echo "</form></td>";
-							echo "</tr>";
-						};
-						echo "</tbody></table>";
+				$sql = "SELECT * FROM `users`;";
+				$result_of_query = $db_connection->query($sql);
+				$total_records  = mysqli_num_rows($result_of_query); 
+				$total_pages = ceil($total_records / $page_rows);
+				echo "<center><a class='btn btn-primary' href='admin.php?page=1'>".'First Page'."</a> ";
 
-						$sql = "SELECT * FROM `users`;";
-						$result_of_query = $db_connection->query($sql);
-						$total_records  = mysqli_num_rows($result_of_query); 
-						$total_pages = ceil($total_records / $page_rows);
-						echo "<center><a class='btn btn-primary' href='admin.php?page=1'>".'First Page'."</a> ";
+				for ($i=1; $i<=$total_pages; $i++) {
+					echo "<a class='btn btn-primary' href='admin.php?page=".$i."'>".$i."</a> ";
+				};
 
-						for ($i=1; $i<=$total_pages; $i++) {
-							echo "<a class='btn btn-primary' href='admin.php?page=".$i."'>".$i."</a> ";
-						};
-
-						echo "<a class='btn btn-primary' href='admin.php?page=$total_pages'>".'Last Page'."</a></center>";
-                    } else {
-                        $this->errors[] = "Database connection problem.";
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+				echo "<a class='btn btn-primary' href='admin.php?page=$total_pages'>".'Last Page'."</a></center>";
+			} else {
+				$this->errors[] = "Database connection problem.";
+			}
+			?>
+			</tbody>
+			<br>
+		</table>
+	</div>
 </div>
-</div>
-<!-- /.row -->

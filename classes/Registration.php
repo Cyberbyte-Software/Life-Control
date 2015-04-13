@@ -84,7 +84,9 @@ class Registration
                 $user_email = $this->db_connection->real_escape_string(strip_tags($_POST['user_email'], ENT_QUOTES));
 				$playerid = $this->db_connection->real_escape_string(strip_tags($_POST['player_id'], ENT_QUOTES));
                 $user_password = $_POST['user_password_new'];
-
+				$user_profile = $_POST['profile_pic'];
+				$user_lvl = $_POST['user_lvl'];
+				
                 // crypt the user's password with PHP 5.5's password_hash() function, results in a 60 character
                 // hash string. the PASSWORD_DEFAULT constant is defined by the PHP 5.5, or if you are using
                 // PHP 5.3/5.4, by the password hashing compatibility library
@@ -98,8 +100,8 @@ class Registration
                     $this->errors[] = "Sorry, that username / email address is already taken.";
                 } else {
                     // write new user's data into database
-                    $sql = "INSERT INTO users (user_name, user_password_hash, user_email, user_level, playerid)
-                            VALUES('" . $user_name . "', '" . $user_password_hash . "', '" . $user_email . "','1','" . $playerid . "');";
+                    $sql = "INSERT INTO users (user_name, user_password_hash, user_email, user_level, user_profile, playerid)
+                            VALUES('" . $user_name . "', '" . $user_password_hash . "', '" . $user_email . "', '" . $user_lvl . "', '" . $user_profile . "','" . $playerid . "');";
                     $query_new_user_insert = $this->db_connection->query($sql);
 
                     // if user has been added successfully

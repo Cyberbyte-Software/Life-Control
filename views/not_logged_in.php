@@ -5,122 +5,123 @@ if (isset($login)) {
         foreach ($login->errors as $error) {
             echo $error;
         }
-    }
-    if ($login->messages) {
-        foreach ($login->messages as $message) {
-            echo $message;
-        }
-    }
+	}
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
     <title>Life Control</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+  </head>
 
-</head>
+ <body onload="getTime()">
 
-<body>
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
 
-    <div id="wrapper">
+	  	<div class="container">
+	  	
+	  		<div id="showtime"></div>
+	  			<div class="col-lg-4 col-lg-offset-4">
+	  				<div class="lock-screen">
+		  				<h2><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i></a></h2>
+		  				<h3>LOGIN</h3>
+		  				
+				          <!-- Modal -->
+				          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+				              <div class="modal-dialog">
+				                  <div class="modal-content">
+				                      <div class="modal-header">
+				                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				                          <h4 class="modal-title">Please Login</h4>
+				                      </div>
+										<form method="post" action="index.php">
+										  <div class="modal-body">
+											<p class="centered"><img class="img-circle" width="80" src="assets/img/ui-sam.jpg"></p>
+												<div class="login-wrap">
+													<input type="text" id="login_input_username" class="form-control" placeholder="Username" name="user_name" required  autofocus>
+													<br>
+													<input type="password" id="login_input_password" class="form-control" placeholder="Password" name="user_password" required>
+													<br>
+													<select id='lang' name='lang' class="form-control login_input">
+														<option value="en" selected>English</option>
+														<option value="de">Deutsch</option>
+													</select>
+												</div>
+										  </div>
+										  <div class="modal-footer centered">
+											  <button data-dismiss="modal" class="btn btn-theme04" type="button">Cancel</button>
+											  <button class="btn btn-theme03" href="index.php" type="submit" name="login">Login</button>
+										  </div>
+										</form>
+				                  </div>
+				              </div>
+				          </div>
+				          <!-- modal -->
+		  				
+		  				
+	  				</div><! --/lock-screen -->
+	  			</div><!-- /col-lg-4 -->
+	  	
+	  	</div><!-- /container -->
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Life Control</a>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
-        <div id="page-wrapper">
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+    <script>
+        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
+    </script>
 
-            <div class="container-fluid">
+    <script>
+        function getTime()
+        {
+            var today=new Date();
+            var h=today.getHours();
+            var m=today.getMinutes();
+            var s=today.getSeconds();
+            // add a zero in front of numbers<10
+            m=checkTime(m);
+            s=checkTime(s);
+            document.getElementById('showtime').innerHTML=h+":"+m+":"+s;
+            t=setTimeout(function(){getTime()},500);
+        }
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            <center>Please Login <small>To Continue</small></center>
-                        </h1>
-                    </div>
-                </div>
-                <!-- /.row -->
-				<div class="col-sm-4">
-                </div>
-				<div class="col-sm-4">
-					<form method="post" action="index.php" name="loginform">                          
-					   <div class="form-group">
-							Username : <input placeholder="Username" id="login_input_username" class=" form-control login_input" type="text" name="user_name" required >
-							Password : <input pid="login_input_password" class="form-control login_input" type="password" name="user_password" autocomplete="off" required >
-							Language : <select id='lang' name='lang' class="form-control login_input">
-											<option value="en" selected>English</option>
-											<option value="de">Deutsch</option>
-										</select>
-							<br>
-							<input class="btn btn-lg btn-primary" style="float:right;" type="submit"  name="login" value="Log in" >
-						</div>
-					</form>
-                </div>
+        function checkTime(i)
+        {
+            if (i<10)
+            {
+                i="0" + i;
+            }
+            return i;
+        }
+    </script>
 
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
-
-
-
-
-</body>
-
+  </body>
 </html>
-
 

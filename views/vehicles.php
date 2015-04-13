@@ -15,102 +15,98 @@ if (!$db_connection->set_charset("utf8")) {
             <?php echo $lang['vehicles']; ?>
             <small><?php echo " " . $lang['overview']; ?></small>
         </h1>
-        <div class="col-lg-4" style="top:3px;float:right;">
-            <form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
-                  name='searchPlayer'>
-                <input id='searchText' type='text' name='searchText'>
-                <input class='btn btn-sm btn-primary' type='submit' name='pid'
-                       value='<?php echo $lang['search'] . " " . $lang['PID']; ?>'>
-                <input class='btn btn-sm btn-primary' type='submit' name='class'
-                       value='<?php echo $lang['search'] . " " . $lang['class']; ?>'>
-            </form>
-        </div>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-car"></i><?php echo " " . $lang['vehicles']; ?>
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->
 
-<div class="col-lg-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-car fa-fw"></i><?php echo " " . $lang['vehicles']; ?>
-        </div>
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th><?php echo $lang['owner'] . " " . $lang['playerID']; ?></th>
-                        <th><?php echo $lang['class']; ?></th>
-                        <th><?php echo $lang['type']; ?></th>
-                        <th><?php echo $lang['plate']; ?></th>
-                        <th><?php echo $lang['alive']; ?></th>
-                        <th><?php echo $lang['edit']; ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if (!$db_connection->connect_errno) {
-						if (isset($_GET["page"])) {
-							$page = $_GET["page"];
-						}else {
-							$page=1;
-						}
+<div class="col-md-12">
+	<div class="content-panel">
+		<table class="table table-striped table-advance table-hover">
+			<h4>
+				<i class="fa fa-car"></i>
+				<?php echo " " . $lang['vehicles']; ?>
+				<div class="col-lg-5 pull-right">
+					<form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
+						  name='searchPlayer'>
+						<input id='searchText' type='text' name='searchText'>
+						<input class='btn btn-sm btn-primary' type='submit' name='pid'
+							   value='<?php echo $lang['search'] . " " . $lang['PID']; ?>'>
+						<input class='btn btn-sm btn-primary' type='submit' name='class'
+							   value='<?php echo $lang['search'] . " " . $lang['class']; ?>'>
+					</form>
+				</div>			
+			</h4>
+			<hr>
+			<thead>
+				<tr>
+					<th><i class="fa fa-eye"></i><?php echo " ". $lang['owner'] . " " . $lang['playerID']; ?></th>
+					<th><i class="fa fa-car"></i><?php echo " ". $lang['class']; ?></th>
+					<th><i class="fa fa-car"></i><?php echo " ". $lang['type']; ?></th>
+					<th><i class="fa fa-car"></i><?php echo " ". $lang['plate']; ?></th>
+					<th><i class="fa fa-car"></i><?php echo " ". $lang['alive']; ?></th>
+					<th><i class="fa fa-pencil"></i><?php echo " ". $lang['edit']; ?></th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+			if (!$db_connection->connect_errno) {
+				if (isset($_GET["page"])) {
+					$page = $_GET["page"];
+				}else {
+					$page=1;
+				}
 
-						$start_from = ($page-1) * $page_rows;
-						$max = 'LIMIT ' . $start_from . ',' . $page_rows;
-							
-						if (isset($_POST['searchText'])) {
-							$searchText = $_POST['searchText'];
+				$start_from = ($page-1) * $page_rows;
+				$max = 'LIMIT ' . $start_from . ',' . $page_rows;
+					
+				if (isset($_POST['searchText'])) {
+					$searchText = $_POST['searchText'];
 
-							if (isset($_POST['pid'])) {
-								$sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
-							} else {
-								$sql = "SELECT * FROM `vehicles` WHERE `classname` LIKE '%" . $searchText . "%' " . $max . " ;";
-							}
-						} else {
-							$sql = "SELECT * FROM `vehicles` " . $max . " ;";
-						}
-						$result_of_query = $db_connection->query($sql);
-						while ($row = mysqli_fetch_assoc($result_of_query)) {
-							$vehID = $row["id"];
-							echo "<tr>";
-							echo "<td>" . $row["pid"] . "</td>";
-							echo "<td>" . $row["classname"] . "</td>";
-							echo "<td>" . $row["type"] . "</td>";
-							echo "<td>" . $row["plate"] . "</td>";
-							echo "<td>" . $row["alive"] . "</td>";
-							echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
-							echo "<input id='vehID' type='hidden' name='vehID' value='" . $vehID . "'>";
-							echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='" . $lang['edit'] . "'>";
-							echo "</form></td>";
-							echo "</tr>";
-						};
-						echo "</tbody></table>";
+					if (isset($_POST['pid'])) {
+						$sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
+					} else {
+						$sql = "SELECT * FROM `vehicles` WHERE `classname` LIKE '%" . $searchText . "%' " . $max . " ;";
+					}
+				} else {
+					$sql = "SELECT * FROM `vehicles` " . $max . " ;";
+				}
+				$result_of_query = $db_connection->query($sql);
+				while ($row = mysqli_fetch_assoc($result_of_query)) {
+					$vehID = $row["id"];
+					echo "<tr>";
+					echo "<td>" . $row["pid"] . "</td>";
+					echo "<td>" . $row["classname"] . "</td>";
+					echo "<td>" . $row["type"] . "</td>";
+					echo "<td>" . $row["plate"] . "</td>";
+					echo "<td>" . $row["alive"] . "</td>";
+					echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
+					echo "<input id='vehID' type='hidden' name='vehID' value='" . $vehID . "'>";
+					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
+					echo "</form></td>";
+					echo "</tr>";
+				};
+				echo "</tbody></table>";
 
-						$sql = "SELECT * FROM `vehicles`;";
-						$result_of_query = $db_connection->query($sql);
-						$total_records  = mysqli_num_rows($result_of_query); 
-						$total_pages = ceil($total_records / $page_rows);
-						echo "<center><a class='btn btn-primary' href='vehicles.php?page=1'>".'First Page'."</a> ";
+				$sql = "SELECT * FROM `vehicles`;";
+				$result_of_query = $db_connection->query($sql);
+				$total_records  = mysqli_num_rows($result_of_query); 
+				$total_pages = ceil($total_records / $page_rows);
+				echo "<center><a class='btn btn-primary' href='vehicles.php?page=1'>".'First Page'."</a> ";
 
-						for ($i=1; $i<=$total_pages; $i++) {
-							echo "<a class='btn btn-primary' href='vehicles.php?page=".$i."'>".$i."</a> ";
-						};
+				for ($i=1; $i<=$total_pages; $i++) {
+					echo "<a class='btn btn-primary' href='vehicles.php?page=".$i."'>".$i."</a> ";
+				};
 
-						echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages'>".'Last Page'."</a></center>";
-												
-                    } else {
-                        $this->errors[] = "Database connection problem.";
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+				echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages'>".'Last Page'."</a></center>";
+										
+			} else {
+				$this->errors[] = "Database connection problem.";
+			}
+			?>
+			<br>
+			</tbody>
+		</table>
+	</div>
 </div>
+
+		
