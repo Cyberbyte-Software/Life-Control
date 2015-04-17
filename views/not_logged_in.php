@@ -84,8 +84,8 @@ if (isset($_GET['setup'])){
 												</div>
 										  </div>
 										  <div class="modal-footer centered">
-											  <button data-dismiss="modal" class="btn btn-theme04" type="button">Cancel</button>
-											  <button class="btn btn-theme03" href="index.php" type="submit" name="login">Login</button>
+											  <button data-dismiss="modal" class="btn btn-theme04" type="button"><?php echo $lang['cancel'];?></button>
+											  <button class="btn btn-theme03" href="index.php" type="submit" name="login"><?php echo $lang['login'];?></button>
 										  </div>
 										</form>
 				                  </div>

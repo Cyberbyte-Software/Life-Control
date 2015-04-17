@@ -141,4 +141,15 @@ $lang['setup'] = 'De database is nu opgezet';
 $lang['upgrade'] = 'De database is nu bijgewerkt';
 $lang['noPerm'] = 'Het spijt me, u hebt geen toestemming om deze pagina te bekijken';
 
+$lang['topRich'] = 'Top Ten Richest Players';
+$lang['noHouse'] = 'No Houses';
+$lang['noCar'] = 'No cars';
+$lang['noPlayer'] = 'Player cannot be found';
+$lang['enterPass'] = 'Enter new password';
+$lang['password'] = 'Password';
+$lang['repeat'] = 'Repeat';
+$lang['login'] = 'Login';
+$lang['cancel'] = 'Cancel';
+$lang['picture'] = 'Picture';
+$lang['changePass'] = 'Change Password';
 ?>

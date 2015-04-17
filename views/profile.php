@@ -55,20 +55,43 @@ $curpassHash = "";
                     echo "<center>";
                     echo "<h4>" . $lang['emailAdd'] . ": <input style='min-width:300px;text-align:center;'id='email' type='text' name='email' value='" . $row["user_email"] . "'></h4>";
                     echo "<h4>" . $lang['rank'] . ": " . $row["user_level"] . "</h4>";
-                    echo "<h4> Picture: ";
+                    echo "<h4>" . $lang['picture'] . ": ";
 
                     echo "<select id='user_pic' name='user_pic'>";
-                    for ($icon = 1; $icon <= lvlmed; $icon = $icon + 1) {
+                    for ($icon = 1; $icon <= 6; $icon = $icon + 1) {
                         echo '<option value="' . $icon . '" ' . select($icon, $row['user_profile']) . '>' . iconName($icon) . '</option>';
                     }
                     echo "</select>";
 
-                    echo "<h4>" . $lang['playerID'] . ": " . $row["playerid"] . "</h4>";
-                    echo "<input class='btn btn-sm btn-primary'  type='submit'  name='edit' value='" . $lang['subChange'] . "'>";
+                    echo "<h4>" . $lang['playerID'] . ": " . $row["playerid"]. "</h4>";
+                    echo "<input class='btn btn-sm btn-primary' type='submit'  name='edit' value='" . $lang['subChange'] . "'> ";
+                    echo "<a data-toggle='modal' href='#password'><button type='button' class='btn btn-sm btn-primary'>".$lang['changePass']."</button></a>";
                     echo "</center>";
                 }
             ;
                 ?>
+                <div aria-hidden="true" aria-labelledby="Passchange" role="dialog" tabindex="-1" id="password" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title"><?php echo $lang['enterPass']; ?></h4>
+                            </div>
+                            <form method="post" action="profile.php">
+                                <div class="modal-body">
+                                    <p class="centered">
+                                        <input type="password" id="input_password" class="form-control" placeholder="<?php echo $lang['password'];?>" name="user_password" autocorrect="off" autocapitalize="off" required> <br>
+                                        <input type="password" id="input_password_again" class="form-control" placeholder="<?php echo $lang['password'];?>" name="user_password_again" autocorrect="off" autocapitalize="off" required>
+                                </div>
+                                <div class="modal-footer centered">
+                                    <button data-dismiss="modal" class="btn btn-theme04" type="button"><?php echo $lang['cancel'];?></button>
+                                    <button class="btn btn-theme03" href="profile.php" type="submit" name="save"><?php echo $lang['login']; ?></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 </form>
             <?php
             } else {

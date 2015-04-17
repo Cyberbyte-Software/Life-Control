@@ -91,7 +91,7 @@ if (isset($_GET["ID"])) {
                                         $vehID = $row["id"];
                                         echo "<tr>";
                                         echo "<td>" . carName($row["classname"]) . "</td>";
-                                        echo "<td>" . $row["type"] . "</td>";
+                                        echo "<td>" . carType($row["type"],$lang) . "</td>";
                                         echo "<td>" . $row["plate"] . "</td>";
                                         echo "<td><a class='btn btn-primary btn-xs' href='editVeh.php?ID=" . $row["id"] . "'>";
                                         echo "<i class='fa fa-pencil'></i></a></td>";
@@ -145,7 +145,7 @@ if (isset($_GET["ID"])) {
                                 ?>
                                 </tbody>
                             </table>
-                        <?php } else echo "<h1>No houses</h1>" ?>
+                        <?php } else echo $lang['noHouse'] ?>
                     </div>
                 </div>
             </div>
@@ -222,7 +222,7 @@ if (isset($_GET["ID"])) {
                                 echo "<h4>" . $lang['donator'] . ": " . $row['donatorlvl'] . "</h4>";
                             }
                         }
-                    } else echo '<h1>Player not found</h1>';
+                    } else echo "<h1>".$lang['noPlayer']."<h1>";
                     echo "</center>";
                     ?>
             </div>
@@ -333,7 +333,7 @@ if (isset($_GET["ID"])) {
         <center>
             <?php
             echo "<input id='playerId' type='hidden' name='playerId' value='" . $pID . "'>";
-            echo "<input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='Submit Changes'>";
+            echo "<input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='".$lang['subChange']."'>";
             ?>
             <br/>
         </center>

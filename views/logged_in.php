@@ -129,7 +129,7 @@ if ($_SESSION['user_level'] >= 2) {
 			<div class="content-panel">
 				<table class="table table-striped table-advance table-hover">
 					<h4>
-						<i class="fa fa-money fa-fw"></i> Top Ten Richest Players
+						<i class="fa fa-money fa-fw"></i><?php echo $lang['topRich']; ?>
 					</h4>
 					<hr>
 					<thead>
@@ -168,7 +168,8 @@ if ($_SESSION['user_level'] >= 2) {
         <div class="content-panel">
 			<table class="table table-striped table-advance table-hover">
 				<h4>
-					<i class="fa fa-ambulance fa-fw"></i> Medic Overview
+					<i class="fa fa-ambulance fa-fw"></i>
+                    <?php echo $lang['medic'] . " " . $lang['overview']; ?>
 					<div class="col-lg-3 pull-right">
 						<a href="medic.php"><?php echo $lang['viewAll'] . " "; ?> <i class="fa fa-arrow-circle-right"></i></a>
 					</div>

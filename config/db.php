@@ -10,10 +10,10 @@
  * DB_USER: user for your database. the user needs to have rights for SELECT, UPDATE, DELETE and INSERT.
  * DB_PASS: the password of the above user
  */
-define("DB_HOST", "localhost");
-define("DB_NAME", "arma3life");
-define("DB_USER", "arma3life");
-define("DB_PASS", "133788hjk");
+define("DB_HOST", "87.117.246.99");
+define("DB_NAME", "theproho_arma3stat");
+define("DB_USER", "theproho_arma");
+define("DB_PASS", "arma3");
 define("results_per_page", 10 );
 
 /**

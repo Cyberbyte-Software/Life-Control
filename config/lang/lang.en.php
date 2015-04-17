@@ -27,7 +27,7 @@ $lang['editor'] = 'Editor';
 $lang['members'] = 'Members';
 $lang['subChange'] = 'Submit Changes';
 $lang['editPlayer'] = 'Edit Player';
-$lang['DELETE'] = 'DELETE';
+$lang['DELETE'] = 'Delete';
 $lang['quickLook'] = 'Quick Look';
 $lang['PID'] = 'PID';
 $lang['curPlayers'] = 'Current Players';
@@ -141,4 +141,15 @@ $lang['setup'] = 'The database has now been setup';
 $lang['upgrade'] = 'The database has now been upgraded';
 $lang['noPerm'] = 'Sorry you do not have permission to view this page';
 
+$lang['topRich'] = 'Top Ten Richest Players';
+$lang['noHouse'] = 'No Houses';
+$lang['noCar'] = 'No cars';
+$lang['noPlayer'] = 'Player cannot be found';
+$lang['enterPass'] = 'Enter new password';
+$lang['password'] = 'Password';
+$lang['repeat'] = 'Repeat';
+$lang['login'] = 'Login';
+$lang['cancel'] = 'Cancel';
+$lang['picture'] = 'Picture';
+$lang['changePass'] = 'Change Password';
 ?>

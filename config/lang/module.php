@@ -1,6 +1,9 @@
 <?php
 
-$lang = $_SESSION['lang'];
+if (isset($_SESSION['lang']))
+    $lang = $_SESSION['lang'];
+else
+    $lang = 'en';
 
 switch ($lang) 
 {

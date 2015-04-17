@@ -83,7 +83,7 @@ $lang['id'] = 'ID';
 $lang['staffName'] = 'Staff Name';
 $lang['emailAdd'] = 'Email Address';
 $lang['rank'] = 'Level';
-$lang['name'] = 'Name';
+$lang['name'] = 'Name'; //???
 $lang['wantList'] = 'Verbrechens Liste';
 $lang['aliases'] = 'Aliases';
 $lang['owner'] = 'Besitzer';
@@ -139,5 +139,17 @@ $lang['time'] = 'Zeit';
 $lang['setup'] = 'Die Datenbank wurde eingestellt';
 $lang['upgrade'] = 'Die Datenbank wurde geupdatet';
 $lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigte Rechte um die Seite zu öffnen';
+
+$lang['topRich'] = 'Top Ten Richest Players';
+$lang['noHouse'] = 'Besitzt kein Haus';
+$lang['noCar'] = 'No cars';
+$lang['noPlayer'] = 'Player cannot be found';
+$lang['enterPass'] = 'Enter new password';
+$lang['password'] = 'Passwort';
+$lang['repeat'] = 'Repeat';
+$lang['login'] = 'Login';
+$lang['cancel'] = 'Cancel';
+$lang['picture'] = 'Picture';
+$lang['changePass'] = 'Change Password';
 
 ?>
