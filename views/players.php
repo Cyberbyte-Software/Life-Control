@@ -43,13 +43,13 @@ if (!$db_connection->set_charset("utf8")) {
 				<tr>
 					<th><i class="fa fa-user"></i><?php echo " ". $lang['name']; ?></th>
 					<th><i class="fa fa-eye"></i><?php echo " ". $lang['playerID']; ?></th>
-					<th><i class="fa fa-money"></i><?php echo " ". $lang['cash']; ?></th>
-					<th><i class="fa fa-bank"></i><?php echo " ". $lang['bank']; ?></th>
-					<th><i class="fa fa-taxi"></i><?php echo " ". $lang['cop']; ?></th>
-					<th><i class="fa fa-ambulance"></i><?php echo " ". $lang['medic']; ?></th>
-					<th><i class="fa fa-cogs"></i><?php echo " ". $lang['admin']; ?></th>
+					<th class="hidden-xs"><i class="fa fa-money"></i><?php echo " ". $lang['cash']; ?></th>
+					<th class="hidden-xs"><i class="fa fa-bank"></i><?php echo " ". $lang['bank']; ?></th>
+					<th class="hidden-xs"><i class="fa fa-taxi"></i><?php echo " ". $lang['cop']; ?></th>
+					<th class="hidden-xs"><i class="fa fa-ambulance"></i><?php echo " ". $lang['medic']; ?></th>
+					<th class="hidden-xs"><i class="fa fa-cogs"></i><?php echo " ". $lang['admin']; ?></th>
 					<th><i class="fa fa-pencil"></i><?php echo " ". $lang['edit']; ?></th>
-					<th><i class="fa fa-steam"></i> Steam</th>
+					<th class="hidden-xs"><i class="fa fa-steam"></i> Steam</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -81,17 +81,15 @@ if (!$db_connection->set_charset("utf8")) {
 					echo "<tr>";
 					echo "<td>" . $row["name"] . "</td>";
 					echo "<td>" . $playersID . "</td>";
-					echo "<td>" . $row["cash"] . "</td>";
-					echo "<td>" . $row["bankacc"] . "</td>";
-					echo "<td>" . $row["coplevel"] . "</td>";
-					echo "<td>" . $row["mediclevel"] . "</td>";
-					echo "<td>" . $row["adminlevel"] . "</td>";
-					echo "<td><form method='post' action='editPlayer.php' name='PlayerEdit'>";
-					echo "<input id='playerId' type='hidden' name='playerId' value='" . $playersID . "'>";
-					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
-					echo "</form></td><td>";
-					echo "<a href='http://steamcommunity.com/profiles/".$row["playerid"]."' class='btn btn-primary btn-xs'><i class='fa fa-steam'></i></a>";					
-					echo "</td></tr>";
+					echo "<td class='hidden-xs'>" . $row["cash"] . "</td>";
+					echo "<td class='hidden-xs'>" . $row["bankacc"] . "</td>";
+					echo "<td class='hidden-xs'>" . $row["coplevel"] . "</td>";
+					echo "<td class='hidden-xs'>" . $row["mediclevel"] . "</td>";
+					echo "<td class='hidden-xs'>" . $row["adminlevel"] . "</td>";
+                    echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=".$row["uid"]."'>";
+                    echo "<i class='fa fa-pencil'></i></a></td>";
+					echo "<td class='hidden-xs'><a href='http://steamcommunity.com/profiles/".$row["playerid"]."' ";
+					echo "class='btn btn-primary btn-xs'><i class='fa fa-steam'></i></a></td></tr>";
 
 				};
 				echo "</tbody></table>";

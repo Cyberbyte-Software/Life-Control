@@ -82,13 +82,18 @@ class Login
                     // the hash of that user's password
                     if (password_verify($_POST['user_password'], $result_row->user_password_hash)) {
 
-                        // write user data into PHP SESSION (a file on your server)
-                        $_SESSION['user_name'] = $result_row->user_name;
-						$_SESSION['user_level'] = $result_row->user_level;
-						$_SESSION['user_profile'] = $result_row->user_profile;
-                        $_SESSION['user_email'] = $result_row->user_email;
-						$_SESSION['lang'] = $_POST['lang'];
-                        $_SESSION['user_login_status'] = 1;
+                        if ($result_row->user_level <> 0){
+                            // write user data into PHP SESSION (a file on your server)
+                            $_SESSION['user_name'] = $result_row->user_name;
+                            $_SESSION['user_level'] = $result_row->user_level;
+                            $_SESSION['user_profile'] = $result_row->user_profile;
+                            $_SESSION['user_email'] = $result_row->user_email;
+                            $_SESSION['lang'] = $_POST['lang'];
+                            $_SESSION['user_login_status'] = 1;
+
+                        } else {
+                            $this->errors[] = "User is banned.";
+                        }
 
                     } else {
                         $this->errors[] = "Wrong password. Try again.";

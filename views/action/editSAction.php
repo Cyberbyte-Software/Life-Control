@@ -7,8 +7,9 @@
 		$staffName = $_POST['staffName'];
 		$staffEmail = $_POST['staffEmail'];
 		$staffPID = $_POST['staffPID'];
-		$staffRank = $_POST['staffRank'];
 		$uId = $_POST['user_id'];
+        if(isset($_POST['ban']))$staffRank = 0; else $staffRank = $_POST['staffRank'];
+        $_SESSION['user_level'] = $staffRank;
 	}
 	else
 	{
@@ -31,5 +32,5 @@
 		$this->errors[] = "Database connection problem.";
 	}
 
-	header('Location: index.php');
+	header('Location: staff.php');
 ?>

@@ -49,26 +49,23 @@ if (!$db_connection->set_charset("utf8")) {
 
 				$start_from = ($page-1) * $page_rows;
 				$max = 'LIMIT ' . $start_from . ',' . $page_rows;
-					
+
 				$sql = "SELECT `name`,`coplevel`,`playerid` FROM `players` WHERE `coplevel` >= '1' ORDER BY `coplevel` " . $max . " ;";
 				$result_of_query = $db_connection->query($sql);
 				while ($row = mysqli_fetch_assoc($result_of_query)) {
-					$playersID = $row["playerid"];
 					echo "<tr>";
 					echo "<td>" . $row["name"] . "</td>";
-					echo "<td>" . $playersID . "</td>";
+					echo "<td>" . $row["playerid"] . "</td>";
 					echo "<td>" . $row["coplevel"] . "</td>";
-					echo "<td><form method='post' action='editPlayer.php' name='PlayerEdit'>";
-					echo "<input id='playerId' type='hidden' name='playerId' value='" . $playersID . "'>";
-					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
-					echo "</form></td>";
+                    echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=" . $row["playerid"] . "'>";
+                    echo "<i class='fa fa-pencil'></i></a></td>";
 					echo "</tr>";
 				};
 				echo "</tbody></table>";
 
 				$sql = "SELECT * FROM `players` WHERE `coplevel` >= '1';";
 				$result_of_query = $db_connection->query($sql);
-				$total_records  = mysqli_num_rows($result_of_query); 
+				$total_records  = mysqli_num_rows($result_of_query);
 				$total_pages = ceil($total_records / $page_rows);
 				echo "<center><a class='btn btn-primary' href='police.php?page=1'>".'First Page'."</a> ";
 
@@ -77,7 +74,7 @@ if (!$db_connection->set_charset("utf8")) {
 				};
 
 				echo "<a class='btn btn-primary' href='police.php?page=$total_pages'>".'Last Page'."</a></center>";
-										
+
 			} else {
 				$this->errors[] = "Database connection problem.";
 			}

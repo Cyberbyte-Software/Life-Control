@@ -17,23 +17,41 @@ define("DB_PASS", "133788hjk");
 define("results_per_page", 10 );
 
 /**
-	Make altis_life_4 True to be able to access the wanted section
-*/
+ * Make altis_life_4 True to be able to access the wanted section
+ */
 define("alits_life_4", false);
 
 /**
-	Modules: Here you can enable any modules for the system that have been made to
-			 support people who use things like SQL Smart Phone
-*/
-define("sql_smartPhone",false);
+ * Modules: Here you can enable any modules for the system that have been made to
+ * support people who use things like SQL Smart Phone
+ */
+define("sql_smartPhone", false);
 
 
 /**
-	Change These To Reflect The Connection Info Of Your Game Server.
-	This Allows the current players function to work.
-	!! Make sure to add +1 to the server port, ARMA 3 implementation violates Source query protocol spec. !!
+ * Change These To Reflect The Connection Info Of Your Game Server.
+ * This Allows the current players function to work.
+ * !! Make sure to add +1 to the server port, ARMA 3 implementation violates Source query protocol spec. !!
+ **/
+define("enable_game_query", false);
+define("SQ_SERVER_ADDR", "192.99.69.251");
+define("SQ_SERVER_PORT", 2313);
+define("SQ_SERVER_PASSWORD", "PizzaTrees");
 
-**/
-define( 'enable_game_query', false);
-define( 'SQ_SERVER_ADDR'   , '127.0.0.1' );
-define( 'SQ_SERVER_PORT'   , 3103 );
+/**
+ * Levels
+ */
+define("lvlcop", 7);
+define("lvlmed", 5);
+define("lvladmin", 5);
+define("lvldonator", 5);
+
+/**
+ * Names add names to the profile images
+ */
+define("icon1", "Dave");
+define("icon2", "Sam");
+define("icon3", "Joe");
+define("icon4", "Kerry");
+define("icon5", "Connie");
+define("icon6", "Jess");

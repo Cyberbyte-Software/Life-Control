@@ -1,16 +1,35 @@
 <?php
-// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+if (!$db_connection->set_charset("utf8")) {
+    $db_connection->errors[] = $db_connection->error;
+}
 
-if (isset($_POST["gID"])) {
-    $gID = $_POST["gID"];
+if (isset($_GET["ID"])) {
+    $gID = $_GET["ID"];
 } else {
     echo "<center><h1 style='color:red'>" . $lang['idNotSet'] . "</h1></center>";
 }
 
-// change character set to utf8 and check it
-if (!$db_connection->set_charset("utf8")) {
-    $db_connection->errors[] = $db_connection->error;
+if (isset($_POST["gID"])) {
+    $gID = $_POST["gID"];
+    $gname = $_POST["gname"];
+    $gowner = $_POST["gowner"];
+    $gMM = $_POST["gMM"];
+    $gbank = $_POST["gbank"];
+    $gAct = $_POST["gAct"];
+    $gMem = $_POST["gMem"];
+
+    if (!$db_connection->connect_errno) {
+        if (isset($_POST['drop'])) {
+            $sql = "DELETE FROM `gangs` WHERE `gangs`.`id` = '" . $gID . "'";
+        } else {
+            $sql = "UPDATE `gangs` SET `owner`='" . $gowner . "',`name`='" . $gname . "',`members`='" . $gMem . "',`maxmembers`='" . $gMM . "',`bank`='" . $gbank . "',`active`='" . $gAct . "' WHERE `gangs`.`id` = '" . $gID . "'";
+        }
+        $result_of_query = $db_connection->query($sql);
+
+    } else {
+        $this->errors[] = "Database connection problem.";
+    }
 }
 ?>
 
@@ -31,7 +50,7 @@ if (!$db_connection->set_charset("utf8")) {
             <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " " . $lang['player']; ?></h3>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit-actionG.php" name="editform">
+            <form method="post" action="editGang.php" name="editform">
                 <?php
                 if (!$db_connection->connect_errno)
                 {
@@ -44,10 +63,14 @@ if (!$db_connection->set_charset("utf8")) {
                 $gID = $row["id"];
                 echo "<center>";
                 echo "<h3>" . $lang['name'] . ":    <input id='gname' name='gname' type='text' value='" . $row["name"] . "'></td><br/>";
-                echo "<h4>" . $lang['owner'] . ":    <input id='gowner' name='gowner' type='text' value='" . $row["owner"] . "'></td><br/>";
-                echo "<h4>" . $lang['maxMembers'] . ":    <input id='gMM' name='gMM' type='text' value='" . $row["maxmembers"] . "'></td><br/>";
-                echo "<h4>" . $lang['bank'] . ":     <input id='gbank' name='gbank' type='text' value='" . $row["bank"] . "'></td><br/>";
-                echo "<h4>" . $lang['active'] . ":   <input id='gAct' name='gAct' type='text' value='" . $row["active"] . "'></td><br/>";
+                echo "<h4>" . $lang['owner'] . ":    <input id='gowner' name='gowner' type='number' value='" . $row["owner"] . "'></td><br/>";
+                echo "<h4>" . $lang['maxMembers'] . ":    <input id='gMM' name='gMM' type='number' value='" . $row["maxmembers"] . "'></td><br/>";
+                echo "<h4>" . $lang['bank'] . ":     <input id='gbank' name='gbank' type='number' value='" . $row["bank"] . "'></td><br/>";
+                echo "<h4>" . $lang['active'] . ":   ";
+                echo "<select id='gAct' name='gAct'>";
+                echo '<option value="0"' . select('0', $row['active']) . '>' . $lang['no'] . '</option>';
+                echo '<option value="1"' . select('1', $row['active']) . '>' . $lang['yes'] . '</option>';
+                echo "</select>";
                 echo "</center>";
                 ?>
         </div>

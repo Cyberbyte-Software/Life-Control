@@ -8,14 +8,10 @@ if (!$db_connection->set_charset("utf8")) {
 }
 
 require __DIR__ . '/SourceQuery/SourceQuery.class.php';
-
-// Edit this ->
 define('SQ_TIMEOUT', 1);
 define('SQ_ENGINE', SourceQuery :: SOURCE);
-// Edit this <-
 
 $Timer = MicroTime(true);
-
 $Query = new SourceQuery();
 
 $Info = Array();
@@ -24,7 +20,7 @@ $Players = Array();
 
 try {
     $Query->Connect(SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE);
-    //$Query->SetRconPassword( $SQ_RCON_Pass );
+    //$Query->SetRconPassword( SQ_RCON_Pass );
 
     $Info = $Query->GetInfo();
     $Players = $Query->GetPlayers();
@@ -34,9 +30,24 @@ try {
 }
 
 $Query->Disconnect();
-
 $Timer = Number_Format(MicroTime(true) - $Timer, 4, '.', '');
 
+if(isset($_POST['kick'])){
+    $Query = new SourceQuery( );
+    try
+    {
+        $Query->Connect( SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE );
+
+        $Query->SetRconPassword(SQ_SERVER_PASSWORD);
+
+        var_dump( $Query->Rcon( 'say hello' ) );
+    }
+    catch( Exception $e )
+    {
+        echo $e->getMessage( );
+    }
+    $Query->Disconnect( );
+}
 
 ?>
 
@@ -62,14 +73,17 @@ $Timer = Number_Format(MicroTime(true) - $Timer, 4, '.', '');
 				<tr>
 					<th><i class="fa fa-user"></i><?php echo " ". $lang['name']; ?></th>
 					<th><i class="fa fa-clock-o"></i><?php echo " ". $lang['time']; ?></th>
+                    <th><?php echo $lang['kick']; ?></th>
 				</tr>
 			</thead>
                     <tbody>
                     <?php if (Is_Array($Players)): ?>
                         <?php foreach ($Players as $Player): ?>
+                            <?php var_dump($Player)?>
                             <tr>
                                 <td><?php echo htmlspecialchars($Player['Name']); ?></td>
                                 <td><?php echo $Player['TimeF']; ?></td>
+                                <td><?php echo $Player['Id']; ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>

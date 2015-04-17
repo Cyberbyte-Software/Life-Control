@@ -1,4 +1,5 @@
 <?php
+require_once("config/carNames.php");
 
 // create a database connection, using the constants from config/db.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -39,7 +40,7 @@ if (!$db_connection->set_charset("utf8")) {
 			<hr>
 			<thead>
 				<tr>
-					<th><i class="fa fa-eye"></i><?php echo " ". $lang['owner'] . " " . $lang['playerID']; ?></th>
+					<th><i class="fa fa-eye"></i><?php echo " ". $lang['owner'] ?></th>
 					<th><i class="fa fa-car"></i><?php echo " ". $lang['class']; ?></th>
 					<th><i class="fa fa-car"></i><?php echo " ". $lang['type']; ?></th>
 					<th><i class="fa fa-car"></i><?php echo " ". $lang['plate']; ?></th>
@@ -49,7 +50,6 @@ if (!$db_connection->set_charset("utf8")) {
 			</thead>
 			<tbody>
 			<?php
-			if (!$db_connection->connect_errno) {
 				if (isset($_GET["page"])) {
 					$page = $_GET["page"];
 				}else {
@@ -58,8 +58,11 @@ if (!$db_connection->set_charset("utf8")) {
 
 				$start_from = ($page-1) * $page_rows;
 				$max = 'LIMIT ' . $start_from . ',' . $page_rows;
-					
-				if (isset($_POST['searchText'])) {
+
+                if(isset($_GET['ID'])){
+                    $searchText = $_GET['ID'];
+                    $sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
+                } elseif (isset($_POST['searchText'])) {
 					$searchText = $_POST['searchText'];
 
 					if (isset($_POST['pid'])) {
@@ -74,15 +77,13 @@ if (!$db_connection->set_charset("utf8")) {
 				while ($row = mysqli_fetch_assoc($result_of_query)) {
 					$vehID = $row["id"];
 					echo "<tr>";
-					echo "<td>" . $row["pid"] . "</td>";
-					echo "<td>" . $row["classname"] . "</td>";
-					echo "<td>" . $row["type"] . "</td>";
+					echo "<td>" . nameID($row["pid"]) . "</td>";
+					echo "<td>" . carName($row["classname"]) . "</td>";
+					echo "<td>" . carType($row["type"],$lang) . "</td>";
 					echo "<td>" . $row["plate"] . "</td>";
-					echo "<td>" . $row["alive"] . "</td>";
-					echo "<td><form method='post' action='editVeh.php' name='PlayerEdit'>";
-					echo "<input id='vehID' type='hidden' name='vehID' value='" . $vehID . "'>";
-					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
-					echo "</form></td>";
+					echo "<td>" . yesNo($row["alive"],$lang) . "</td>";
+                    echo "<td><a class='btn btn-primary btn-xs' href='editVeh.php?ID=".$row["id"]."'>";
+                    echo "<i class='fa fa-pencil'></i></a></td>";
 					echo "</tr>";
 				};
 				echo "</tbody></table>";
@@ -98,10 +99,7 @@ if (!$db_connection->set_charset("utf8")) {
 				};
 
 				echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages'>".'Last Page'."</a></center>";
-										
-			} else {
-				$this->errors[] = "Database connection problem.";
-			}
+
 			?>
 			<br>
 			</tbody>

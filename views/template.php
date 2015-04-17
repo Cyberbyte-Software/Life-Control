@@ -1,4 +1,7 @@
-<?php include("config/lang/module.php") ?>
+<?php //include("config/lang/module.php");
+include("gfunctions.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -57,7 +60,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="<?php echo $_SESSION['user_profile']; ?>" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="profile.php"><img src="<?php echo 'assets/img/profile/'.$_SESSION['user_profile'].'.jpg'; ?>" class="img-circle" width="60"></a></p>
 					<h5 class="centered">
 						<?php echo $_SESSION['user_name']; ?>
 					</h5>
@@ -127,7 +130,7 @@
 								  <span><?php echo $lang['navAdmin'];?></span>
 							  </a>
 							  <ul class="sub">
-								  <li><a  href="admin.php"><?php echo $lang['staff'];?></a></li>
+								  <li><a  href="staff.php"><?php echo $lang['staff'];?></a></li>
 								  <li><a  href="register.php"><?php echo $lang['navNewUser'];?></a></li>
 							  </ul>
 							</li>							
@@ -184,9 +187,9 @@
 				// (string | mandatory) the heading of the notification
 				title: 'Welcome to Life Control!',
 				// (string | mandatory) the text inside the notification
-				text: 'Please Report Any Bugs/Feature Requests to Cammygames<br> Version : v2.2',
+				text: 'Please Report Any Bugs/Feature Requests to Cammygames<br> Version : v2.3',
 				// (string | optional) the image to display on the left
-				image: 'assets/img/ui-sam.jpg',
+				image: 'assets/img/profile/2.jpg',
 				// (bool | optional) if you want it to fade out on its own or just sit there
 				sticky: true,
 				// (int | optional) the time you want it to be alive for before fading out

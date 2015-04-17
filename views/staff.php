@@ -1,5 +1,4 @@
 <?php
-
 // create a database connection, using the constants from config/db.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -10,48 +9,43 @@ if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
 }
 ?>
-
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            <?php echo $lang['houses']; ?>
+            <?php echo $lang['staff']; ?>
             <small><?php echo " " . $lang['overview']; ?></small>
         </h1>
-    </div>
 </div>
 <!-- /.row -->
-
 <div class="col-md-12">
 	<div class="content-panel">
 		<table class="table table-striped table-advance table-hover">
 			<h4>
-				<i class="fa fa-home fa-fw"></i>
-				<?php echo " " . $lang['houses']; ?>
+				<i class="fa fa-cogs fa-fw"></i>
+				<?php echo " " . $lang['staff']; ?>
 				<div class="col-lg-4 pull-right">
 					<form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
 						  name='searchPlayer'>
 						<input id='searchText' type='text' name='searchText'>
-						<input class='btn btn-sm btn-primary' type='submit' name='pid'
-							   value='<?php echo $lang['search'] . " " . $lang['PID']; ?>'>
-						<input class='btn btn-sm btn-primary' type='submit' name='pos'
-							   value='<?php echo $lang['search'] . " " . $lang['position']; ?>'>
+						<input class='btn btn-sm btn-primary' type='submit' name='edit'
+							   value='<?php echo " " . $lang['search']; ?>'>
 					</form>
 				</div>
 			</h4>
 			<hr>
 			<thead>
 				<tr>
-					<th><i class="fa fa-eye"><?php echo " " .$lang['owner'] ?></th>
-					<th><i class="fa fa-user"><?php echo " " .$lang['position']; ?></th>
-					<th><i class="fa fa-user"><?php echo " " .$lang['owned']; ?></th>
+					<th><i class="fa fa-user"><?php echo  " " . $lang['staffName']; ?></th>
+					<th><i class="fa fa-user"><?php echo  " " . $lang['emailAdd']; ?></th>
+					<th><i class="fa fa-user"><?php echo  " " . $lang['rank']; ?></th>
+					<th><i class="fa fa-eye"><?php echo  " " . $lang['playerID']; ?></th>
 					<th><i class="fa fa-pencil"><?php echo " " .$lang['edit']; ?></th>
 				</tr>
 			</thead>
 			<tbody>
 			<?php
 			if (!$db_connection->connect_errno) {
-
 				if (isset($_GET["page"])) {
 					$page = $_GET["page"];
 				}else {
@@ -63,40 +57,36 @@ if (!$db_connection->set_charset("utf8")) {
 					
 				if (isset($_POST['searchText'])) {
 					$searchText = $_POST['searchText'];
-
-					if (isset($_POST['pos'])) {
-						$sql = "SELECT * FROM `houses` WHERE `pos` LIKE '%" . $searchText . "%' " . $max . " ;";
-					} else {
-						$sql = "SELECT * FROM `houses` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
-					}
+					$sql = "SELECT * FROM `users` WHERE `user_name` LIKE '%" . $searchText . "%' " . $max . " ;";
 				} else {
-					$sql = "SELECT * FROM `houses` " . $max . " ;";
+					$sql = "SELECT * FROM `users` " . $max . ";";
 				}
+
 				$result_of_query = $db_connection->query($sql);
 				while ($row = mysqli_fetch_assoc($result_of_query)) {
-					$hID = $row["id"];
+					$userID = $row["user_id"];
 					echo "<tr>";
-					echo "<td>" . nameID($row["pid"]) . "</td>";
-					echo "<td>" . $row["pos"] . "</td>";
-					echo "<td>" . yesNo($row["owned"],$lang) . "</td>";
-                    echo "<td><a class='btn btn-primary btn-xs' href='editHouse.php?ID=".$row["id"]."'>";
+					echo "<td>" . $row["user_name"] . "</td>";
+					echo "<td>" . $row["user_email"] . "</td>";
+					echo "<td>" . $row["user_level"] . "</td>";
+					echo "<td>" . $row["playerid"] . "</td>";
+                    echo "<td><a class='btn btn-primary btn-xs' href='editStaff.php?ID=".$row["user_id"]."'>";
                     echo "<i class='fa fa-pencil'></i></a></td>";
 					echo "</tr>";
 				};
 				echo "</tbody></table>";
 
-				$sql = "SELECT * FROM `houses`";
+				$sql = "SELECT * FROM `users`;";
 				$result_of_query = $db_connection->query($sql);
 				$total_records  = mysqli_num_rows($result_of_query); 
 				$total_pages = ceil($total_records / $page_rows);
-				echo "<center><a class='btn btn-primary' href='houses.php?page=1'>".'First Page'."</a> ";
+				echo "<center><a class='btn btn-primary' href='staff.php?page=1'>" .'First Page'."</a> ";
 
 				for ($i=1; $i<=$total_pages; $i++) {
-					echo "<a class='btn btn-primary' href='houses.php?page=".$i."'>".$i."</a> ";
+					echo "<a class='btn btn-primary' href='staff.php?page=".$i."'>".$i."</a> ";
 				};
 
-				echo "<a class='btn btn-primary' href='houses.php?page=$total_pages'>".'Last Page'."</a></center>";
-										
+				echo "<a class='btn btn-primary' href='staff.php?page=$total_pages'>" .'Last Page'."</a></center>";
 			} else {
 				$this->errors[] = "Database connection problem.";
 			}

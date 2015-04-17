@@ -19,7 +19,7 @@
 					</thead>
 					<tbody>
 						<?php
-						$sql = 'SELECT * FROM `messages` WHERE `fromID` = "'.$pId.'" OR `toID` = "'.$pId.'" ORDER BY `time` DESC LIMIT 10';
+						$sql = 'SELECT * FROM `messages` WHERE `fromID` = "'.$pID.'" OR `toID` = "'.$pID.'" ORDER BY `time` DESC LIMIT 10';
 						$result_of_query = $db_connection->query($sql);
 						while($row = mysqli_fetch_assoc($result_of_query)) 
 						{

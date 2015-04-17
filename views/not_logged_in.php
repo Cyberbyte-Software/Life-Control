@@ -1,4 +1,6 @@
 <?php
+include("config/lang/module.php");
+
 // show potential errors / feedback (from login object)
 if (isset($login)) {
     if ($login->errors) {
@@ -6,6 +8,14 @@ if (isset($login)) {
             echo $error;
         }
 	}
+}
+
+if (isset($_GET['setup'])){
+    if($_GET['setup'] == 1){
+        $message = $lang['setup'];
+    } elseif($_GET['setup']== 2) {
+        $message = $lang['upgrade'];
+    } else $message = $_GET['setup'];
 }
 ?>
 <!DOCTYPE html>
@@ -46,6 +56,7 @@ if (isset($login)) {
 	  		<div id="showtime"></div>
 	  			<div class="col-lg-4 col-lg-offset-4">
 	  				<div class="lock-screen">
+                        <?php if(isset($message)) echo '<div class="alert alert-info" role="alert">'.$message.'</div>' ?>
 		  				<h2><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i></a></h2>
 		  				<h3>LOGIN</h3>
 		  				
@@ -59,7 +70,7 @@ if (isset($login)) {
 				                      </div>
 										<form method="post" action="index.php">
 										  <div class="modal-body">
-											<p class="centered"><img class="img-circle" width="80" src="assets/img/ui-sam.jpg"></p>
+											<p class="centered"><img class="img-circle" width="80" src="assets/img/profile/2.jpg"></p>
 												<div class="login-wrap">
 													<input type="text" id="login_input_username" class="form-control" placeholder="Username" name="user_name" required  autofocus>
 													<br>
@@ -68,6 +79,7 @@ if (isset($login)) {
 													<select id='lang' name='lang' class="form-control login_input">
 														<option value="en" selected>English</option>
 														<option value="de">Deutsch</option>
+                                                        <option value="ne">Nederlands</option>
 													</select>
 												</div>
 										  </div>
@@ -82,7 +94,7 @@ if (isset($login)) {
 				          <!-- modal -->
 		  				
 		  				
-	  				</div><! --/lock-screen -->
+	  				</div>
 	  			</div><!-- /col-lg-4 -->
 	  	
 	  	</div><!-- /container -->

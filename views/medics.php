@@ -7,6 +7,12 @@ $page_rows = results_per_page;
 if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
 }
+
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];
+} else {
+    $page = 1;
+}
 ?>
 <!-- Page Heading -->
 <div class="row">
@@ -20,68 +26,59 @@ if (!$db_connection->set_charset("utf8")) {
 <!-- /.row -->
 
 <div class="col-md-12">
-	<div class="content-panel">
-		<table class="table table-striped table-advance table-hover">
-			<h4>
-				<i class="fa fa-ambulance fa-fw"></i>
-				<?php echo " " . $lang['medics']; ?>
-			</h4>
-			<hr>
-			<thead>
-				<tr>
-					<th><i class="fa fa-user"></i><?php echo " ". $lang['name']; ?></th>
-					<th><i class="fa fa-eye"></i><?php echo " ". $lang['playerID']; ?></th>
-					<th><i class="fa fa-user"></i><?php echo " ". $lang['rank']; ?></th>
-					<th><i class="fa fa-pencil"></i><?php echo " ". $lang['edit']; ?></th>
-					</tr>
-			</thead>
-			<tbody>
-			<?php
-			if (!$db_connection->connect_errno) {
-				if (isset($_GET["page"])) {
-					$page = $_GET["page"];
-				}else {
-					$page=1;
-				}
+    <div class="content-panel">
+        <table class="table table-striped table-advance table-hover">
+            <h4>
+                <i class="fa fa-ambulance fa-fw"></i>
+                <?php echo " " . $lang['medics']; ?>
+            </h4>
+            <hr>
+            <thead>
+            <tr>
+                <th><i class="fa fa-user"></i><?php echo " " . $lang['name']; ?></th>
+                <th><i class="fa fa-eye"></i><?php echo " " . $lang['playerID']; ?></th>
+                <th><i class="fa fa-user"></i><?php echo " " . $lang['rank']; ?></th>
+                <th><i class="fa fa-pencil"></i><?php echo " " . $lang['edit']; ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            if (!$db_connection->connect_errno) {
+                $start_from = ($page - 1) * $page_rows;
+                $max = 'LIMIT ' . $start_from . ',' . $page_rows;
 
-				$start_from = ($page-1) * $page_rows;
-				$max = 'LIMIT ' . $start_from . ',' . $page_rows;
-					
-				$sql = "SELECT `name`,`mediclevel`,`playerid` FROM `players` WHERE `mediclevel` >= '1' ORDER BY `mediclevel` " . $max . " ;";
-				$result_of_query = $db_connection->query($sql);
-				while ($row = mysqli_fetch_assoc($result_of_query)) {
-					$playersID = $row["playerid"];
-					echo "<tr>";
-					echo "<td>" . $row["name"] . "</td>";
-					echo "<td>" . $playersID . "</td>";
-					echo "<td>" . $row["mediclevel"] . "</td>";
-					echo "<td><form method='post' action='editPlayer.php' name='PlayerEdit'>";
-					echo "<input id='playerId' type='hidden' name='playerId' value='" . $playersID . "'>";
-					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
-					echo "</form></td>";
-					echo "</tr>";
-				};
-				echo "</tbody></table>";
+                $sql = "SELECT `name`,`mediclevel`,`playerid` FROM `players` WHERE `mediclevel` >= '1' ORDER BY `mediclevel` " . $max . " ;";
+                $result_of_query = $db_connection->query($sql);
+                while ($row = mysqli_fetch_assoc($result_of_query)) {
+                    echo "<tr>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["playerid"] . "</td>";
+                    echo "<td>" . $row["mediclevel"] . "</td>";
+                    echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=" . $row["playerid"] . "'>";
+                    echo "<i class='fa fa-pencil'></i></a></td>";
+                    echo "</tr>";
+                };
+                echo "</tbody></table>";
 
-				$sql = "SELECT * FROM `players` WHERE `mediclevel` >= '1'";
-				$result_of_query = $db_connection->query($sql);
-				$total_records  = mysqli_num_rows($result_of_query); 
-				$total_pages = ceil($total_records / $page_rows);
-				echo "<center><a class='btn btn-primary' href='medics.php?page=1'>".'First Page'."</a> ";
+                $sql = "SELECT * FROM `players` WHERE `mediclevel` >= '1'";
+                $result_of_query = $db_connection->query($sql);
+                $total_records = mysqli_num_rows($result_of_query);
+                $total_pages = ceil($total_records / $page_rows);
+                echo "<center><a class='btn btn-primary' href='medics.php?page=1'>" . 'First Page' . "</a> ";
 
-				for ($i=1; $i<=$total_pages; $i++) {
-					echo "<a class='btn btn-primary' href='medics.php?page=".$i."'>".$i."</a> ";
-				};
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    echo "<a class='btn btn-primary' href='medics.php?page=" . $i . "'>" . $i . "</a> ";
+                };
 
-				echo "<a class='btn btn-primary' href='medics.php?page=$total_pages'>".'Last Page'."</a></center>";
-										
-			} else {
-				$this->errors[] = "Database connection problem.";
-			}
-			?>
-			</tbody>
-			<br>
-		</table>
-	</div>
+                echo "<a class='btn btn-primary' href='medics.php?page=$total_pages'>" . 'Last Page' . "</a></center>";
+
+            } else {
+                $this->errors[] = "Database connection problem.";
+            }
+            ?>
+            </tbody>
+            <br>
+        </table>
+    </div>
 </div>
 

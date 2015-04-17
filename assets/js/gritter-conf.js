@@ -8,7 +8,7 @@ var Gritter = function () {
             // (string | mandatory) the text inside the notification
             text: 'Hover me to enable the Close Button. This note also contains a link example. Thank you so much to try Dashgum. Developed by <a href="#" style="color:#FFD777">Alvarez.is</a>.',
             // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
+            image: 'assets/img/2.jpg',
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: true,
             // (int | optional) the time you want it to be alive for before fading out
@@ -41,7 +41,7 @@ var Gritter = function () {
             // (string | mandatory) the text inside the notification
             text: 'This will fade out after a certain amount of time. This note also contains a link example. Thank you so much to try Dashgum. Developed by <a href="#" style="color:#FFD777">Alvarez.is</a>.',
             // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
+            image: 'assets/img/2.jpg',
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: false,
             // (int | optional) the time you want it to be alive for before fading out
@@ -60,7 +60,7 @@ var Gritter = function () {
             // (string | mandatory) the text inside the notification
             text: 'This will fade out after a certain amount of time. This note also contains a link example. Thank you so much to try Dashgum. Developed by <a href="#" style="color:#FFD777">Alvarez.is</a>.',
             // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
+            image: 'assets/img/2.jpg',
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: false,
             // (function) before the gritter notice is opened

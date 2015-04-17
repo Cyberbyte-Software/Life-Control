@@ -1,5 +1,4 @@
 <?php
-
 // create a database connection, using the constants from config/db.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -45,7 +44,7 @@ if (!$db_connection->set_charset("utf8")) {
 				<tr>
 					<th><i class="fa fa-eye"><?php echo " " .$lang['id']; ?></th>
 					<th><i class="fa fa-user"><?php echo " " .$lang['gang'] . " " . $lang['name']; ?></th>
-					<th><i class="fa fa-user"><?php echo " " .$lang['owner'] . " " . $lang['playerID']; ?></th>
+					<th><i class="fa fa-user"><?php echo " " .$lang['owner']; ?></th>
 					<th><i class="fa fa-bank"><?php echo " " .$lang['bank']; ?></th>
 					<th><i class="fa fa-user"><?php echo " " .$lang['maxMembers']; ?></th>
 					<th><i class="fa fa-user"><?php echo " " .$lang['active']; ?></th>
@@ -67,10 +66,11 @@ if (!$db_connection->set_charset("utf8")) {
 				if (isset($_POST['searchText'])) {
 					$searchText = $_POST['searchText'];
 
+
 					if (isset($_POST['pid'])) {
-						$sql = "SELECT * FROM `gangs` WHERE `owner` LIKE '%" . $searchText . "%' " . $max . " ;";
+						$sql = "SELECT * FROM `gangs` WHERE `owner` LIKE " . $searchText . $max . " ;";
 					} else {
-						$sql = "SELECT * FROM `gangs` WHERE `name` LIKE '%" . $searchText . "%' " . $max . " ;";
+						$sql = "SELECT * FROM `gangs` WHERE `name` LIKE " . $searchText . $max . " ;";
 					}
 				} else {
 					$sql = "SELECT * FROM `gangs` " . $max . " ;";
@@ -80,14 +80,12 @@ if (!$db_connection->set_charset("utf8")) {
 					echo "<tr>";
 					echo "<td>" . $row["id"] . "</td>";
 					echo "<td>" . $row["name"] . "</td>";
-					echo "<td>" . $row["owner"] . "</td>";
+					echo "<td>" . nameID($row["owner"]) . "</td>";
 					echo "<td>" . $row["bank"] . "</td>";
 					echo "<td>" . $row["maxmembers"] . "</td>";
-					echo "<td>" . $row["active"] . "</td>";
-					echo "<td><form method='post' action='editGang.php' name='PlayerEdit'>";
-					echo "<input id='gID' type='hidden' name='gID' value='" . $row["id"] . "'>";
-					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
-					echo "</form></td>";
+					echo "<td>" . yesNo($row["active"],$lang) . "</td>";
+					echo "<td><a class='btn btn-primary btn-xs' href='editGang.php?ID=".$row["id"]."'>";
+					echo "<i class='fa fa-pencil'></i></a></td>";
 					echo "</tr>";
 				};
 				echo "</tbody></table>";

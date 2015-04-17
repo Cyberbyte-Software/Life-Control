@@ -12,8 +12,8 @@ switch ($lang)
   $lang_file = 'lang.de.php';
   break;
  
-  case 'es':
-  $lang_file = 'lang.es.php';
+  case 'ne':
+  $lang_file = 'lang.ne.php';
   break;
  
   default:

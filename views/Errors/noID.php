@@ -1,0 +1,1 @@
+<?php echo "<center><h1 style='color:red'>" . $lang['idNotSet'] . "</h1></center>";

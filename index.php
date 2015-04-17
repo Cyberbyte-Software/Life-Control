@@ -39,7 +39,28 @@ if ($login->isUserLoggedIn() == true) {
     include("views/template.php");
 
 } else {
-    // the user is not logged in. you can do whatever you want here.
-    // for demonstration purposes, we simply show the "you are not logged in" view.
-    include("views/not_logged_in.php");
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+
+    $result = mysqli_query($link,"SHOW TABLES LIKE 'users'");
+    $table_query = mysqli_num_rows($result);
+    mysqli_close($link);
+
+    if (!$table_query) {
+        include("firstTime.php");
+    } else {
+        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $result = mysqli_query($link, "SHOW COLUMNS FROM `users` LIKE 'user_profile';");
+        $table_query = mysqli_num_rows($result);
+        mysqli_close($link);
+        if (!$table_query) {
+            include("update.php");
+        } else {
+            include("views/not_logged_in.php");
+        }
+    }
 }
