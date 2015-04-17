@@ -41,7 +41,7 @@ if (isset($_GET["ID"]) || isset($_POST["gID"])) {
         <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " " . $lang['player']; ?></h3>
     </div>
     <div class="panel-body">
-    <form method="post" action="editGang.php" name="editform">
+    <form method="post" action="editGang.php?ID=<?php echo $gID; ?>" name="editform">
     <?php
     $sql = 'SELECT * FROM `gangs` WHERE `id` ="' . $gID . '";';
     $result_of_query = $db_connection->query($sql);

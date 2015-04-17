@@ -19,13 +19,13 @@ define("results_per_page", 10 );
 /**
  * Make altis_life_4 True to be able to access the wanted section
  */
-define("alits_life_4", false);
+define("alits_life_4", true);
 
 /**
  * Modules: Here you can enable any modules for the system that have been made to
  * support people who use things like SQL Smart Phone
  */
-define("sql_smartPhone", false);
+define("sql_smartPhone", true);
 
 
 /**
