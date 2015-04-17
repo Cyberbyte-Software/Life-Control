@@ -3,8 +3,32 @@
 // create a database connection, using the constants from config/db.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-if (isset($_POST["wantedID"])) {
-    $wantedID = $_POST["wantedID"];
+if (isset($_GET["ID"])) {
+    $wantedID = $_GET["ID"];
+	
+	if (isset($_POST["wantedID"]))
+	{
+		//vehOwner vehClass vehSide vehType vehPlate vehAlive vehAct vehCol vehInv
+		$wantedID   = $_POST["wantedID"];
+		$wantedName = $_POST["wantedName"];
+		$wantedCrimes = $_POST["wantedCrimes"];
+		$wantedBounty = $_POST["wantedBounty"];
+		$active = $_POST["active"];
+	
+		if (!$db_connection->connect_errno) 
+		{
+			if (isset($_POST['drop'])) 
+			{
+				$sql = "DELETE FROM `wanted` WHERE `wanted`.`wantedID` = '".$wantedID."'";
+			} 
+			else 
+			{
+				$sql = "UPDATE `wanted` SET `active` = '".$active."', `wantedName` = '".$wantedName."', `wantedBounty` = '".$wantedBounty."', `wantedCrimes` = '".$wantedCrimes."' WHERE `wanted`.`wantedID` = '".$wantedID."'";
+			}		
+
+			$result_of_query = $db_connection->query($sql);
+		}
+	}	
 } else {
     echo "<center><h1 style='color:red'>" . $lang['idNotSet'] . "</h1></center>";
 }
@@ -36,7 +60,7 @@ if (!$db_connection->set_charset("utf8")) {
             <h3 class="panel-title"><i class="fa fa-child fa-fw"></i> <?php echo " " . $lang['wanted']; ?></h3>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit-actionW.php" name="editform">
+            <form method="post" action="editWanted.php?ID=<?php echo $wantedID; ?>" name="editform">
                 <?php
                 if (!$db_connection->connect_errno)
                 {
