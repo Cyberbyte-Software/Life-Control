@@ -10,24 +10,29 @@ if (isset($_GET["ID"])) {
     echo "<center><h1 style='color:red'>" . $lang['idNotSet'] . "</h1></center>";
 }
 
-if (isset($_POST["hID"])) {
-    $hID = $_POST["hID"];
-    $hOwn = $_POST["hOwn"];
-    $hPos = $_POST["hPos"];
-    $hOwned = $_POST["hOwned"];
-    $hCont = $_POST["hCont"];
-    $hInv = $_POST["hInv"];
+if (isset($_POST["hID"]))
+{
+	$hID   = $_POST["hID"];
+	$hOwn = $_POST["hOwn"];
+	$hPos = $_POST["hPos"];
+	$hOwned = $_POST["hOwned"];
+	$hCont = $_POST["hCont"];
+	$hInv = $_POST["hInv"];
 
-    if (!$db_connection->connect_errno) {
-        if (isset($_POST['drop'])) {
-            $sql = "DELETE FROM `houses` WHERE `houses`.`id` = '" . $hID . "'";
-        } else {
-            $sql = "UPDATE `houses` SET `pid`='" . $hOwn . "',`pos`='" . $hPos . "',`owned`='" . $hOwned . "',`inventory`='" . $hInv . "',`containers`='" . $hCont . "' WHERE `houses`.`id` = '" . $hID . "'";
-        }
-        $result_of_query = $db_connection->query($sql);
-    } else {
-        $this->errors[] = "Database connection problem.";
-    }
+	if (!$db_connection->connect_errno) 
+	{
+		if (isset($_POST['drop'])) 
+		{
+			$sql = "DELETE FROM `houses` WHERE `houses`.`id` = '".$hID."'";
+		} 
+		else 
+		{
+			$sql = "UPDATE `houses` SET `pid`='".$hOwn."',`pos`='".$hPos."',`owned`='".$hOwned."',`inventory`='".$hInv."',`containers`='".$hCont."' WHERE `houses`.`id` = '".$hID."'";
+		}		
+
+		$result_of_query = $db_connection->query($sql);
+
+	}
 }
 
 ?>
@@ -49,7 +54,7 @@ if (isset($_POST["hID"])) {
             <h3 class="panel-title"><i class="fa fa-home fa-fw"></i><?php echo " " . $lang['house']; ?></h3>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit-actionH.php" name="editform">
+            <form method="post" action="editHouse.php?ID=<?php echo $hID; ?>" name="editform">
                 <?php
                 if (!$db_connection->connect_errno)
                 {
