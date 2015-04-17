@@ -72,10 +72,8 @@ if (!$db_connection->set_charset("utf8")) {
 					echo "<td>" . $row["wantedCrimes"] . "</td>";
 					echo "<td>" . $row["wantedBounty"] . "</td>";
 					echo "<td>" . $row["active"] . "</td>";
-					echo "<td><form method='post' action='editWanted.php' name='PlayerEdit'>";
-					echo "<input id='wantedID' type='hidden' name='wantedID' value='" . $wantedID . "'>";
-					echo "<button type='submit'  name='edit' class='btn btn-primary btn-xs'><i class='fa fa-pencil'></i></button>";
-					echo "</form></td>";
+					echo "<td><a class='btn btn-primary btn-xs' href='editWanted.php?ID=".$row["wantedID"]."'>";
+                    echo "<i class='fa fa-pencil'></i></a></td>";
 					echo "</tr>";
 				};
 				echo "</tbody></table>";
