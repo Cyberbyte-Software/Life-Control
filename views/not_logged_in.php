@@ -57,7 +57,7 @@ if (isset($_GET['setup'])){
 	  			<div class="col-lg-4 col-lg-offset-4">
 	  				<div class="lock-screen">
                         <?php if(isset($message)) echo '<div class="alert alert-info" role="alert">'.$message.'</div>' ?>
-		  				<h2><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i> Admin Login</a></h2>
+		  				<h2><a data-toggle="modal" href="#myModal"><i class="fa fa-lock"></i></a></h2>
 		  				<h3>LOGIN</h3>
 		  				
 				          <!-- Modal -->

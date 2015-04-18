@@ -26,7 +26,7 @@ define("alits_life_4", true);
  * Modules: Here you can enable any modules for the system that have been made to
  * support people who use things like SQL Smart Phone
  */
-define("playerView", true);
+define("playerView", false);
 define("sql_smartPhone", false);
 
 
