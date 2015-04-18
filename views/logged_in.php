@@ -10,39 +10,7 @@ if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
 }
 
-if (enable_game_query == TRUE) {
-    require __DIR__ . '/SourceQuery/SourceQuery.class.php';
-
-    // Edit this ->
-    define('SQ_TIMEOUT', 1);
-    define('SQ_ENGINE', SourceQuery :: SOURCE);
-    // Edit this <-
-
-    $Timer = MicroTime(true);
-
-    $Query = new SourceQuery();
-
-    $Info = Array();
-    $Rules = Array();
-    $Players = Array();
-
-    try {
-        $Query->Connect(SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE);
-
-        $Info = $Query->GetInfo();
-        $Players = $Query->GetPlayers();
-        $Rules = $Query->GetRules();
-    } catch (Exception $e) {
-        $Exception = $e;
-    }
-
-    $Query->Disconnect();
-
-    $Timer = Number_Format(MicroTime(true) - $Timer, 4, '.', '');
-}
-
 ?>
-
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
@@ -53,36 +21,6 @@ if (enable_game_query == TRUE) {
     </div>
 </div>
 
-
-<?php
-if ($_SESSION['user_level'] >= 2) {
-    if (enable_game_query == TRUE) {
-        ?>
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <center>
-                                <div id="bigfella" style="width:200px; height:120px"></div>
-                            </center>
-                        </div>
-                    </div>
-                    <a href="curPlayers.php">
-                        <div class="panel-footer">
-                            <span class="pull-left"><?php echo $lang['viewAll'];?></span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    <?php
-    }
-}
-?>
 <div class="row">
     <div class="col-lg-4">
 		<div class="content-panel">

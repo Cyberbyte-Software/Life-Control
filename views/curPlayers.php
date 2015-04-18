@@ -7,32 +7,8 @@ if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
 }
 
-require __DIR__ . '/SourceQuery/SourceQuery.class.php';
-define('SQ_TIMEOUT', 1);
-define('SQ_ENGINE', SourceQuery :: SOURCE);
-
-$Timer = MicroTime(true);
-$Query = new SourceQuery();
-
-$Info = Array();
-$Rules = Array();
-$Players = Array();
-
-try {
-    $Query->Connect(SQ_SERVER_ADDR, SQ_SERVER_PORT, SQ_TIMEOUT, SQ_ENGINE);
-    //$Query->SetRconPassword( SQ_RCON_Pass );
-
-    $Info = $Query->GetInfo();
-    $Players = $Query->GetPlayers();
-    $Rules = $Query->GetRules();
-} catch (Exception $e) {
-    $Exception = $e;
-}
-
-$Query->Disconnect();
-$Timer = Number_Format(MicroTime(true) - $Timer, 4, '.', '');
-
-if(isset($_POST['kick'])){
+if(isset($_POST['kick']))
+{
     $Query = new SourceQuery( );
     try
     {
@@ -47,6 +23,37 @@ if(isset($_POST['kick'])){
         echo $e->getMessage( );
     }
     $Query->Disconnect( );
+}
+
+if (isset($_GET["IP"])) {
+	
+	require __DIR__ . '/SourceQuery/SourceQuery.class.php';
+	define('SQ_TIMEOUT', 1);
+	define('SQ_ENGINE', SourceQuery :: SOURCE);
+	
+	$serverIp = $_GET["IP"];
+	$serverPort = $_GET["Port"];
+
+	$Timer = MicroTime(true);
+	$Query = new SourceQuery();
+
+	$Info = Array();
+	$Rules = Array();
+	$Players = Array();
+
+	try {
+		$Query->Connect($serverIp , $serverPort, SQ_TIMEOUT, SQ_ENGINE);
+		//$Query->SetRconPassword( SQ_RCON_Pass );
+
+		$Info = $Query->GetInfo();
+		$Players = $Query->GetPlayers();
+		$Rules = $Query->GetRules();
+	} catch (Exception $e) {
+		$Exception = $e;
+	}
+
+	$Query->Disconnect();
+	$Timer = Number_Format(MicroTime(true) - $Timer, 4, '.', '');	
 }
 
 ?>
@@ -73,13 +80,12 @@ if(isset($_POST['kick'])){
 				<tr>
 					<th><i class="fa fa-user"></i><?php echo " ". $lang['name']; ?></th>
 					<th><i class="fa fa-clock-o"></i><?php echo " ". $lang['time']; ?></th>
-                    <th><?php echo $lang['kick']; ?></th>
+                    <th><?php echo $lang['Kick']; ?></th>
 				</tr>
 			</thead>
                     <tbody>
                     <?php if (Is_Array($Players)): ?>
                         <?php foreach ($Players as $Player): ?>
-                            <?php var_dump($Player)?>
                             <tr>
                                 <td><?php echo htmlspecialchars($Player['Name']); ?></td>
                                 <td><?php echo $Player['TimeF']; ?></td>

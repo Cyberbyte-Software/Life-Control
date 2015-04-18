@@ -1,6 +1,8 @@
 <?php //include("config/lang/module.php");
 include("gfunctions.php");
 
+$arrayCount = count($gameServers);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,6 +114,16 @@ include("gfunctions.php");
 							}
 						}
                     ?>
+					<?php if (Is_Array($gameServers) && enable_game_query): ?>
+                        <?php foreach ($gameServers as $gameServer): ?>
+						<li>
+							<a href="curPlayers.php?IP=<?php echo $gameServer[2];?>&Port=<?php echo $gameServer[1];?>">
+								<i class="fa fa-cog"></i>
+								<span><?php echo $gameServer[0];?></span>
+							</a>
+						</li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                     <li>
                         <a href="profile.php">
 							<i class="fa fa-fw fa-user"></i>

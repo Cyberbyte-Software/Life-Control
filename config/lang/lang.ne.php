@@ -140,7 +140,7 @@ $lang['time'] = 'Tijd';
 $lang['setup'] = 'De database is nu opgezet';
 $lang['upgrade'] = 'De database is nu bijgewerkt';
 $lang['noPerm'] = 'Het spijt me, u hebt geen toestemming om deze pagina te bekijken';
-
+$lang['Kick'] = 'Kick';
 $lang['topRich'] = 'Top Ten Richest Players';
 $lang['noHouse'] = 'No Houses';
 $lang['noCar'] = 'No cars';
@@ -152,4 +152,5 @@ $lang['login'] = 'Login';
 $lang['cancel'] = 'Cancel';
 $lang['picture'] = 'Picture';
 $lang['changePass'] = 'Change Password';
+$lang['gameServers'] = 'Game Servers';
 ?>

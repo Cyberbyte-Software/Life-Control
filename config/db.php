@@ -10,10 +10,10 @@
  * DB_USER: user for your database. the user needs to have rights for SELECT, UPDATE, DELETE and INSERT.
  * DB_PASS: the password of the above user
  */
-define("DB_HOST", "87.117.246.99");
-define("DB_NAME", "theproho_arma3stat");
-define("DB_USER", "theproho_arma");
-define("DB_PASS", "arma3");
+define("DB_HOST", "localhost");
+define("DB_NAME", "arma3life");
+define("DB_USER", "arma3life");
+define("DB_PASS", "133788hjk");
 define("results_per_page", 10 );
 
 /**
@@ -32,11 +32,14 @@ define("sql_smartPhone", true);
  * Change These To Reflect The Connection Info Of Your Game Server.
  * This Allows the current players function to work.
  * !! Make sure to add +1 to the server port, ARMA 3 implementation violates Source query protocol spec. !!
+ * Add your servers query details to the array like so:
+ * array("Server Name","Port", "IP")
  **/
-define("enable_game_query", false);
-define("SQ_SERVER_ADDR", "192.99.69.251");
-define("SQ_SERVER_PORT", 2313);
-define("SQ_SERVER_PASSWORD", "PizzaTrees");
+define("enable_game_query", true);
+$gameServers = array(
+	array("Altis Life","3103", "37.187.154.23"),
+	array("KOTH","2503", "188.165.255.190")
+);
 
 /**
  * Levels

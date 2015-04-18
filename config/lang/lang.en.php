@@ -140,7 +140,7 @@ $lang['time'] = 'Time';
 $lang['setup'] = 'The database has now been setup';
 $lang['upgrade'] = 'The database has now been upgraded';
 $lang['noPerm'] = 'Sorry you do not have permission to view this page';
-
+$lang['Kick'] = 'Kick';
 $lang['topRich'] = 'Top Ten Richest Players';
 $lang['noHouse'] = 'No Houses';
 $lang['noCar'] = 'No cars';
@@ -152,4 +152,5 @@ $lang['login'] = 'Login';
 $lang['cancel'] = 'Cancel';
 $lang['picture'] = 'Picture';
 $lang['changePass'] = 'Change Password';
+$lang['gameServers'] = 'Game Servers';
 ?>
