@@ -68,7 +68,7 @@ if (isset($_GET["page"])) {
 ?>
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-						Page <span class="caret"></span>
+                        <?php echo $lang['page']; ?> <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
 					<?php 
@@ -78,8 +78,7 @@ if (isset($_GET["page"])) {
 				  <?php }; ?>
 					</ul>
 				</div>
-				
-				<?phpecho "<a class='btn btn-primary' href='medics.php?page=$total_pages'>".$lang['first']."</a></center>";
+                <?php echo "<a class='btn btn-primary' href='medics.php?page=$total_pages'>".$lang['last']."</a></center>";
 
             } else {
                 $this->errors[] = "Database connection problem.";

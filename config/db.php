@@ -11,9 +11,9 @@
  * DB_PASS: the password of the above user
  */
 define("DB_HOST", "localhost");
-define("DB_NAME", "arma3life");
-define("DB_USER", "arma3life");
-define("DB_PASS", "133788hjk");
+define("DB_NAME", "arma3");
+define("DB_USER", "root");
+define("DB_PASS", "");
 define("results_per_page", 10 );
 
 /**
