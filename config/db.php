@@ -21,11 +21,13 @@ define("results_per_page", 10 );
  */
 define("alits_life_4", true);
 
+
 /**
  * Modules: Here you can enable any modules for the system that have been made to
  * support people who use things like SQL Smart Phone
  */
-define("sql_smartPhone", true);
+define("playerView", true);
+define("sql_smartPhone", false);
 
 
 /**

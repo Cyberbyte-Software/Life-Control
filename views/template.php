@@ -114,21 +114,23 @@ $arrayCount = count($gameServers);
 							}
 						}
                     ?>
-					<?php if (Is_Array($gameServers) && enable_game_query): ?>
-                        <?php foreach ($gameServers as $gameServer): ?>
-						<li>
-							<a href="curPlayers.php?IP=<?php echo $gameServer[2];?>&Port=<?php echo $gameServer[1];?>">
-								<i class="fa fa-cog"></i>
-								<span><?php echo $gameServer[0];?></span>
-							</a>
-						</li>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    <li>
-                        <a href="profile.php">
-							<i class="fa fa-fw fa-user"></i>
-							<span><?php echo $lang['navProfile'];?></span>
-						</a>
+					<li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-tasks"></i>
+                            <span><?php echo $lang['gameServers'];?></span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar" >
+							<?php if (Is_Array($gameServers) && enable_game_query): ?>
+								<?php foreach ($gameServers as $gameServer): ?>
+								<li style="colour:green;">
+									<a href="curPlayers.php?IP=<?php echo $gameServer[2];?>&Port=<?php echo $gameServer[1];?>">
+										<i class="fa fa-cog"></i>
+										<span><?php echo $gameServer[0];?></span>
+									</a>
+								</li>
+								<?php endforeach; ?>
+							<?php endif; ?>
+                        </ul>
                     </li>
 					<?php
 						
@@ -136,24 +138,41 @@ $arrayCount = count($gameServers);
 					<?php
 						if ($_SESSION['user_level'] >= 3) {
 					?>
-							<li class="sub-menu">
-							  <a href="javascript:;" >
-								  <i class="fa fa-cogs"></i>
-								  <span><?php echo $lang['navAdmin'];?></span>
-							  </a>
-							  <ul class="sub">
-								  <li><a  href="staff.php"><?php echo $lang['staff'];?></a></li>
-								  <li><a  href="register.php"><?php echo $lang['navNewUser'];?></a></li>
-							  </ul>
-							</li>							
+					<li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-tasks"></i>
+                            <span><?php echo $lang['navAdmin'];?></span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+							<li>
+								<a href="register.php">
+									<i class="fa fa-fw fa-cogs"></i>
+									<span><?php echo $lang['navNewUser'];?></span>
+								</a>
+							</li>
+                            <li>
+								<a href="profile.php">
+									<i class="fa fa-fw fa-user"></i>
+									<span><?php echo $lang['navProfile'];?></span>
+								</a>
+							</li>
+                        </ul>
+                    </li>
+							
 					<?php
 					}
 					?>
+                    <li>
+                        <a href="profile.php">
+							<i class="fa fa-fw fa-user"></i>
+							<span><?php echo $lang['navProfile'];?></span>
+						</a>
+                    </li>
 					<li>
 						<a href="index.php?logout"><i
 								class="fa fa-fw fa-power-off"></i><?php echo " " . $lang['navLogOut']; ?></a>
-					</li>  
-				  
+					</li>
+					
               </ul>
               <!-- sidebar menu end-->
           </div>

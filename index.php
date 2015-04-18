@@ -60,7 +60,14 @@ if ($login->isUserLoggedIn() == true) {
         if (!$table_query) {
             include("update.php");
         } else {
-            include("views/not_logged_in.php");
+			if (playerView)
+			{
+				include("views/modules/playerView/playerView.php");
+			}
+			else 
+			{
+				include("views/not_logged_in.php");
+			}
         }
     }
 }

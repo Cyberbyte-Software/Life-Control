@@ -99,11 +99,21 @@ if (!$db_connection->set_charset("utf8")) {
 				$total_records  = mysqli_num_rows($result_of_query); 
 				$total_pages = ceil($total_records / $page_rows);
 				echo "<center><a class='btn btn-primary' href='players.php?page=1'>".$lang['first']."</a> ";
+				?>
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						Page <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+					<?php 
+						for ($i=1; $i<=$total_pages; $i++) {
+					?>
+							<li><?php echo "<a href='players.php?page=".$i."'>".$i."</a> "; ?></li>
+				  <?php }; ?>
+					</ul>
+				</div>
 				
-				for ($i=1; $i<=$total_pages; $i++) {
-					echo "<a class='btn btn-primary' href='players.php?page=".$i."'>".$i."</a> ";
-				};
-
+				<?php
 				echo "<a class='btn btn-primary' href='players.php?page=$total_pages'>".$lang['last']."</a></center>";
 				
 			} else {

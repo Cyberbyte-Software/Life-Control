@@ -101,7 +101,7 @@ if (isset($_GET["ID"])) {
                                     ?>
                                     </tbody>
                                 </table>
-                                <?php echo '<a href="vehicles.php?ID=' . $pID . '">More</a>';
+                                <?php 
                             } else echo '<h1>No cars</h1>';
                         } ?>
                     </div>
