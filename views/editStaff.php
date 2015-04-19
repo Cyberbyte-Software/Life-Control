@@ -43,7 +43,7 @@ if (isset($_POST["staffName"])) {
             <h3 class="panel-title"><i class="fa fa-users fa-fw"></i><?php echo " " . $lang['staff']; ?></h3>
         </div>
         <div class="panel-body">
-            <form method="post" action="editStaffAction.php" name="editform">
+            <form method="post" action="editStaff.php?ID=<?php echo $uId; ?>" name="editform">
                 <?php
                 if (!$db_connection->connect_errno) {
                     $sql = 'SELECT * FROM `users` WHERE `user_id` ="' . $uId . '";';

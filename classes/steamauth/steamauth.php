@@ -9,7 +9,7 @@ function logoutbutton() {
 function steamlogin()
 {
 try {
-	require("./config/steamSettings.php");
+	require("steamSettings.php");
     $openid = new LightOpenID($steamauth['domainname']);
     
     $button['small'] = "small";

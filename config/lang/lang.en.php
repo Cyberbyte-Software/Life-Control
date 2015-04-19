@@ -82,6 +82,7 @@ $lang['last'] = 'Last';
 -------------------------------
 */
 $lang['id'] = 'ID';
+$lang['uid'] = 'User ID';
 $lang['staffName'] = 'Staff Name';
 $lang['emailAdd'] = 'Email Address';
 $lang['rank'] = 'Rank';
@@ -154,4 +155,8 @@ $lang['picture'] = 'Picture';
 $lang['changePass'] = 'Change Password';
 $lang['gameServers'] = 'Game Servers';
 $lang['page'] = 'Page';
+$lang['not'] = 'Not';
+$lang['blacklisted'] = 'Blacklisted';
+$lang['arrested'] = 'Arrested';
+$lang['finances'] = 'Finances';
 ?>

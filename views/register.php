@@ -42,11 +42,11 @@ if (isset($registration)) {
 <div id="login-page">
     <div class="col-lg-1 container">
         <h4> Dave: </h4>
-        <img src="assets/img/ui-dave.jpg">
+        <img src="assets/img/profile/1.jpg">
         <h4> Joe: </h4>
-        <img src="assets/img/ui-joe.jpg">
+        <img src="assets/img/profile/2.jpg">
         <h4> Sam: </h4>
-        <img src="assets/img/ui-sam.jpg">
+        <img src="assets/img/profile/3.jpg">
     </div>
 
     <div class="col-lg-10 container">
@@ -104,10 +104,10 @@ if (isset($registration)) {
     </div>
     <div class="col-lg-1 container">
         <h4> Kerry: </h4>
-        <img src="assets/img/ui-kerry.jpg">
+        <img src="assets/img/profile/4.jpg">
         <h4> Jess: </h4>
-        <img src="assets/img/ui-jess.jpg">
+        <img src="assets/img/profile/5.jpg">
         <h4> Connie: </h4>
-        <img src="assets/img/ui-connie.jpg">
+        <img src="assets/img/profile/6.jpg">
     </div>
 </div>

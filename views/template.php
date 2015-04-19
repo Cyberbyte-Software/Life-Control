@@ -21,14 +21,14 @@ $arrayCount = count($gameServers);
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">    
-    
+    <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">      
+	
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-
     <script src="assets/js/chart-master/Chart.js"></script>
-    
+	<script src="assets/js/easyTab/jquery.easytabs.js" type="text/javascript"></script>
+		
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -208,6 +208,18 @@ $arrayCount = count($gameServers);
     <!--script for this page-->
     <script src="assets/js/sparkline-chart.js"></script>    
 	<script src="assets/js/zabuto_calendar.js"></script>	
+
+	<!-- JS FOR TABS -->
+	<script type="text/javascript">
+		$('#myTab a').click(function (e) {
+			console.log('clicked '+this);
+			if($(this).parent('li').hasClass('active')){
+				var target_pane=$(this).attr('href');
+				console.log('pane: '+target_pane);
+				$( target_pane ).toggle( !$( target_pane ).is(":visible") );
+			}
+		});
+	</script>	
 	
 	<?php if ($page == "views/logged_in.php") { ?>
 		<script type="text/javascript">

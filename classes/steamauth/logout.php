@@ -1,5 +1,5 @@
 <?php
-include("./config/steamSettings.php");
+include("steamSettings.php");
 header("Location: ../".$steamauth['logoutpage']);
 session_start();
 unset($_SESSION['steamid']);
