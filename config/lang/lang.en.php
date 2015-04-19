@@ -50,10 +50,6 @@ $lang['error'] = 'Error';
 $lang['dbError'] = 'Database connection problem.';
 $lang['idNotSet'] = 'ID NOT SET';
 $lang['noRes'] = 'ERROR NO RESULTS';
-$lang['noHouse'] = 'No Houses';
-$lang['noCar'] = 'No cars';
-$lang['noPlayer'] = 'Player cannot be found';
-$lang['noPerm'] = 'Sorry you do not have permission to view this page';
 
 /*
 ---------------
@@ -143,8 +139,12 @@ $lang['time'] = 'Time';
 */
 $lang['setup'] = 'The database has now been setup';
 $lang['upgrade'] = 'The database has now been upgraded';
+$lang['noPerm'] = 'Sorry you do not have permission to view this page';
 $lang['Kick'] = 'Kick';
 $lang['topRich'] = 'Top Ten Richest Players';
+$lang['noHouse'] = 'No Houses';
+$lang['noCar'] = 'No cars';
+$lang['noPlayer'] = 'Player cannot be found';
 $lang['enterPass'] = 'Enter new password';
 $lang['password'] = 'Password';
 $lang['repeat'] = 'Repeat';
@@ -153,5 +153,4 @@ $lang['cancel'] = 'Cancel';
 $lang['picture'] = 'Picture';
 $lang['changePass'] = 'Change Password';
 $lang['gameServers'] = 'Game Servers';
-$lang['page'] = 'Page';
 ?>

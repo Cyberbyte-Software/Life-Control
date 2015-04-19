@@ -139,7 +139,7 @@ $arrayCount = count($gameServers);
 						if ($_SESSION['user_level'] >= 3) {
 					?>
 					<li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-tasks"></i>
                             <span><?php echo $lang['navAdmin'];?></span>
                         </a>
@@ -151,9 +151,9 @@ $arrayCount = count($gameServers);
 								</a>
 							</li>
                             <li>
-								<a href="staff.php">
+								<a href="profile.php">
 									<i class="fa fa-fw fa-user"></i>
-									<span><?php echo $lang['staff'];?></span>
+									<span><?php echo $lang['navProfile'];?></span>
 								</a>
 							</li>
                         </ul>

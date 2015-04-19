@@ -40,6 +40,15 @@ if (isset($registration)) {
 ?>
 
 <div id="login-page">
+    <div class="col-lg-1 container">
+        <h4> Dave: </h4>
+        <img src="assets/img/ui-dave.jpg">
+        <h4> Joe: </h4>
+        <img src="assets/img/ui-joe.jpg">
+        <h4> Sam: </h4>
+        <img src="assets/img/ui-sam.jpg">
+    </div>
+
     <div class="col-lg-10 container">
         <form class="" method="post" action="register.php" name="registerform">
             <h2 class="form-login-heading">New User</h2>
@@ -75,7 +84,7 @@ if (isset($registration)) {
 
                 <p>Profile Picture:</p>
                 <select class=" form-control" name="profile_pic">
-                    <?php for ($icon = 1; $icon <= 6; $icon = $icon + 1) {
+                    <?php for ($icon = 1; $icon <= lvlmed; $icon = $icon + 1) {
                     echo '<option value="' . $icon . '" >' . iconName($icon) . '</option>';
                     } ?>
                 </select>
@@ -92,5 +101,13 @@ if (isset($registration)) {
                 <hr>
             </div>
         </form>
+    </div>
+    <div class="col-lg-1 container">
+        <h4> Kerry: </h4>
+        <img src="assets/img/ui-kerry.jpg">
+        <h4> Jess: </h4>
+        <img src="assets/img/ui-jess.jpg">
+        <h4> Connie: </h4>
+        <img src="assets/img/ui-connie.jpg">
     </div>
 </div>

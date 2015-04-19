@@ -80,10 +80,11 @@ if (!$db_connection->set_charset("utf8")) {
 				$result_of_query = $db_connection->query($sql);
 				$total_records  = mysqli_num_rows($result_of_query); 
 				$total_pages = ceil($total_records / $page_rows);
-				echo "<center><a class='btn btn-primary' href='staff.php?page=1'>" .$lang['first']."</a> ";?>
+				echo "<center><a class='btn btn-primary' href='staff.php?page=1'>" .'First Page'."</a> ";
+?>
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <?php echo $lang['page']; ?> <span class="caret"></span>
+						Page <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
 					<?php 
@@ -93,7 +94,9 @@ if (!$db_connection->set_charset("utf8")) {
 				  <?php }; ?>
 					</ul>
 				</div>
-                <?php echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages'>".$lang['last']."</a></center>";
+				
+				<?php
+				echo "<a class='btn btn-primary' href='staff.php?page=$total_pages'>" .'Last Page'."</a></center>";
 			} else {
 				$this->errors[] = "Database connection problem.";
 			}

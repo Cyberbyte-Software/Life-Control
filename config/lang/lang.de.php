@@ -4,7 +4,7 @@ $lang = array();
 
 /*
 ------------------------------------
-    Common Items / Header Items
+Common Items / Header Items
 ------------------------------------
 */
 
@@ -41,21 +41,17 @@ $lang['air'] = 'Luft';
 $lang['ban'] = 'Bann';
 /*
 ------------------
-    Errors
+Errors
 ------------------
 */
 $lang['error'] = 'Error';
 $lang['dbError'] = 'Probleme bei der Verbindung zur Datenbank.';
 $lang['idNotSet'] = 'ID NOT SET';
 $lang['noRes'] = 'ERROR NO RESULTS';
-$lang['noHouse'] = 'Besitzt kein Haus';
-$lang['noCar'] = 'Keine Fahrzeuge vorhanden';
-$lang['noPlayer'] = 'Spieler kann nicht gefunden werden';
-$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigte Rechte um die Seite zu öffnen';
 
 /*
 ------------------
-    Ranks
+Ranks
 ------------------
 */
 $lang['support'] = 'Support';
@@ -64,7 +60,7 @@ $lang['administrator'] = 'Administrator';
 
 /*
 ------------------
-    Menu Items
+Menu Items
 ------------------
 */
 
@@ -80,7 +76,7 @@ $lang['last'] = 'Letzte';
 
 /*
 ----------------------------
-    Table Headers / Buttons
+Table Headers / Buttons 
 ---------------------------
 */
 $lang['id'] = 'ID';
@@ -126,7 +122,7 @@ $lang['gutschein'] = 'Gutschein System';
 
 /*
 -----------------------
-    SQL Phone Module
+SQL Phone Module
 -----------------------
 */
 
@@ -142,15 +138,18 @@ $lang['time'] = 'Zeit';
 */
 $lang['setup'] = 'Die Datenbank wurde eingestellt';
 $lang['upgrade'] = 'Die Datenbank wurde geupdatet';
+$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigte Rechte um die Seite zu öffnen';
 $lang['Kick'] = 'Kick';
-$lang['topRich'] = '10 Reichsten Spieler';
-$lang['enterPass'] = 'Neues Passwort Eingeben';
+$lang['topRich'] = 'Top Ten Richest Players';
+$lang['noHouse'] = 'Besitzt kein Haus';
+$lang['noCar'] = 'No cars';
+$lang['noPlayer'] = 'Player cannot be found';
+$lang['enterPass'] = 'Enter new password';
 $lang['password'] = 'Passwort';
-$lang['repeat'] = 'Wiederholen';
+$lang['repeat'] = 'Repeat';
 $lang['login'] = 'Login';
-$lang['cancel'] = 'Abbrechen';
-$lang['picture'] = 'Avatar';
-$lang['changePass'] = 'Passwort ändern';
+$lang['cancel'] = 'Cancel';
+$lang['picture'] = 'Picture';
+$lang['changePass'] = 'Change Password';
 $lang['gameServers'] = 'Game Servers';
-$lang['page'] = 'Seite';
 ?>
