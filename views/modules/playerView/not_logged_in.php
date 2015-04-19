@@ -121,7 +121,13 @@ if (isset($_GET['setup'])){
     <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
     <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
     <script>
-        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
+		$.backstretch([
+			"assets/img/bg/1.jpg",
+			"assets/img/bg/2.jpg",
+			"assets/img/bg/3.jpg",
+			"assets/img/bg/4.jpg",
+			"assets/img/bg/5.jpg"
+		], {duration: 10000, fade: 900});
     </script>
 
     <script>

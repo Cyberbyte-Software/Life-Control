@@ -80,7 +80,6 @@ if (isset($_GET["IP"])) {
 				<tr>
 					<th><i class="fa fa-user"></i><?php echo " ". $lang['name']; ?></th>
 					<th><i class="fa fa-clock-o"></i><?php echo " ". $lang['time']; ?></th>
-                    <th><?php echo $lang['kick']; ?></th>
 				</tr>
 			</thead>
                     <tbody>
@@ -89,7 +88,6 @@ if (isset($_GET["IP"])) {
                             <tr>
                                 <td><?php echo htmlspecialchars($Player['Name']); ?></td>
                                 <td><?php echo $Player['TimeF']; ?></td>
-                                <td><?php echo $Player['Id']; ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>

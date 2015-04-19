@@ -152,4 +152,5 @@ $lang['cancel'] = 'Cancel';
 $lang['picture'] = 'Picture';
 $lang['changePass'] = 'Change Password';
 $lang['gameServers'] = 'Game Servers';
+$lang['page'] = 'Page';
 ?>

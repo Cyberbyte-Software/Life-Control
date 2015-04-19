@@ -61,7 +61,7 @@ if (isset($_GET["ID"])) {
 <?php
     if ($_SESSION['user_level'] >= 2) {
         ?>
-        <div class="col-lg-4">
+        <div class="col-lg-4" style="float:right;">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i
@@ -101,7 +101,7 @@ if (isset($_GET["ID"])) {
                                     ?>
                                     </tbody>
                                 </table>
-                                <?php 
+                                <?php echo '<a href="vehicles.php?ID=' . $pID . '">More</a>';
                             } else echo '<h1>No cars</h1>';
                         } ?>
                     </div>
@@ -109,7 +109,7 @@ if (isset($_GET["ID"])) {
             </div>
         </div>
     <?php } ?>
-    <div class="col-lg-4">
+    <div class="col-lg-4" style="float:right;"> 
         <?php
         if ($_SESSION['user_level'] >= 2) {
             ?>
@@ -145,7 +145,7 @@ if (isset($_GET["ID"])) {
                                 ?>
                                 </tbody>
                             </table>
-                        <?php } else echo $lang['noHouse'] ?>
+                        <?php echo '<a href="houses.php?ID=' . $pID . '">More</a>'; } else echo $lang['noHouse'] ?>
                     </div>
                 </div>
             </div>
@@ -154,7 +154,7 @@ if (isset($_GET["ID"])) {
         ?>
     </div>
     <!-- /.row -->
-    <div class="col-md-4">
+    <div class="col-md-4" style="float:left;">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " " . $lang['player']; ?></h3>

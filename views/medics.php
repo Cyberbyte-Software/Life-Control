@@ -68,7 +68,7 @@ if (isset($_GET["page"])) {
 ?>
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-						Page <span class="caret"></span>
+						<?php echo $lang['page'] . " " ?><span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
 					<?php 

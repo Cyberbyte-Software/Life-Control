@@ -151,9 +151,9 @@ $arrayCount = count($gameServers);
 								</a>
 							</li>
                             <li>
-								<a href="profile.php">
+								<a href="staff.php">
 									<i class="fa fa-fw fa-user"></i>
-									<span><?php echo $lang['navProfile'];?></span>
+									<span><?php echo $lang['staff'];?></span>
 								</a>
 							</li>
                         </ul>

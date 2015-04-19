@@ -12,8 +12,8 @@
  */
 define("DB_HOST", "localhost");
 define("DB_NAME", "arma3life");
-define("DB_USER", "arma3life");
-define("DB_PASS", "133788hjk");
+define("DB_USER", "root");
+define("DB_PASS", "");
 define("results_per_page", 10 );
 
 /**
@@ -25,10 +25,10 @@ define("alits_life_4", true);
 /**
  * Modules: Here you can enable any modules for the system that have been made to
  * support people who use things like SQL Smart Phone
+ * If you enable player view please edit the steamSettings.php file !
  */
 define("playerView", false);
 define("sql_smartPhone", false);
-
 
 /**
  * Change These To Reflect The Connection Info Of Your Game Server.

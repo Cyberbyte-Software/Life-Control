@@ -282,7 +282,9 @@ if(isset($_SESSION['steamid']))
 					</div>
 				</div>
 			<?php } ?>
-			<div class="col-lg-4">
+			<div class="col-lg-12">
+			</div>
+			<div class="col-lg-4" style="float:left;">
 				<?php
 				if (isset($_SESSION['steamid'])) {
 					?>
@@ -324,20 +326,6 @@ if(isset($_SESSION['steamid']))
 				?>
 			</div>
 			<!-- /.row -->
-
-
-			
-			<?php
-			if(isset($_SESSION['steamid']))
-			{
-				include("views/modules/playerView/logged_in.php");	
-			}
-			else
-			{
-				include("views/modules/playerView/not_logged_in.php");	
-			}
-			?>
-			
           </section>
       </section>
 
