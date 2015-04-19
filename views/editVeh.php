@@ -49,7 +49,7 @@ if (isset($_POST["vehID"]))
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            <?php echo $lang['vehicle']; ?>
+            <?php echo $lang['vehicles']; ?>
             <small><?php echo " " . $lang['editing']; ?></small>
         </h1>
     </div>
@@ -59,7 +59,7 @@ if (isset($_POST["vehID"]))
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i><?php echo " " . $lang['vehicle']; ?></h3>
+            <h3 class="panel-title"><i class="fa fa-taxi fa-fw"></i><?php echo " " . $lang['vehicles']; ?></h3>
         </div>
         <div class="panel-body">
             <form method="post" action="editVeh.php?ID=<?php echo $vehID; ?>" name="editform">
