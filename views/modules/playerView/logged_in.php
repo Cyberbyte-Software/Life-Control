@@ -95,7 +95,7 @@ if(isset($_SESSION['steamid']))
 						$pGID = md5('BE' . $temp);
 				?>
 					<p class="centered">
-						<a href="profile.php">
+						<a>
 						<img src="<?php echo $steamprofile['avatar']; ?>" class="img-circle" width="60">
 						</a>
 						</p>
@@ -122,37 +122,67 @@ if(isset($_SESSION['steamid']))
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header">
-						<?php echo $lang['player']; ?>
-						<small><?php echo " " . $lang['editing']; ?></small>
-					</h1>
-				</div>
-			</div>
-			<div class="col-md-4">
+			<!-- /.row -->
+			<?php
+				$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+				$result_of_query = $db_connection->query($sql);
+				if ($result_of_query->num_rows > 0) {
+					while ($row = mysqli_fetch_assoc($result_of_query)) {	
+			?>
+			<div class="col-md-3" style="float:left;  padding-top:20px;">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo " " . $lang['player']; ?></h3>
+						<h2 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo $row["name"]; ?></h2>
 					</div>
 					<div class="panel-body">
+						<?php 
+							$get_skin_civ = $row['civ_gear'];
+							if($get_skin_civ == "\"[]\"") {
+								$get_skin_civ = "U_C_Poloshirt_stripped";
+							}
+							else{
+								$get_skin_civ = substr($get_skin_civ,3);
+								$get_skin_civ = substr ($get_skin_civ,0,strpos ($get_skin_civ, "`"));
+								if(empty($get_skin_civ)){
+									$get_skin_civ = "U_C_Poloshirt_stripped";
+								}
+							}				
+						?>
+						<center><img src="assets/img/uniform/<?php echo $get_skin_civ;?>.jpg" />
 							<?php
-							$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $steamprofile['steamid'] . '";';
-							$result_of_query = $db_connection->query($sql);
-							if ($result_of_query->num_rows > 0) {
-								while ($row = mysqli_fetch_assoc($result_of_query)) {
-									$playersID = $row["playerid"];
-									echo "<center>";
-									echo "<h3>" . $lang['name'] . ": " . $row["name"] . "</h3>";
+									$playersID = $_SESSION['steamid'];
+									
 									echo "<h4>" . $lang['aliases'] . ": " . $row["aliases"] . "</h4>";
-									echo "<h4>" . $lang['playerID'] . ": " . $steamprofile['steamid'] . "</h4>";
+									echo "<h4>" . $lang['uid'] . ": " . $row["uid"]. "</h4>";
+									echo "<h4>" . $lang['playerID'] . ": " . $_SESSION['steamid'] . "</h4>";
 									echo "<h4>" . $lang['GUID'] . ": " . $pGID . "</h4>";
-									echo "<h4>" . $lang['cash'] . ": " . $row["cash"] . "</h4>";
-									echo "<h4>" . $lang['bank'] . ": " . $row["bankacc"] . "</h4>";
-									echo "<h4>" . $lang['cop'] . ": " . $row['coplevel'] . "</h4>";
-									echo "<h4>" . $lang['medic'] . ": " . $row['mediclevel'] . "</h4>";
-									echo "<h4>" . $lang['admin'] . ": " . $row['adminlevel'] . "</h4>";
-									echo "<h4>" . $lang['donator'] . ": " . $row['donatorlvl'] . "</h4>";
+									?>
+										<span class="fa fa-2x fa-money">
+											<h4> <?php echo $lang['cash'].": ".$row["cash"];  ?> </h4>
+										</span>
+										<span style="padding-left:15px;" class="fa fa-2x fa-bank">
+											<h4> <?php echo $lang['bank'].": ".$row["bankacc"];  ?> </h4>
+										</span>							
+									<?php
+									if ($row["arrested"] !== false)
+									{
+										echo "<h4><span class='label label-success'>".$lang["not"]." ".$lang["arrested"]."</span> ";
+									}
+									else
+									{
+										echo "<h4><span class='label label-danger'>".$lang["arrested"]."</span> ";				
+									}
+									
+									if ($row["blacklist"] !== false)
+									{
+										echo " <span class='label label-success'>".$lang["not"]." ".$lang["blacklisted"]."</span></h4>";						
+									}
+									else
+									{
+										echo " <span class='label label-danger'>".$lang["blacklisted"]."</span></h4>";	
+									}
+							?>
+							<?php				
 								}
 							} else echo "<h1>".$lang['noPlayer']."<h1>";
 							echo "</center>";
@@ -160,95 +190,177 @@ if(isset($_SESSION['steamid']))
 					</div>
 				</div>
 			</div>
-
-			<div class='col-lg-8' style="float:right;">
+			
+			<div class="col-md-9" style="float:right; padding-top:20px;">
 				<?php
-				$sql = 'SELECT * FROM `players` WHERE `playerID` ="' . $steamprofile['steamid'] . '";';
-				$result_of_query = $db_connection->query($sql);
-				while ($row = mysqli_fetch_assoc($result_of_query)) {
-					if(isset($row["cop_licenses"])) {?>
-					<div class='panel panel-default'>
-						<div class='panel-heading'>
-							<h3 class='panel-title'><i class='fa fa-taxi fa-fw'></i><?php echo " " . $lang['police']; ?>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<div class="col-md-1"></div>
-							<div class="col-md-4">
-								<?php
-									echo "<h4>" . $lang['cop'] . " " . $lang['licenses'] . ":</h4> <textarea readonly rows='5' style='width: 100%' id='cop_lic' name='cop_lic'>" . $row["cop_licenses"] . "</textarea>";
-								?>
-							</div>
-							<div class="col-md-2"></div>
-							<div class="col-md-4">
-								<?php
-									echo "<h4>" . $lang['cop'] . " " . $lang['gear'] . ":</h4> <textarea readonly rows='5' style='width: 100%' id='cop_gear' name='cop_gear'>" . $row["cop_gear"] . "</textarea>";
-								?>
-							</div>
+					$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+					$result_of_query = $db_connection->query($sql);
+					while ($row = mysqli_fetch_assoc($result_of_query)) 
+					{
+				?>
+				<div class="row mtbox">
+					<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+						<div class="box1">
+							<span class="fa fa-3x fa-taxi"></span>
+							<h3> <?php echo $lang['police'].": ".$row["coplevel"];  ?> </h3>
 						</div>
 					</div>
-					<?php } if(isset($row["civ_licenses"])) {?>
-					<div class='panel panel-default'>
-						<div class='panel-heading'>
-							<h3 class='panel-title'><i class='fa fa-child fa-fw'></i><?php echo " " . $lang['civil']; ?>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<div class="col-md-1"></div>
-							<div class="col-md-4">
-								<?php
-									echo "<h4>" . $lang['civ'] . " " . $lang['licenses'] . ":</h4> <textarea readonly rows='5' style='width: 100%' id='civ_lic' name='civ_lic'>" . $row["civ_licenses"] . "</textarea>";
-								?>
-							</div>
-							<div class="col-md-2"></div>
-							<div class="col-md-4">
-								<?php
-									echo "<h4>" . $lang['civ'] . " " . $lang['gear'] . ":</h4> <textarea readonly rows='5' style='width: 100%' id='civ_gear' name='civ_gear'>" . $row["civ_gear"] . "</textarea>";
-								?>
-							</div>
+					<div class="col-md-2 col-sm-2 box0">
+						<div class="box1">
+							<span class="fa fa-3x fa-ambulance"></span>
+							<h3> <?php echo $lang['medic'].": ".$row["mediclevel"];  ?> </h3>
 						</div>
 					</div>
-					<?php } if(isset($row["med_licenses"])) {?>
-					<div class='panel panel-default'>
-						<div class='panel-heading'>
-							<h3 class='panel-title'><i class='fa fa-ambulance fa-fw'></i><?php echo " " . $lang['medic']; ?>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<div class="col-md-1"></div>
-							<div class="col-md-4">
-								<?php
-									echo "<h4>" . $lang['medic'] . " " . $lang['licenses'] . ":</h4> <textarea readonly rows='5' style='width: 100%' id='med_lic' name='med_lic'>" . $row["med_licenses"] . "</textarea>";
-								?>
-							</div>
-							<div class="col-md-2"></div>
-							<div class="col-md-4">
-								<?php
-									echo "<h4>" . $lang['medic'] . " " . $lang['gear'] . ":</h4> <textarea readonly rows='5' style='width: 100%' id='med_gear' name='med_gear'>" . $row["med_gear"] . "</textarea>";
-								?>
-							</div>
+					<div class="col-md-2 col-sm-2 box0">
+						<div class="box1">
+							<span class="fa fa-3x fa-usd"></span>
+							<h3> <?php echo $lang['donator'].": ".$row["donatorlvl"];  ?> </h3>
 						</div>
 					</div>
-					<?php 
+					<div class="col-md-2 col-sm-2 box0">
+						<div class="box1">
+							<span class="fa fa-3x fa-group"></span>
+							<h3> <?php echo $lang['admin'].": ".$row["adminlevel"];  ?> </h3>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-2 box0">
+						<div class="box1">
+							<a href="http://steamcommunity.com/profiles/<?php echo $_SESSION['steamid']; ?>"><span class="fa fa-3x fa-steam"></span></a>
+							<h3>Steam</h3>
+						</div>
+					</div>
+				</div>
+				<?php
 					}
-				}
-				?>
-			</div>
-			<?php
-			if (isset($_SESSION['steamid'])) {
-				?>
-				<div class="col-lg-4" style="float:left;">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title"><i
-									class="fa fa-car fa-fw"></i><?php echo " " . $lang['vehicles'] . " " . $lang['quickLook']; ?>
-							</h3>
+				?>		
+				
+				<div class="panel panel-default" style="float:left; width:100%; margin:0 auto;">
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang['licenses'];?> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#civ_lic" data-toggle="tab"><?php echo $lang['civ'];?></a></li>
+								<li><a href="#medic_lic" data-toggle="tab"><?php echo $lang['medic'];?></a></li>
+								<li><a href="#police_lic" data-toggle="tab"><?php echo $lang['police'];?></a></li>
+							</ul>
+						</li>			
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang['inventory'];?> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#civ_inv" data-toggle="tab"><?php echo $lang['civ'];?></a></li>
+								<li><a href="#medic_inv" data-toggle="tab"><?php echo $lang['medic'];?></a></li>
+								<li><a href="#police_inv" data-toggle="tab"><?php echo $lang['police'];?></a></li>
+							</ul>
+						</li>
+						<li><a href="#house" data-toggle="tab"><?php echo $lang['houses'];?></a></li>
+						<li><a href="#veh" data-toggle="tab"><?php echo $lang['vehicles'];?></a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">		
+						<div class="tab-pane fade in active well" id="civ_lic">
+								<h4 style="centred"><?php echo $lang['civ']." ".$lang['licenses'];?> </h4>
+								<?php
+									$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+									$result_of_query = $db_connection->query($sql);
+									while ($row = mysqli_fetch_assoc($result_of_query)) 
+									{
+										$civ_licenses = array();
+										$civ_licenses = explode("],[", $row["civ_licenses"]);
+										$civ_licenses = str_replace("]]\"","",$civ_licenses);
+										$civ_licenses = str_replace("\"[[","",$civ_licenses);
+										$civ_licenses = str_replace("`","",$civ_licenses);
+			   
+										for ( $x = 0; $x < count ($civ_licenses); $x++){
+											if(strpos($civ_licenses[$x], "1")!==false){
+												echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".substr($civ_licenses[$x],0,-2)."</span>";    
+											}
+											else{
+												echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".substr($civ_licenses[$x],0,-2)."</span> "; 
+											}
+										}						
+									}
+								?>
 						</div>
-						<div class="panel-body">
+						<div class="tab-pane well fade" id="medic_lic">
+							<h4 style="centred"><?php echo $lang['medic']." ".$lang['licenses'];?> </h4>
+							<?php
+								$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+								$result_of_query = $db_connection->query($sql);
+								while ($row = mysqli_fetch_assoc($result_of_query)) 
+								{
+									$med_licenses = array();
+									$med_licenses = explode("],[", $row["med_licenses"]);
+									$med_licenses = str_replace("]]\"","",$med_licenses);
+									$med_licenses = str_replace("\"[[","",$med_licenses);
+									$med_licenses = str_replace("`","",$med_licenses);
+		   
+									for ( $x = 0; $x < count ($med_licenses); $x++){
+										if(strpos($med_licenses[$x], "1")!==false){
+											echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".substr($med_licenses[$x],0,-2)."</span> ";    
+										}
+										else{
+											echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".substr($med_licenses[$x],0,-2)."</span> "; 
+										}
+									}						
+								}
+							?>
+						</div>	
+						<div class="tab-pane well fade" id="police_lic">
+							<h4 style="centred"><?php echo $lang['police']." ".$lang['licenses'];?> </h4>
+							<?php
+								$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+								$result_of_query = $db_connection->query($sql);
+								while ($row = mysqli_fetch_assoc($result_of_query)) 
+								{
+									$cop_licenses = array();
+									$cop_licenses = explode("],[", $row["cop_licenses"]);
+									$cop_licenses = str_replace("]]\"","",$cop_licenses);
+									$cop_licenses = str_replace("\"[[","",$cop_licenses);
+									$cop_licenses = str_replace("`","",$cop_licenses);
+		   
+									for ( $x = 0; $x < count ($cop_licenses); $x++){
+										if(strpos($cop_licenses[$x], "1")!==false){
+											echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".substr($cop_licenses[$x],0,-2)."</span> ";    
+										}
+										else{
+											echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".substr($cop_licenses[$x],0,-2)."</span> "; 
+										}
+									}						
+								}
+							?>
+						</div>				
+						<div class="tab-pane fade" id="house">
 							<div class="table-responsive">
 								<?php
-								if (isset($_SESSION['steamid'])) {
-									$sql = "SELECT * FROM `vehicles` WHERE `pid` = '" . $steamprofile['steamid'] . "' ORDER BY `id` DESC LIMIT 8";
+								$sql = "SELECT `pos`,`id` FROM `houses` WHERE `pid` = '" . $_SESSION['steamid'] . "' ORDER BY `id` DESC LIMIT 8";
+								$result_of_query = $db_connection->query($sql);
+								if ($result_of_query->num_rows > 0) 
+								{
+									?>
+									<table class="table table-bordered table-hover table-striped">
+										<thead>
+										<tr>
+											<th><?php echo $lang['position']; ?></th>
+										</tr>
+										</thead>
+										<tbody>
+										<?php
+										while ($row = mysqli_fetch_assoc($result_of_query)) {
+											echo "<tr>";
+											echo "<td>" . $row["pos"] . "</td>";
+											echo "</tr>";
+										};
+										?>
+										</tbody>
+									</table>
+										<?php 
+									} else echo '<h1>No Houses</h1>';
+								?>
+							</div>
+						</div>			  
+						<div class="tab-pane fade" id="veh">
+							<div class="table-responsive">
+								<?php
+									$sql = "SELECT * FROM `vehicles` WHERE `pid` = '" . $_SESSION['steamid'] . "' ORDER BY `id` DESC LIMIT 8";
 									$result_of_query = $db_connection->query($sql);
 									if ($result_of_query->num_rows > 0) {
 										?>
@@ -275,57 +387,46 @@ if(isset($_SESSION['steamid']))
 											</tbody>
 										</table>
 										<?php 
-									} else echo '<h1>No cars</h1>';
-								} ?>
+									} else echo '<h1>No Cars</h1>';
+								?>
 							</div>
 						</div>
+						<div class="tab-pane fade well" id="civ_inv">
+								<h4 style="centred"><?php echo $lang['civ']." ".$lang['gear'];?> </h4>
+								<?php
+									$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+									$result_of_query = $db_connection->query($sql);
+									while ($row = mysqli_fetch_assoc($result_of_query)) 
+									{
+										echo "<textarea class='form-control' readonly rows='5' style='width: 100%' id='civ_gear' name='civ_gear'>" . $row["civ_gear"] . "</textarea>";						
+									}							
+								?>					
+						</div>
+						<div class="tab-pane fade well" id="police_inv">
+								<h4 style="centred"><?php echo $lang['police']." ".$lang['gear'];?> </h4>
+								<?php
+									$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+									$result_of_query = $db_connection->query($sql);
+									while ($row = mysqli_fetch_assoc($result_of_query)) 
+									{
+										echo "<textarea class='form-control' readonly rows='5' style='width: 100%' id='civ_gear' name='cop_gear'>" . $row["cop_gear"] . "</textarea>";							
+									}							
+								?>				
+						</div>
+						<div class="tab-pane fade well" id="medic_inv">
+								<h4 style="centred"><?php echo $lang['medic']." ".$lang['gear'];?> </h4>
+								<?php
+									$sql = 'SELECT * FROM `players` WHERE `playerid` ="' . $_SESSION['steamid'] . '";';
+									$result_of_query = $db_connection->query($sql);
+									while ($row = mysqli_fetch_assoc($result_of_query)) 
+									{
+										echo "<textarea class='form-control' readonly rows='5' style='width: 100%' id='civ_gear' name='med_gear'>" . $row["med_gear"] . "</textarea>";								
+									}							
+								?>					
+						</div>					
 					</div>
 				</div>
-			<?php } ?>
-			<div class="col-lg-12">
-			</div>
-			<div class="col-lg-4" style="float:left;">
-				<?php
-				if (isset($_SESSION['steamid'])) {
-					?>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title"><i
-									class="fa fa-home fa-fw"></i><?php echo " " . $lang['houses'] . " " . $lang['quickLook']; ?>
-							</h3>
-						</div>
-						<div class="panel-body">
-							<div class="table-responsive">
-								<?php
-								$sql = "SELECT `pos`,`id` FROM `houses` WHERE `pid` = '" . $steamprofile['steamid'] . "' ORDER BY `id` DESC LIMIT 8";
-								$result_of_query = $db_connection->query($sql);
-								if ($result_of_query->num_rows > 0) {
-									?>
-									<table class="table table-bordered table-hover table-striped">
-										<thead>
-										<tr>
-											<th><?php echo $lang['position']; ?></th>
-										</tr>
-										</thead>
-										<tbody>
-										<?php
-										while ($row = mysqli_fetch_assoc($result_of_query)) {
-											echo "<tr>";
-											echo "<td>" . $row["pos"] . "</td>";
-											echo "</tr>";
-										};
-										?>
-										</tbody>
-									</table>
-								<?php } else echo '<h1>'.$lang['noHouse'].'</h1>'; ?>
-							</div>
-						</div>
-					</div>
-				<?php
-				}
-				?>
-			</div>
-			<!-- /.row -->
+			</div>	
           </section>
       </section>
 

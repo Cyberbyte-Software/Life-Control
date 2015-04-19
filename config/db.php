@@ -12,8 +12,8 @@
  */
 define("DB_HOST", "localhost");
 define("DB_NAME", "arma3life");
-define("DB_USER", "arma3life");
-define("DB_PASS", "133788hjk");
+define("DB_USER", "");
+define("DB_PASS", "");
 define("results_per_page", 10 );
 
 /**
@@ -27,7 +27,7 @@ define("alits_life_4", true);
  * support people who use things like SQL Smart Phone
  * If you enable player view please edit the classes/steamauth/steamSettings.php file !
  */
-define("playerView", true);
+define("playerView", false);
 define("sql_smartPhone", false);
 
 /**
@@ -37,7 +37,7 @@ define("sql_smartPhone", false);
  * Add your servers query details to the array like so:
  * array("Server Name","Port", "IP")
  **/
-define("enable_game_query", true);
+define("enable_game_query", false);
 $gameServers = array(
 	array("Altis Life","3103", "37.187.154.23"),
 	array("KOTH","2503", "188.165.255.190")
