@@ -82,21 +82,29 @@ $arrayCount = count($gameServers);
 					</li>
 
 					<?php
-						if ($_SESSION['user_level'] >= 2) 
-						{
-                    ?>
-                    <li>
-                        <a href="vehicles.php">
-							<i class="fa fa-fw fa-car"></i>
-							<span><?php echo $lang['vehicles'];?></span>
-						</a>
-                    </li>
-                    <li>
-                        <a href="houses.php">
-							<i class="fa fa-fw fa-home"></i>
-							<span><?php echo $lang['houses'];?></span>
-						</a>
-                    </li>
+						if ($_SESSION['user_level'] >= P_VIEW_VEHICLES) {
+                            ?>
+                            <li>
+                                <a href="vehicles.php">
+                                    <i class="fa fa-fw fa-car"></i>
+                                    <span><?php echo $lang['vehicles'];?></span>
+                                </a>
+                            </li>
+                        <?php
+                        }
+                    if ($_SESSION['user_level'] >= P_VIEW_HOUSES) {
+                        ?>
+                        <li>
+                            <a href="houses.php">
+                                <i class="fa fa-fw fa-home"></i>
+                                <span><?php echo $lang['houses'];?></span>
+                            </a>
+                        </li>
+                    <?php
+                    }
+                  if ($_SESSION['user_level'] >= P_VIEW_GANGS)
+                  {
+                      ?>
                     <li>
                         <a href="gangs.php">
 							<i class="fa fa-fw fa-sitemap"></i>
@@ -104,7 +112,7 @@ $arrayCount = count($gameServers);
 						</a>
                     </li>
 						<?php
-							if (alits_life_4 == TRUE) {
+							if (alits_life_4 == TRUE && $_SESSION['user_level'] >= P_VIEW_WANTED) {
 						?>
 						<li>
 							<a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i><?php echo " " . $lang['wanted'];?>
@@ -115,7 +123,7 @@ $arrayCount = count($gameServers);
 						}
                     ?>
 					<li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
                             <i class="fa fa-tasks"></i>
                             <span><?php echo $lang['gameServers'];?></span>
                         </a>
@@ -136,10 +144,10 @@ $arrayCount = count($gameServers);
 						
 						?>                 
 					<?php
-						if ($_SESSION['user_level'] >= 3) {
+						if ($_SESSION['user_level'] >= P_EDIT_STAFF) {
 					?>
 					<li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
                             <i class="fa fa-tasks"></i>
                             <span><?php echo $lang['navAdmin'];?></span>
                         </a>
@@ -158,10 +166,16 @@ $arrayCount = count($gameServers);
 							</li>
                         </ul>
                     </li>
-							
 					<?php
-					}
+					} elseif ($_SESSION['user_level'] >= P_VIEW_STAFF) {
 					?>
+                  <li>
+                      <a href="staff.php">
+                          <i class="fa fa-fw fa-user"></i>
+                          <span><?php echo $lang['staff'];?></span>
+                      </a>
+                  </li>
+                  <?php } ?>
                     <li>
                         <a href="profile.php">
 							<i class="fa fa-fw fa-user"></i>

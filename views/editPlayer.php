@@ -266,7 +266,7 @@ if (isset($_GET["ID"]))
 			</div>
 			<div class="col-md-2 col-sm-2 box0">
 				<div class="box1">
-					<a href="http://steamcommunity.com/profiles/<?php echo $row["playerid"]; ?>"><span class="fa fa-3x fa-steam"></span></a>
+					<a href="http://steamcommunity.com/profiles/<?php echo $row["playerid"]; ?>" target="_blank"><span class="fa fa-3x fa-steam"></span></a>
 					<h3>Steam</h3>
 				</div>
 			</div>
@@ -294,7 +294,7 @@ if (isset($_GET["ID"]))
 					</ul>
 				</li>
 				<li><a href="#house" data-toggle="tab"><?php echo $lang['houses'];?></a></li>
-				<li><a href="#veh" data-toggle="tab"><?php echo $lang['vehicles'];?></a></li>
+				<?php if($_SESSION['user_level'] >= P_VIEW_VEHICLES) echo'<li><a href="#veh" data-toggle="tab">'. $lang['vehicles'] .'</a></li>' ?>
 			</ul>
 			<div id="myTabContent" class="tab-content">		
 				<div class="tab-pane fade in active well" id="civ_lic">
@@ -413,7 +413,7 @@ if (isset($_GET["ID"]))
 				<div class="tab-pane fade" id="veh">
 					<div class="table-responsive">
 						<?php
-						if ($_SESSION['user_level'] >= 2) {
+						if ($_SESSION['user_level'] >= P_VIEW_VEHICLES) {
 							$sql = "SELECT * FROM `vehicles` WHERE `pid` = '" . $pID . "' ORDER BY `id` DESC LIMIT 8";
 							$result_of_query = $db_connection->query($sql);
 							if ($result_of_query->num_rows > 0) {
@@ -424,11 +424,12 @@ if (isset($_GET["ID"]))
 										<th><?php echo $lang['class']; ?></th>
 										<th><?php echo $lang['type']; ?></th>
 										<th><?php echo $lang['plate']; ?></th>
-										<th><?php echo $lang['edit']; ?></th>
+										<?php if ($_SESSION['user_level'] >= P_EDIT_VEHICLES) echo "<th>". $lang['edit'] ."</th>"; ?>
 									</tr>
 									</thead>
 									<tbody>
 									<?php
+                                    if ($_SESSION['user_level'] >= P_EDIT_VEHICLES) {
 									while ($row = mysqli_fetch_assoc($result_of_query)) {
 										$vehID = $row["id"];
 										echo "<tr>";
@@ -439,6 +440,15 @@ if (isset($_GET["ID"]))
 										echo "<i class='fa fa-pencil'></i></a></td>";
 										echo "</tr>";
 									};
+                                    } else {
+                                        while ($row = mysqli_fetch_assoc($result_of_query)) {
+                                            $vehID = $row["id"];
+                                            echo "<tr>";
+                                            echo "<td>" . carName($row["classname"]) . "</td>";
+                                            echo "<td>" . carType($row["type"],$lang) . "</td>";
+                                            echo "<td>" . $row["plate"] . "</td>";
+                                            echo "</tr>";
+                                    }; }
 
 									?>
 									</tbody>
@@ -547,6 +557,7 @@ if (isset($_GET["ID"]))
         </div>
     </div>
 </div>
+    if
 <div class="modal fade" id="edit_cop_licenses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -724,7 +735,6 @@ if (isset($_GET["ID"]))
 				$result_of_query = $db_connection->query($sql);
 				while ($row = mysqli_fetch_assoc($result_of_query)) 			
 				{
-			
 			?>
 			
             <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
@@ -734,48 +744,48 @@ if (isset($_GET["ID"]))
                         <div class="row">
 							<center>
 								<?php
-									if ($_SESSION['user_level'] >= 2) 
+									if ($_SESSION['user_level'] >= P_EDIT_PLAYER)
 									{
 										echo "<h4>" . $lang['cash'] . ":    <input id='player_cash' name='player_cash' type='number' value='" . $row["cash"] . "'>";
 										echo "<h4>" . $lang['bank'] . ":    <input id='player_bank' name='player_bank' type='number' value='" . $row["bankacc"] . "'>";
 									}
 									echo "<h4>" . $lang['cop'] . ": ";
 									echo "<select id='player_coplvl' name='player_coplvl'>";
-									for ($lvl = 0; $lvl <= lvlcop; $lvl = $lvl + 1) {
+									for ($lvl = 0; $lvl <= lvlcop; $lvl++) {
 										echo '<option value="' . $lvl . '"' . select($lvl, $row['coplevel']) . '>' . $lvl . '</option>';
 									}
 									echo "</select>";
 									echo "<h4>" . $lang['medic'] . ": ";
 									echo "<select id='player_medlvl' name='player_medlvl'>";
-									for ($lvl = 0; $lvl <= lvlmed; $lvl = $lvl + 1) {
+									for ($lvl = 0; $lvl <= lvlmed; $lvl++) {
 										echo '<option value="' . $lvl . '"' . select($lvl, $row['mediclevel']) . '>' . $lvl . '</option>';
 									}
 									echo "</select>";
 									if ($_SESSION['user_level'] >= 3) {
 										echo "<h4>" . $lang['admin'] . ": ";
 										echo "<select id='player_adminlvl' name='player_adminlvl'>";
-										for ($lvl = 0; $lvl <= lvladmin; $lvl = $lvl + 1) {
+										for ($lvl = 1; $lvl <= lvladmin; $lvl++) {
 											echo '<option value="' . $lvl . '"' . select($lvl, $row['adminlevel']) . '>' . $lvl . '</option>';
 										}
 										echo "</select>";
-										echo "<h4>" . $lang['blacklisted'] . ": ";
+										echo "<h4>" . $lang['blacklisted'] . ": "; //TODO: Yes or no option
 										echo "<select id='player_blacklist' name='player_blacklist'>";
-										for ($lvl = 0; $lvl <= 1; $lvl = $lvl + 1) {
+										for ($lvl = 0; $lvl <= 1; $lvl++) {
 											echo '<option value="' . $lvl . '"' . select($lvl, $row['blacklist']) . '>' . $lvl . '</option>';
 										}
-										echo "</select>";
-										echo "<h4>" . $lang['arrested'] . ": ";
-										echo "<select id='player_arrest' name='player_arrest'>";
-										for ($lvl = 0; $lvl <= 1; $lvl = $lvl + 1) {
-											echo '<option value="' . $lvl . '"' . select($lvl, $row['arrested']) . '>' . $lvl . '</option>';
-										}
-										echo "</select>";
+                                        echo "</select>";
 									}
-									if ($_SESSION['user_level'] >= 2) 
+									if ($_SESSION['user_level'] >= P_EDIT_PLAYER)
 									{
+                                        echo "<h4>" . $lang['arrested'] . ": ";
+                                        echo "<select id='player_arrest' name='player_arrest'>";
+                                        for ($lvl = 0; $lvl <= 1; $lvl++) {
+                                            echo '<option value="' . $lvl . '"' . select($lvl, $row['arrested']) . '>' . $lvl . '</option>';
+                                        }
+                                        echo "</select>";
 										echo "<h4>" . $lang['donator'] . ": ";
 										echo "<select id='player_donlvl' name='player_donlvl'>";
-										for ($lvl = 0; $lvl <= lvldonator; $lvl = $lvl + 1) {
+										for ($lvl = 0; $lvl <= lvldonator; $lvl++) {
 											echo '<option value="' . $lvl . '"' . select($lvl, $row['donatorlvl']) . '>' . $lvl . '</option>';
 										}
 										echo "</select>";
