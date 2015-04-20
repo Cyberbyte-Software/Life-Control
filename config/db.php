@@ -28,7 +28,7 @@ define("alits_life_4", true);
  * If you enable player view please edit the classes/steamauth/steamSettings.php file !
  */
 define("playerView", true);
-define("sql_smartPhone", false);
+define("sql_smartPhone", true);
 
 /**
  * Change These To Reflect The Connection Info Of Your Game Server.

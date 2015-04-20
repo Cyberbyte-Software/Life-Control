@@ -495,22 +495,21 @@ if (isset($_GET["ID"]))
 			</div>
 		</div>
 	</div>	
-	
-    <div class='col-lg-12'>
-        <?php
-        $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
-        $result_of_query = $db_connection->query($sql);
-        while ($row = mysqli_fetch_assoc($result_of_query)) 
-		{
-            if (sql_smartPhone == TRUE && $_SESSION['user_level'] >= 2) 
+
+	<div class="col-md-9" style="float:right; padding-top:20px;">
+		<?php
+			$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
+			$result_of_query = $db_connection->query($sql);
+			while ($row = mysqli_fetch_assoc($result_of_query)) 
 			{
-                include("views/modules/sqlSmartPhone/module.php");
-            }
-        }
-        ?>
-    </div>
-
-
+				if (sql_smartPhone == TRUE && $_SESSION['user_level'] >= 2) 
+				{
+					include("views/modules/sqlSmartPhone/module.php");
+				}
+			}
+        ?>	
+	</div>
+	
 <div class="modal fade" id="edit_civ_licenses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
