@@ -11,6 +11,7 @@ Common Items / Header Items
 $lang['welcome'] = 'Willkommen';
 $lang['players'] = 'Spieler';
 $lang['player'] = 'Player';
+$lang['vehicle'] = 'Fahrzeuge';
 $lang['vehicles'] = 'Fahrzeuge';
 $lang['houses'] = 'Häuser';
 $lang['house'] = 'Haus';
@@ -153,4 +154,8 @@ $lang['picture'] = 'Picture';
 $lang['changePass'] = 'Change Password';
 $lang['gameServers'] = 'Game Servers';
 $lang['page'] = 'Page';
+$lang['not'] = 'Not';
+$lang['blacklisted'] = 'Blacklisted';
+$lang['arrested'] = 'Arrested';
+$lang['finances'] = 'Finances';
 ?>

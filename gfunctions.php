@@ -2,9 +2,18 @@
 include("config/lang/module.php");
 
 function carType($car,$lang){
-    if($car == 'Car') return $lang['car'];
-    elseif($car == 'Air') return $lang['air'];
-    else return $car;
+	switch ($car)
+	{
+		case 'Car':
+			return $lang['car'];
+			break;
+		case 'Air':
+			return $lang['air'];
+			break;
+		case 'Ship':
+			return $lang['ship'];
+			break;
+	}
 }
 
 function yesNo($input,$lang){

@@ -45,6 +45,7 @@ if (!$db_connection->set_charset("utf8")) {
 					<th><i class="fa fa-car"></i><?php echo " ". $lang['type']; ?></th>
 					<th><i class="fa fa-car"></i><?php echo " ". $lang['plate']; ?></th>
 					<th><i class="fa fa-car"></i><?php echo " ". $lang['alive']; ?></th>
+					<th><i class="fa fa-info"></i><?php echo " ". $lang['active']; ?></th>
 					<th><i class="fa fa-pencil"></i><?php echo " ". $lang['edit']; ?></th>
 				</tr>
 			</thead>
@@ -82,6 +83,7 @@ if (!$db_connection->set_charset("utf8")) {
 					echo "<td>" . carType($row["type"],$lang) . "</td>";
 					echo "<td>" . $row["plate"] . "</td>";
 					echo "<td>" . yesNo($row["alive"],$lang) . "</td>";
+					echo "<td>" . yesNo($row["active"],$lang) . "</td>";
                     echo "<td><a class='btn btn-primary btn-xs' href='editVeh.php?ID=".$row["id"]."'>";
                     echo "<i class='fa fa-pencil'></i></a></td>";
 					echo "</tr>";
