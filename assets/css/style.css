@@ -2244,11 +2244,21 @@ label {
     border-left: 3px solid #BEC3C7;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
 /*footer*/
 .site-footer {
     background: #68dff0;
-    color: #fff;
-    padding: 10px 0;
+	width:100%;
+	height:40px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	z-index: -1;
 }
 
 
@@ -2277,3 +2287,4 @@ label {
 .tab-content > .active {
   display: block;
 }
+

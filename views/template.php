@@ -180,15 +180,17 @@ $arrayCount = count($gameServers);
       <!--sidebar end-->
       
       <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
+      MAIN CONTENT stayDownFooter
       *********************************************************************************************************************************************************** -->
-      <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">
-				<?php include($page) ?>
-          </section>
-      </section>
-
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper">
+				<?php include($page) ?>				
+			</section>
+		</section>
+		<footer class="site-footer">
+			<center><h4>Copyright &copy; 2015 Life Control 2.3 by Cammygames & MightySCollins</h4></center>	
+		</footer>			
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->

@@ -70,7 +70,7 @@ if (isset($_GET["page"])) {
 					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						<?php echo $lang['page'] . " " ?><span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" role="menu">
+					<ul class="dropdown-menu scrollable-menu" role="menu">
 					<?php 
 						for ($i=1; $i<=$total_pages; $i++) {
 					?>
