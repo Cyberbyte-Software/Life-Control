@@ -127,34 +127,34 @@ else if ($licenseLang == 'por') {
 }
 
 
-function licName($license)
+function licName($lic,$license)
 {
     // Civ
-    if ($license == 'license_civ_driver') return $license['driver'];
-    elseif ($license == 'license_civ_boat') return $license['boat'];
-    elseif ($license == 'license_civ_pilot') return $license['pilot'];
-    elseif ($license == 'license_civ_gun') return $license['gun'];
-    elseif ($license == 'license_civ_dive') return $license['dive'];
-    elseif ($license == 'license_civ_oil') return $license['oil'];
-    elseif ($license == 'license_civ_heroin') return $license['heroin'];
-    elseif ($license == 'license_civ_marijuana') return $license['marijuana'];
-    elseif ($license == 'license_civ_rebel') return $license['rebel'];
-    elseif ($license == 'license_civ_trucking') return $license['trucking'];
-    elseif ($license == 'license_civ_diamond') return $license['diamond'];
-    elseif ($license == 'license_civ_salt') return $license['salt'];
-    elseif ($license == 'license_civ_cocaine') return $license['cocaine'];
-    elseif ($license == 'license_civ_sand') return $license['sand'];
-    elseif ($license == 'license_civ_iron') return $license['iron'];
-    elseif ($license == 'license_civ_copper') return $license['copper'];
-    elseif ($license == 'license_civ_cement') return $license['cement'];
-    elseif ($license == 'license_civ_home') return $license['home'];
+    if ($lic == 'license_civ_driver') return $license['driver'];
+    elseif ($lic == 'license_civ_boat') return $license['boat'];
+    elseif ($lic == 'license_civ_pilot') return $license['pilot'];
+    elseif ($lic == 'license_civ_gun') return $license['gun'];
+    elseif ($lic == 'license_civ_dive') return $license['dive'];
+    elseif ($lic == 'license_civ_oil') return $license['oil'];
+    elseif ($lic == 'license_civ_heroin') return $license['heroin'];
+    elseif ($lic == 'license_civ_marijuana') return $license['marijuana'];
+    elseif ($lic == 'license_civ_rebel') return $license['rebel'];
+    elseif ($lic == 'license_civ_trucking') return $license['trucking'];
+    elseif ($lic == 'license_civ_diamond') return $license['diamond'];
+    elseif ($lic == 'license_civ_salt') return $license['salt'];
+    elseif ($lic == 'license_civ_cocaine') return $license['cocaine'];
+    elseif ($lic == 'license_civ_sand') return $license['sand'];
+    elseif ($lic == 'license_civ_iron') return $license['iron'];
+    elseif ($lic == 'license_civ_copper') return $license['copper'];
+    elseif ($lic == 'license_civ_cement') return $license['cement'];
+    elseif ($lic == 'license_civ_home') return $license['home'];
 
     // Medic
-    elseif ($license == 'license_med_mAir  ') return $license['pilot'];
+    elseif ($lic == 'license_med_mAir  ') return $license['pilot'];
 
     // Cop
-    elseif ($license == 'license_cop_cAir') return $license['pilot'];
-    elseif ($license == 'license_cop_coastguard') return $license['coastguard'];
-    elseif ($license == 'license_cop_swat') return $license['swat'];
-    else return $license;
+    elseif ($lic == 'license_cop_cAir') return $license['pilot'];
+    elseif ($lic == 'license_cop_coastguard') return $license['coastguard'];
+    elseif ($lic == 'license_cop_swat') return $license['swat'];
+    else return $lic;
 }

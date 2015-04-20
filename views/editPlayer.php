@@ -1,5 +1,6 @@
 <?php
 require_once("config/carNames.php");
+require_once("config/license.php");
 
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$db_connection->set_charset("utf8")) {
@@ -310,11 +311,12 @@ if (isset($_GET["ID"]))
 								$civ_licenses = str_replace("`","",$civ_licenses);
 	   
 								for ( $x = 0; $x < count ($civ_licenses); $x++){
+                                    $lic = substr($civ_licenses[$x],0,-2);
 									if(strpos($civ_licenses[$x], "1")!==false){
-										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".substr($civ_licenses[$x],0,-2)."</span>";    
+										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span>";
 									}
 									else{
-										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".substr($civ_licenses[$x],0,-2)."</span> "; 
+										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
 									}
 								}						
 							}
@@ -337,11 +339,12 @@ if (isset($_GET["ID"]))
 							$med_licenses = str_replace("`","",$med_licenses);
    
 							for ( $x = 0; $x < count ($med_licenses); $x++){
+                                $lic = substr($med_licenses[$x],0,-2);
 								if(strpos($med_licenses[$x], "1")!==false){
-									echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".substr($med_licenses[$x],0,-2)."</span> ";    
+									echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
 								}
 								else{
-									echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".substr($med_licenses[$x],0,-2)."</span> "; 
+									echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
 								}
 							}						
 						}
@@ -364,11 +367,12 @@ if (isset($_GET["ID"]))
 							$cop_licenses = str_replace("`","",$cop_licenses);
    
 							for ( $x = 0; $x < count ($cop_licenses); $x++){
+                                $lic = substr($cop_licenses[$x],0,-2);
 								if(strpos($cop_licenses[$x], "1")!==false){
-									echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".substr($cop_licenses[$x],0,-2)."</span> ";    
+									echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
 								}
 								else{
-									echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".substr($cop_licenses[$x],0,-2)."</span> "; 
+									echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
 								}
 							}						
 						}
