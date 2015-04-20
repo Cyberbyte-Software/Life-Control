@@ -304,21 +304,29 @@ if (isset($_GET["ID"]))
 							$result_of_query = $db_connection->query($sql);
 							while ($row = mysqli_fetch_assoc($result_of_query)) 
 							{
-								$civ_licenses = array();
-								$civ_licenses = explode("],[", $row["civ_licenses"]);
-								$civ_licenses = str_replace("]]\"","",$civ_licenses);
-								$civ_licenses = str_replace("\"[[","",$civ_licenses);
-								$civ_licenses = str_replace("`","",$civ_licenses);
-	   
-								for ( $x = 0; $x < count ($civ_licenses); $x++){
-                                    $lic = substr($civ_licenses[$x],0,-2);
-									if(strpos($civ_licenses[$x], "1")!==false){
-										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span>";
+								if ($row["civ_licenses"] !== '"[]"')
+								{
+									$civ_licenses = array();
+									$civ_licenses = explode("],[", $row["civ_licenses"]);
+									$civ_licenses = str_replace("]]\"","",$civ_licenses);
+									$civ_licenses = str_replace("\"[[","",$civ_licenses);
+									$civ_licenses = str_replace("`","",$civ_licenses);
+		   
+									for ( $x = 0; $x < count ($civ_licenses); $x++){
+										$civName = substr($civ_licenses[$x],0,-2);
+										if(strpos($civ_licenses[$x], "1")!==false){
+											echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($civName,$license)."</span>";    
+										}
+										else{
+											echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($civName,$license)."</span> "; 
+										}
 									}
-									else{
-										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
-									}
-								}						
+								}
+								else 
+								{
+									echo $lang['no']." ".$lang['licenses'];
+									
+								}
 							}
 						?>
 						<a data-toggle="modal" href="#edit_civ_licenses" class="btn btn-primary btn-xs" style="float: right;">
@@ -332,21 +340,29 @@ if (isset($_GET["ID"]))
 						$result_of_query = $db_connection->query($sql);
 						while ($row = mysqli_fetch_assoc($result_of_query)) 
 						{
-							$med_licenses = array();
-							$med_licenses = explode("],[", $row["med_licenses"]);
-							$med_licenses = str_replace("]]\"","",$med_licenses);
-							$med_licenses = str_replace("\"[[","",$med_licenses);
-							$med_licenses = str_replace("`","",$med_licenses);
-   
-							for ( $x = 0; $x < count ($med_licenses); $x++){
-                                $lic = substr($med_licenses[$x],0,-2);
-								if(strpos($med_licenses[$x], "1")!==false){
-									echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
+							if ($row["med_licenses"] !== '"[]"')
+							{
+								$med_licenses = array();
+								$med_licenses = explode("],[", $row["med_licenses"]);
+								$med_licenses = str_replace("]]\"","",$med_licenses);
+								$med_licenses = str_replace("\"[[","",$med_licenses);
+								$med_licenses = str_replace("`","",$med_licenses);
+	   
+								for ( $x = 0; $x < count ($med_licenses); $x++){
+									$medName = substr($med_licenses[$x],0,-2);
+									if(strpos($med_licenses[$x], "1")!==false){		
+										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($medName,$license)."</span> ";    
+									}
+									else{
+										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($medName,$license)."</span> "; 
+									}
 								}
-								else{
-									echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
-								}
-							}						
+							}
+							else 
+							{
+								echo $lang['no']." ".$lang['licenses'];
+								
+							}							
 						}
 					?>
 					<a data-toggle="modal" href="#edit_med_licenses" class="btn btn-primary btn-xs" style="float: right;">
@@ -360,21 +376,29 @@ if (isset($_GET["ID"]))
 						$result_of_query = $db_connection->query($sql);
 						while ($row = mysqli_fetch_assoc($result_of_query)) 
 						{
-							$cop_licenses = array();
-							$cop_licenses = explode("],[", $row["cop_licenses"]);
-							$cop_licenses = str_replace("]]\"","",$cop_licenses);
-							$cop_licenses = str_replace("\"[[","",$cop_licenses);
-							$cop_licenses = str_replace("`","",$cop_licenses);
-   
-							for ( $x = 0; $x < count ($cop_licenses); $x++){
-                                $lic = substr($cop_licenses[$x],0,-2);
-								if(strpos($cop_licenses[$x], "1")!==false){
-									echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
+							if ($row["cop_licenses"] !== '"[]"')
+							{
+								$cop_licenses = array();
+								$cop_licenses = explode("],[", $row["cop_licenses"]);
+								$cop_licenses = str_replace("]]\"","",$cop_licenses);
+								$cop_licenses = str_replace("\"[[","",$cop_licenses);
+								$cop_licenses = str_replace("`","",$cop_licenses);
+	   
+								for ( $x = 0; $x < count ($cop_licenses); $x++){
+									$copName = substr($cop_licenses[$x],0,-2);								
+									if(strpos($cop_licenses[$x], "1")!==false){
+										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($copName,$license)."</span> ";    
+									}
+									else{
+										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($copName,$license)."</span> "; 
+									}
 								}
-								else{
-									echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($lic,$license)."</span> ";
-								}
-							}						
+							}
+							else 
+							{
+								echo $lang['no']." ".$lang['licenses'];
+								
+							}
 						}
 					?>
 					<a data-toggle="modal" href="#edit_cop_licenses" class="btn btn-primary btn-xs" style="float: right;">

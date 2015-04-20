@@ -24,7 +24,8 @@ if ($licenseLang == 'en') {
     $license['copper'] = 'Copper Processing';
     $license['cement'] = 'Cement Mixing License';
     $license['home'] = 'Home Owners License';
-
+	$license['truck'] = 'Truck License';
+	
     // Cop
     $license['coastguard'] = 'Coast Guard License';
     $license['swat'] = 'SWAT License';
@@ -48,7 +49,8 @@ else if ($licenseLang == 'de') {
     $license['copper'] = 'Kupferverarbeitung';
     $license['cement'] = 'Zementmisch-Lizenz';
     $license['home'] = 'Eigentumsurkunde';
-
+	$license['truck'] = 'Truck License';
+	
     // Cop
     $license['coastguard'] = 'Küstenwache';
     $license['swat'] = 'SWAT-Lizenz';
@@ -72,7 +74,8 @@ else if ($licenseLang == 'fr') {
     $license['copper'] = 'Fonte du Cuivre';
     $license['cement'] = 'Fabrication du Ciment';
     $license['home'] = 'Droit de Propriété';
-
+	$license['truck'] = 'Truck License';
+	
     // Cop
     $license['coastguard'] = 'Garde-Cotes';
     $license['swat'] = 'License du SWAT';
@@ -96,7 +99,8 @@ else if ($licenseLang == 'it') {
     $license['copper'] = 'Processo Rame';
     $license['cement'] = 'Processo Cemento';
     $license['home'] = 'Licenza possesso Casa';
-
+	$license['truck'] = 'Truck License';
+	
     // Cop
     $license['coastguard'] = 'Licenza Guardia Costiera';
     $license['swat'] = 'Licenza SWAT';
@@ -120,7 +124,8 @@ else if ($licenseLang == 'por') {
     $license['copper'] = 'Processamento de Bronze';
     $license['cement'] = 'Licença de Cimento';
     $license['home'] = 'Licença de Casas';
-
+	$license['truck'] = 'Truck License';
+	
     // Cop
     $license['coastguard'] = 'Licença de Guarda Costeira';
     $license['swat'] = 'Licença do Bope';
@@ -148,9 +153,11 @@ function licName($lic,$license)
     elseif ($lic == 'license_civ_copper') return $license['copper'];
     elseif ($lic == 'license_civ_cement') return $license['cement'];
     elseif ($lic == 'license_civ_home') return $license['home'];
-
+	elseif ($lic == 'license_civ_air') return $license['pilot'];
+	elseif ($lic == 'license_civ_truck') return $license['truck'];
+	
     // Medic
-    elseif ($lic == 'license_med_mAir  ') return $license['pilot'];
+    elseif ($lic == 'license_med_mAir') return $license['pilot'];
 
     // Cop
     elseif ($lic == 'license_cop_cAir') return $license['pilot'];

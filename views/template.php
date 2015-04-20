@@ -50,6 +50,7 @@ $arrayCount = count($gameServers);
             <!--logo start-->
             <a href="index.php" class="logo"><b>Life Control</b></a>
             <!--logo end-->
+			<a href="index.php" class="logosmall pull-right"><b>Copyright &copy; 2015 Life Control 2.3 by Cammygames & MightySCollins</b></a>
         </header>
       <!--header end-->
       
@@ -185,12 +186,10 @@ $arrayCount = count($gameServers);
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
-				<?php include($page) ?>				
+				<?php include($page) ?>					
 			</section>
-		</section>
-		<footer class="site-footer">
-			<center><h4>Copyright &copy; 2015 Life Control 2.3 by Cammygames & MightySCollins</h4></center>	
-		</footer>			
+		
+		</section>			
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
