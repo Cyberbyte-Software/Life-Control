@@ -159,4 +159,5 @@ $lang['blacklisted'] = 'Blacklisted';
 $lang['arrested'] = 'Inhaftiert';
 $lang['finances'] = 'Finanzen';
 $lang['ship'] = 'Ship';
+$lang['uid'] = 'Datenbank ID'
 ?>
