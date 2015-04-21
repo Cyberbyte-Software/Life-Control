@@ -38,8 +38,8 @@ else if ($licenseLang == 'de') {
     $license['gun'] = 'Waffenschein';
     $license['dive'] = 'Taucherschein';
     $license['oil'] = 'Ölverarbeitung';
-    $license['heroin'] = 'Heroin wird verarbeitet';
-    $license['marijuana'] = 'Marihuana wird verarbeitet';
+    $license['heroin'] = 'Heroinherstellung';
+    $license['marijuana'] = 'Marihuanaherstellung';
     $license['rebel'] = 'Rebellenausbildung';
     $license['trucking'] = 'LKW-Führerschein';
     $license['diamond'] = 'Diamantenverarbeitung';
@@ -47,9 +47,9 @@ else if ($licenseLang == 'de') {
     $license['sand'] = 'Sandverarbeitung';
     $license['iron'] = 'Eisenverarbeitung';
     $license['copper'] = 'Kupferverarbeitung';
-    $license['cement'] = 'Zementmisch-Lizenz';
+    $license['cement'] = 'Zementherstellung';
     $license['home'] = 'Eigentumsurkunde';
-	$license['truck'] = 'Truck License';
+	$license['truck'] = 'LKW Führerschein;
 	
     // Cop
     $license['coastguard'] = 'Küstenwache';
