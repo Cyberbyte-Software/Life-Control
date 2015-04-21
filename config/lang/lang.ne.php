@@ -155,6 +155,7 @@ $lang['changePass'] = 'Change Password';
 $lang['gameServers'] = 'Game Servers';
 $lang['page'] = 'Page';
 $lang['not'] = 'Not';
+$lang['notactive'] = 'niet Actief';
 $lang['blacklisted'] = 'Blacklisted';
 $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
