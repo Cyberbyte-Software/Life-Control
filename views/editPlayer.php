@@ -642,7 +642,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Medic Licenses</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Medic Gear</h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -675,7 +675,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Medic Licenses</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Civilian Inventory</h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -688,7 +688,7 @@ if (isset($_GET["ID"]))
                     <div class="form-group">
                         <input type="hidden" name="editType" value="civ_inv" />
                         <div class="row">
-                            <textarea class="form-control" rows="10" name="civ_inv_value"><?php echo $row['med_gear'];?></textarea>
+                            <textarea class="form-control" rows="10" name="civ_inv_value"><?php echo $row["civ_gear"];?></textarea>
                         </div>
                     </div>
                 </div>
@@ -708,7 +708,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Medic Licenses</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Police Inventory</h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
