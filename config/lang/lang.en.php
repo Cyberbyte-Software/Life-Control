@@ -161,4 +161,5 @@ $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
 $lang['ship'] = 'Ship';
 $lang['store'] = 'Store';
+$lang['uid'] = 'Database ID'
 ?>
