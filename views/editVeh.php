@@ -99,7 +99,7 @@ if (isset($_GET["ID"]))
 							
 							if ($row["active"] == false)
 							{
-								echo " <span class='label label-danger'>".$lang["not"]." ".$lang["active"]."</span></h4>";						
+								echo " <span class='label label-danger'>".$lang["notactive"]."</span></h4>";						
 							}
 							else
 							{
