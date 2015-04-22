@@ -72,10 +72,12 @@ define("P_VIEW_WANTED", 2);
 define("P_VIEW_PLAYER", 1);
 define("P_VIEW_LICENCES", 1);
 
-
 define("P_EDIT_STAFF", 3);
 define("P_EDIT_VEHICLES", 3);
 define("P_EDIT_HOUSES", 3);
 define("P_EDIT_GANGS", 3);
 define("P_EDIT_WANTED", 3);
+define("P_EDIT_ADMINS", 3);
 define("P_EDIT_PLAYER", 2);
+
+define("P_ACCESS_SQL_PHONE", 2);

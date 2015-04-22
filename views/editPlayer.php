@@ -504,7 +504,7 @@ if (isset($_GET["ID"]))
 					<a data-toggle="modal" href="#edit_med_inv" class="btn btn-primary btn-xs" style="float: right;">
 						<i class="fa fa-pencil"></i>
 					</a>
-						<br>					
+					<br>
 				</div>					
 			</div>
 		</div>
@@ -516,7 +516,7 @@ if (isset($_GET["ID"]))
 			$result_of_query = $db_connection->query($sql);
 			while ($row = mysqli_fetch_assoc($result_of_query)) 
 			{
-				if (sql_smartPhone == TRUE && $_SESSION['user_level'] >= 2) 
+				if (sql_smartPhone == TRUE && $_SESSION['user_level'] >= P_ACCESS_SQL_PHONE)
 				{
 					include("views/modules/sqlSmartPhone/module.php");
 				}
@@ -761,7 +761,7 @@ if (isset($_GET["ID"]))
 										echo '<option value="' . $lvl . '"' . select($lvl, $row['mediclevel']) . '>' . $lvl . '</option>';
 									}
 									echo "</select>";
-									if ($_SESSION['user_level'] >= 3) {
+									if ($_SESSION['user_level'] >= P_EDIT_ADMINS) {
 										echo "<h4>" . $lang['admin'] . ": ";
 										echo "<select id='player_adminlvl' name='player_adminlvl'>";
 										for ($lvl = 1; $lvl <= lvladmin; $lvl++) {
@@ -770,18 +770,16 @@ if (isset($_GET["ID"]))
 										echo "</select>";
 										echo "<h4>" . $lang['blacklisted'] . ": "; //TODO: Yes or no option
 										echo "<select id='player_blacklist' name='player_blacklist'>";
-										for ($lvl = 0; $lvl <= 1; $lvl++) {
-											echo '<option value="' . $lvl . '"' . select($lvl, $row['blacklist']) . '>' . $lvl . '</option>';
-										}
+                                        echo '<option value="1"' . select('1', $row['blacklist']) . '>Yes</option>';
+                                        echo '<option value="0"' . select('0', $row['blacklist']) . '>No</option>';
                                         echo "</select>";
 									}
 									if ($_SESSION['user_level'] >= P_EDIT_PLAYER)
 									{
                                         echo "<h4>" . $lang['arrested'] . ": ";
                                         echo "<select id='player_arrest' name='player_arrest'>";
-                                        for ($lvl = 0; $lvl <= 1; $lvl++) {
-                                            echo '<option value="' . $lvl . '"' . select($lvl, $row['arrested']) . '>' . $lvl . '</option>';
-                                        }
+                                        echo '<option value="1"' . select('1', $row['arrested']) . '>Yes</option>';
+                                        echo '<option value="0"' . select('0', $row['arrested']) . '>No</option>';
                                         echo "</select>";
 										echo "<h4>" . $lang['donator'] . ": ";
 										echo "<select id='player_donlvl' name='player_donlvl'>";
