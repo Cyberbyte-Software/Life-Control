@@ -3,6 +3,8 @@ include("gfunctions.php");
 
 $arrayCount = count($gameServers);
 
+$json = file_get_contents('http://cyberbyte.org.uk/version.json');
+$obj = json_decode($json);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,39 +39,34 @@ $arrayCount = count($gameServers);
 </head>
 
 <body>
-
-<section id="container">
-    <!-- **********************************************************************************************************************************************************
-    TOP BAR CONTENT & NOTIFICATIONS
-    *********************************************************************************************************************************************************** -->
-    <!--header start-->
-    <header class="header black-bg">
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-        </div>
-        <!--logo start-->
-        <a href="index.php" class="logo"><b>Life Control</b></a>
-        <!--logo end-->
-        <a href="index.php" class="logosmall pull-right"><b>Copyright &copy; 2015 Life Control 2.3 by Cammygames &
-                MightySCollins</b></a>
-    </header>
-    <!--header end-->
-
-    <!-- **********************************************************************************************************************************************************
-    MAIN SIDEBAR MENU
-    *********************************************************************************************************************************************************** -->
-    <!--sidebar start-->
-    <aside>
-        <div id="sidebar" class="nav-collapse ">
-            <!-- sidebar menu start-->
-            <ul class="sidebar-menu" id="nav-accordion">
-
-                <p class="centered"><a href="profile.php"><img
-                            src="<?php echo 'assets/img/profile/' . $_SESSION['user_profile'] . '.jpg'; ?>"
-                            class="img-circle" width="60"></a></p>
-                <h5 class="centered">
-                    <?php echo $_SESSION['user_name']; ?>
-                </h5>
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="index.php" class="logo"><b>Life Control</b></a>
+            <!--logo end-->
+			<a href="index.php" class="logosmall pull-right"><b>Copyright &copy; 2015 Life Control <?php if(isset($obj->version)) echo $obj->version;?> by Cyberbyte Studios</b></a>
+        </header>
+      <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+              
+              	  <p class="centered"><a href="profile.php"><img src="<?php echo 'assets/img/profile/'.$_SESSION['user_profile'].'.jpg'; ?>" class="img-circle" width="60"></a></p>
+					<h5 class="centered">
+						<?php echo $_SESSION['user_name']; ?>
+					</h5>
 
                 <li>
                     <a href="index.php">
@@ -237,9 +234,7 @@ $arrayCount = count($gameServers);
         }
     });
 </script>
-<?php if ($page == "views/logged_in.php") {
-    $json = file_get_contents('http://cyberbyte.org.uk/version.json');
-    $obj = json_decode($json);?>
+<?php if ($page == "views/logged_in.php") { ?>
     <script type="text/javascript">
         $(document).ready(function () {
             var unique_id = $.gritter.add({
