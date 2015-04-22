@@ -2,6 +2,22 @@
 require_once("config/carNames.php");
 require_once("config/license.php");
 
+function stripArray($input)
+{
+	$array = array();
+	$array = explode("],[",$input);
+	$array = str_replace('"[[',"",$array);
+	$array = str_replace(']]"',"",$array);
+	$array = str_replace('`',"",$array);
+	return $array;
+}
+
+//Thanks PHP Doc's For this Function (User: biohazard dot ge at gmail dot com ¶ )
+function before ($this, $inthat)
+{
+	return substr($inthat, 0, strpos($inthat, $this));
+};
+
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
@@ -379,19 +395,19 @@ if (isset($_GET["ID"]))
 							{
 								if ($row["civ_licenses"] !== '"[]"')
 								{
-									$civ_licenses = array();
-									$civ_licenses = explode("],[", $row["civ_licenses"]);
-									$civ_licenses = str_replace("]]\"","",$civ_licenses);
-									$civ_licenses = str_replace("\"[[","",$civ_licenses);
-									$civ_licenses = str_replace("`","",$civ_licenses);
-		   
-									for ( $x = 0; $x < count ($civ_licenses); $x++){
-										$civName = substr($civ_licenses[$x],0,-2);
-										if(strpos($civ_licenses[$x], "1")!==false){
-											echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($civName,$license)."</span>";    
+									$return = stripArray($row["civ_licenses"]);
+
+									foreach ($return as $value) 
+									{
+										if (strpos($value , "1") == TRUE)
+										{
+											$name = before (',', $value);
+											echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($name,$license)."</span> ";   
 										}
-										else{
-											echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($civName,$license)."</span> "; 
+										else
+										{
+											$name = before (',', $value);
+											echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($name,$license)."</span> ";  
 										}
 									}
 								}
@@ -415,19 +431,19 @@ if (isset($_GET["ID"]))
 						{
 							if ($row["med_licenses"] !== '"[]"')
 							{
-								$med_licenses = array();
-								$med_licenses = explode("],[", $row["med_licenses"]);
-								$med_licenses = str_replace("]]\"","",$med_licenses);
-								$med_licenses = str_replace("\"[[","",$med_licenses);
-								$med_licenses = str_replace("`","",$med_licenses);
-	   
-								for ( $x = 0; $x < count ($med_licenses); $x++){
-									$medName = substr($med_licenses[$x],0,-2);
-									if(strpos($med_licenses[$x], "1")!==false){		
-										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($medName,$license)."</span> ";    
+								$return = stripArray($row["med_licenses"]);
+
+								foreach ($return as $value) 
+								{
+									if (strpos($value , "1") == TRUE)
+									{
+										$name = before (',', $value);
+										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($name,$license)."</span> ";   
 									}
-									else{
-										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($medName,$license)."</span> "; 
+									else
+									{
+										$name = before (',', $value);
+										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($name,$license)."</span> ";  
 									}
 								}
 							}
@@ -451,19 +467,19 @@ if (isset($_GET["ID"]))
 						{
 							if ($row["cop_licenses"] !== '"[]"')
 							{
-								$cop_licenses = array();
-								$cop_licenses = explode("],[", $row["cop_licenses"]);
-								$cop_licenses = str_replace("]]\"","",$cop_licenses);
-								$cop_licenses = str_replace("\"[[","",$cop_licenses);
-								$cop_licenses = str_replace("`","",$cop_licenses);
-	   
-								for ( $x = 0; $x < count ($cop_licenses); $x++){
-									$copName = substr($cop_licenses[$x],0,-2);								
-									if(strpos($cop_licenses[$x], "1")!==false){
-										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($copName,$license)."</span> ";    
+								$return = stripArray($row["cop_licenses"]);
+
+								foreach ($return as $value) 
+								{
+									if (strpos($value , "1") == TRUE)
+									{
+										$name = before (',', $value);
+										echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>".licName($name,$license)."</span> ";   
 									}
-									else{
-										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($copName,$license)."</span> "; 
+									else
+									{
+										$name = before (',', $value);
+										echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>".licName($name,$license)."</span> ";  
 									}
 								}
 							}
