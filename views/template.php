@@ -50,7 +50,7 @@ $arrayCount = count($gameServers);
             <!--logo start-->
             <a href="index.php" class="logo"><b>Life Control</b></a>
             <!--logo end-->
-			<a href="index.php" class="logosmall pull-right"><b>Copyright &copy; 2015 Life Control 2.3 by Cammygames & MightySCollins</b></a>
+			<a href="index.php" class="logosmall pull-right"><b>Copyright &copy; 2015 Life Control 2.3 by Cyberbyte Studios</b></a>
         </header>
       <!--header end-->
       
