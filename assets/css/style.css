@@ -2002,10 +2002,20 @@ label {
 	color: #fff;
 	font-size: 90px;
 	margin-bottom: 30px;
-	margin-top: 250px;
 	display: inline-block;
 	text-align: center;
 	font-weight: 400;
+}
+
+/*Error Message*/
+#message {
+    width: 100%;
+    color: #fff;
+    font-size: 90px;
+    margin-bottom: 30px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
 }
 
 .lock-screen {
