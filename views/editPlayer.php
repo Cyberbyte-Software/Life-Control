@@ -38,7 +38,7 @@ if (isset($_GET["ID"]))
 					echo "<div class='col-lg-12'>";
 					echo "<div class='alert alert-danger alert-dismissable'>";
 					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> UPDATED civ_licenses";
+					echo "<i class='fa fa-info-circle'></i> UPDATED";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";	
@@ -59,7 +59,7 @@ if (isset($_GET["ID"]))
 					echo "<div class='col-lg-12'>";
 					echo "<div class='alert alert-danger alert-dismissable'>";
 					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> UPDATED cop_licenses";
+					echo "<i class='fa fa-info-circle'></i> UPDATED";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";					
@@ -79,7 +79,7 @@ if (isset($_GET["ID"]))
 					echo "<div class='col-lg-12'>";
 					echo "<div class='alert alert-danger alert-dismissable'>";
 					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> UPDATED med_licenses";
+					echo "<i class='fa fa-info-circle'></i> UPDATED";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";					
@@ -99,7 +99,7 @@ if (isset($_GET["ID"]))
 					echo "<div class='col-lg-12'>";
 					echo "<div class='alert alert-danger alert-dismissable'>";
 					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> UPDATED civ_inv";
+					echo "<i class='fa fa-info-circle'></i> UPDATED";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";					
@@ -119,7 +119,7 @@ if (isset($_GET["ID"]))
 					echo "<div class='col-lg-12'>";
 					echo "<div class='alert alert-danger alert-dismissable'>";
 					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> UPDATED cop_inv";
+					echo "<i class='fa fa-info-circle'></i> UPDATED";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";					
@@ -139,7 +139,7 @@ if (isset($_GET["ID"]))
 					echo "<div class='col-lg-12'>";
 					echo "<div class='alert alert-danger alert-dismissable'>";
 					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> UPDATED med_inv";
+					echo "<i class='fa fa-info-circle'></i> UPDATED";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";						
@@ -163,7 +163,7 @@ if (isset($_GET["ID"]))
 							echo "<div class='col-lg-12'>";
 							echo "<div class='alert alert-danger alert-dismissable'>";
 							echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-							echo "<i class='fa fa-info-circle'></i> UPDATED player_edit";
+							echo "<i class='fa fa-info-circle'></i> UPDATED";
 							echo "</div>";
 							echo "</div>";
 							echo "</div>";								
@@ -189,7 +189,7 @@ if (isset($_GET["ID"]))
 							echo "<div class='col-lg-12'>";
 							echo "<div class='alert alert-danger alert-dismissable'>";
 							echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-							echo "<i class='fa fa-info-circle'></i> UPDATED player_edit";
+							echo "<i class='fa fa-info-circle'></i> UPDATED";
 							echo "</div>";
 							echo "</div>";
 							echo "</div>";								
@@ -216,7 +216,7 @@ if (isset($_GET["ID"]))
 							echo "<div class='col-lg-12'>";
 							echo "<div class='alert alert-danger alert-dismissable'>";
 							echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-							echo "<i class='fa fa-info-circle'></i> UPDATED player_edit";
+							echo "<i class='fa fa-info-circle'></i> UPDATED";
 							echo "</div>";
 							echo "</div>";
 							echo "</div>";								
@@ -616,7 +616,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Civ Licenses</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['civ']." ".$lang['licenses'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -649,7 +649,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Cop Licenses</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['police']." ".$lang['licenses'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -682,7 +682,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Medic Licenses</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['medic']." ".$lang['licenses'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -715,7 +715,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Medic Gear</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['medic']." ".$lang['inventory'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -748,7 +748,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Civilian Inventory</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['civ']." ".$lang['inventory'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -781,7 +781,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Police Inventory</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['police']." ".$lang['inventory'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -814,7 +814,7 @@ if (isset($_GET["ID"]))
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span> Edit Player</h4>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['edit']." ".$lang['player'];?></h4>
             </div>
 			<?php 
 				$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
