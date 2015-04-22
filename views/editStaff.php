@@ -56,9 +56,9 @@ if (isset($_POST["staffName"])) {
                             echo "<h4>" . $lang['emailAdd'] . ": <input id='staffEmail' style='min-width:300px;'name='staffEmail' type='text' value='" . $row["user_email"] . "'></h4>";
                             echo "<h4>" . $lang['rank'] . ": ";
                             echo "<select id='staffRank' name='staffRank'>";
-                            echo '<option value="1"' . select('1', $row['user_level']) . '>' . $lang['support'] . '</option>';
-                            echo '<option value="2"' . select('2', $row['user_level']) . '>' . $lang['mod'] . '</option>';
-                            echo '<option value="3"' . select('3', $row['user_level']) . '>' . $lang['administrator'] . '</option>';
+                            for ($lvl = 1; $lvl <= staff_levels; $lvl++) {
+                                echo '<option value="' . $lvl . '"' . select($lvl, $row['user_level']) . '>' . $lvl . '</option>';
+                            }
                             echo "</select></h4>";
                             echo "<h4>" . $lang['playerID'] . ":  <input id='staffPID' name='staffPID' type='text' value='" . $row["playerid"] . "'></h4>";
                             echo "</center>";

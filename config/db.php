@@ -64,6 +64,8 @@ define("icon6", "Jess");
 /**
  * Permissions
  */
+define("staff_levels", 3);
+
 define("P_VIEW_STAFF", 3);
 define("P_VIEW_VEHICLES", 2);
 define("P_VIEW_HOUSES", 2);
