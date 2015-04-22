@@ -49,7 +49,7 @@ else if ($licenseLang == 'de') {
     $license['copper'] = 'Kupferverarbeitung';
     $license['cement'] = 'Zementherstellung';
     $license['home'] = 'Eigentumsurkunde';
-	$license['truck'] = 'LKW Führerschein;
+	$license['truck'] = 'LKW Führerschein';
 	
     // Cop
     $license['coastguard'] = 'Küstenwache';
