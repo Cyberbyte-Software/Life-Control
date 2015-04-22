@@ -29,23 +29,40 @@ if (isset($_GET["ID"]))
 		switch ($_POST["editType"])
 		{
 			case "civ_licenses":
-				$civ_licenses_value = mysql_real_escape_string($_POST["civ_licenses_value"]);	
+				$civ_licenses_value = $_POST["civ_licenses_value"];
 				$update = "UPDATE players SET civ_licenses = '".$civ_licenses_value."' WHERE uid = '".$uID."' ";
 				if (!$db_connection->connect_errno) 
 				{
 					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> UPDATED civ_licenses";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";	
 				} 
 				else 
 				{
 					$this->errors[] = "Database connection problem.";
-				}				
+				}
+			
 				break;
 			case "cop_licenses":
-				$cop_licenses_value = mysql_real_escape_string($_POST["cop_licenses_value"]);	
+				$cop_licenses_value = $_POST["cop_licenses_value"];	
 				$update = "UPDATE players SET cop_licenses = '".$cop_licenses_value."' WHERE uid = '".$uID."' ";				
 				if (!$db_connection->connect_errno) 
 				{
 					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> UPDATED cop_licenses";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";					
 				} 
 				else 
 				{
@@ -53,11 +70,19 @@ if (isset($_GET["ID"]))
 				}				
 				break;
 			case "med_licenses":
-				$med_licenses_value = mysql_real_escape_string($_POST["med_licenses_value"]);	
+				$med_licenses_value = $_POST["med_licenses_value"];	
 				$update = "UPDATE players SET med_licenses = '".$med_licenses_value."' WHERE uid = '".$uID."' ";					
 				if (!$db_connection->connect_errno) 
 				{
 					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> UPDATED med_licenses";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";					
 				} 
 				else 
 				{
@@ -65,11 +90,19 @@ if (isset($_GET["ID"]))
 				}				
 				break;
 			case "civ_inv":
-				$civ_gear_value = mysql_real_escape_string($_POST["civ_inv_value"]);	
+				$civ_gear_value = $_POST["civ_inv_value"];	
 				$update = "UPDATE players SET civ_gear = '".$civ_gear_value."' WHERE uid = '".$uID."' ";
 				if (!$db_connection->connect_errno) 
 				{
 					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> UPDATED civ_inv";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";					
 				} 
 				else 
 				{
@@ -77,11 +110,19 @@ if (isset($_GET["ID"]))
 				}				
 				break;
 			case "cop_inv":
-				$cop_gear_value = mysql_real_escape_string($_POST["cop_inv_value"]);	
+				$cop_gear_value = $_POST["cop_inv_value"];	
 				$update = "UPDATE players SET cop_gear = '".$cop_gear_value."' WHERE uid = '".$uID."' ";
 				if (!$db_connection->connect_errno) 
 				{
 					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> UPDATED cop_inv";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";					
 				} 
 				else 
 				{
@@ -89,11 +130,19 @@ if (isset($_GET["ID"]))
 				}				
 				break;
 			case "med_inv":
-				$med_gear_value = mysql_real_escape_string($_POST["med_inv_value"]);	
+				$med_gear_value = $_POST["med_inv_value"];	
 				$update = "UPDATE players SET med_gear = '".$med_gear_value."' WHERE uid = '".$uID."' ";
 				if (!$db_connection->connect_errno) 
 				{
 					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> UPDATED med_inv";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";						
 				} 
 				else 
 				{
@@ -110,6 +159,14 @@ if (isset($_GET["ID"]))
 						if (!$db_connection->connect_errno) 
 						{
 							$result_of_query = $db_connection->query($update);
+							echo "<div class='row'>";
+							echo "<div class='col-lg-12'>";
+							echo "<div class='alert alert-danger alert-dismissable'>";
+							echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+							echo "<i class='fa fa-info-circle'></i> UPDATED player_edit";
+							echo "</div>";
+							echo "</div>";
+							echo "</div>";								
 						} 
 						else 
 						{
@@ -120,14 +177,22 @@ if (isset($_GET["ID"]))
 						$coplevel = intval($_POST["player_coplvl"]);
 						$mediclevel = intval($_POST["player_medlvl"]);
 						$donatorlvl = intval($_POST["player_donlvl"]);
-						$cash = mysql_real_escape_string($_POST["player_cash"]);
-						$bankacc = mysql_real_escape_string($_POST["player_bank"]);
+						$cash = intval($_POST["player_cash"]);
+						$bankacc = intval($_POST["player_bank"]);
 						$arrested = intval($_POST["player_arrest"]);
 						$blacklist = intval($_POST["player_blacklist"]);						
 						$update = "UPDATE players SET coplevel = '".$coplevel."', mediclevel = '".$mediclevel."', donatorlvl = '".$donatorlvl."', cash = '".$cash."', bankacc = '".$bankacc."', arrested = '".$arrested."', blacklist = '".$blacklist."' WHERE uid = '".$uID."' ";				
 						if (!$db_connection->connect_errno) 
 						{
 							$result_of_query = $db_connection->query($update);
+							echo "<div class='row'>";
+							echo "<div class='col-lg-12'>";
+							echo "<div class='alert alert-danger alert-dismissable'>";
+							echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+							echo "<i class='fa fa-info-circle'></i> UPDATED player_edit";
+							echo "</div>";
+							echo "</div>";
+							echo "</div>";								
 						} 
 						else 
 						{
@@ -139,14 +204,22 @@ if (isset($_GET["ID"]))
 						$mediclevel = intval($_POST["player_medlvl"]);
 						$donatorlvl = intval($_POST["player_donlvl"]);
 						$adminlevel = intval($_POST["player_adminlvl"]);
-						$cash = mysql_real_escape_string($_POST["player_cash"]);
-						$bankacc = mysql_real_escape_string($_POST["player_bank"]);
+						$cash = intval($_POST["player_cash"]);
+						$bankacc = intval($_POST["player_bank"]);
 						$arrested = intval($_POST["player_arrest"]);
 						$blacklist = intval($_POST["player_blacklist"]);						
 						$update = "UPDATE players SET coplevel = '".$coplevel."', mediclevel = '".$mediclevel."', donatorlvl = '".$donatorlvl."', adminlevel = '".$adminlevel."', cash = '".$cash."', bankacc = '".$bankacc."', arrested = '".$arrested."', blacklist = '".$blacklist."' WHERE uid = '".$uID."' ";	
 						if (!$db_connection->connect_errno) 
 						{
 							$result_of_query = $db_connection->query($update);
+							echo "<div class='row'>";
+							echo "<div class='col-lg-12'>";
+							echo "<div class='alert alert-danger alert-dismissable'>";
+							echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+							echo "<i class='fa fa-info-circle'></i> UPDATED player_edit";
+							echo "</div>";
+							echo "</div>";
+							echo "</div>";								
 						} 
 						else 
 						{
@@ -202,7 +275,7 @@ if (isset($_GET["ID"]))
 									<h4> <?php echo $lang['bank'].": ".$row["bankacc"];  ?> </h4>
 								</span>							
 							<?php
-							if ($row["arrested"] !== false)
+							if ($row["arrested"] == 0)
 							{
 								echo "<h4><span class='label label-success'>".$lang["not"]." ".$lang["arrested"]."</span> ";
 							}
@@ -211,7 +284,7 @@ if (isset($_GET["ID"]))
 								echo "<h4><span class='label label-danger'>".$lang["arrested"]."</span> ";				
 							}
 							
-							if ($row["blacklist"] !== false)
+							if ($row["blacklist"] == 0)
 							{
 								echo " <span class='label label-success'>".$lang["not"]." ".$lang["blacklisted"]."</span></h4>";						
 							}
