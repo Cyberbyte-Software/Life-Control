@@ -13,13 +13,7 @@ erdknuffel aka jastend for giving me some ideas and fixes for Life-Control and l
 1. Download the latest files (for mostly-stable versions, please visit our [releases section](https://github.com/cammygames/Life-Control/releases/tag/2.0))
 2. Unpack everything
 3. Add your database settings to the [config/db.php](https://github.com/cammygames/Life-Control/blob/master/config/db.php)
-3. Upload the files to your webserver
-4. Run this database query in your Altis Life database: https://gist.github.com/cammygames/ff1ebe48b1130e10d1b8
-   * Default username: Admin
-   * Default password: Admin%12345
-6. Create a hash of your first password via http://life.kbs-altis.de/hash/
-7. Go into the users table and change your username and password for your first account
-8. Gently congratulate yourself with a hot beverage of your choice and log in
+4. Gently congratulate yourself with a hot beverage of your choice and it will guide you through the setup process
 
 ## Rank system
 
