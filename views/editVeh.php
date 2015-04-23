@@ -1,6 +1,51 @@
 <?php
 require_once("config/carNames.php");
-require_once("config/images.php");
+
+function getPic($input)
+{
+    $carPics = array(
+        'B_Boat_Armed_01_minigun_F',
+        'B_Boat_Transport_01_F',
+        'B_G_Offroad_01_armed_F',
+        'B_G_Offroad_01_F',
+        'B_G_Offroad_01_F_1',
+        'B_G_Van_01_transport_F',
+        'B_Heli_Light_01_F',
+        'B_Heli_Transport_01_F',
+        'B_Lifeboat',
+        'B_MRAP_01_F',
+        'B_MRAP_01_hmg_F',
+        'B_Quadbike_01_F',
+        'B_SDV_01_F',
+        'B_Truck_01_ammo_F',
+        'B_Truck_01_box_F',
+        'B_Truck_01_covered_F',
+        'B_Truck_01_transport_F',
+        'C_Boat_Civil_01_F',
+        'C_Boat_Civil_01_police_F',
+        'C_Hatchback_01_F',
+        'C_Hatchback_01_sport_F',
+        'C_Offroad_01_F',
+        'C_Rubberboat',
+        'C_SUV_01_F',
+        'C_Van_01_box_F',
+        'C_Van_01_fuel_F',
+        'C_Van_01_transport_F',
+        'I_Heli_light_03_unarmed_F',
+        'I_Heli_Transport_02_F',
+        'I_MRAP_03_F',
+        'I_Truck_02_covered_F',
+        'I_Truck_02_transport_F',
+        'O_Heli_Light_02_unarmed_F',
+        'O_MRAP_02_F'
+    );
+
+    if (in_array($input, $carPics)) {
+        return $input;
+    } else {
+        return "Default";
+    }
+}
 
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$db_connection->set_charset("utf8")) {

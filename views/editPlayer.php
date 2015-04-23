@@ -1,7 +1,6 @@
 <?php
 require_once("config/carNames.php");
 require_once("config/license.php");
-require_once("config/images.php");
 
 function updated()
 {
