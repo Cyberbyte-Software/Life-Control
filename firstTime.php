@@ -1,5 +1,5 @@
 <?php
-require_once("config/db.php");
+require_once("config/config.php");
 
 function iconName($icon){
     if ($icon == 2) return icon2;

@@ -40,15 +40,22 @@ $lang['no'] = 'Nein';
 $lang['car'] = 'Auto';
 $lang['air'] = 'Luft';
 $lang['ban'] = 'Bann';
+$lang['uid'] = 'Datenbank ID';
+
 /*
 ------------------
 Errors
 ------------------
 */
+
 $lang['error'] = 'Error';
 $lang['dbError'] = 'Probleme bei der Verbindung zur Datenbank.';
 $lang['idNotSet'] = 'Keine ID vorhanden';
 $lang['noRes'] = 'Fehler - Keine Ergebnisse';
+$lang['noHouse'] = 'Besitzt kein Haus';
+$lang['noCar'] = 'Besitzt keine Autos';
+$lang['noPlayer'] = 'Spieler nicht gefunden';
+$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigte Rechte um die Seite zu öffnen';
 
 /*
 ------------------
@@ -162,4 +169,5 @@ $lang['ship'] = 'Ship';
 $lang['add'] = 'Add';
 $lang['new'] = 'New';
 $lang['note'] = 'Note';
+$lang['noMessage'] = 'No messages';
 ?>

@@ -48,7 +48,7 @@ $lang['ban'] = 'Ban';
 */
 $lang['error'] = 'Error';
 $lang['dbError'] = 'Database verbindings problemen.';
-$lang['idNotSet'] = 'ID NIET INGESTELD';
+$lang['idNotSet'] = 'ID neit ingesteld';
 $lang['noRes'] = 'ERROR GEEN RESULTATEN';
 
 /*
@@ -162,4 +162,6 @@ $lang['ship'] = 'Ship';
 $lang['add'] = 'Add';
 $lang['new'] = 'New';
 $lang['note'] = 'Note';
+$lang['uid'] = 'uID';
+$lang['noMessage'] = 'No messages';
 ?>
