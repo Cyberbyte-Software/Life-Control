@@ -3,10 +3,11 @@ require_once("config/config.php");
 require_once("classes/Login.php");
 
 $login = new Login();
-$page = "views/modules/module.php";
+$page = "views/addStaff.php";
 
 if ($login->isUserLoggedIn() == true) {
     include("views/template.php");
+
 } else {
     include("views/login.php");
 }
