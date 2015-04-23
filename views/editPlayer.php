@@ -25,13 +25,16 @@ function stripArray($input)
 function before($this, $inthat)
 {
     return substr($inthat, 0, strpos($inthat, $this));
-};
+}
 
+;
 function after($this, $inthat)
 {
     if (!is_bool(strpos($inthat, $this)))
         return substr($inthat, strpos($inthat, $this) + strlen($this));
-};
+}
+
+;
 
 function getPlayerSkin($input, $list)
 {
@@ -180,8 +183,19 @@ if (isset($_GET["ID"])) {
                 <h2 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo $row["name"]; ?></h2>
             </div>
             <div class="panel-body">
-
-            <center><img src="assets/img/uniform/<?php echo getPlayerSkin($row['civ_gear'],$playerSkins);?>.jpg" />
+            <?php
+            $get_skin_civ = $row['civ_gear'];
+            if ($get_skin_civ == "\"[]\"") {
+                $get_skin_civ = "U_C_Poloshirt_stripped";
+            } else {
+                $get_skin_civ = substr($get_skin_civ, 3);
+                $get_skin_civ = substr($get_skin_civ, 0, strpos($get_skin_civ, "`"));
+                if (empty($get_skin_civ)) {
+                    $get_skin_civ = "U_C_Poloshirt_stripped";
+                }
+            }
+            ?>
+            <center><img src="assets/img/uniform/<?php echo $get_skin_civ; ?>.jpg"/>
             <?php
             $playersID = $row["playerid"];
             $alias = str_replace('"[`', "", $row["aliases"]);
