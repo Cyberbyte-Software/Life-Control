@@ -69,7 +69,7 @@ if (isset($_GET["ID"])) {
             <?php $carPic = getPic($row["classname"]); ?>
             <center><img src="assets/img/cars/<?php echo $carPic; ?>.jpg"/>
             <?php
-            echo "<h4>" . $lang['owner'] . ": " . nameID($row["pid"]) . "</h4>";
+            echo "<h4>" . $lang['owner'] . ": <a href=\"editPlayer.php?ID=" .uID($row["pid"])."\">" . nameID($row["pid"]) . "</a></h4>";
             echo "<h4>" . $lang['class'] . ": " . carName($row["classname"]) . "</h4>";
             echo "<h4>" . $lang['plate'] . ": " . $row["plate"] . "</h4>";
 

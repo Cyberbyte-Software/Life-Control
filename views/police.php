@@ -19,7 +19,7 @@ if (!$db_connection->connect_errno) {
     $start_from = ($page - 1) * $page_rows;
     $max = 'LIMIT ' . $start_from . ',' . $page_rows;
 
-    $sql = "SELECT `name`,`coplevel`,`playerid` FROM `players` WHERE `coplevel` >= '1' ORDER BY `coplevel` " . $max . " ;";
+    $sql = "SELECT `name`,`coplevel`,`playerid`,`uid` FROM `players` WHERE `coplevel` >= '1' ORDER BY `coplevel` " . $max . " ;";
     $result_of_query = $db_connection->query($sql);
     if ($result_of_query->num_rows > 0) {
         ?>
@@ -59,7 +59,7 @@ if (!$db_connection->connect_errno) {
                         echo "<td>" . $row["playerid"] . "</td>";
                         echo "<td>" . $row["coplevel"] . "</td>";
                         if ($_SESSION['user_level'] >= P_EDIT_PLAYER) {
-                            echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=" . $row["playerid"] . "'>";
+                            echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=" . $row["uid"] . "'>";
                             echo "<i class='fa fa-pencil'></i></a></td>";
                         }
                         echo "</tr>";
