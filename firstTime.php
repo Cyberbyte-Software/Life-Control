@@ -44,6 +44,16 @@ if (isset($_POST['user_name']) && isset($_POST['user_email']) && isset($_POST['u
     mysqli_query($link, "ALTER TABLE `users`
     MODIFY `user_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index',AUTO_INCREMENT=5;") or die(mysqli_error($link));
 
+	mysqli_query($link, "CREATE TABLE IF NOT EXISTS `notes` (
+	  `note_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing note_id of each user, unique index',
+	  `uid` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	  `staff_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	  `note_text` varchar(255) NOT NULL,
+	  `note_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	  PRIMARY KEY (`note_id`),
+	  UNIQUE KEY `note_id` (`note_id`)
+    ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+
     mysqli_close($link);
     header("Location: index.php?setup=1");
 } else {

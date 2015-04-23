@@ -10,5 +10,5 @@ if ($login->isUserLoggedIn() == true) {
     if($_SESSION['user_level'] < P_EDIT_PLAYER) $page = "views/errors/noPerm.php"; else $page = "views/editPlayer.php";
     include("views/template.php");
 } else {
-    include("views/not_logged_in.php");
+    include("views/login.php");
 }

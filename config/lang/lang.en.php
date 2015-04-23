@@ -163,4 +163,10 @@ $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
 $lang['ship'] = 'Ship';
 $lang['store'] = 'Store';
-?>
+$lang['add'] = 'Add';
+$lang['new'] = 'New';
+$lang['note'] = 'Note';
+$lang['username'] = 'Username';
+$lang['update'] = 'An update is available';
+$lang['noRec'] = 'No records found';
+$lang['view'] = 'View';

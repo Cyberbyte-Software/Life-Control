@@ -25,30 +25,30 @@ if (isset($_POST["staffName"])) {
         $this->errors[] = "Database connection problem.";
     }
 }
-?>
-<!-- Page Heading -->
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?php echo $lang['staff']; ?>
-            <small><?php echo " " . $lang['editor']; ?></small>
-        </h1>
-    </div>
-</div>
-<!-- /.row -->
-<div class="col-md-4"></div>
-<div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-users fa-fw"></i><?php echo " " . $lang['staff']; ?></h3>
+if (!$db_connection->connect_errno) {
+    $sql = 'SELECT * FROM `users` WHERE `user_id` ="' . $uId . '";';
+    $result_of_query = $db_connection->query($sql);
+    if ($result_of_query->num_rows > 0) {
+        ?>
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <?php echo $lang['staff']; ?>
+                    <small><?php echo " " . $lang['editor']; ?></small>
+                </h1>
+            </div>
         </div>
-        <div class="panel-body">
-            <form method="post" action="editStaff.php?ID=<?php echo $uId; ?>" name="editform">
-                <?php
-                if (!$db_connection->connect_errno) {
-                    $sql = 'SELECT * FROM `users` WHERE `user_id` ="' . $uId . '";';
-                    $result_of_query = $db_connection->query($sql);
-                    if ($result_of_query->num_rows > 0) {
+        <!-- /.row -->
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-users fa-fw"></i><?php echo " " . $lang['staff']; ?></h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="editStaff.php?ID=<?php echo $uId; ?>" name="editform">
+                        <?php
                         while ($row = mysqli_fetch_assoc($result_of_query)) {
                             $playersID = $row["playerid"];
                             echo "<center>";
@@ -64,20 +64,22 @@ if (isset($_POST["staffName"])) {
                             echo "</center>";
 
                         };
-                    } else {
-                        echo "<center><h1 style='color:red'>ERROR NO RESULTS</h1></center>";
-                    }
 
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
-                echo "<input id='user_id' type='hidden' name='user_id' value='" . $uId . "'>";
-                echo "<center><input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='" . $lang['subChange'] . "'>
-                <input class='btn btn-lg btn-danger'  type='submit'  name='ban' value='" . $lang['ban'] . "'></center>";
-
-                ?>
-            </form>
+                        echo "<input id='user_id' type='hidden' name='user_id' value='" . $uId . "'>";
+                        echo "<center><input class='btn btn-lg btn-primary'  type='submit'  name='edit' value='" . $lang['subChange'] . "'>";
+                        if ($_SESSION['user_id'] <> $uId)
+                            echo "  <input class='btn btn-lg btn-danger' type='submit'  name='ban' value='" . $lang['ban'] . "'>";
+                        ?>
+                        </center>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-								
+    <?php
+    } else {
+        include("views/Errors/noID.php");
+    }
+
+} else {
+    $this->errors[] = "Database connection problem.";
+}

@@ -51,7 +51,7 @@ $obj = json_decode($json);
         $version = include 'config/version.php';
         if (isset($obj->version))
             if (floatval($version['version']) < floatval($obj->version) && !DEV && $_SESSION['user_level'] >= P_VIEW_UPDATE)
-                echo '</a><a href="' . $obj->git . '" target="_blank" class="logosmall"> An update is available V'
+                echo '</a><a href="' . $obj->git . '" target="_blank" class="logosmall">'.$lang['update'].' V'
                     .$obj->version. '</a><a class="logosmall pull-right">';
         ?>
         <b>Copyright &copy; 2015 Life Control <?php if (isset($version['version'])) echo $version['version']; ?> by
@@ -157,7 +157,7 @@ $obj = json_decode($json);
                     </a>
                     <ul class="dropdown-menu extended tasks-bar">
                         <li>
-                            <a href="register.php">
+                            <a href="newUser.php">
                                 <i class="fa fa-fw fa-cogs"></i>
                                 <span><?php echo $lang['navNewUser']; ?></span>
                             </a>
@@ -235,7 +235,7 @@ $obj = json_decode($json);
         }
     });
 </script>
-<?php if ($page == "views/logged_in.php") { ?>
+<?php if ($page == "views/dashboard.php") { ?>
     <script type="text/javascript">
         $(document).ready(function () {
             var unique_id = $.gritter.add({

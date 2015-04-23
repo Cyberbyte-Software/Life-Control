@@ -9,5 +9,5 @@ $page = "views/profile.php";
 if ($login->isUserLoggedIn() == true) {
     include("views/template.php");
 } else {
-    include("views/not_logged_in.php");
+    include("views/login.php");
 }

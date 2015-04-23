@@ -9,5 +9,5 @@ if ($login->isUserLoggedIn() == true) {
     if($_SESSION['user_level'] < P_EDIT_VEHICLES) $page = "views/errors/noPerm.php"; else $page = "views/editVeh.php";
     include("views/template.php");
 } else {
-    include("views/not_logged_in.php");
+    include("views/login.php");
 }
