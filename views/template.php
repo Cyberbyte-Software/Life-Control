@@ -39,170 +39,171 @@ $obj = json_decode($json);
 </head>
 
 <body>
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-      <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.php" class="logo"><b>Life Control</b></a>
-            <!--logo end-->
-			<a href="index.php" class="logosmall pull-right"><b>Copyright &copy; 2015 Life Control <?php if(isset($obj->version)) echo $obj->version;?> by Cyberbyte Studios</b></a>
-        </header>
-      <!--header end-->
-      
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
-              
-              	  <p class="centered"><a href="profile.php"><img src="<?php echo 'assets/img/profile/'.$_SESSION['user_profile'].'.jpg'; ?>" class="img-circle" width="60"></a></p>
-					<h5 class="centered">
-						<?php echo $_SESSION['user_name']; ?>
-					</h5>
+<!--header start-->
+<header class="header black-bg">
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <!--logo start-->
+    <a href="index.php" class="logo"><b>Life Control</b></a>
+    <!--logo end-->
+    <a class="logosmall pull-right"><?php
+        $version = include 'config/version.php';
+        if (isset($obj->version))
+            if (floatval($version['version']) < floatval($obj->version) && !DEV && $_SESSION['user_level'] >= P_VIEW_UPDATE)
+                echo '</a><a href="' . $obj->git . '" target="_blank" class="logosmall"> An update is available V'
+                    .$obj->version. '</a><a class="logosmall pull-right">';
+        ?>
+        <b>Copyright &copy; 2015 Life Control <?php if (isset($version['version'])) echo $version['version']; ?> by
+            Cyberbyte Studios</b></a>
+</header>
+<!--header end-->
 
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+
+            <p class="centered"><a href="profile.php"><img
+                        src="<?php echo 'assets/img/profile/' . $_SESSION['user_profile'] . '.jpg'; ?>"
+                        class="img-circle" width="60"></a></p>
+            <h5 class="centered">
+                <?php echo $_SESSION['user_name']; ?>
+            </h5>
+
+            <li>
+                <a href="index.php">
+                    <i class="fa fa-dashboard"></i>
+                    <span><?php echo $lang['navDashboard']; ?></span>
+                </a>
+            </li>
+
+            <li>
+                <a href="players.php">
+                    <i class="fa fa-fw fa-child "></i>
+                    <span><?php echo $lang['players']; ?></span>
+                </a>
+            </li>
+
+            <?php
+            if ($_SESSION['user_level'] >= P_VIEW_VEHICLES) {
+                ?>
                 <li>
-                    <a href="index.php">
-                        <i class="fa fa-dashboard"></i>
-                        <span><?php echo $lang['navDashboard']; ?></span>
+                    <a href="vehicles.php">
+                        <i class="fa fa-fw fa-car"></i>
+                        <span><?php echo $lang['vehicles']; ?></span>
                     </a>
                 </li>
-
+            <?php
+            }
+            if ($_SESSION['user_level'] >= P_VIEW_HOUSES) {
+                ?>
                 <li>
-                    <a href="players.php">
-                        <i class="fa fa-fw fa-child "></i>
-                        <span><?php echo $lang['players']; ?></span>
+                    <a href="houses.php">
+                        <i class="fa fa-fw fa-home"></i>
+                        <span><?php echo $lang['houses']; ?></span>
                     </a>
                 </li>
+            <?php
+            }
+            if ($_SESSION['user_level'] >= P_VIEW_GANGS) {
+                ?>
+                <li>
+                    <a href="gangs.php">
+                        <i class="fa fa-fw fa-sitemap"></i>
+                        <span><?php echo $lang['gangs']; ?></span>
+                    </a>
+                </li>
+                <?php
+                if (alits_life_4 == TRUE && $_SESSION['user_level'] >= P_VIEW_WANTED) {
+                    ?>
+                    <li>
+                        <a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i><?php echo " " . $lang['wanted']; ?>
+                        </a>
+                    </li>
+                <?php
+                }
+            }
+            ?>
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
+                    <i class="fa fa-tasks"></i>
+                    <span><?php echo $lang['gameServers']; ?></span>
+                </a>
+                <ul class="dropdown-menu extended tasks-bar">
+                    <?php if (Is_Array($gameServers) && enable_game_query): ?>
+                        <?php foreach ($gameServers as $gameServer): ?>
+                            <li style="colour:green;">
+                                <a href="curPlayers.php?IP=<?php echo $gameServer[2]; ?>&Port=<?php echo $gameServer[1]; ?>">
+                                    <i class="fa fa-cog"></i>
+                                    <span><?php echo $gameServer[0]; ?></span>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </ul>
+            </li>
+            <?php
 
-                <?php
-                if ($_SESSION['user_level'] >= P_VIEW_VEHICLES) {
-                    ?>
-                    <li>
-                        <a href="vehicles.php">
-                            <i class="fa fa-fw fa-car"></i>
-                            <span><?php echo $lang['vehicles']; ?></span>
-                        </a>
-                    </li>
-                <?php
-                }
-                if ($_SESSION['user_level'] >= P_VIEW_HOUSES) {
-                    ?>
-                    <li>
-                        <a href="houses.php">
-                            <i class="fa fa-fw fa-home"></i>
-                            <span><?php echo $lang['houses']; ?></span>
-                        </a>
-                    </li>
-                <?php
-                }
-                if ($_SESSION['user_level'] >= P_VIEW_GANGS) {
-                    ?>
-                    <li>
-                        <a href="gangs.php">
-                            <i class="fa fa-fw fa-sitemap"></i>
-                            <span><?php echo $lang['gangs'];?></span>
-                        </a>
-                    </li>
-                    <?php
-                    if (alits_life_4 == TRUE && $_SESSION['user_level'] >= P_VIEW_WANTED) {
-                        ?>
-                        <li>
-                            <a href="wanted.php"><i class="fa fa-fw fa-list-ul"></i><?php echo " " . $lang['wanted']; ?>
-                            </a>
-                        </li>
-                    <?php
-                    }
-                }
+            ?>
+            <?php
+            if ($_SESSION['user_level'] >= P_EDIT_STAFF) {
                 ?>
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
                         <i class="fa fa-tasks"></i>
-                        <span><?php echo $lang['gameServers']; ?></span>
+                        <span><?php echo $lang['navAdmin']; ?></span>
                     </a>
                     <ul class="dropdown-menu extended tasks-bar">
-                        <?php if (Is_Array($gameServers) && enable_game_query): ?>
-                            <?php foreach ($gameServers as $gameServer): ?>
-                                <li style="colour:green;">
-                                    <a href="curPlayers.php?IP=<?php echo $gameServer[2]; ?>&Port=<?php echo $gameServer[1]; ?>">
-                                        <i class="fa fa-cog"></i>
-                                        <span><?php echo $gameServer[0]; ?></span>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                        <li>
+                            <a href="register.php">
+                                <i class="fa fa-fw fa-cogs"></i>
+                                <span><?php echo $lang['navNewUser']; ?></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="staff.php">
+                                <i class="fa fa-fw fa-user"></i>
+                                <span><?php echo $lang['staff']; ?></span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <?php
-
+            <?php
+            } elseif ($_SESSION['user_level'] >= P_VIEW_STAFF) {
                 ?>
-                <?php
-                if ($_SESSION['user_level'] >= P_EDIT_STAFF) {
-                    ?>
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
-                            <i class="fa fa-tasks"></i>
-                            <span><?php echo $lang['navAdmin']; ?></span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <li>
-                                <a href="register.php">
-                                    <i class="fa fa-fw fa-cogs"></i>
-                                    <span><?php echo $lang['navNewUser']; ?></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="staff.php">
-                                    <i class="fa fa-fw fa-user"></i>
-                                    <span><?php echo $lang['staff']; ?></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php
-                } elseif ($_SESSION['user_level'] >= P_VIEW_STAFF) {
-                    ?>
-                    <li>
-                        <a href="staff.php">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span><?php echo $lang['staff']; ?></span>
-                        </a>
-                    </li>
-                <?php } ?>
                 <li>
-                    <a href="profile.php">
+                    <a href="staff.php">
                         <i class="fa fa-fw fa-user"></i>
-                        <span><?php echo $lang['navProfile']; ?></span>
+                        <span><?php echo $lang['staff']; ?></span>
                     </a>
                 </li>
-                <li>
-                    <a href="index.php?logout"><i
-                            class="fa fa-fw fa-power-off"></i><?php echo " " . $lang['navLogOut']; ?></a>
-                </li>
+            <?php } ?>
+            <li>
+                <a href="profile.php">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span><?php echo $lang['navProfile']; ?></span>
+                </a>
+            </li>
+            <li>
+                <a href="index.php?logout"><i
+                        class="fa fa-fw fa-power-off"></i><?php echo " " . $lang['navLogOut']; ?></a>
+            </li>
 
-            </ul>
-            <!-- sidebar menu end-->
-        </div>
-    </aside>
-    <!--sidebar end-->
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->
 
-    <!-- **********************************************************************************************************************************************************
-    MAIN CONTENT stayDownFooter
-    *********************************************************************************************************************************************************** -->
-    <!--main content start-->
-    <section id="main-content">
-        <section class="wrapper">
-            <?php include($page) ?>
-        </section>
-
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <?php include($page) ?>
     </section>
+
+</section>
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->

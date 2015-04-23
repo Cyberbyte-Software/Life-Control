@@ -48,8 +48,9 @@ $lang['ban'] = 'Ban';
 */
 $lang['error'] = 'Error';
 $lang['dbError'] = 'Database verbindings problemen.';
-$lang['idNotSet'] = 'ID NIET INGESTELD';
+$lang['idNotSet'] = 'ID neit ingesteld';
 $lang['noRes'] = 'ERROR GEEN RESULTATEN';
+$lang['noPerm'] = 'Het spijt me, u hebt geen toestemming om deze pagina te bekijken';
 
 /*
 ---------------
@@ -120,6 +121,7 @@ $lang['plate'] = 'Plate';
 $lang['alive'] = 'Alive';
 $lang['colour'] = 'Colour';
 $lang['class'] = 'Class';
+$lang['uid'] = 'uID';
 
 /*
 ---------------------------
@@ -139,7 +141,6 @@ $lang['time'] = 'Tijd';
 */
 $lang['setup'] = 'De database is nu opgezet';
 $lang['upgrade'] = 'De database is nu bijgewerkt';
-$lang['noPerm'] = 'Het spijt me, u hebt geen toestemming om deze pagina te bekijken';
 $lang['Kick'] = 'Kick';
 $lang['topRich'] = 'Top Ten Richest Players';
 $lang['noHouse'] = 'No Houses';
@@ -159,4 +160,5 @@ $lang['blacklisted'] = 'Blacklisted';
 $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
 $lang['ship'] = 'Ship';
+$lang['noMessage'] = 'No messages';
 ?>
