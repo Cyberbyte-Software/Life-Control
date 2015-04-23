@@ -1,4 +1,4 @@
-<?php //include("config/lang/module.php");
+<?php
 include("gfunctions.php");
 
 $arrayCount = count($gameServers);

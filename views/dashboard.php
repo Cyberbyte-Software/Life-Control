@@ -10,6 +10,15 @@ if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
 }
 
+if (isset($_GET['setup'])) {
+if ($_GET['setup'] == 1) {
+    $message = $lang['setup'];
+} elseif ($_GET['setup'] == 2) {
+    $message = $lang['upgrade'];
+} else $message = $_GET['setup']; }
+
+if (isset($obj->DBversion)) if (floatval($version['DBversion']) < floatval($obj->DBversion) && $_SESSION['user_level'] >= P_VIEW_UPDATE && !DEV)
+    $message = 'There is a database upgrade avalible, update your software and go to <a href="/update.php">update.php</a><br>Don\'t want this message set P_VIEW_UPDATE to 99'
 ?>
 <!-- Page Heading -->
 <div class="row">
@@ -20,6 +29,7 @@ if (!$db_connection->set_charset("utf8")) {
         </h1>
     </div>
 </div>
+<?php if (isset($message)) echo '<div class="alert alert-info" role="alert">' . $message . '</div>';?>
 
 <div class="row">
     <div class="col-lg-4">

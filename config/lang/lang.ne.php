@@ -161,4 +161,12 @@ $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
 $lang['ship'] = 'Ship';
 $lang['noMessage'] = 'No messages';
-?>
+$lang['add'] = 'Add';
+$lang['new'] = 'New';
+$lang['note'] = 'Note';
+$lang['username'] = 'Username';
+$lang['update'] = 'An update is available';
+$lang['noRec'] = 'No records found';
+$lang['view'] = 'View';
+$lang['noNotes'] = 'No notes for this player';
+$lang['updated'] = 'Updated';

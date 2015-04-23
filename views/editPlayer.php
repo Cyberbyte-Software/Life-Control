@@ -2,6 +2,55 @@
 require_once("config/carNames.php");
 require_once("config/license.php");
 
+function updated()
+{
+    echo "<div class='row'><div class='col-lg-12'>";
+    echo "<div class='alert alert-danger alert-dismissable'>";
+    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+    echo "<i class='fa fa-info-circle'></i> File updated</div></div></div>";//todo: use $lang['updated']
+}
+
+function stripArray($input)
+{
+    $array = array();
+    $array = explode("],[", $input);
+    $array = str_replace('"[[', "", $array);
+    $array = str_replace(']]"', "", $array);
+    $array = str_replace('`', "", $array);
+    return $array;
+}
+
+//Thanks PHP Doc's For these two Function (User: biohazard dot ge at gmail dot com ¶ )
+function before($this, $inthat)
+{
+    return substr($inthat, 0, strpos($inthat, $this));
+}
+
+;
+function after($this, $inthat)
+{
+    if (!is_bool(strpos($inthat, $this)))
+        return substr($inthat, strpos($inthat, $this) + strlen($this));
+}
+
+;
+
+function getPlayerSkin($input, $list)
+{
+    if ($input !== '"[]"') {
+        $name = after('"[`', $input);
+        $name = before('`', $name);
+
+        if (in_array($name, $list)) {
+            return $name;
+        } else {
+            return "Default";
+        }
+    } else {
+        return "Default";
+    }
+};
+
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
@@ -24,184 +73,102 @@ if (isset($_GET["ID"])) {
         $pID = $row["playerid"];
     }
     if (isset($_POST["editType"])) {
-        switch ($_POST["editType"]) {
-            case "civ_licenses":
-                $civ_licenses_value = $_POST["civ_licenses_value"];
-                $update = "UPDATE players SET civ_licenses = '" . $civ_licenses_value . "' WHERE uid = '" . $uID . "' ";
-                if (!$db_connection->connect_errno) {
+        if (!$db_connection->connect_errno) {
+            switch ($_POST["editType"]) {
+                case "civ_licenses":
+                    $civ_licenses_value = $_POST["civ_licenses_value"];
+                    $update = "UPDATE players SET civ_licenses = '" . $civ_licenses_value . "' WHERE uid = '" . $uID . "' ";
                     $result_of_query = $db_connection->query($update);
-                    echo "<div class='row'>";
-                    echo "<div class='col-lg-12'>";
-                    echo "<div class='alert alert-danger alert-dismissable'>";
-                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                    echo "<i class='fa fa-info-circle'></i> UPDATED";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
+                    updated();
+                    break;
 
-                break;
-            case "cop_licenses":
-                $cop_licenses_value = $_POST["cop_licenses_value"];
-                $update = "UPDATE players SET cop_licenses = '" . $cop_licenses_value . "' WHERE uid = '" . $uID . "' ";
-                if (!$db_connection->connect_errno) {
+                case "cop_licenses":
+                    $cop_licenses_value = $_POST["cop_licenses_value"];
+                    $update = "UPDATE players SET cop_licenses = '" . $cop_licenses_value . "' WHERE uid = '" . $uID . "' ";
                     $result_of_query = $db_connection->query($update);
-                    echo "<div class='row'>";
-                    echo "<div class='col-lg-12'>";
-                    echo "<div class='alert alert-danger alert-dismissable'>";
-                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                    echo "<i class='fa fa-info-circle'></i> UPDATED";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
-                break;
-            case "med_licenses":
-                $med_licenses_value = $_POST["med_licenses_value"];
-                $update = "UPDATE players SET med_licenses = '" . $med_licenses_value . "' WHERE uid = '" . $uID . "' ";
-                if (!$db_connection->connect_errno) {
+                    updated();
+                    break;
+
+                case "med_licenses":
+                    $med_licenses_value = $_POST["med_licenses_value"];
+                    $update = "UPDATE players SET med_licenses = '" . $med_licenses_value . "' WHERE uid = '" . $uID . "' ";
                     $result_of_query = $db_connection->query($update);
-                    echo "<div class='row'>";
-                    echo "<div class='col-lg-12'>";
-                    echo "<div class='alert alert-danger alert-dismissable'>";
-                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                    echo "<i class='fa fa-info-circle'></i> UPDATED";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
-                break;
-            case "civ_inv":
-                $civ_gear_value = $_POST["civ_inv_value"];
-                $update = "UPDATE players SET civ_gear = '" . $civ_gear_value . "' WHERE uid = '" . $uID . "' ";
-                if (!$db_connection->connect_errno) {
+                    updated();
+                    break;
+
+                case "civ_inv":
+                    $civ_gear_value = $_POST["civ_inv_value"];
+                    $update = "UPDATE players SET civ_gear = '" . $civ_gear_value . "' WHERE uid = '" . $uID . "' ";
                     $result_of_query = $db_connection->query($update);
-                    echo "<div class='row'>";
-                    echo "<div class='col-lg-12'>";
-                    echo "<div class='alert alert-danger alert-dismissable'>";
-                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                    echo "<i class='fa fa-info-circle'></i> UPDATED";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
-                break;
-            case "cop_inv":
-                $cop_gear_value = $_POST["cop_inv_value"];
-                $update = "UPDATE players SET cop_gear = '" . $cop_gear_value . "' WHERE uid = '" . $uID . "' ";
-                if (!$db_connection->connect_errno) {
+                    updated();
+                    break;
+
+                case "cop_inv":
+                    $cop_gear_value = $_POST["cop_inv_value"];
+                    $update = "UPDATE players SET cop_gear = '" . $cop_gear_value . "' WHERE uid = '" . $uID . "' ";
                     $result_of_query = $db_connection->query($update);
-                    echo "<div class='row'>";
-                    echo "<div class='col-lg-12'>";
-                    echo "<div class='alert alert-danger alert-dismissable'>";
-                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                    echo "<i class='fa fa-info-circle'></i> UPDATED";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
-                break;
-            case "med_inv":
-                $med_gear_value = $_POST["med_inv_value"];
-                $update = "UPDATE players SET med_gear = '" . $med_gear_value . "' WHERE uid = '" . $uID . "' ";
-                if (!$db_connection->connect_errno) {
+                    updated();
+                    break;
+
+                case "med_inv":
+                    $med_gear_value = $_POST["med_inv_value"];
+                    $update = "UPDATE players SET med_gear = '" . $med_gear_value . "' WHERE uid = '" . $uID . "' ";
                     $result_of_query = $db_connection->query($update);
-                    echo "<div class='row'>";
-                    echo "<div class='col-lg-12'>";
-                    echo "<div class='alert alert-danger alert-dismissable'>";
-                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                    echo "<i class='fa fa-info-circle'></i> UPDATED";
-                    echo "</div>";
-                    echo "</div>";
-                    echo "</div>";
-                } else {
-                    $this->errors[] = "Database connection problem.";
-                }
-                break;
-            case "player_edit":
-                switch ($_SESSION['user_level']) {
-                    case 1:
-                        $coplevel = intval($_POST["player_coplvl"]);
-                        $mediclevel = intval($_POST["player_medlvl"]);
-                        $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "' WHERE uid = '" . $uID . "' ";
-                        if (!$db_connection->connect_errno) {
+                    updated();
+                    break;
+
+                case "player_edit":
+                    switch ($_SESSION['user_level']) {
+                        case 1:
+                            $coplevel = intval($_POST["player_coplvl"]);
+                            $mediclevel = intval($_POST["player_medlvl"]);
+                            $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "' WHERE uid = '" . $uID . "' ";
                             $result_of_query = $db_connection->query($update);
-                            echo "<div class='row'>";
-                            echo "<div class='col-lg-12'>";
-                            echo "<div class='alert alert-danger alert-dismissable'>";
-                            echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                            echo "<i class='fa fa-info-circle'></i> UPDATED";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                        } else {
-                            $this->errors[] = "Database connection problem.";
-                        }
-                        break;
-                    case 2:
-                        $coplevel = intval($_POST["player_coplvl"]);
-                        $mediclevel = intval($_POST["player_medlvl"]);
-                        $donatorlvl = intval($_POST["player_donlvl"]);
-                        $cash = intval($_POST["player_cash"]);
-                        $bankacc = intval($_POST["player_bank"]);
-                        $arrested = intval($_POST["player_arrest"]);
-                        $blacklist = intval($_POST["player_blacklist"]);
-                        $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "', donatorlvl = '" . $donatorlvl . "', cash = '" . $cash . "', bankacc = '" . $bankacc . "', arrested = '" . $arrested . "', blacklist = '" . $blacklist . "' WHERE uid = '" . $uID . "' ";
-                        if (!$db_connection->connect_errno) {
+                            updated();
+                            break;
+
+                        case 2:
+                            $coplevel = intval($_POST["player_coplvl"]);
+                            $mediclevel = intval($_POST["player_medlvl"]);
+                            $donatorlvl = intval($_POST["player_donlvl"]);
+                            $cash = intval($_POST["player_cash"]);
+                            $bankacc = intval($_POST["player_bank"]);
+                            $arrested = intval($_POST["player_arrest"]);
+                            $blacklist = intval($_POST["player_blacklist"]);
+                            $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "', donatorlvl = '" . $donatorlvl . "', cash = '" . $cash . "', bankacc = '" . $bankacc . "', arrested = '" . $arrested . "', blacklist = '" . $blacklist . "' WHERE uid = '" . $uID . "' ";
                             $result_of_query = $db_connection->query($update);
-                            echo "<div class='row'>";
-                            echo "<div class='col-lg-12'>";
-                            echo "<div class='alert alert-danger alert-dismissable'>";
-                            echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                            echo "<i class='fa fa-info-circle'></i> UPDATED";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                        } else {
-                            $this->errors[] = "Database connection problem.";
-                        }
-                        break;
-                    case 3:
-                        $coplevel = intval($_POST["player_coplvl"]);
-                        $mediclevel = intval($_POST["player_medlvl"]);
-                        $donatorlvl = intval($_POST["player_donlvl"]);
-                        $adminlevel = intval($_POST["player_adminlvl"]);
-                        $cash = intval($_POST["player_cash"]);
-                        $bankacc = intval($_POST["player_bank"]);
-                        $arrested = intval($_POST["player_arrest"]);
-                        $blacklist = intval($_POST["player_blacklist"]);
-                        $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "', donatorlvl = '" . $donatorlvl . "', adminlevel = '" . $adminlevel . "', cash = '" . $cash . "', bankacc = '" . $bankacc . "', arrested = '" . $arrested . "', blacklist = '" . $blacklist . "' WHERE uid = '" . $uID . "' ";
-                        if (!$db_connection->connect_errno) {
+                            updated();
+
+                            break;
+                        case 3:
+                            $coplevel = intval($_POST["player_coplvl"]);
+                            $mediclevel = intval($_POST["player_medlvl"]);
+                            $donatorlvl = intval($_POST["player_donlvl"]);
+                            $adminlevel = intval($_POST["player_adminlvl"]);
+                            $cash = intval($_POST["player_cash"]);
+                            $bankacc = intval($_POST["player_bank"]);
+                            $arrested = intval($_POST["player_arrest"]);
+                            $blacklist = intval($_POST["player_blacklist"]);
+                            $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "', donatorlvl = '" . $donatorlvl . "', adminlevel = '" . $adminlevel . "', cash = '" . $cash . "', bankacc = '" . $bankacc . "', arrested = '" . $arrested . "', blacklist = '" . $blacklist . "' WHERE uid = '" . $uID . "' ";
                             $result_of_query = $db_connection->query($update);
-                            echo "<div class='row'>";
-                            echo "<div class='col-lg-12'>";
-                            echo "<div class='alert alert-danger alert-dismissable'>";
-                            echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-                            echo "<i class='fa fa-info-circle'></i> UPDATED";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                        } else {
-                            $this->errors[] = "Database connection problem.";
-                        }
-                        break;
-                }
-                break;
+                            updated();
+                            break;
+                    }
+                    break;
+                case "new_note":
+                    $note_text = $_POST["note_text"];
+                    $update = "INSERT INTO `notes` (`uid`, `staff_name`, `note_text`, `note_updated`) VALUES ('" . $uID . "', '" . $_SESSION['user_name'] . "', '" . $note_text . "', CURRENT_TIMESTAMP); ";
+                    $result_of_query = $db_connection->query($update);
+                    updated();
+                    break;
+            }
+
+        } else {
+            $this->errors[] = "Database connection problem.";
         }
     }
 
     ?>
-
     <!-- /.row -->
     <?php
     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
@@ -230,18 +197,22 @@ if (isset($_GET["ID"])) {
             <center><img src="assets/img/uniform/<?php echo $get_skin_civ; ?>.jpg"/>
             <?php
             $playersID = $row["playerid"];
+            $alias = str_replace('"[`', "", $row["aliases"]);
+            $alias = str_replace('`]"', "", $alias);
 
-            echo "<h4>" . $lang['aliases'] . ": " . $row["aliases"] . "</h4>";
+            echo "<h4>" . $lang['aliases'] . ": " . $alias . "</h4>";
             echo "<h4>" . $lang['uid'] . ": " . $row["uid"] . "</h4>";
             echo "<h4>" . $lang['playerID'] . ": " . $pID . "</h4>";
             echo "<h4>" . $lang['GUID'] . ": " . $pGID . "</h4>";
             ?>
+
             <span class="fa fa-2x fa-money">
-									<h4> <?php echo $lang['cash'] . ": " . $row["cash"]; ?> </h4>
-								</span>
+                <h4> <?php echo $lang['cash'] . ": " . $row["cash"]; ?> </h4>
+            </span>
+
             <span style="padding-left:15px;" class="fa fa-2x fa-bank">
-									<h4> <?php echo $lang['bank'] . ": " . $row["bankacc"]; ?> </h4>
-								</span>
+            <h4> <?php echo $lang['bank'] . ": " . $row["bankacc"]; ?> </h4>
+            </span>
             <?php
             if ($row["arrested"] == 0) {
                 echo "<h4><span class='label label-success'>" . $lang["not"] . " " . $lang["arrested"] . "</span> ";
@@ -254,11 +225,12 @@ if (isset($_GET["ID"])) {
             } else {
                 echo " <span class='label label-danger'>" . $lang["blacklisted"] . "</span></h4>";
             }
-            ?>
-            <a data-toggle="modal" href="#edit_player" class="btn btn-primary btn-xs" style="float: right;">
-                <i class="fa fa-pencil"></i>
-            </a>
-        <?php
+
+            if ($_SESSION['user_level'] >= P_EDIT_PLAYER) {
+                echo '<a data-toggle="modal" href="#edit_player" class="btn btn-primary btn-xs" style="float: right;">';
+                echo '<i class="fa fa-pencil"></i>';
+                echo '</a>';
+            }
         }
     } else echo "<h1>" . $lang['noPlayer'] . "<h1>";
     echo "</center>";
@@ -302,62 +274,65 @@ if (isset($_GET["ID"])) {
                         <h3> <?php echo $lang['admin'] . ": " . $row["adminlevel"]; ?> </h3>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 box0">
-                    <div class="box1">
-                        <a href="http://steamcommunity.com/profiles/<?php echo $row["playerid"]; ?>"
-                           target="_blank"><span class="fa fa-3x fa-steam"></span></a>
-
-                        <h3>Steam</h3>
-                    </div>
-                </div>
+                <?php
+                if ($_SESSION['user_level'] >= P_VIEW_STEAM) {
+                    echo '<div class="col-md-2 col-sm-2 box0">';
+                    echo '<div class="box1">';
+                    echo '<a href="http://steamcommunity.com/profiles/' . $row["playerid"] . '"';
+                    echo 'target="_blank"><span class="fa fa-3x fa-steam"></span></a>';
+                    echo '<h3>Steam</h3>';
+                    echo '</div>';
+                    echo '</div>';
+                } ?>
             </div>
         <?php
         }
         ?>
 
+
         <div class="panel panel-default" style="float:left; width:100%; margin:0 auto;">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="dropdown active">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang['licenses'];?> <b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang['licenses']; ?> <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#civ_lic" data-toggle="tab"><?php echo $lang['civ'];?></a></li>
-                        <li><a href="#medic_lic" data-toggle="tab"><?php echo $lang['medic'];?></a></li>
-                        <li><a href="#police_lic" data-toggle="tab"><?php echo $lang['police'];?></a></li>
+                        <li><a href="#civ_lic" data-toggle="tab"><?php echo $lang['civ']; ?></a></li>
+                        <li><a href="#medic_lic" data-toggle="tab"><?php echo $lang['medic']; ?></a></li>
+                        <li><a href="#police_lic" data-toggle="tab"><?php echo $lang['police']; ?></a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang['inventory'];?> <b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang['inventory']; ?> <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#civ_inv" data-toggle="tab"><?php echo $lang['civ'];?></a></li>
-                        <li><a href="#medic_inv" data-toggle="tab"><?php echo $lang['medic'];?></a></li>
-                        <li><a href="#police_inv" data-toggle="tab"><?php echo $lang['police'];?></a></li>
+                        <li><a href="#civ_inv" data-toggle="tab"><?php echo $lang['civ']; ?></a></li>
+                        <li><a href="#medic_inv" data-toggle="tab"><?php echo $lang['medic']; ?></a></li>
+                        <li><a href="#police_inv" data-toggle="tab"><?php echo $lang['police']; ?></a></li>
                     </ul>
                 </li>
-                <li><a href="#house" data-toggle="tab"><?php echo $lang['houses'];?></a></li>
-                <?php if ($_SESSION['user_level'] >= P_VIEW_VEHICLES) echo '<li><a href="#veh" data-toggle="tab">' . $lang['vehicles'] . '</a></li>' ?>
+                <li><a href="#house" data-toggle="tab"><?php echo $lang['houses']; ?></a></li>
+                <?php
+                if ($_SESSION['user_level'] >= P_VIEW_VEHICLES) echo '<li><a href="#veh" data-toggle="tab">' . $lang['vehicles'] . '</a></li>';
+                if ($_SESSION['user_level'] >= P_VIEW_NOTE) echo '<li><a href="#notes" data-toggle="tab"> Notes</a></li>'; //todo: add to lang page
+                ?>
             </ul>
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade in active well" id="civ_lic">
-                    <h4 style="centred"><?php echo $lang['civ'] . " " . $lang['licenses'];?> </h4>
+                    <h4 style="centred"><?php echo $lang['civ'] . " " . $lang['licenses']; ?> </h4>
                     <?php
                     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
                     $result_of_query = $db_connection->query($sql);
                     while ($row = mysqli_fetch_assoc($result_of_query)) {
                         if ($row["civ_licenses"] !== '"[]"') {
-                            $civ_licenses = array();
-                            $civ_licenses = explode("],[", $row["civ_licenses"]);
-                            $civ_licenses = str_replace("]]\"", "", $civ_licenses);
-                            $civ_licenses = str_replace("\"[[", "", $civ_licenses);
-                            $civ_licenses = str_replace("`", "", $civ_licenses);
+                            $return = stripArray($row["civ_licenses"]);
 
-                            for ($x = 0; $x < count($civ_licenses); $x++) {
-                                $civName = substr($civ_licenses[$x], 0, -2);
-                                if (strpos($civ_licenses[$x], "1") !== false) {
-                                    echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>" . licName($civName, $license) . "</span>";
+                            foreach ($return as $value) {
+                                if (strpos($value, "1") == TRUE) {
+                                    $name = before(',', $value);
+                                    echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>" . licName($name, $license) . "</span> ";
                                 } else {
-                                    echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . licName($civName, $license) . "</span> ";
+                                    $name = before(',', $value);
+                                    echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . licName($name, $license) . "</span> ";
                                 }
                             }
                         } else {
@@ -372,24 +347,21 @@ if (isset($_GET["ID"])) {
                     </a>
                 </div>
                 <div class="tab-pane well fade" id="medic_lic">
-                    <h4 style="centred"><?php echo $lang['medic'] . " " . $lang['licenses'];?> </h4>
+                    <h4 style="centred"><?php echo $lang['medic'] . " " . $lang['licenses']; ?> </h4>
                     <?php
                     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
                     $result_of_query = $db_connection->query($sql);
                     while ($row = mysqli_fetch_assoc($result_of_query)) {
                         if ($row["med_licenses"] !== '"[]"') {
-                            $med_licenses = array();
-                            $med_licenses = explode("],[", $row["med_licenses"]);
-                            $med_licenses = str_replace("]]\"", "", $med_licenses);
-                            $med_licenses = str_replace("\"[[", "", $med_licenses);
-                            $med_licenses = str_replace("`", "", $med_licenses);
+                            $return = stripArray($row["med_licenses"]);
 
-                            for ($x = 0; $x < count($med_licenses); $x++) {
-                                $medName = substr($med_licenses[$x], 0, -2);
-                                if (strpos($med_licenses[$x], "1") !== false) {
-                                    echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>" . licName($medName, $license) . "</span> ";
+                            foreach ($return as $value) {
+                                if (strpos($value, "1") == TRUE) {
+                                    $name = before(',', $value);
+                                    echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>" . licName($name, $license) . "</span> ";
                                 } else {
-                                    echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . licName($medName, $license) . "</span> ";
+                                    $name = before(',', $value);
+                                    echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . licName($name, $license) . "</span> ";
                                 }
                             }
                         } else {
@@ -404,24 +376,21 @@ if (isset($_GET["ID"])) {
                     </a>
                 </div>
                 <div class="tab-pane well fade" id="police_lic">
-                    <h4 style="centred"><?php echo $lang['police'] . " " . $lang['licenses'];?> </h4>
+                    <h4 style="centred"><?php echo $lang['police'] . " " . $lang['licenses']; ?> </h4>
                     <?php
                     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
                     $result_of_query = $db_connection->query($sql);
                     while ($row = mysqli_fetch_assoc($result_of_query)) {
                         if ($row["cop_licenses"] !== '"[]"') {
-                            $cop_licenses = array();
-                            $cop_licenses = explode("],[", $row["cop_licenses"]);
-                            $cop_licenses = str_replace("]]\"", "", $cop_licenses);
-                            $cop_licenses = str_replace("\"[[", "", $cop_licenses);
-                            $cop_licenses = str_replace("`", "", $cop_licenses);
+                            $return = stripArray($row["cop_licenses"]);
 
-                            for ($x = 0; $x < count($cop_licenses); $x++) {
-                                $copName = substr($cop_licenses[$x], 0, -2);
-                                if (strpos($cop_licenses[$x], "1") !== false) {
-                                    echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>" . licName($copName, $license) . "</span> ";
+                            foreach ($return as $value) {
+                                if (strpos($value, "1") == TRUE) {
+                                    $name = before(',', $value);
+                                    echo "<span class='label label-success' style='margin-right:3px; line-height:2;'>" . licName($name, $license) . "</span> ";
                                 } else {
-                                    echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . licName($copName, $license) . "</span> ";
+                                    $name = before(',', $value);
+                                    echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . licName($name, $license) . "</span> ";
                                 }
                             }
                         } else {
@@ -514,8 +483,52 @@ if (isset($_GET["ID"])) {
                         } ?>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="notes">
+                    <div class="table-responsive">
+                        <?php
+                        if ($_SESSION['user_level'] >= P_ADD_NOTE) {
+                            $sql = 'SELECT * FROM `notes` WHERE `uid` = "' . $uID . '" ORDER BY `note_updated` DESC LIMIT 10';
+                            $result_of_query = $db_connection->query($sql);
+                            if ($result_of_query->num_rows > 0) {
+                                ?>
+                                <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Note Owner</th>
+                                    <th><?php echo $lang['message']; ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $sql = 'SELECT * FROM `notes` WHERE `uid` = "' . $uID . '" ORDER BY `note_updated` DESC LIMIT 10';
+                                $result_of_query = $db_connection->query($sql);
+                                while ($row = mysqli_fetch_assoc($result_of_query)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["staff_name"] . "</td>";
+                                    echo "<td>" . $row["note_text"] . "</td>";
+                                    echo "</tr>";
+                                };
+                                ?>
+                                </tbody>
+                                </table><?php
+                                if ($_SESSION['user_level'] >= P_ADD_NOTE) {
+                                    echo '<a data - toggle = "modal" href = "#add_note" class="btn btn-primary btn-xs"';
+                                    echo 'style = "float: right; margin-right:5px; margin-bottom:5px;" >';
+                                    echo '<i class="fa fa-file-o" ></i ></a >';
+                                }
+                            } else {
+                                echo '<h1>' . $lang['noNotes'] . '</h1>';
+                                if ($_SESSION['user_level'] >= P_ADD_NOTE) {
+                                    echo '<a data - toggle = "modal" href = "#add_note" class="btn btn-primary btn-xs"';
+                                    echo 'style = "float: right; margin-right:5px; margin-bottom:5px;" >';
+                                    echo '<i class="fa fa-file-o" ></i ></a >';
+                                }
+                            };
+                        } ?>
+                    </div>
+                </div>
                 <div class="tab-pane fade well" id="civ_inv">
-                    <h4 style="centred"><?php echo $lang['civ'] . " " . $lang['gear'];?> </h4>
+                    <h4 style="centred"><?php echo $lang['civ'] . " " . $lang['gear']; ?> </h4>
                     <?php
                     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
                     $result_of_query = $db_connection->query($sql);
@@ -530,7 +543,7 @@ if (isset($_GET["ID"])) {
                     <br>
                 </div>
                 <div class="tab-pane fade well" id="police_inv">
-                    <h4 style="centred"><?php echo $lang['police'] . " " . $lang['gear'];?> </h4>
+                    <h4 style="centred"><?php echo $lang['police'] . " " . $lang['gear']; ?> </h4>
                     <?php
                     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
                     $result_of_query = $db_connection->query($sql);
@@ -545,7 +558,7 @@ if (isset($_GET["ID"])) {
                     <br>
                 </div>
                 <div class="tab-pane fade well" id="medic_inv">
-                    <h4 style="centred"><?php echo $lang['medic'] . " " . $lang['gear'];?> </h4>
+                    <h4 style="centred"><?php echo $lang['medic'] . " " . $lang['gear']; ?> </h4>
                     <?php
                     $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
                     $result_of_query = $db_connection->query($sql);
@@ -562,6 +575,101 @@ if (isset($_GET["ID"])) {
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="edit_civ_licenses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><span
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['civ'] . " " . $lang['licenses']; ?>
+                    </h4>
+                </div>
+                <?php
+                $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
+                $result_of_query = $db_connection->query($sql);
+                while ($row = mysqli_fetch_assoc($result_of_query)) {
+                    ?>
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="hidden" name="editType" value="civ_licenses"/>
+
+                                <div class="row">
+                                    <textarea class="form-control" rows="10"
+                                              name="civ_licenses_value"><?php echo $row['civ_licenses']; ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade well" id="civ_inv">
+                            <h4 style="centred"><?php echo $lang['civ'] . " " . $lang['gear']; ?> </h4>
+                            <?php
+                            $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
+                            $result_of_query = $db_connection->query($sql);
+                            while ($row = mysqli_fetch_assoc($result_of_query)) {
+                                echo "<textarea class='form-control' readonly rows='5' style='width: 100%' id='civ_gear' name='civ_gear'>" . $row["civ_gear"] . "</textarea>";
+                            }
+                            ?>
+                            <br>
+                            <a data-toggle="modal" href="#edit_civ_inv" class="btn btn-primary btn-xs"
+                               style="float: right;">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <br>
+                        </div>
+                    </form>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="edit_cop_licenses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><span
+                class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['police'] . " " . $lang['licenses']; ?>
+        </h4>
+    </div>
+    <?php
+    $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
+    $result_of_query = $db_connection->query($sql);
+    while ($row = mysqli_fetch_assoc($result_of_query)) {
+        ?>
+        <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="hidden" name="editType" value="cop_licenses"/>
+
+                    <div class="row">
+                        <textarea class="form-control" rows="10"
+                                  name="cop_licenses_value"><?php echo $row['cop_licenses']; ?></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade well" id="medic_inv">
+                <h4 style="centred"><?php echo $lang['medic'] . " " . $lang['gear']; ?> </h4>
+                <?php
+                $sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
+                $result_of_query = $db_connection->query($sql);
+                while ($row = mysqli_fetch_assoc($result_of_query)) {
+                    echo "<textarea class='form-control' readonly rows='5' style='width: 100%' id='civ_gear' name='med_gear'>" . $row["med_gear"] . "</textarea>";
+                }
+                ?>
+                <br>
+                <a data-toggle="modal" href="#edit_med_inv" class="btn btn-primary btn-xs" style="float: right;">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <br>
+            </div>
+            </div>
+        </div>
+    </div>
+        <?php } ?>
 
     <div class="col-md-9" style="float:right; padding-top:20px;">
         <?php
@@ -582,7 +690,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['civ'] . " " . $lang['licenses'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['civ'] . " " . $lang['licenses']; ?>
                     </h4>
                 </div>
                 <?php
@@ -590,14 +698,14 @@ if (isset($_GET["ID"])) {
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="civ_licenses"/>
 
                                 <div class="row">
                                     <textarea class="form-control" rows="10"
-                                              name="civ_licenses_value"><?php echo $row['civ_licenses'];?></textarea>
+                                              name="civ_licenses_value"><?php echo $row['civ_licenses']; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -619,7 +727,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['police'] . " " . $lang['licenses'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['police'] . " " . $lang['licenses']; ?>
                     </h4>
                 </div>
                 <?php
@@ -627,14 +735,14 @@ if (isset($_GET["ID"])) {
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="cop_licenses"/>
 
                                 <div class="row">
                                     <textarea class="form-control" rows="10"
-                                              name="cop_licenses_value"><?php echo $row['cop_licenses'];?></textarea>
+                                              name="cop_licenses_value"><?php echo $row['cop_licenses']; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -656,7 +764,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['medic'] . " " . $lang['licenses'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['medic'] . " " . $lang['licenses']; ?>
                     </h4>
                 </div>
                 <?php
@@ -664,14 +772,14 @@ if (isset($_GET["ID"])) {
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="med_licenses"/>
 
                                 <div class="row">
                                     <textarea class="form-control" rows="10"
-                                              name="med_licenses_value"><?php echo $row['med_licenses'];?></textarea>
+                                              name="med_licenses_value"><?php echo $row['med_licenses']; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -693,7 +801,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['medic'] . " " . $lang['inventory'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['medic'] . " " . $lang['inventory']; ?>
                     </h4>
                 </div>
                 <?php
@@ -701,14 +809,14 @@ if (isset($_GET["ID"])) {
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="med_inv"/>
 
                                 <div class="row">
                                     <textarea class="form-control" rows="10"
-                                              name="med_inv_value"><?php echo $row['med_gear'];?></textarea>
+                                              name="med_inv_value"><?php echo $row['med_gear']; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -730,7 +838,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['civ'] . " " . $lang['inventory'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['civ'] . " " . $lang['inventory']; ?>
                     </h4>
                 </div>
                 <?php
@@ -738,14 +846,14 @@ if (isset($_GET["ID"])) {
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="civ_inv"/>
 
                                 <div class="row">
                                     <textarea class="form-control" rows="10"
-                                              name="civ_inv_value"><?php echo $row["civ_gear"];?></textarea>
+                                              name="civ_inv_value"><?php echo $row["civ_gear"]; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -767,7 +875,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['police'] . " " . $lang['inventory'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['police'] . " " . $lang['inventory']; ?>
                     </h4>
                 </div>
                 <?php
@@ -775,14 +883,14 @@ if (isset($_GET["ID"])) {
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="cop_inv"/>
 
                                 <div class="row">
                                     <textarea class="form-control" rows="10"
-                                              name="cop_inv_value"><?php echo $row['cop_gear'];?></textarea>
+                                              name="cop_inv_value"><?php echo $row['cop_gear']; ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -804,7 +912,7 @@ if (isset($_GET["ID"])) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title"><span
-                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['player'];?>
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['edit'] . " " . $lang['player']; ?>
                     </h4>
                 </div>
                 <?php
@@ -813,7 +921,7 @@ if (isset($_GET["ID"])) {
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
 
-                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                    <form method="post" action="editPlayer.php?ID=<?php echo $row['uid']; ?>" role="form">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="hidden" name="editType" value="player_edit"/>
@@ -883,4 +991,3 @@ if (isset($_GET["ID"])) {
 } else {
     include("views/errors/noID.php");
 }
-?>
