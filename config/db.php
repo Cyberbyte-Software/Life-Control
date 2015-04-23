@@ -44,11 +44,6 @@ $gameServers = array(
 );
 
 /**
-* Enable Notes System
-*/
-define("admin_notes", true);
-
-/**
  * Levels
  */
 define("lvlcop", 7);

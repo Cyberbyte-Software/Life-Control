@@ -70,27 +70,7 @@ if (isset($_GET["ID"]))
 	if (isset($_POST["editType"])) 
 	{
 		switch ($_POST["editType"])
-		{
-			case "new_note":
-				$note_text = $_POST["note_text_value"];
-				$update = "INSERT INTO `notes` (`note_id`, `uid`, `staff_name`, `note_text`, `note_updated`) VALUES (NULL, '".$uID."', '".$_SESSION['user_name']."', '".$note_text."', CURRENT_TIMESTAMP); ";
-				if (!$db_connection->connect_errno) 
-				{
-					$result_of_query = $db_connection->query($update);
-					echo "<div class='row'>";
-					echo "<div class='col-lg-12'>";
-					echo "<div class='alert alert-danger alert-dismissable'>";
-					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
-					echo "<i class='fa fa-info-circle'></i> Added New Note!";
-					echo "</div>";
-					echo "</div>";
-					echo "</div>";	
-				} 
-				else 
-				{
-					$this->errors[] = "Database connection problem.";
-				}
-				break;			
+		{		
 			case "civ_licenses":
 				$civ_licenses_value = $_POST["civ_licenses_value"];
 				$update = "UPDATE players SET civ_licenses = '".$civ_licenses_value."' WHERE uid = '".$uID."' ";
@@ -289,7 +269,27 @@ if (isset($_GET["ID"]))
 						}						
 						break;
 				}
-				break;					
+				break;
+				case "new_note":
+				$note_text = $_POST["note_text"];
+				$update = "INSERT INTO `notes` (`uid`, `staff_name`, `note_text`, `note_updated`) VALUES ('".$uID."', '".$_SESSION['user_name']."', '".$note_text."', CURRENT_TIMESTAMP); ";
+				if (!$db_connection->connect_errno) 
+				{
+					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> Added New Note!";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";	
+				} 
+				else 
+				{
+					$this->errors[] = "Database connection problem.";
+				}
+				break;				
 		}
 	}
 
@@ -417,6 +417,7 @@ if (isset($_GET["ID"]))
 				</li>
 				<li><a href="#house" data-toggle="tab"><?php echo $lang['houses'];?></a></li>
 				<?php if($_SESSION['user_level'] >= P_VIEW_VEHICLES) echo'<li><a href="#veh" data-toggle="tab">'. $lang['vehicles'] .'</a></li>' ?>
+				<?php if($_SESSION['user_level'] >= P_ADD_NOTE) echo'<li><a href="#notes" data-toggle="tab">'. $lang['note'] .'</a></li>' ?>
 			</ul>
 			<div id="myTabContent" class="tab-content">		
 				<div class="tab-pane fade in active well" id="civ_lic">
@@ -604,6 +605,44 @@ if (isset($_GET["ID"]))
 						} ?>
 					</div>
 				</div>
+				<div class="tab-pane fade" id="notes">
+					<div class="table-responsive">
+						<?php
+						if ($_SESSION['user_level'] >= P_ADD_NOTE) {
+							$sql = 'SELECT * FROM `notes` WHERE `uid` = "' . $uID . '" ORDER BY `note_updated` DESC LIMIT 10';
+							$result_of_query = $db_connection->query($sql);
+							if ($result_of_query->num_rows > 0) {
+								?>
+								<table class="table table-bordered table-hover table-striped">
+									<thead>
+									<tr>
+										<th>Note Owner</th>
+										<th><?php echo $lang['message']; ?></th>
+									</tr>
+									</thead>
+									<tbody>
+									<?php
+									$sql = 'SELECT * FROM `notes` WHERE `uid` = "' . $uID . '" ORDER BY `note_updated` DESC LIMIT 10';
+									$result_of_query = $db_connection->query($sql);
+									while ($row = mysqli_fetch_assoc($result_of_query)) {
+										echo "<tr>";
+										echo "<td>" . $row["staff_name"] . "</td>";
+										echo "<td>" . $row["note_text"] . "</td>";
+										echo "</tr>";
+									};
+									?>
+									</tbody>
+								</table>	
+						<?php
+							} else echo '<h1>No Notes Add One Now!</h1>';
+						?>
+							<a data-toggle="modal" href="#add_note" class="btn btn-primary btn-xs" style="float: right; margin-right:5px; margin-bottom:5px;">
+								<i class="fa fa-file-o"></i>
+							</a>							
+						<?php
+						} ?>						
+					</div>
+				</div>				
 				<div class="tab-pane fade well" id="civ_inv">
 						<h4 style="centred"><?php echo $lang['civ']." ".$lang['gear'];?> </h4>
 						<?php
@@ -657,17 +696,7 @@ if (isset($_GET["ID"]))
 	</div>	
 
 	<div class="col-md-9" style="float:right; padding-top:20px;">
-		<?php
-			$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
-			$result_of_query = $db_connection->query($sql);
-			while ($row = mysqli_fetch_assoc($result_of_query)) 
-			{
-				if (admin_notes == TRUE && $_SESSION['user_level'] >= P_ADD_NOTE)
-				{
-					include("views/modules/notes/module.php");
-				}
-			}
-        ?>	
+		
 	</div>	
 	
 	<div class="col-md-9" style="float:right; padding-top:20px;">
@@ -970,7 +999,7 @@ if (isset($_GET["ID"]))
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['add']." ".$lang['new']." ".$lang['note'];?></h4>
             </div>
-            <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+            <form method="post" action="editPlayer.php?ID=<?php echo $uID;?>" role="form">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" name="editType" value="new_note" />
