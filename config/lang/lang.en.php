@@ -50,11 +50,6 @@ $lang['error'] = 'Error';
 $lang['dbError'] = 'Database connection problem.';
 $lang['idNotSet'] = 'ID NOT SET';
 $lang['noRes'] = 'ERROR NO RESULTS';
-$lang['noMessage'] = 'No messages';
-$lang['topRich'] = 'Top Ten Richest Players';
-$lang['noHouse'] = 'No Houses';
-$lang['noCar'] = 'No cars';
-$lang['noPerm'] = 'Sorry you do not have permission to view this page';
 
 /*
 ---------------
@@ -126,7 +121,6 @@ $lang['plate'] = 'Plate';
 $lang['alive'] = 'Alive';
 $lang['colour'] = 'Colour';
 $lang['class'] = 'Class';
-$lang['uid'] = 'uID';
 
 /*
 ---------------------------
@@ -146,7 +140,11 @@ $lang['time'] = 'Time';
 */
 $lang['setup'] = 'The database has now been setup';
 $lang['upgrade'] = 'The database has now been upgraded';
+$lang['noPerm'] = 'Sorry you do not have permission to view this page';
 $lang['Kick'] = 'Kick';
+$lang['topRich'] = 'Top Ten Richest Players';
+$lang['noHouse'] = 'No Houses';
+$lang['noCar'] = 'No cars';
 $lang['noPlayer'] = 'Player cannot be found';
 $lang['enterPass'] = 'Enter new password';
 $lang['password'] = 'Password';
@@ -163,13 +161,7 @@ $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
 $lang['ship'] = 'Ship';
 $lang['store'] = 'Store';
-$lang['noMessage'] = 'No messages';
 $lang['add'] = 'Add';
 $lang['new'] = 'New';
 $lang['note'] = 'Note';
-$lang['username'] = 'Username';
-$lang['update'] = 'An update is available';
-$lang['noRec'] = 'No records found';
-$lang['view'] = 'View';
-$lang['noNotes'] = 'No notes for this player';
-$lang['updated'] = 'Updated';
+?>

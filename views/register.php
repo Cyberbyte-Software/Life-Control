@@ -1,15 +1,22 @@
 <?php
+include("config/lang/module.php");
+
+// create a database connection, using the constants from config/db.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+// change character set to utf8 and check it
 if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
 }
+?>
 
+<?php
 if (isset($registration)) {
     if ($registration->errors) {
         foreach ($registration->errors as $error) {
             echo "<div class='row'>";
             echo "<div class='col-lg-12'>";
-            echo "<div class='alert alert-danger alert-dismissable animated infinite bounce' style ='padding-top: 25px;'>";
+            echo "<div class='alert alert-danger alert-dismissable'>";
             echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
             echo "<i class='fa fa-info-circle'></i> " . $error;
             echo "</div>";
@@ -21,7 +28,7 @@ if (isset($registration)) {
         foreach ($registration->messages as $message) {
             echo "<div class='row'>";
             echo "<div class='col-lg-12'>";
-            echo "<div class='alert alert-info alert-dismissable animated infinite bounce' style ='padding-top: 25px;'>";
+            echo "<div class='alert alert-danger alert-dismissable'>";
             echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
             echo "<i class='fa fa-info-circle'></i> " . $message;
             echo "</div>";
@@ -34,70 +41,73 @@ if (isset($registration)) {
 
 <div id="login-page">
     <div class="col-lg-1 container">
-        <h4> <?php echo icon1 ?>: </h4>
+        <h4> Dave: </h4>
         <img src="assets/img/profile/1.jpg">
-        <h4> <?php echo icon2 ?>: </h4>
+        <h4> Joe: </h4>
         <img src="assets/img/profile/2.jpg">
-        <h4> <?php echo icon3 ?>: </h4>
+        <h4> Sam: </h4>
         <img src="assets/img/profile/3.jpg">
     </div>
 
     <div class="col-lg-10 container">
-        <form class="" method="post" action="newUser.php" name="registerform">
+        <form class="" method="post" action="register.php" name="registerform">
             <h2 class="form-login-heading">New User</h2>
 
             <div class="login-wrap">
-                <p><?php echo $lang['username']?>:</p>
-                <input id="login_input_username" type="text" class="form-control" autofocus
+                <p>Username:</p>
+                <input id="login_input_username" type="text" class="form-control"
+                       placeholder="Username (only letters and numbers, 2 to 64 characters)" autofocus
                        pattern="[a-zA-Z0-9]{2,64}" name="user_name" required>
                 <br>
 
-                <p><?php echo $lang['playerID']?>:</p>
-                <input id="player_id" class="form-control" type="text" name="player_id"
+                <p>Player ID:</p>
+                <input id="player_id" class="form-control" placeholder="PlayerID" type="text" name="player_id"
                        required/>
                 <br>
 
-                <p><?php echo $lang['emailAdd']?>:</p>
-                <input id="login_input_email" class=" form-control" type="email"
+                <p>Email Address:</p>
+                <input id="login_input_email" placeholder="User's email" class=" form-control" type="email"
                        name="user_email" required/>
                 <br>
 
-                <p><?php echo $lang['password']?>:</p>
-                <input id="login_input_password_new"
+                <p>Password:</p>
+                <input id="login_input_password_new" placeholder="Password (min. 6 characters)"
                        class=" form-control login_input" type="password"
                        name="user_password_new" pattern=".{6,}" required autocomplete="off"/>
                 <br>
 
-                <p><?php echo $lang['repeat'] .' '. $lang['password']?>:</p>
-                <input id="login_input_password_repeat" class=" form-control login_input" type="password"
+                <p>Repeat password:</p>
+                <input id="login_input_password_repeat" placeholder="Repeat password" class=" form-control login_input"
+                       type="password"
                        name="user_password_repeat" pattern=".{6,}" required autocomplete="off"/>
                 <br>
 
-                <p><?php echo $lang['picture']?>:</p>
+                <p>Profile Picture:</p>
                 <select class=" form-control" name="profile_pic">
-                    <?php for ($icon = 1; $icon <= 6; $icon++) {
+                    <?php for ($icon = 1; $icon <= lvlmed; $icon = $icon + 1) {
                     echo '<option value="' . $icon . '" >' . iconName($icon) . '</option>';
                     } ?>
                 </select>
                 <br>
 
-                <p><?php echo $lang['rank']?>:</p>
+                <p>Rank:</p>
                 <select class="form-control" name="user_lvl">
-                    <?php for ($rank = 1; $rank <= staff_levels; $rank++) {
-                        echo '<option value="' . $rank . '" >' . $rank . '</option>';
-                    } ?>
+                    <option value="1">Support</option>
+                    <option value="2">Moderator</option>
+                    <option value="3">Administrator</option>
                 </select>
                 <br>
                 <input type="submit" class="btn btn-theme btn-block" name="register" value="Add New User"/>
+                <hr>
             </div>
         </form>
     </div>
     <div class="col-lg-1 container">
-        <h4> <?php echo icon4 ?>: </h4>
+        <h4> Kerry: </h4>
         <img src="assets/img/profile/4.jpg">
-        <h4> <?php echo icon5 ?>: </h4>
+        <h4> Jess: </h4>
         <img src="assets/img/profile/5.jpg">
-        <h4> <?php echo icon6 ?>: </h4>
+        <h4> Connie: </h4>
         <img src="assets/img/profile/6.jpg">
     </div>
 </div>

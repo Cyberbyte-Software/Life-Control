@@ -6,20 +6,18 @@ http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US
 
 ## Credits
 	
-erdknuffel aka jastend for giving me some ideas and fixes for Life-Control and letting me merge some of them in to the base file from his custom one.
-Provokan for his continued support and ideas.
+erdknuffel aka jastend for giving me some ideas and fixes for Life-Control and letting me merge some of them in to the base file from his custom one
 
 ## Installation
 
-1. Download the latest files (for mostly-stable versions, please visit our [releases section](https://github.com/cammygames/Life-Control/releases))
+1. Download the latest files (for mostly-stable versions, please visit our [releases section](https://github.com/cammygames/Life-Control/releases/tag/2.0))
 2. Unpack everything
 3. Add your database settings to the [config/db.php](https://github.com/cammygames/Life-Control/blob/master/config/db.php)
 4. Gently congratulate yourself with a hot beverage of your choice and it will guide you through the setup process
 
 ## Rank system
 
-The system now uses a user level system based of the modifications by erdknuffel which can all be customised in the config.php
-Below are the default settings:
+The System Now Uses A User Level System Based Of The Modifications erdknuffel Made To The Level System
 
 ### Administrator
 

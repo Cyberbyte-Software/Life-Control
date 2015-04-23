@@ -1,22 +1,16 @@
 <?php
-require_once("config/config.php");
-$json = file_get_contents('http://cyberbyte.org.uk/version.json');
-$obj = json_decode($json);
-$version = include 'config/version.php';
-
+require_once("config/db.php");
 if (isset($_POST['upgrade'])) {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if (mysqli_connect_errno()) {
         printf("Connect failed: %s\n", mysqli_connect_error());
         exit();
     }
-    for ($run = $version['DBversion'] + 1; $run <= $obj->DBversion; $run++){
-        include_once("/libraries/updater/".$run.".php");
-        $version['DBversion']= $run;
-        file_put_contents('config/version.php', '<?php return ' . var_export($version, true) . ';');
-        $version = include 'config/version.php';
-    }
-    header("Location: index.php?setup=2");
+
+    mysqli_query($link, "ALTER TABLE `users` CHANGE user_level user_level ENUM('0','1','2','3');") or die(mysqli_error($link));
+    mysqli_query($link, "ALTER TABLE `users` ADD `user_profile` SMALLINT NOT NULL;") or die(mysqli_error($link));
+    mysqli_query($link, "UPDATE `users` SET `user_profile`='1'") or die(mysqli_error($link));
+    mysqli_close($link);
 }
 ?>
 
@@ -55,6 +49,9 @@ if (isset($_POST['upgrade'])) {
 <body>
 
 <section id="container" >
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
     <!--header start-->
     <header class="header black-bg">
         <!--logo start-->
@@ -62,6 +59,10 @@ if (isset($_POST['upgrade'])) {
         <!--logo end-->
     </header>
     <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
     <!--sidebar end-->
     <section id="main-content">
         <section class="wrapper">
@@ -72,7 +73,7 @@ if (isset($_POST['upgrade'])) {
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            <center>Upgrade system
+                            <center>Upgrade
                             </center>
                         </h1>
                     </div>
@@ -82,18 +83,11 @@ if (isset($_POST['upgrade'])) {
                 </div>
                 <div class="col-sm-4">
 
-                    <form method="post" action="update.php" name="upgradeform">
+                    <form method="post" action="index.php" name="upgradeform">
                         <div class="form-group">
-                            Your version is currently <?php echo $version['version']; echo '<br>';
-                            if ($version['DBversion'] < $obj->DBversion)
-                                echo 'There is a database update<br>
-                                <input class="btn btn-lg btn-primary" style="float:right;" type="submit" name="upgrade"
-                                   value="Upgrade"><br>';
-                            if (floatval($version['version']) < floatval($obj->version))
-                                echo 'There is a new version available on our website or </a><a href="' . $obj->git . '" target="_blank">GitHub</a>.';
-                            ?>
-
-
+                            This will change your SQL tables
+                            <input class="btn btn-lg btn-primary" style="float:right;" type="submit" name="upgrade"
+                                   value="Upgrade">
                         </div>
                     </form>
                 </div>
@@ -111,6 +105,8 @@ if (isset($_POST['upgrade'])) {
 <script src="assets/js/jquery-1.8.3.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="jquery.scrollTo.min.js"></script>
+<script src="jquery.nicescroll.js" type="text/javascript"></script>
 <script src="assets/js/jquery.sparkline.js"></script>
 
 
@@ -123,25 +119,26 @@ if (isset($_POST['upgrade'])) {
 <!--script for this page-->
 <script src="assets/js/sparkline-chart.js"></script>
 <script src="assets/js/zabuto_calendar.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var unique_id = $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: '<?php if(isset($obj->title)) echo $obj->title; else echo 'Welcome to Life Control!'?>',
-            // (string | mandatory) the text inside the notification
-            text: '<?php if(isset($obj->text)) echo $obj->text; else echo 'Report any bugs to Cyberbyte Studios'?>',
-            // (string | optional) the image to display on the left
-            image: 'assets/img/profile/<?php if(isset($obj->image)) echo $obj->image; else echo '2'?>.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
-        });
 
-        return false;
-    });
-</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var unique_id = $.gritter.add({
+                // (string | mandatory) the heading of the notification
+                title: 'Automatic Updater',
+                // (string | mandatory) the text inside the notification
+                text: 'This program should automatically update your database',
+                // (string | optional) the image to display on the left
+                image: 'assets/img/profile/2.jpg',
+                // (bool | optional) if you want it to fade out on its own or just sit there
+                sticky: true,
+                // (int | optional) the time you want it to be alive for before fading out
+                time: '',
+                // (string | optional) the class name you want to apply to that specific message
+                class_name: 'my-sticky-class'
+            });
+
+            return false;
+        });
+    </script>
 </body>
 </html>
