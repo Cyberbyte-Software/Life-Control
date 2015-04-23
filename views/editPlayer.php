@@ -181,7 +181,7 @@ if (isset($_GET["ID"])) {
             </div>
             <div class="panel-body">
 
-            <center><img src="assets/img/uniform/<?php echo getPlayerSkin($row['civ_gear'],$playerSkins);?>.jpg" />
+            <center><img src="assets/img/uniform/<?php echo getPlayerSkin($row['civ_gear'], $playerSkins); ?>.jpg"/>
             <?php
             $playersID = $row["playerid"];
             $alias = str_replace('"[`', "", $row["aliases"]);
@@ -487,8 +487,6 @@ if (isset($_GET["ID"])) {
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql = 'SELECT * FROM `notes` WHERE `uid` = "' . $uID . '" ORDER BY `note_updated` DESC LIMIT 10';
-                                $result_of_query = $db_connection->query($sql);
                                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                                     echo "<tr>";
                                     echo "<td>" . $row["staff_name"] . "</td>";
@@ -498,18 +496,14 @@ if (isset($_GET["ID"])) {
                                 ?>
                                 </tbody>
                                 </table><?php
-                                if ($_SESSION['user_level'] >= P_ADD_NOTE) {
-                                    echo '<a data - toggle = "modal" href = "#add_note" class="btn btn-primary btn-xs"';
-                                    echo 'style = "float: right; margin-right:5px; margin-bottom:5px;" >';
-                                    echo '<i class="fa fa-file-o" ></i ></a >';
-                                }
+                                if ($_SESSION['user_level'] >= P_ADD_NOTE)
+                                    echo '<a data-toggle="modal" href="#add_note" class="btn btn-primary btn-xs" style="float: right; margin-right:5px; margin-bottom:5px;">
+                                <i class="fa fa-file-o"></i></a>';
                             } else {
                                 echo '<h1>' . $lang['noNotes'] . '</h1>';
-                                if ($_SESSION['user_level'] >= P_ADD_NOTE) {
-                                    echo '<a data - toggle = "modal" href = "#add_note" class="btn btn-primary btn-xs"';
-                                    echo 'style = "float: right; margin-right:5px; margin-bottom:5px;" >';
-                                    echo '<i class="fa fa-file-o" ></i ></a >';
-                                }
+                                if ($_SESSION['user_level'] >= P_ADD_NOTE)
+                                    echo '<a data-toggle="modal" href="#add_note" class="btn btn-primary btn-xs" style="float: right; margin-right:5px; margin-bottom:5px;">
+                                <i class="fa fa-file-o"></i></a>';
                             };
                         } ?>
                     </div>
@@ -844,7 +838,7 @@ if (isset($_GET["ID"])) {
                                                 echo '<option value="' . $lvl . '"' . select($lvl, $row['adminlevel']) . '>' . $lvl . '</option>';
                                             }
                                             echo "</select>";
-                                            echo "<h4>" . $lang['blacklisted'] . ": "; //TODO: Yes or no option
+                                            echo "<h4>" . $lang['blacklisted'] . ": ";
                                             echo "<select id='player_blacklist' name='player_blacklist'>";
                                             echo '<option value="1"' . select('1', $row['blacklist']) . '>Yes</option>';
                                             echo '<option value="0"' . select('0', $row['blacklist']) . '>No</option>';
@@ -876,6 +870,33 @@ if (isset($_GET["ID"])) {
                 <?php
                 }
                 ?>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="add_note" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"><span
+                            class="glyphicon glyphicon-pencil"></span><?php echo " " . $lang['add'] . " " . $lang['new'] . " " . $lang['note']; ?>
+                    </h4>
+                </div>
+                <form method="post" action="editPlayer.php?ID=<?php echo $uID ?>" role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" name="editType" value="new_note"/>
+
+                            <div class="row">
+                                <textarea class="form-control" rows="10" name="note_text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="reset">Close</button>
+                        <button class="btn btn-primary" type="submit"><?php echo $lang['subChange']; ?></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

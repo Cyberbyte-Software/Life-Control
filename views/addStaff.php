@@ -50,7 +50,7 @@ if (isset($registration)) {
     </div>
 
     <div class="col-lg-10 container">
-        <form class="" method="post" action="register.php" name="registerform">
+        <form class="" method="post" action="addStaff.php" name="registerform">
             <h2 class="form-login-heading">New User</h2>
 
             <div class="login-wrap">
