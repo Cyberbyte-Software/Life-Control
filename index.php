@@ -21,7 +21,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 }
 
 // include the configs / constants for the database connection
-require_once("config/db.php");
+require_once("config/config.php");
 
 // load the login class
 require_once("classes/Login.php");
@@ -30,7 +30,7 @@ require_once("classes/Login.php");
 // so this single line handles the entire login process. in consequence, you can simply ...
 $login = new Login();
 // includes page in template
-$page = "views/logged_in.php";
+$page = "views/dashboard.php";
 
 // ... ask if we are logged in here:
 if ($login->isUserLoggedIn() == true) {
@@ -66,7 +66,7 @@ if ($login->isUserLoggedIn() == true) {
 			}
 			else 
 			{
-				include("views/not_logged_in.php");
+				include("views/login.php");
 			}
         }
     }

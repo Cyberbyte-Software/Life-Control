@@ -2,10 +2,10 @@
 
 	if(isset($_SESSION['steamid']))
 	{
-		include("views/modules/playerView/logged_in.php");	
+		include("views/modules/playerView/dashboard.php");
 	}
 	else
 	{
-		include("views/modules/playerView/not_logged_in.php");	
+		include("views/modules/playerView/login.php");
 	}
 ?>
