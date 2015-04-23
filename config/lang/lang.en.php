@@ -161,4 +161,7 @@ $lang['arrested'] = 'Arrested';
 $lang['finances'] = 'Finances';
 $lang['ship'] = 'Ship';
 $lang['store'] = 'Store';
+$lang['add'] = 'Add';
+$lang['new'] = 'New';
+$lang['note'] = 'Note';
 ?>

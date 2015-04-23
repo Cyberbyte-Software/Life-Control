@@ -159,4 +159,7 @@ $lang['blacklisted'] = 'Blacklisted';
 $lang['arrested'] = 'Inhaftiert';
 $lang['finances'] = 'Finanzen';
 $lang['ship'] = 'Ship';
+$lang['add'] = 'Add';
+$lang['new'] = 'New';
+$lang['note'] = 'Note';
 ?>

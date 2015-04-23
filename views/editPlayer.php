@@ -71,6 +71,26 @@ if (isset($_GET["ID"]))
 	{
 		switch ($_POST["editType"])
 		{
+			case "new_note":
+				$note_text = $_POST["note_text_value"];
+				$update = "INSERT INTO `notes` (`note_id`, `uid`, `staff_name`, `note_text`, `note_updated`) VALUES (NULL, '".$uID."', '".$_SESSION['user_name']."', '".$note_text."', CURRENT_TIMESTAMP); ";
+				if (!$db_connection->connect_errno) 
+				{
+					$result_of_query = $db_connection->query($update);
+					echo "<div class='row'>";
+					echo "<div class='col-lg-12'>";
+					echo "<div class='alert alert-danger alert-dismissable'>";
+					echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+					echo "<i class='fa fa-info-circle'></i> Added New Note!";
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";	
+				} 
+				else 
+				{
+					$this->errors[] = "Database connection problem.";
+				}
+				break;			
 			case "civ_licenses":
 				$civ_licenses_value = $_POST["civ_licenses_value"];
 				$update = "UPDATE players SET civ_licenses = '".$civ_licenses_value."' WHERE uid = '".$uID."' ";
@@ -90,7 +110,6 @@ if (isset($_GET["ID"]))
 				{
 					$this->errors[] = "Database connection problem.";
 				}
-			
 				break;
 			case "cop_licenses":
 				$cop_licenses_value = $_POST["cop_licenses_value"];	
@@ -643,6 +662,20 @@ if (isset($_GET["ID"]))
 			$result_of_query = $db_connection->query($sql);
 			while ($row = mysqli_fetch_assoc($result_of_query)) 
 			{
+				if (admin_notes == TRUE && $_SESSION['user_level'] >= P_ADD_NOTE)
+				{
+					include("views/modules/notes/module.php");
+				}
+			}
+        ?>	
+	</div>	
+	
+	<div class="col-md-9" style="float:right; padding-top:20px;">
+		<?php
+			$sql = 'SELECT * FROM `players` WHERE `uid` ="' . $uID . '";';
+			$result_of_query = $db_connection->query($sql);
+			while ($row = mysqli_fetch_assoc($result_of_query)) 
+			{
 				if (sql_smartPhone == TRUE && $_SESSION['user_level'] >= P_ACCESS_SQL_PHONE)
 				{
 					include("views/modules/sqlSmartPhone/module.php");
@@ -930,6 +963,31 @@ if (isset($_GET["ID"]))
         </div>
     </div>
 </div>
+<div class="modal fade" id="add_note" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-pencil"></span><?php echo " ".$lang['add']." ".$lang['new']." ".$lang['note'];?></h4>
+            </div>
+            <form method="post" action="editPlayer.php?ID=<?php echo $row['uid'];?>" role="form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="editType" value="new_note" />
+                        <div class="row">
+                            <textarea class="form-control" rows="10" name="note_text"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="reset">Close</button>
+                    <button class="btn btn-primary" type="submit"><?php echo $lang['subChange']; ?></button>
+                </div>
+            </form>
+       </div>
+    </div>
+</div>
+
 <?php
 } else {
     include("views/errors/noID.php");
