@@ -12,10 +12,37 @@ function stripArray($input)
 	return $array;
 }
 
-//Thanks PHP Doc's For this Function (User: biohazard dot ge at gmail dot com ¶ )
+//Thanks PHP Doc's For these two Function (User: biohazard dot ge at gmail dot com ¶ )
 function before ($this, $inthat)
 {
 	return substr($inthat, 0, strpos($inthat, $this));
+};
+function after ($this, $inthat)
+{
+	if (!is_bool(strpos($inthat, $this)))
+	return substr($inthat, strpos($inthat,$this)+strlen($this));
+};
+
+function getPlayerSkin ($input,$list)
+{
+	if ($input !== '"[]"')
+	{
+		$name = after ('"[`', $input);
+		$name = before ('`', $name);
+		
+		if (in_array($name,$list))
+		{
+			return $name;
+		}
+		else 
+		{
+			return "Default";
+		}		
+	}
+	else 
+	{
+		return "Default";
+	}
 };
 
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -262,20 +289,7 @@ if (isset($_GET["ID"]))
                 <h2 class="panel-title"><i class="fa fa-child fa-fw"></i><?php echo $row["name"]; ?></h2>
             </div>
             <div class="panel-body">
-				<?php 
-					$get_skin_civ = $row['civ_gear'];
-					if($get_skin_civ == "\"[]\"") {
-						$get_skin_civ = "U_C_Poloshirt_stripped";
-					}
-					else{
-						$get_skin_civ = substr($get_skin_civ,3);
-						$get_skin_civ = substr ($get_skin_civ,0,strpos ($get_skin_civ, "`"));
-						if(empty($get_skin_civ)){
-							$get_skin_civ = "U_C_Poloshirt_stripped";
-						}
-					}				
-				?>
-				<center><img src="assets/img/uniform/<?php echo $get_skin_civ;?>.jpg" />
+				<center><img src="assets/img/uniform/<?php echo getPlayerSkin($row['civ_gear'],$playerSkins);?>.jpg" />
                     <?php
                             $playersID = $row["playerid"];
                             
@@ -670,7 +684,6 @@ if (isset($_GET["ID"]))
         </div>
     </div>
 </div>
-    if
 <div class="modal fade" id="edit_cop_licenses" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

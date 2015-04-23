@@ -82,7 +82,7 @@ if (!$db_connection->set_charset("utf8")) {
 					</ul>
 				</div>
 				
-				<?phpecho "<a class='btn btn-primary' href='police.php?page=$total_pages'>".'Last Page'."</a></center>";
+				<?php echo "<a class='btn btn-primary' href='police.php?page=".$total_pages."'>".'Last Page'."</a></center>";
 
 			} else {
 				$this->errors[] = "Database connection problem.";

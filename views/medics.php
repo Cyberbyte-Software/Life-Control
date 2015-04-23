@@ -79,7 +79,7 @@ if (isset($_GET["page"])) {
 					</ul>
 				</div>
 				
-				<?phpecho "<a class='btn btn-primary' href='medics.php?page=$total_pages'>".$lang['first']."</a></center>";
+				<?php echo "<a class='btn btn-primary' href='medics.php?page=".$total_pages."'>".$lang['first']."</a></center>";
 
             } else {
                 $this->errors[] = "Database connection problem.";
