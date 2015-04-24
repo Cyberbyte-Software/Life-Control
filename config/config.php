@@ -83,7 +83,9 @@ define("P_EDIT_HOUSES", 3);
 define("P_EDIT_GANGS", 3);
 define("P_EDIT_WANTED", 3);
 define("P_EDIT_ADMINS", 3);
-define("P_EDIT_PLAYER", 2);
+define("P_EDIT_PLAYER", 1);
+define("P_EDIT_PLAYER_INV", 2);
+define("P_EDIT_PLAYER_LICENCES", 2);
 
 define("P_ADD_NOTE", 2);
 define("P_VIEW_NOTE", 1);
