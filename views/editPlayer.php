@@ -415,7 +415,7 @@ if (isset($_GET["ID"]))
 						<li><a href="#police_inv" data-toggle="tab"><?php echo $lang['police'];?></a></li>
 					</ul>
 				</li>
-				<li><a href="#house" data-toggle="tab"><?php echo $lang['houses'];?></a></li>
+				<?php if($_SESSION['user_level'] >= P_VIEW_HOUSES) echo'<li><a href="#house" data-toggle="tab">'. $lang['houses'] .'</a></li>' ?>
 				<?php if($_SESSION['user_level'] >= P_VIEW_VEHICLES) echo'<li><a href="#veh" data-toggle="tab">'. $lang['vehicles'] .'</a></li>' ?>
 				<?php if($_SESSION['user_level'] >= P_ADD_NOTE) echo'<li><a href="#notes" data-toggle="tab">'. $lang['note'] .'</a></li>' ?>
 			</ul>
@@ -451,10 +451,13 @@ if (isset($_GET["ID"]))
 									
 								}
 							}
+							if ($_SESSION['user_level'] >= P_EDIT_PLAYER_LICENCES)
+							{
 						?>
-						<a data-toggle="modal" href="#edit_civ_licenses" class="btn btn-primary btn-xs" style="float: right;">
-							<i class="fa fa-pencil"></i>
-						</a>
+								<a data-toggle="modal" href="#edit_civ_licenses" class="btn btn-primary btn-xs" style="float: right;">
+									<i class="fa fa-pencil"></i>
+								</a>
+					<?php   } ?>
 				</div>
 				<div class="tab-pane well fade" id="medic_lic">
 					<h4 style="centred"><?php echo $lang['medic']." ".$lang['licenses'];?> </h4>
@@ -487,10 +490,13 @@ if (isset($_GET["ID"]))
 								
 							}							
 						}
+					if ($_SESSION['user_level'] >= P_EDIT_PLAYER_LICENCES)
+					{	
 					?>
-					<a data-toggle="modal" href="#edit_med_licenses" class="btn btn-primary btn-xs" style="float: right;">
-						<i class="fa fa-pencil"></i>
-					</a>
+						<a data-toggle="modal" href="#edit_med_licenses" class="btn btn-primary btn-xs" style="float: right;">
+							<i class="fa fa-pencil"></i>
+						</a>
+			<?php   } ?>
 				</div>	
 				<div class="tab-pane well fade" id="police_lic">
 					<h4 style="centred"><?php echo $lang['police']." ".$lang['licenses'];?> </h4>
@@ -523,10 +529,13 @@ if (isset($_GET["ID"]))
 								
 							}
 						}
+					if ($_SESSION['user_level'] >= P_EDIT_PLAYER_LICENCES)
+					{	
 					?>
-					<a data-toggle="modal" href="#edit_cop_licenses" class="btn btn-primary btn-xs" style="float: right;">
-						<i class="fa fa-pencil"></i>
-					</a>
+						<a data-toggle="modal" href="#edit_cop_licenses" class="btn btn-primary btn-xs" style="float: right;">
+							<i class="fa fa-pencil"></i>
+						</a>
+			<?php   } ?>	
 				</div>				
 				<div class="tab-pane fade" id="house">
 					<div class="table-responsive">
@@ -654,9 +663,14 @@ if (isset($_GET["ID"]))
 							}							
 						?>
 						<br>
-					<a data-toggle="modal" href="#edit_civ_inv" class="btn btn-primary btn-xs" style="float: right;">
-						<i class="fa fa-pencil"></i>
-					</a>
+					<?php
+					if ($_SESSION['user_level'] >= P_EDIT_PLAYER_INV)
+					{	
+					?>						
+						<a data-toggle="modal" href="#edit_civ_inv" class="btn btn-primary btn-xs" style="float: right;">
+							<i class="fa fa-pencil"></i>
+						</a>
+					<?php   } ?>	
 						<br>					
 				</div>
 				<div class="tab-pane fade well" id="police_inv">
@@ -670,9 +684,14 @@ if (isset($_GET["ID"]))
 							}							
 						?>
 						<br>
+					<?php
+					if ($_SESSION['user_level'] >= P_EDIT_PLAYER_INV)
+					{	
+					?>							
 					<a data-toggle="modal" href="#edit_cop_inv" class="btn btn-primary btn-xs" style="float: right;">
 						<i class="fa fa-pencil"></i>
 					</a>
+					<?php   } ?>	
 						<br>					
 				</div>
 				<div class="tab-pane fade well" id="medic_inv">
@@ -686,9 +705,14 @@ if (isset($_GET["ID"]))
 							}							
 						?>
 						<br>
+					<?php
+					if ($_SESSION['user_level'] >= P_EDIT_PLAYER_INV)
+					{	
+					?>							
 					<a data-toggle="modal" href="#edit_med_inv" class="btn btn-primary btn-xs" style="float: right;">
 						<i class="fa fa-pencil"></i>
 					</a>
+					<?php   } ?>
 					<br>
 				</div>					
 			</div>
