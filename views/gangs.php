@@ -65,16 +65,15 @@ if (!$db_connection->set_charset("utf8")) {
 					
 				if (isset($_POST['searchText'])) {
 					$searchText = $_POST['searchText'];
-
-
 					if (isset($_POST['pid'])) {
-						$sql = "SELECT * FROM `gangs` WHERE `owner` LIKE " . $searchText . $max . " ;";
+						$sql = "SELECT * FROM `gangs` WHERE `owner` LIKE '%" . $searchText . "%' " . $max . " ;";
 					} else {
-						$sql = "SELECT * FROM `gangs` WHERE `name` LIKE " . $searchText . $max . " ;";
+						$sql = "SELECT * FROM `gangs` WHERE `name` LIKE '%" . $searchText . "%' " . $max . " ;";
 					}
 				} else {
 					$sql = "SELECT * FROM `gangs` " . $max . " ;";
-				}
+				}	
+					
 				$result_of_query = $db_connection->query($sql);
 				while ($row = mysqli_fetch_assoc($result_of_query)) {
 					echo "<tr>";
@@ -109,7 +108,7 @@ if (!$db_connection->set_charset("utf8")) {
 					</ul>
 				</div>
 				
-				<?php			echo "<a class='btn btn-primary' href='gangs.php?page=$total_pages'>".$lang['last']."</a></center>";
+				<?php			echo "<a class='btn btn-primary' href='gangs.php?page=".$total_pages."'>".$lang['last']."</a></center>";
 			} else {
 				$this->errors[] = "Database connection problem.";
 			}
