@@ -19,18 +19,17 @@ if (!$db_connection->connect_errno) {
     $start_from = ($page - 1) * $page_rows;
     $max = 'LIMIT ' . $start_from . ',' . $page_rows;
 
-    if (isset($_POST['searchText'])) {
-        $searchText = $_POST['searchText'];
-
-
-        if (isset($_POST['pid'])) {
-            $sql = "SELECT * FROM `gangs` WHERE `owner` LIKE " . $searchText . $max . " ;";
-        } else {
-            $sql = "SELECT * FROM `gangs` WHERE `name` LIKE " . $searchText . $max . " ;";
-        }
-    } else {
-        $sql = "SELECT * FROM `gangs` " . $max . " ;";
-    }
+	if (isset($_POST['searchText'])) {
+		$searchText = $_POST['searchText'];
+		if (isset($_POST['pid'])) {
+			$sql = "SELECT * FROM `gangs` WHERE `owner` LIKE '%" . $searchText . "%' " . $max . " ;";
+		} else {
+			$sql = "SELECT * FROM `gangs` WHERE `name` LIKE '%" . $searchText . "%' " . $max . " ;";
+		}
+	} else {
+		$sql = "SELECT * FROM `gangs` " . $max . " ;";
+	}
+	
     $result_of_query = $db_connection->query($sql);
     if ($result_of_query->num_rows > 0) {
         ?>
@@ -113,7 +112,7 @@ if (!$db_connection->connect_errno) {
             </div>
 
             <?php
-            echo "<a class='btn btn-primary' href='gangs.php?page=$total_pages'>" . $lang['last'] . "</a></center>";
+            echo "<a class='btn btn-primary' href='gangs.php?page=".$total_pages."'>" . $lang['last'] . "</a></center>";
         }
     } else {
         $this->errors[] = "Database connection problem.";
