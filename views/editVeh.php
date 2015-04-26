@@ -2,6 +2,14 @@
 require_once("config/carNames.php");
 require_once("config/images.php");
 
+function updated()
+{
+    echo "<div class='row'><div class='col-lg-12'>";
+    echo "<div class='alert alert-danger alert-dismissable'>";
+    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>";
+    echo "<i class='fa fa-info-circle'></i> File updated</div></div></div>";//todo: use $lang['updated']
+}
+
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$db_connection->set_charset("utf8")) {
     $db_connection->errors[] = $db_connection->error;
@@ -17,6 +25,7 @@ if (isset($_GET["ID"])) {
                 $sql = "UPDATE `vehicles` SET `inventory`='" . $vehInv . "' WHERE `vehicles`.`id` = '" . $vehID . "'";
                 if (!$db_connection->connect_errno) {
                     $result_of_query = $db_connection->query($sql);
+					updated();
                 } else {
                     $this->errors[] = "Database connection problem.";
                 }
@@ -25,6 +34,7 @@ if (isset($_GET["ID"])) {
                 $sql = "UPDATE `vehicles` SET `alive`='1',`active`='0' WHERE `vehicles`.`id` = '" . $vehID . "'";
                 if (!$db_connection->connect_errno) {
                     $result_of_query = $db_connection->query($sql);
+					updated();
                 } else {
                     $this->errors[] = "Database connection problem.";
                 }
@@ -33,6 +43,7 @@ if (isset($_GET["ID"])) {
                 $sql = "DELETE FROM `vehicles` WHERE `vehicles`.`id` = '" . $vehID . "'";
                 if (!$db_connection->connect_errno) {
                     $result_of_query = $db_connection->query($sql);
+					updated();
                 } else {
                     $this->errors[] = "Database connection problem.";
                 }
@@ -46,6 +57,7 @@ if (isset($_GET["ID"])) {
                 $sql = "UPDATE `vehicles` SET `side`='" . $vehSide . "',`classname`='" . $vehClass . "',`type`='" . $vehType . "',`plate`='" . $vehPlate . "',`color`='" . $vehCol . "' WHERE `vehicles`.`id` = '" . $vehID . "'";
                 if (!$db_connection->connect_errno) {
                     $result_of_query = $db_connection->query($sql);
+					updated();
                 } else {
                     $this->errors[] = "Database connection problem.";
                 }
