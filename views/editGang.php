@@ -6,22 +6,23 @@ if (!$db_connection->set_charset("utf8")) {
 if (isset($_GET["ID"]) || isset($_POST["gID"])) {
     if (isset($_GET["ID"])) {
         $gID = $_GET["ID"];
-    } elseif (isset($_POST["gID"])) {
-        $gID = $_POST["gID"];
-        $gname = $_POST["gname"];
-        $gowner = $_POST["gowner"];
-        $gMM = $_POST["gMM"];
-        $gbank = $_POST["gbank"];
-        $gAct = $_POST["gAct"];
-        $gMem = $_POST["gMem"];
+		if (isset($_POST["gID"])) {
+			$gID = $_POST["gID"];
+			$gname = $_POST["gname"];
+			$gowner = $_POST["gowner"];
+			$gMM = $_POST["gMM"];
+			$gbank = $_POST["gbank"];
+			$gAct = $_POST["gAct"];
+			$gMem = $_POST["gMem"];
 
-        if (isset($_POST['drop'])) {
-            $sql = "DELETE FROM `gangs` WHERE `gangs`.`id` = '" . $gID . "'";
-        } else {
-            $sql = "UPDATE `gangs` SET `owner`='" . $gowner . "',`name`='" . $gname . "',`members`='" . $gMem . "',`maxmembers`='" . $gMM . "',`bank`='" . $gbank . "',`active`='" . $gAct . "' WHERE `gangs`.`id` = '" . $gID . "'";
-        }
-        $result_of_query = $db_connection->query($sql);
-    }
+			if (isset($_POST['drop'])) {
+				$sql = "DELETE FROM `gangs` WHERE `gangs`.`id` = '" . $gID . "'";
+			} else {
+				$sql = "UPDATE `gangs` SET `owner`='" . $gowner . "',`name`='" . $gname . "',`members`='" . $gMem . "',`maxmembers`='" . $gMM . "',`bank`='" . $gbank . "',`active`='" . $gAct . "' WHERE `gangs`.`id` = '" . $gID . "'";
+			}
+			$result_of_query = $db_connection->query($sql);
+		}		
+    } 
     ?>
 
     <!-- Page Heading -->
