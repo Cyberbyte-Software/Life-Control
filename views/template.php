@@ -126,6 +126,9 @@ $obj = json_decode($json);
                 }
             }
             ?>
+
+
+
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="index.php#">
                     <i class="fa fa-tasks"></i>
@@ -180,6 +183,22 @@ $obj = json_decode($json);
                     </a>
                 </li>
             <?php } ?>
+            <?php
+            foreach($navigation_Items as $item)
+            {
+                if ($_SESSION['user_level'] >= $item[4])
+                {
+                    ?>
+                    <li>
+                        <a href="<?php echo $item[1];?>">
+                            <i class="fa <?php echo $item[2]; ?>"></i>
+                            <span><?php echo $item[0]; ?></span>
+                        </a>
+                    </li>
+                <?php
+                }
+            }
+            ?>
             <li>
                 <a href="profile.php">
                     <i class="fa fa-fw fa-user"></i>
