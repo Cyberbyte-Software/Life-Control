@@ -44,10 +44,6 @@ $gameServers = array(
     array("KOTH", "2503", "188.165.255.190")
 );
 
-$navigation_Items = array(
-    array("Houses", "houses.php", "fa-fw fa-home","P_VIEW_HOUSES")
-);
-
 /**
  * Levels
  */
