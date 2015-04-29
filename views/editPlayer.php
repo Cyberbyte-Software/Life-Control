@@ -976,7 +976,7 @@ if (isset($_GET["ID"]))
 									if ($_SESSION['user_level'] >= P_EDIT_ADMINS) {
 										echo "<h4>" . $lang['admin'] . ": ";
 										echo "<select id='player_adminlvl' name='player_adminlvl'>";
-										for ($lvl = 1; $lvl <= lvladmin; $lvl++) {
+										for ($lvl = 0; $lvl <= lvladmin; $lvl++) {
 											echo '<option value="' . $lvl . '"' . select($lvl, $row['adminlevel']) . '>' . $lvl . '</option>';
 										}
 										echo "</select>";
