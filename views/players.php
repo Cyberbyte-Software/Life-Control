@@ -40,7 +40,6 @@ if (!$db_connection->connect_errno) {
                     <?php echo $lang['players']; ?>
                     <small><?php echo " " . $lang['overview']; ?></small>
                 </h1>
-
             </div>
         </div>
         <!-- /.row -->
@@ -54,10 +53,10 @@ if (!$db_connection->connect_errno) {
                 <form style="float:right;" method='post' action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"
                       name='searchPlayer'>
                     <input id='searchText' type='text' name='searchText'>
-                    <input class='btn btn-sm btn-primary' type='submit' name='pid'
-                           value='<?php echo $lang['search'] . " " . $lang['PID']; ?>'>
                     <input class='btn btn-sm btn-primary' type='submit' name='name'
                            value='<?php echo $lang['search'] . " " . $lang['name']; ?>'>
+                    <input class='btn btn-sm btn-primary' type='submit' name='pid'
+                           value='<?php echo $lang['search'] . " " . $lang['PID']; ?>'>
                 </form>
             </div>
         </h4>

@@ -97,25 +97,53 @@ if ($result_of_query->num_rows > 0) {
                 $result_of_query = $db_connection->query($sql);
                 $total_records = mysqli_num_rows($result_of_query);
                 $total_pages = ceil($total_records / $page_rows);
-                if ($total_pages > 1) {
-                    echo "<center><a class='btn btn-primary' href='vehicles.php?page=1'>" . $lang['first'] . "</a> ";
-                    ?>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <?php echo $lang['page'] . " " ?><span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu scrollable-menu" role="menu">
-                            <?php
-                            for ($i = 1; $i <= $total_pages; $i++) {
-                                ?>
-                                <li><?php echo "<a href='vehicles.php?page=" . $i . "'>" . $i . "</a> "; ?></li>
-                            <?php }; ?>
-                        </ul>
-                    </div>
+                if ($total_pages > 1)
+                {
+                    if (isset($_GET['ID']))
+                    {
+                        $fixingthis = $_GET['ID'];
+                        echo "<center><a class='btn btn-primary' href='vehicles.php?page=1&ID=" . $fixingthis . "'>" . $lang['first'] . "</a> ";
+                        ?>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <?php echo $lang['page'] . " " ?><span class="caret"></span>
+                            </button>
 
-                    <?php
-                    echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages'>" . $lang['last'] . "</a></center>";
-                } ?>
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <?php
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    ?>
+                                    <li><?php echo "<a href='vehicles.php?page=" . $i . "&ID=" . $fixingthis . "'>" . $i . "</a> "; ?></li>
+                                <?php }; ?>
+                            </ul>
+                        </div>
+
+                        <?php
+                        echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages&ID=" . $fixingthis . "'>" . $lang['last'] . "</a></center>";
+                    }
+                    else
+                    {
+                        echo "<center><a class='btn btn-primary' href='vehicles.php?page=1'>" . $lang['first'] . "</a> ";
+                        ?>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <?php echo $lang['page'] . " " ?><span class="caret"></span>
+                            </button>
+
+                            <ul class="dropdown-menu scrollable-menu" role="menu">
+                                <?php
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    ?>
+                                    <li><?php echo "<a href='vehicles.php?page=" . $i . "'>" . $i . "</a> "; ?></li>
+                                <?php }; ?>
+                            </ul>
+                        </div>
+
+                        <?php
+                        echo "<a class='btn btn-primary' href='vehicles.php?page=$total_pages'>" . $lang['last'] . "</a></center>";
+                    }
+                }
+                ?>
                 <br>
                 </tbody>
             </table>
