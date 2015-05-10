@@ -1,6 +1,4 @@
 <?php
-
-// create a database connection, using the constants from config/config.php (which we loaded in index.php)
 $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 $page_rows = results_per_page;
@@ -49,7 +47,6 @@ if (!$db_connection->connect_errno) {
 
         <div class="col-md-12">
             <div class="content-panel">
-                <table class="table table-striped table-advance table-hover">
                     <h4>
                         <i class="fa fa-home fa-fw"></i>
                         <?php echo " " . $lang['houses']; ?>
@@ -65,13 +62,14 @@ if (!$db_connection->connect_errno) {
                             </form>
                         </div>
                     </h4>
-                    <hr>
+                <hr>
+                <table class="table table-striped table-advance table-hover">
                     <thead>
                     <tr>
-                        <th><i class="fa fa-eye"><?php echo " " . $lang['owner'] ?></th>
-                        <th><i class="fa fa-user"><?php echo " " . $lang['position']; ?></th>
-                        <th><i class="fa fa-user"><?php echo " " . $lang['owned']; ?></th>
-                        <?php if ($_SESSION['user_level'] >= P_EDIT_HOUSES) echo '<th><i class="fa fa-pencil"> '. $lang['edit'] .'</th>'; ?>
+                        <th><i class="fa fa-eye"></i><?php echo " " . $lang['owner'] ?></th>
+                        <th><i class="fa fa-user"></i><?php echo " " . $lang['position']; ?></th>
+                        <th><i class="fa fa-user"></i><?php echo " " . $lang['owned']; ?></th>
+                        <?php if ($_SESSION['user_level'] >= P_EDIT_HOUSES) echo '<th><i class="fa fa-pencil"></i>'. $lang['edit'] .'</th>'; ?>
                     </tr>
                     </thead>
                     <tbody>
@@ -103,12 +101,10 @@ if (!$db_connection->connect_errno) {
                             <ul class="dropdown-menu scrollable-menu" role="menu">
                                 <?php
                                 for ($i = 1; $i <= $total_pages; $i++) {
-                                    ?>
-                                    <li><?php echo "<a href='houses.php?page=" . $i . "'>" . $i . "</a> "; ?></li>
-                                <?php }; ?>
+                                    echo "<li><a href='houses.php?page=" . $i . "'>" . $i . "</a></li>";
+                                }; ?>
                             </ul>
                         </div>
-
                         <?php
                         echo "<a class='btn btn-primary' href='houses.php?page=$total_pages'>" . $lang['last'] . "</a></center>";
                     }?>

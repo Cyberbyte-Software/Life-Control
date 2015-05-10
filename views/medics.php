@@ -56,7 +56,7 @@ if (!$db_connection->connect_errno) {
                         echo "<td>" . $row["playerid"] . "</td>";
                         echo "<td>" . $row["mediclevel"] . "</td>";
                         if ($_SESSION['user_level'] >= P_EDIT_PLAYER) {
-                            echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=" . $row["uid"] . "'>";
+                            echo "<td><a class='btn btn-primary btn-xs' href='editPlayer.php?ID=" . uID($row["uid"]) . "'>";
                             echo "<i class='fa fa-pencil'></i></a></td>";
                         }
                         echo "</tr>";

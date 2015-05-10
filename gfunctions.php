@@ -45,12 +45,14 @@ function nameID($pID)
         $db_connection->errors[] = $db_connection->error;
     }
 
-    $update = "SELECT `name`, `playerid` FROM `players` WHERE `playerid` = '" . $pID . "' ";
-    $result_of_query = $db_connection->query($update);
+    $sql = "SELECT `name`, `playerid` FROM `players` WHERE `playerid` = '" . $pID . "' ";
+    $result_of_query = $db_connection->query($sql);
 
-    while ($row = mysqli_fetch_assoc($result_of_query)) {
-        return $row['name'];
-    }
+    if ($result_of_query->num_rows > 0) {
+        while ($row = mysqli_fetch_assoc($result_of_query)) {
+            return $row['name'];
+        }
+    } else return $pID;
 }
 
 function uID($pID)
@@ -60,12 +62,12 @@ function uID($pID)
         $db_connection->errors[] = $db_connection->error;
     }
 
-    $update = "SELECT `uid`,`playerid` FROM `players` WHERE `playerid` = '" . $pID . "' ";
-    $result_of_query = $db_connection->query($update);
+    $sql = "SELECT `uid`,`playerid` FROM `players` WHERE `playerid` = '" . $pID . "' ";
+    $result_of_query = $db_connection->query($sql);
 
-    while ($row = mysqli_fetch_assoc($result_of_query)) {
-        return $row['uid'];
-    }
+    if ($result_of_query->num_rows > 0) {
+        while ($row = mysqli_fetch_assoc($result_of_query)) {
+            return $row['uid'];
+        }
+    } else return $pID;
 }
-
-?>

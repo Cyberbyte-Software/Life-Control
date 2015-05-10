@@ -37,9 +37,10 @@ $curpassHash = "";
                 if (!empty($_POST)) {
                     $email = $_POST['email'];
                     $user_pic = $_POST['user_pic'];
-                    $_SESSION['user_profile'] = $user_pic;
+                    $pId = $_POST['pId'];
 
-                    $update = "UPDATE `users` SET `user_email`= '" . $email . "', `user_profile`= '" . $user_pic . "'WHERE `user_name` = '" . $_SESSION['user_name'] . "' ";
+                    $_SESSION['user_profile'] = $user_pic;
+                    $update = "UPDATE `users` SET `user_email`= '" . $email . "',`playerid`= '" . $pId . "', `user_profile`= '" . $user_pic . "'WHERE `user_name` = '" . $_SESSION['user_name'] . "' ";
                     $result_of_query = $db_connection->query($update);
                     $sql = "SELECT * FROM `users` WHERE `user_name` ='" . $_SESSION['user_name'] . "' ;";
                 } else {
@@ -49,11 +50,11 @@ $curpassHash = "";
                 $result_of_query = $db_connection->query($sql);
                 while ($row = mysqli_fetch_assoc($result_of_query)) {
                     ?>
-                    <form method='post' action='<?php echo htmlentities($_SERVER['PHP_SELF']); ?>' name='profileEdit'>
+                    <form method='post' action='profile.php' name='profileEdit'>
                     <?php
                     $userPid = $row["playerid"];
                     echo "<center>";
-                    echo "<h4>" . $lang['emailAdd'] . ": <input style='min-width:300px;text-align:center;'id='email' type='text' name='email' value='" . $row["user_email"] . "'></h4>";
+                    echo "<h4>" . $lang['emailAdd'] . ": <input style='min-width:300px;text-align:center;'id='email' type='email' name='email' value='" . $row["user_email"] . "'></h4>";
                     echo "<h4>" . $lang['rank'] . ": " . $row["user_level"] . "</h4>";
                     echo "<h4>" . $lang['picture'] . ": ";
 
@@ -63,43 +64,45 @@ $curpassHash = "";
                     }
                     echo "</select>";
 
-                    echo "<h4>" . $lang['playerID'] . ": " . $row["playerid"] . "</h4>";
+                    echo "<h4>" . $lang['playerID'] . ": <input style='min-width:300px;text-align:center;' id='pId' type='number' name='pId' value='" . $row["playerid"] . "'>";
+
+                    $sql = "SELECT `uid`,`playerid` FROM `players` WHERE `playerid` = '" . $row["playerid"] . "' ";
+                    $result_of_query = $db_connection->query($sql);
+
+                    if ($result_of_query->num_rows > 0) {
+                        while ($row = mysqli_fetch_assoc($result_of_query)) {
+                            echo '<a href="editPlayer.php?ID=' . $row["uid"] . '">  View</a>';
+                        }
+                    }
+                    echo "</h4>";
+                    ?>
+
+                    <form method="post" action="profile.php">
+                        <div class="modal-body">
+                            <p class="centered">
+                                <input type="password" id="input_password" class="form-control"
+                                       placeholder="<?php echo $lang['password']; ?>" name="user_password"
+                                       autocorrect="off" autocapitalize="off" required> <br>
+                                <input type="password" id="input_password_again" class="form-control"
+                                       placeholder="<?php echo $lang['password']; ?>"
+                                       name="user_password_again" autocorrect="off"
+                                       autocapitalize="off" required>
+                        </div>
+                        <div class="modal-footer centered">
+                            <button data-dismiss="modal" class="btn btn-theme04"
+                                    type="button"><?php echo $lang['cancel']; ?></button>
+                            <button class="btn btn-theme03" href="profile.php" type="submit"
+                                    name="save"><?php echo $lang['login']; ?></button>
+                        </div>
+                    </form>
+
+                    <?php
                     echo "<input class='btn btn-sm btn-primary' type='submit'  name='edit' value='" . $lang['subChange'] . "'> ";
                     echo "<a data-toggle='modal' href='#password'><button type='button' class='btn btn-sm btn-primary'>" . $lang['changePass'] . "</button></a>";
-                    echo "</center>";
+                    echo "</form></center>";
                 }
             ;
                 ?>
-                <div aria-hidden="true" aria-labelledby="Passchange" role="dialog" tabindex="-1" id="password"
-                     class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-hidden="true">&times;</button>
-                                <h4 class="modal-title"><?php echo $lang['enterPass']; ?></h4>
-                            </div>
-                            <form method="post" action="profile.php">
-                                <div class="modal-body">
-                                    <p class="centered">
-                                        <input type="password" id="input_password" class="form-control" placeholder="
-                                        <?php echo $lang['password']; ?>" name="user_password" autocorrect="off"
-                                               autocapitalize="off" required> <br>
-                                        <input type="password" id="input_password_again" class="form-control"
-                                               placeholder="
-                                        <?php echo $lang['password']; ?>" name="user_password_again" autocorrect="off"
-                                               autocapitalize="off" required>
-                                </div>
-                                <div class="modal-footer centered">
-                                    <button data-dismiss="modal" class="btn btn-theme04"
-                                            type="button"><?php echo $lang['cancel']; ?></button>
-                                    <button class="btn btn-theme03" href="profile.php" type="submit"
-                                            name="save"><?php echo $lang['login']; ?></button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
 
                 </form>
             <?php

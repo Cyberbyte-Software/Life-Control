@@ -18,10 +18,7 @@ if (isset($_GET["page"])) {
 $start_from = ($page - 1) * $page_rows;
 $max = 'LIMIT ' . $start_from . ',' . $page_rows;
 
-if (isset($_GET['ID'])) {
-    $searchText = $_GET['ID'];
-    $sql = "SELECT * FROM `vehicles` WHERE `pid` LIKE '%" . $searchText . "%' " . $max . " ;";
-} elseif (isset($_POST['searchText'])) {
+if (isset($_POST['searchText'])) {
     $searchText = $_POST['searchText'];
 
     if (isset($_POST['pid'])) {
@@ -48,7 +45,6 @@ if ($result_of_query->num_rows > 0) {
 
     <div class="col-md-12">
         <div class="content-panel">
-            <table class="table table-striped table-advance table-hover">
                 <h4>
                     <i class="fa fa-car"></i>
                     <?php echo " " . $lang['vehicles']; ?>
@@ -65,6 +61,7 @@ if ($result_of_query->num_rows > 0) {
                     </div>
                 </h4>
                 <hr>
+            <table class="table table-striped table-advance table-hover">
                 <thead>
                 <tr>
                     <th><i class="fa fa-eye"></i><?php echo " " . $lang['owner'] ?></th>

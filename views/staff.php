@@ -20,7 +20,6 @@ if (!$db_connection->set_charset("utf8")) {
     <!-- /.row -->
     <div class="col-md-12">
         <div class="content-panel">
-            <table class="table table-striped table-advance table-hover">
                 <h4>
                     <i class="fa fa-cogs fa-fw"></i>
                     <?php echo " " . $lang['staff']; ?>
@@ -35,13 +34,14 @@ if (!$db_connection->set_charset("utf8")) {
                     </div>
                 </h4>
                 <hr>
+            <table class="table table-striped table-advance table-hover">
                 <thead>
                 <tr>
-                    <th><i class="fa fa-user"><?php echo " " . $lang['staffName']; ?></th>
-                    <th><i class="fa fa-user"><?php echo " " . $lang['emailAdd']; ?></th>
-                    <th><i class="fa fa-user"><?php echo " " . $lang['rank']; ?></th>
-                    <th><i class="fa fa-eye"><?php echo " " . $lang['playerID']; ?></th>
-                    <?php if ($_SESSION['user_level'] >= P_EDIT_STAFF) echo '<th><i class="fa fa-pencil"> ' . $lang['edit'] . '</th>'; ?>
+                    <th><i class="fa fa-user"></i><?php echo " " . $lang['staffName']; ?></th>
+                    <th><i class="fa fa-user"></i><?php echo " " . $lang['emailAdd']; ?></th>
+                    <th><i class="fa fa-user"></i><?php echo " " . $lang['rank']; ?></th>
+                    <th><i class="fa fa-eye"></i><?php echo " " . $lang['playerID']; ?></th>
+                    <?php if ($_SESSION['user_level'] >= P_EDIT_STAFF) echo '<th><i class="fa fa-pencil"></i>' . $lang['edit'] . '</th>'; ?>
                     '
                 </tr>
                 </thead>

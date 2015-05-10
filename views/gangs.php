@@ -65,13 +65,13 @@ if (!$db_connection->connect_errno) {
         <hr>
         <thead>
         <tr>
-            <th><i class="fa fa-eye"><?php echo " " . $lang['id']; ?></th>
-            <th><i class="fa fa-user"><?php echo " " . $lang['gang'] . " " . $lang['name']; ?></th>
-            <th><i class="fa fa-user"><?php echo " " . $lang['owner']; ?></th>
-            <th><i class="fa fa-bank"><?php echo " " . $lang['bank']; ?></th>
-            <th><i class="fa fa-user"><?php echo " " . $lang['maxMembers']; ?></th>
-            <th><i class="fa fa-user"><?php echo " " . $lang['active']; ?></th>
-            <?php if ($_SESSION['user_level'] >= P_EDIT_GANGS) echo '<th><i class="fa fa-pencil"> '. $lang['edit'] .'</th>'; ?>
+            <th><i class="fa fa-eye"></i><?php echo " " . $lang['id']; ?></th>
+            <th><i class="fa fa-user"></i><?php echo " " . $lang['gang'] . " " . $lang['name']; ?></th>
+            <th><i class="fa fa-user"></i><?php echo " " . $lang['owner']; ?></th>
+            <th><i class="fa fa-bank"></i><?php echo " " . $lang['bank']; ?></th>
+            <th><i class="fa fa-user"></i><?php echo " " . $lang['maxMembers']; ?></th>
+            <th><i class="fa fa-user"></i><?php echo " " . $lang['active']; ?></th>
+            <?php if ($_SESSION['user_level'] >= P_EDIT_GANGS) echo '<th><i class="fa fa-pencil"></i>'. $lang['edit'] .'</th>'; ?>
         </tr>
         </thead>
         <tbody>

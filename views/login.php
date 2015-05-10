@@ -17,35 +17,8 @@ if (isset($_GET['setup'])) {
         $message = $lang['upgrade'];
     } else $message = $_GET['setup'];
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Life Control</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-    <!--Animation CSS-->
-    <link rel="stylesheet" href="assets/css/animate.css">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+include("views/templates/head.php");?>
 
 <body onload="getTime()">
 
@@ -78,7 +51,8 @@ if (isset($_GET['setup'])) {
                                            placeholder="Username" name="user_name" required autofocus>
                                     <br>
                                     <input type="password" id="login_input_password" class="form-control"
-                                           placeholder="Password" name="user_password" required>
+                                           placeholder="Password" name="user_password" autocorrect="off"
+                                           autocapitalize="off" required>
                                     <br>
                                     <select id='lang' name='lang' class="form-control login_input">
                                         <option value="en" selected>English</option>

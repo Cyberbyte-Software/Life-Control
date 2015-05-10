@@ -54,7 +54,7 @@ if (isset($_GET["ID"])) {
                 $vehType = $_POST["vehType"];
                 $vehPlate = $_POST["vehPlate"];
                 $vehCol = $_POST["vehCol"];
-                $sql = "UPDATE `vehicles` SET `side`='" . $vehSide . "',`classname`='" . $vehClass . "',`type`='" . $vehType . "',`plate`='" . $vehPlate . "',`color`='" . $vehCol . "' WHERE `vehicles`.`id` = '" . $vehID . "'";
+                $sql = "UPDATE `vehicles` SET `side`='" . $vehSide . "',`type`='" . $vehType . "',`color`='" . $vehCol . "' WHERE `vehicles`.`id` = '" . $vehID . "'";
                 if (!$db_connection->connect_errno) {
                     $result_of_query = $db_connection->query($sql);
 					updated();

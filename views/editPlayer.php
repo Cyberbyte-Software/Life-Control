@@ -132,8 +132,7 @@ if (isset($_GET["ID"])) {
                             $cash = intval($_POST["player_cash"]);
                             $bankacc = intval($_POST["player_bank"]);
                             $arrested = intval($_POST["player_arrest"]);
-                            $blacklist = intval($_POST["player_blacklist"]);
-                            $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "', donatorlvl = '" . $donatorlvl . "', cash = '" . $cash . "', bankacc = '" . $bankacc . "', arrested = '" . $arrested . "', blacklist = '" . $blacklist . "' WHERE uid = '" . $uID . "' ";
+                            $update = "UPDATE players SET coplevel = '" . $coplevel . "', mediclevel = '" . $mediclevel . "', donatorlvl = '" . $donatorlvl . "', cash = '" . $cash . "', bankacc = '" . $bankacc . "', arrested = '" . $arrested . "' WHERE uid = '" . $uID . "' ";
                             $result_of_query = $db_connection->query($update);
                             updated();
 
@@ -193,13 +192,13 @@ if (isset($_GET["ID"])) {
             echo "<h4>" . $lang['GUID'] . ": " . $pGID . "</h4>";
             ?>
 
-            <span class="fa fa-2x fa-money">
-                <h4> <?php echo $lang['cash'] . ": " . $row["cash"]; ?> </h4>
-            </span>
+            <i class="fa fa-2x fa-money"></i>
+            <h4> <?php echo $lang['cash'] . ": " . $row["cash"]; ?> </h4>
 
-            <span style="padding-left:15px;" class="fa fa-2x fa-bank">
+
+            <i style="padding-left:15px;" class="fa fa-2x fa-bank"></i>
             <h4> <?php echo $lang['bank'] . ": " . $row["bankacc"]; ?> </h4>
-            </span>
+
             <?php
             if ($row["arrested"] == 0) {
                 echo "<h4><span class='label label-success'>" . $lang["not"] . " " . $lang["arrested"] . "</span> ";

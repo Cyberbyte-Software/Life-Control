@@ -32,8 +32,7 @@ class Login
         // if user tried to log out (happen when user clicks logout button)
         if (isset($_GET["logout"])) {
             $this->doLogout();
-        }
-        // login via post data (if user just submitted a login form)
+        } // login via post data (if user just submitted a login form)
         elseif (isset($_POST["login"])) {
             $this->dologinWithPostData();
         }
@@ -82,7 +81,7 @@ class Login
                     // the hash of that user's password
                     if (password_verify($_POST['user_password'], $result_row->user_password_hash)) {
 
-                        if ($result_row->user_level <> 0){
+                        if ($result_row->user_level <> 0) {
                             // write user data into PHP SESSION (a file on your server)
                             $_SESSION['user_name'] = $result_row->user_name;
                             $_SESSION['user_level'] = $result_row->user_level;
@@ -91,6 +90,11 @@ class Login
                             $_SESSION['user_id'] = $result_row->user_id;
                             $_SESSION['lang'] = $_POST['lang'];
                             $_SESSION['user_login_status'] = 1;
+
+                            $json = file_get_contents('http://cyberbyte.org.uk/version.json');
+                            $obj = json_decode($json);
+                            $_SESSION['version'] = $obj;
+
 
                         } else {
                             $this->errors[] = "User is banned.";

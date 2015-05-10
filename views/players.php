@@ -70,7 +70,7 @@ if (!$db_connection->connect_errno) {
             <th class="hidden-xs"><i class="fa fa-taxi"></i><?php echo " " . $lang['cop']; ?></th>
             <th class="hidden-xs"><i class="fa fa-ambulance"></i><?php echo " " . $lang['medic']; ?></th>
             <th class="hidden-xs"><i class="fa fa-cogs"></i><?php echo " " . $lang['admin']; ?></th>
-            <?php if ($_SESSION['user_level'] >= P_EDIT_PLAYER) echo '<th class="hidden-xs"><i class="fa fa-pencil"> ' .
+            <?php if ($_SESSION['user_level'] >= P_EDIT_PLAYER) echo '<th class="hidden-xs"><i class="fa fa-pencil"></i> ' .
                 $lang['edit'] . '</th>'; else  echo '<th class="hidden-xs"><i class="fa fa-eye"> ' . $lang['view'] . '</th>';
             if ($_SESSION['user_level'] >= P_VIEW_STEAM) echo '<th class="hidden-xs"><i class="fa fa-steam"></i> Steam</th>'
             ?>
@@ -100,6 +100,7 @@ if (!$db_connection->connect_errno) {
 
         }
     ;
+
         echo "</tbody></table>";
 
         $sql = "SELECT * FROM `players`";
