@@ -18,7 +18,7 @@ $lang['house'] = 'Haus';
 $lang['gangs'] = 'Gruppen';
 $lang['gang'] = 'Gruppe';
 $lang['wanted'] = 'Verbrechen';
-$lang['staff'] = 'Staff';
+$lang['staff'] = 'Mitarbeiter';
 $lang['overview'] = 'Übersicht';
 $lang['search'] = 'Suche';
 $lang['edit'] = 'Bearbeiten';
@@ -31,7 +31,7 @@ $lang['DELETE'] = 'Löschen';
 $lang['quickLook'] = 'Übersicht';
 $lang['PID'] = 'PID';
 $lang['curPlayers'] = 'Aktuelle Spieler';
-$lang['statOver'] = 'Statistik Überblick';
+$lang['statOver'] = 'Statistik Übersicht';
 $lang['overview'] = 'Übersicht';
 $lang['viewAll'] = 'Alle anzeigen';
 $lang['subChanges'] = 'Änderungen Speichern';
@@ -48,14 +48,14 @@ Errors
 ------------------
 */
 
-$lang['error'] = 'Error';
-$lang['dbError'] = 'Probleme bei der Verbindung zur Datenbank.';
+$lang['error'] = 'Fehler';
+$lang['dbError'] = 'Fehler bei der Verbindung zur Datenbank.';
 $lang['idNotSet'] = 'Keine ID vorhanden';
 $lang['noRes'] = 'Fehler - Keine Ergebnisse';
 $lang['noHouse'] = 'Besitzt kein Haus';
 $lang['noCar'] = 'Besitzt keine Autos';
 $lang['noPlayer'] = 'Spieler nicht gefunden';
-$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigte Rechte um die Seite zu öffnen';
+$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigten Rechte um diese Seite zu öffnen';
 
 /*
 ------------------
@@ -88,7 +88,7 @@ Table Headers / Buttons
 ---------------------------
 */
 $lang['id'] = 'ID';
-$lang['staffName'] = 'Staff Name';
+$lang['staffName'] = 'Mitarbeiter Name';
 $lang['emailAdd'] = 'Email-Addresse';
 $lang['rank'] = 'Level';
 $lang['name'] = 'Name';
@@ -144,9 +144,9 @@ $lang['time'] = 'Zeit';
 	Need translation
 ----------------------------
 */
-$lang['setup'] = 'Die Datenbank wurde eingestellt';
-$lang['upgrade'] = 'Die Datenbank wurde geupdatet';
-$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigte Rechte um die Seite zu öffnen';
+$lang['setup'] = 'Die Datenbank wurde eingerichtet';
+$lang['upgrade'] = 'Die Datenbank wurde aktualisiert';
+$lang['noPerm'] = 'Entschuldigung, du hast nicht die benötigten Rechte um diese Seite zu öffnen';
 $lang['Kick'] = 'Kick';
 $lang['topRich'] = 'Top 10 reichste Spieler';
 $lang['noHouse'] = 'Besitzt kein Haus';
@@ -168,6 +168,6 @@ $lang['finances'] = 'Finanzen';
 $lang['ship'] = 'Ship';
 $lang['add'] = 'Add';
 $lang['new'] = 'New';
-$lang['note'] = 'Note';
-$lang['noMessage'] = 'No messages';
+$lang['note'] = 'Notiz';
+$lang['noMessage'] = 'Keine Nachrichten';
 ?>
