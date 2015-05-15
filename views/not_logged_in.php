@@ -86,6 +86,7 @@ MAIN CONTENT
                                     <select id='lang' name='lang' class="form-control login_input">
                                         <option value="en" selected>English</option>
                                         <option value="de">Deutsch</option>
+                                        <option value="fr">Français</option>
                                         <option value="ne">Nederlands</option>
                                     </select>
                                 </div>
