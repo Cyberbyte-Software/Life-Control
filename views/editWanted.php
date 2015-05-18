@@ -121,19 +121,10 @@ if (isset($_GET["ID"])) {
                     $sql = 'SELECT * FROM `wanted` WHERE `wantedID` ="' . $wantedID . '";';
                     $result_of_query = $db_connection->query($sql);
                     while ($row = mysqli_fetch_assoc($result_of_query)) {
-                        if ($row["wantedCrimes"] !== '"[]"') {
-                            $return = stripArray($row["wantedCrimes"]);
+					?>
+							<textarea class="form-control" rows="6" name="wantedCrimes"><?php echo $row['wantedCrimes']; ?></textarea>
 
-                            foreach ($return as $value) 
-							{
-								$name = before(',', $value);
-								$count = after(',', $value);
-								echo "<span class='label label-default' style='margin-right:3px; line-height:2;'>" . $name." : ". $count . "</span> ";
-                            }
-                        } else {
-                            echo $lang['no'] . " " . $lang['crimes'];
-
-                        }
+					<?php
                     }
 					if ($_SESSION['user_level'] >= P_EDIT_WANTED)
 					{
