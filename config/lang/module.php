@@ -14,7 +14,11 @@ switch ($lang)
   case 'de':
   $lang_file = 'lang.de.php';
   break;
- 
+
+  case 'fr':
+  $lang_file = 'lang.fr.php';
+  break;
+  
   case 'ne':
   $lang_file = 'lang.ne.php';
   break;

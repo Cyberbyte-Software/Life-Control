@@ -57,7 +57,8 @@ include("views/templates/head.php");?>
                                     <select id='lang' name='lang' class="form-control login_input">
                                         <option value="en" selected>English</option>
                                         <option value="de">Deutsch</option>
-                                        <option value="ne">Nederlands</option>
+                                        <option value="ne">Dutch</option>
+										<option value="fr">Français</option>
                                     </select>
                                 </div>
                             </div>
