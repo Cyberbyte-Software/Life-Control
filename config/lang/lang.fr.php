@@ -102,6 +102,7 @@ $lang['donator'] = 'Donateur';
 $lang['licenses'] = 'Compétences';
 $lang['gear'] = 'Equipement';
 $lang['active'] = 'Actif';
+$lang['username'] = 'Nom d\'utilisateur';
 $lang['playerID'] = 'ID Joueur';
 $lang['wID'] = 'ID Interpol';
 $lang['bounty'] = 'Mise à prix';
