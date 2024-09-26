@@ -111,6 +111,7 @@ $lang['donator'] = 'Donator';
 $lang['licenses'] = 'Licenses';
 $lang['gear'] = 'Gear';
 $lang['active'] = 'Active';
+$lang['username'] = 'Username';
 $lang['playerID'] = 'Player ID';
 $lang['wID'] = 'Wanted ID';
 $lang['bounty'] = 'Bounty';
